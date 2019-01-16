@@ -1,0 +1,37 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+description = 'the Wes animation editing/retargeting library for jMonkeyEngine'
+ext {
+    artifact = 'Wes'
+    version = wesVersion
+    baseName = "$artifact-$version"
+}
+
+jar { baseName project.ext.baseName }
+javadocJar { baseName project.ext.baseName }
+sourcesJar { baseName project.ext.baseName }
+
+dependencies {
+    compile "jme3utilities:jme3-utilities-heart:2.18.0"
+}
+
+build.dependsOn('pom')
+task pom {
+    doLast {
+        pom {
+            project {
+                artifactId project.ext.artifact
+                licenses {
+                    license {
+                        distribution 'repo'
+                        name 'New BSD (3-clause) License'
+                        url 'https://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+                version project.ext.version
+            }
+        }.writeTo("${buildDir}/libs/${project.ext.baseName}.pom")
+    }
+}
