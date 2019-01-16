@@ -4,6 +4,10 @@
 
 description = 'demos, examples, and tests that do not generate reports'
 
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'jme3utilities.test.wes.FlashMobDemo'
+}
+
 dependencies {
     compile 'jme3utilities:jme3-utilities-debug:0.9.9'
     compile 'jme3utilities:jme3-utilities-ui:0.7.0'
@@ -12,8 +16,8 @@ dependencies {
     compile "org.jmonkeyengine:jme3-plugins:$jmonkeyengineVersion"
     runtime 'org.jmonkeyengine:jme3-testdata:3.1.0-stable'
 
-    compile "jme3utilities:Wes:$wesVersion"
-    //compile project(':WesLibrary')
+    //compile "jme3utilities:Wes:$wesVersion"
+    compile project(':WesLibrary')
 }
 
 // cleanup tasks
