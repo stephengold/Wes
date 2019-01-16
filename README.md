@@ -1,6 +1,6 @@
-<img height="150" src="https://i.imgur.com/YEPFEcx.png">
+<img height="150" src="https://i.imgur.com/1iPoJpl.png">
 
-The [Wes Project][wes] is Java runtime library for editing
+The [Wes Project][wes] is a Java runtime library for editing
 animations used in the [jMonkeyEngine Game Engine][jme].
 
 Summary of features:
@@ -111,7 +111,7 @@ Clone the repository using Git:
 
 ### Build the project
 
- 1. In the "Projects" window, right-click on the "Wes" project to
+ 1. In the "Projects" window, right-click on the "WesLibrary" sub-project to
     select it.
  2. Select "Build".
 
@@ -128,7 +128,7 @@ which in turn depends on the standard jme3-core library.
 
 For projects built using Maven or Gradle, it is sufficient to specify the
 dependency on the Wes library.  The build tools should automatically
-resolve the remaining dependences automatically.
+resolve the remaining dependencies automatically.
 
 Because Wes is not on JCenter yet, you have to explicitly specify the
 repository location:
@@ -146,7 +146,7 @@ repository location:
 For project built using Ant, download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/jme3-utilities/releases/tag/wes-0.3.8
+   + https://github.com/stephengold/jme3-utilities/releases/tag/sky-0.9.15
    + https://github.com/stephengold/jme3-utilities/releases/tag/heart-2.18.0
 
 You'll want both class JARs
