@@ -1,7 +1,12 @@
 <img height="150" src="https://i.imgur.com/1iPoJpl.png">
 
-The [Wes Project][wes] is a Java runtime library for editing
+The [Wes Project][wes] is about editing
 animations used in the [jMonkeyEngine Game Engine][jme].
+
+It contains 2 sub-projects:
+
+ 1. WesLibrary: the Wes runtime library (in Java)
+ 2. WesExamples: demos, examples, and test software (in Java)
 
 Summary of features:
 
@@ -105,13 +110,13 @@ Clone the repository using Git:
 10. Click on the "Finish" button.
 11. When the "Clone Complete" dialog appears, click on the "Open Project..."
     button.
-12. Expand the root project node to reveal the "WesLibrary" sub-project.
-13. Select the sub-project, then click on the
+12. Expand the root project node to reveal the sub-projects.
+13. Select both sub-projects using control-click, then click on the
     "Open" button.
 
 ### Build the project
 
- 1. In the "Projects" window, right-click on the "WesLibrary" sub-project to
+ 1. In the "Projects" window, right-click on the "WesExamples" sub-project to
     select it.
  2. Select "Build".
 
@@ -187,6 +192,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [gradle]: https://gradle.org "Gradle Project"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
+[makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
 [netbeans]: https://netbeans.org "NetBeans Project"
@@ -214,6 +220,7 @@ artists and software developers:
     + the Java compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + LWJGL, the Lightweight Java Game Library
+    + the [MakeHuman][] Community
     + the [Markdown][] document conversion tool
     + Microsoft Windows
     + the [NetBeans][] integrated development environment

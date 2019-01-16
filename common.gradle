@@ -36,6 +36,7 @@ ext {
 repositories {
     //mavenLocal()
     maven { url 'https://dl.bintray.com/stephengold/jme3utilities' }
+    maven { url 'https://dl.bintray.com/stephengold/org.jmonkeyengine' } // for testdata
     jcenter()
 }
 
