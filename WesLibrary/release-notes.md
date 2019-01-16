@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.3.9 released on TBD
+## Version 0.3.9 released on 16 January 2019
 
  + Add the `FlashMobDemo` app and related resources.
  + Base on version 2.18 of the jme3-utilities-heart library.

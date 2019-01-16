@@ -29,6 +29,9 @@ Summary of features:
 
 ## Downloads
 
+Newer releases (since v0.3.9) can be downloaded from
+[GitHub](https://github.com/stephengold/Wes/releases).
+
 Older releases (v0.2.1 through v0.3.8) can be downloaded from
 [the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
 
@@ -143,7 +146,7 @@ repository location:
         jcenter()
     }
     dependencies {
-        compile 'jme3utilities:Wes:0.3.8'
+        compile 'jme3utilities:Wes:0.3.9'
     }
 
 #### For Ant projects
@@ -151,7 +154,7 @@ repository location:
 For project built using Ant, download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/jme3-utilities/releases/tag/sky-0.9.15
+   + https://github.com/stephengold/Wes/releases/tag/0.3.9
    + https://github.com/stephengold/jme3-utilities/releases/tag/heart-2.18.0
 
 You'll want both class JARs
