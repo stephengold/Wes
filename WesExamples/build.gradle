@@ -9,7 +9,7 @@ if (!hasProperty('mainClass')) {
 }
 
 dependencies {
-    compile 'jme3utilities:jme3-utilities-debug:0.9.9'
+    compile 'jme3utilities:jme3-utilities-debug:0.9.11'
     compile 'jme3utilities:jme3-utilities-ui:0.7.0'
     compile "org.jmonkeyengine:jme3-desktop:$jmonkeyengineVersion"
     runtime "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengineVersion"
