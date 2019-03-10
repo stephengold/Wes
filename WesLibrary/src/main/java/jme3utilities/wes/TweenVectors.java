@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017, Stephen Gold
+ Copyright (c) 2017-2019, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -204,7 +204,7 @@ public enum TweenVectors {
             storeResult = new Vector3f();
         }
 
-        if (last == 0 || time < times[0]) {
+        if (last == 0 || time < times[0] || MyArray.countNe(samples) == 1) {
             storeResult.set(samples[0]);
             return storeResult;
         }
