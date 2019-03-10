@@ -1,5 +1,10 @@
 # release notes for the Wes library and related examples
 
+## Version 0.3.10 released on TBD
+
+ + Fix an infinite loop in TweenVectors.CentripetalSpline
+ + Base on version 2.20 of the jme3-utilities-heart library.
+
 ## Version 0.3.9 released on 16 January 2019
 
  + Add the `FlashMobDemo` app and related resources.
@@ -11,13 +16,13 @@ to a new GitHub repo.
 
 ## Version 0.3.8 released on 28 December 2018
 
- + Base on version 2.17 of the heart library.
+ + Base on version 2.17 of the jme3-utilities-heart library.
  + Target JME v3.2.2-beta1 .
 
 ## Version 0.3.7 released on 23 September 2018
 
  + Rename `WesVersion.getVersionShort()` to `versionShort()`. (API change)
- + Base on version 2.10 of the heart library.
+ + Base on version 2.10 of the jme3-utilities-heart library.
 
 ## Version 0.3.6 released on 24 July 2018
 
