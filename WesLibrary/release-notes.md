@@ -1,5 +1,9 @@
 # release notes for the Wes library and related examples
 
+## Version 0.3.11 released on TBD
+
+Base on version 2.22 of the jme3-utilities-heart library.
+
 ## Version 0.3.10 released on 9 March 2019
 
  + Fix an infinite loop in `TweenVectors.CentripetalSpline`
