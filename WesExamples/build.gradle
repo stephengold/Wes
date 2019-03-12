@@ -9,8 +9,7 @@ if (!hasProperty('mainClass')) {
 }
 
 dependencies {
-    compile 'jme3utilities:jme3-utilities-debug:0.9.11'
-    compile 'jme3utilities:jme3-utilities-ui:0.7.0'
+    compile 'jme3utilities:jme3-utilities-ui:0.7.1'
     compile "org.jmonkeyengine:jme3-desktop:$jmonkeyengineVersion"
     runtime "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengineVersion"
     compile "org.jmonkeyengine:jme3-plugins:$jmonkeyengineVersion"
@@ -21,9 +20,12 @@ dependencies {
 }
 
 // cleanup tasks
-clean { dependsOn 'cleanDLLs', 'cleanSOs', 'cleanWrittenAssets' }
+clean { dependsOn 'cleanDLLs', 'cleanLogs', 'cleanSOs', 'cleanWrittenAssets' }
 task cleanDLLs(type: Delete) {
     delete fileTree(dir: '.', include: '*.dll')
+}
+task cleanLogs(type: Delete) {
+    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
 task cleanSOs(type: Delete) {
     delete fileTree(dir: '.', include: '*.so')

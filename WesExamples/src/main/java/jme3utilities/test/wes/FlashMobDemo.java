@@ -65,6 +65,7 @@ import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.ui.ActionApplication;
+import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.TrackEdit;
 import jme3utilities.wes.TweenTransforms;
@@ -387,7 +388,7 @@ public class FlashMobDemo extends ActionApplication {
      */
     private void center(Spatial model) {
         Vector3f[] minMax = MySpatial.findMinMaxCoords(model);
-        Vector3f center = MyVector3f.midpoint(minMax[0], minMax[1]);
+        Vector3f center = MyVector3f.midpoint(minMax[0], minMax[1], null);
         Vector3f offset = new Vector3f(center.x, minMax[0].y, center.z);
 
         Vector3f location = model.getWorldTranslation();
