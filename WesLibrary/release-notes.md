@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.3.11 released on TBD
+## Version 0.3.11 released on 12 March 2019
 
 Base on version 2.22 of the jme3-utilities-heart library.
 
