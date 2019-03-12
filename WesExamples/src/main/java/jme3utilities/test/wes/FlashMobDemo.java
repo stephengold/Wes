@@ -60,7 +60,6 @@ import java.util.logging.Logger;
 import jme3utilities.Misc;
 import jme3utilities.MyAsset;
 import jme3utilities.MySpatial;
-import jme3utilities.MyString;
 import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.math.MyVector3f;
@@ -85,7 +84,7 @@ public class FlashMobDemo extends ActionApplication {
     final public static Logger logger
             = Logger.getLogger(FlashMobDemo.class.getName());
     /**
-     * application name for the window's title bar
+     * application name (for the title bar of the app's window)
      */
     final private static String applicationName
             = FlashMobDemo.class.getSimpleName();
@@ -116,21 +115,19 @@ public class FlashMobDemo extends ActionApplication {
      * Sinbad's Skeleton
      */
     private Skeleton sinbadSkeleton;
-
     // *************************************************************************
     // new methods exposed
+
     /**
      * Main entry point for the application.
      *
-     * @param arguments array of command-line arguments (not null)
+     * @param ignored array of command-line arguments (not null)
      */
-    public static void main(String[] arguments) {
+    public static void main(String[] ignored) {
         /*
-         * Mute the chatty loggers found in some imported packages.
+         * Mute the chatty loggers in certain packages.
          */
         Misc.setLoggingLevels(Level.WARNING);
-        Logger.getLogger(MaterialLoader.class.getName()).setLevel(Level.SEVERE);
-        Logger.getLogger(MeshLoader.class.getName()).setLevel(Level.SEVERE);
         Logger.getLogger(ALAudioRenderer.class.getName())
                 .setLevel(Level.SEVERE);
 
@@ -139,12 +136,12 @@ public class FlashMobDemo extends ActionApplication {
          * Customize the window's title bar.
          */
         AppSettings settings = new AppSettings(true);
-        String title = applicationName + " " + MyString.join(arguments);
-        settings.setTitle(title);
+        settings.setTitle(applicationName);
 
         settings.setGammaCorrection(true);
         settings.setVSync(true);
         application.setSettings(settings);
+
         application.start();
     }
     // *************************************************************************
@@ -155,10 +152,14 @@ public class FlashMobDemo extends ActionApplication {
      */
     @Override
     public void actionInitializeApplication() {
+        Logger.getLogger(MaterialLoader.class.getName()).setLevel(Level.SEVERE);
+        Logger.getLogger(MeshLoader.class.getName()).setLevel(Level.SEVERE);
+
         configureCamera();
         ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
         viewPort.setBackgroundColor(bgColor);
         addLighting();
+
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
 
