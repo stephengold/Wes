@@ -116,6 +116,10 @@ public class FlashMobDemo extends ActionApplication {
      */
     private Node oto;
     /*
+     * loaded Puppet model
+     */
+    private Node puppet;
+    /*
      * Sinbad's Skeleton
      */
     private Skeleton sinbadSkeleton;
@@ -170,6 +174,7 @@ public class FlashMobDemo extends ActionApplication {
         addJaime();
         addMhGame();
         addOto();
+        addPuppet();
         addSinbad();
         /*
          * Configure the skeleton visualizers.
@@ -223,6 +228,25 @@ public class FlashMobDemo extends ActionApplication {
         skeleton = animControl.getSkeleton();
         dance = TrackEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2o, techniques, "Dance");
+        animControl.addAnim(dance);
+
+        /*
+         * Load the Puppet-to-Sinbad skeleton map.
+         */
+        AssetKey<SkeletonMapping> p2sKey
+                = new AssetKey<>("SkeletonMaps/PuppetToSinbad.j3o");
+        SkeletonMapping p2s = assetManager.loadAsset(p2sKey);
+        /*
+         * Invert the skeleton map.
+         */
+        SkeletonMapping s2p = p2s.inverse();
+        /*
+         * Retarget the "Dance" animation from Sinbad to Puppet.
+         */
+        animControl = puppet.getControl(AnimControl.class);
+        skeleton = animControl.getSkeleton();
+        dance = TrackEdit.retargetAnimation(sinbadAnimation,
+                sinbadSkeleton, skeleton, s2p, techniques, "Dance");
         animControl.addAnim(dance);
 
         /*
@@ -399,6 +423,36 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
+     * Add a Puppet model.
+     */
+    private void addPuppet() {
+        Node n = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
+        puppet = (Node) n.getChild(0);
+        rootNode.attachChild(puppet);
+
+        List<Spatial> list
+                = MySpatial.listSpatials(puppet, Spatial.class, null);
+        for (Spatial spatial : list) {
+            spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
+        }
+        setHeight(puppet, 2f);
+        center(puppet);
+        puppet.move(2f, 0f, 1f);
+        /*
+         * Add an animation channel.
+         */
+        AnimControl animControl = puppet.getControl(AnimControl.class);
+        AnimChannel animChannel = animControl.createChannel();
+        allChannels.add(animChannel);
+        /*
+         * Add a skeleton visualizer.
+         */
+        SkeletonControl sc = puppet.getControl(SkeletonControl.class);
+        SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
+        visualizers.add(sv);
+    }
+
+    /**
      * Add a Sinbad model.
      */
     private void addSinbad() {
@@ -453,8 +507,8 @@ public class FlashMobDemo extends ActionApplication {
         flyCam.setDragToRotate(true);
         flyCam.setMoveSpeed(4f);
 
-        cam.setLocation(new Vector3f(-3.5f, 2.3f, 2.1f));
-        cam.setRotation(new Quaternion(0.087f, 0.876f, -0.17f, 0.44f));
+        cam.setLocation(new Vector3f(2.85f, 3.46f, 5.29f));
+        cam.setRotation(new Quaternion(-0.054f, 0.946336f, -0.2308f, -0.2197f));
 
         CameraOrbitAppState orbitState
                 = new CameraOrbitAppState(cam, "orbitLeft", "orbitRight");

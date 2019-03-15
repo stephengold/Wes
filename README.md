@@ -200,6 +200,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [maud]: https://github.com/stephengold/Maud "Maud editor"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-Utilities Project"
+[vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [winmerge]: http://winmerge.org "WinMerge Project"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 
@@ -211,9 +212,12 @@ Like most projects, the Wes Project builds on the work of many who
 have gone before.  I therefore acknowledge the following
 artists and software developers:
 
-+ Rémy Bouquet (aka "nehon") for creating the [Bvhretarget Project][bvhretarget]
++ Rémy Bouquet (aka "nehon") for creating the Jaime model and
+  the [Bvhretarget Project][bvhretarget]
   (on which `BoneMapping` and `SkeletonMapping` are based)
   and also for many helpful insights
++ Zi Ye, for creating the Sinbad model
++ [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
 + the creators of (and contributors to) the following software:
     + the [FindBugs][] source-code analyzer
