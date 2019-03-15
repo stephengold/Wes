@@ -112,6 +112,10 @@ public class FlashMobDemo extends ActionApplication {
      */
     private Node mhGame;
     /*
+     * loaded Oto model
+     */
+    private Node oto;
+    /*
      * Sinbad's Skeleton
      */
     private Skeleton sinbadSkeleton;
@@ -165,6 +169,7 @@ public class FlashMobDemo extends ActionApplication {
 
         addJaime();
         addMhGame();
+        addOto();
         addSinbad();
         /*
          * Configure the skeleton visualizers.
@@ -203,6 +208,21 @@ public class FlashMobDemo extends ActionApplication {
         skeleton = animControl.getSkeleton();
         dance = TrackEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2m, techniques, "Dance");
+        animControl.addAnim(dance);
+
+        /*
+         * Load the Sinbad-to-Oto skeleton map.
+         */
+        AssetKey<SkeletonMapping> s2oKey
+                = new AssetKey<>("SkeletonMaps/SinbadToOto.j3o");
+        SkeletonMapping s2o = assetManager.loadAsset(s2oKey);
+        /*
+         * Retarget the "Dance" animation from Sinbad to Oto.
+         */
+        animControl = oto.getControl(AnimControl.class);
+        skeleton = animControl.getSkeleton();
+        dance = TrackEdit.retargetAnimation(sinbadAnimation,
+                sinbadSkeleton, skeleton, s2o, techniques, "Dance");
         animControl.addAnim(dance);
 
         /*
@@ -285,7 +305,7 @@ public class FlashMobDemo extends ActionApplication {
         jaime.rotate(0f, FastMath.PI, 0f); // facing +Z
         setHeight(jaime, 2f);
         center(jaime);
-        jaime.move(-1f, 0f, -1f); // behind Sinbad and to his right
+        jaime.move(-2f, 0f, 0f); // behind Sinbad and to his right
         /*
          * Add an animation channel.
          */
@@ -334,7 +354,7 @@ public class FlashMobDemo extends ActionApplication {
         }
         setHeight(mhGame, 2f);
         center(mhGame);
-        mhGame.move(1f, 0f, -1f); // behind Sinbad and to his left
+        mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
         /*
          * Add an animation channel.
          */
@@ -345,6 +365,35 @@ public class FlashMobDemo extends ActionApplication {
          * Add a skeleton visualizer.
          */
         SkeletonControl sc = mhGame.getControl(SkeletonControl.class);
+        SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
+        visualizers.add(sv);
+    }
+
+    /**
+     * Add an Oto model.
+     */
+    private void addOto() {
+        oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
+        rootNode.attachChild(oto);
+
+        List<Spatial> list
+                = MySpatial.listSpatials(oto, Spatial.class, null);
+        for (Spatial spatial : list) {
+            spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
+        }
+        setHeight(oto, 2f);
+        center(oto);
+        oto.move(0f, 0f, -1f); // directly behind Sinbad
+        /*
+         * Add an animation channel.
+         */
+        AnimControl animControl = oto.getControl(AnimControl.class);
+        AnimChannel animChannel = animControl.createChannel();
+        allChannels.add(animChannel);
+        /*
+         * Add a skeleton visualizer.
+         */
+        SkeletonControl sc = oto.getControl(SkeletonControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
