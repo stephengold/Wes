@@ -315,7 +315,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Add a Jaime model with Sinbad's "Dance" animation.
+     * Attach a Jaime model to the root node.
      */
     private void addJaime() {
         jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
@@ -364,7 +364,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Add an MhGame model.
+     * Attach an MhGame model to the root node.
      */
     private void addMhGame() {
         mhGame = (Node) assetManager.loadModel(
@@ -394,7 +394,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Add an Oto model.
+     * Attach an Oto model to the root node.
      */
     private void addOto() {
         oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
@@ -423,7 +423,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Add a Puppet model.
+     * Attach a Puppet model to the root node.
      */
     private void addPuppet() {
         Node n = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
@@ -453,7 +453,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Add a Sinbad model.
+     * Attach a Sinbad model to the root node.
      */
     private void addSinbad() {
         Node cgModel = (Node) assetManager.loadModel(
