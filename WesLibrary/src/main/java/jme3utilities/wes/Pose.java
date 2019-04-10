@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2018, Stephen Gold
+ Copyright (c) 2017-2019, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -322,27 +322,23 @@ public class Pose implements JmeCloneable {
 
     /**
      * Enumerate all bones in a pre-order depth-first traversal of the skeleton,
-     * such that child bones are never visited before their ancestors. TODO use
-     * MySkeleton
+     * such that child bones are never visited before their ancestors.
      *
-     * @return a new array of indices
+     * @return a new array of bone indices
      */
     public int[] preOrderIndices() {
         if (skeleton == null) {
             return new int[0];
         }
 
+        List<Bone> list = MySkeleton.preOrderBones(skeleton);
         int boneCount = skeleton.getBoneCount();
-        List<Integer> indexList = new ArrayList<>(boneCount);
-        Bone[] roots = skeleton.getRoots();
-        for (Bone root : roots) {
-            addPreOrderIndices(root, indexList);
-        }
-        assert indexList.size() == boneCount : indexList.size();
+        assert list.size() == boneCount : boneCount;
 
         int[] result = new int[boneCount];
-        for (int i = 0; i < boneCount; i++) {
-            result[i] = indexList.get(i);
+        for (int index = 0; index < boneCount; ++index) {
+            Bone bone = list.get(index);
+            result[index] = skeleton.getBoneIndex(bone);
         }
 
         return result;
