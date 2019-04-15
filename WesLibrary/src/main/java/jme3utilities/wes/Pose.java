@@ -104,6 +104,26 @@ public class Pose implements JmeCloneable {
     // new methods exposed
 
     /**
+     * Apply this pose to a skeleton.
+     *
+     * @param targetSkeleton the Skeleton to modify (not null)
+     */
+    public void apply(Skeleton targetSkeleton) {
+        Validate.nonNull(targetSkeleton, "target skeleton");
+        int numBones = countBones();
+        assert targetSkeleton.getBoneCount() == numBones : numBones;
+        /*
+         * Copy local transforms from pose to skeleton.
+         */
+        Transform tempTransform = new Transform();
+        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
+            localTransform(boneIndex, tempTransform);
+            Bone targetBone = targetSkeleton.getBone(boneIndex);
+            MySkeleton.setLocalTransform(targetBone, tempTransform);
+        }
+    }
+
+    /**
      * Calculate the bind transform of the indexed bone.
      *
      * @param boneIndex which bone to use (&ge;0)
