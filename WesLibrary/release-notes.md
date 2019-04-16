@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.3.11 released on 12 March 2019
+## Version 0.3.12 released on 15 April 2019
 
  + Add method to apply a `Pose` to a `Skeleton`.
  + Add Oto and Puppet to the FlashMobDemo app.
