@@ -2,6 +2,14 @@
 
 ## Version 0.3.11 released on 12 March 2019
 
+ + Add method to apply a `Pose` to a `Skeleton`.
+ + Add Oto and Puppet to the FlashMobDemo app.
+ + Re-implement `Pose.preOrderIndices()`.
+ + Base on version 2.25 of the jme3-utilities-heart library.
+ + Target JME 3.2.3-stable .
+
+## Version 0.3.11 released on 12 March 2019
+
 Base on version 2.22 of the jme3-utilities-heart library.
 
 ## Version 0.3.10 released on 9 March 2019
