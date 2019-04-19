@@ -146,7 +146,7 @@ repository location:
         jcenter()
     }
     dependencies {
-        compile 'jme3utilities:Wes:0.3.12'
+        compile 'jme3utilities:Wes:0.4.0'
     }
 
 #### For Ant projects
@@ -154,7 +154,7 @@ repository location:
 For project built using Ant, download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/Wes/releases/tag/0.3.12
+   + https://github.com/stephengold/Wes/releases/tag/0.4.0
    + https://github.com/stephengold/jme3-utilities/releases/tag/heart-2.25.0
 
 You'll want both class JARs

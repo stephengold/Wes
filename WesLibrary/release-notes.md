@@ -1,10 +1,10 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.0 released on TBD
+## Version 0.4.0 released on 18 April 2018
 
- + Moved 4 methods from `TrackEdit` to a new `AnimationEdit` class. (API change)
- + Added a new `reverseAnimation()` method to the `AnimationEdit` class.
- + Added a `ReverseAnimation` example.
+ + Move 4 methods from `TrackEdit` to a new `AnimationEdit` class. (API change)
+ + Add a new `reverseAnimation()` method to the `AnimationEdit` class.
+ + Add a `ReverseAnimation` example.
 
 ## Version 0.3.12 released on 15 April 2019
 
