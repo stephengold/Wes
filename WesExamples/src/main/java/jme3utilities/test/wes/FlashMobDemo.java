@@ -66,7 +66,7 @@ import jme3utilities.math.MyVector3f;
 import jme3utilities.ui.ActionApplication;
 import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
-import jme3utilities.wes.TrackEdit;
+import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.TweenTransforms;
 
 /**
@@ -196,7 +196,7 @@ public class FlashMobDemo extends ActionApplication {
         AnimControl animControl = jaime.getControl(AnimControl.class);
         Skeleton skeleton = animControl.getSkeleton();
         TweenTransforms techniques = new TweenTransforms();
-        Animation dance = TrackEdit.retargetAnimation(sinbadAnimation,
+        Animation dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2j, techniques, "Dance");
         animControl.addAnim(dance);
 
@@ -211,7 +211,7 @@ public class FlashMobDemo extends ActionApplication {
          */
         animControl = mhGame.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
-        dance = TrackEdit.retargetAnimation(sinbadAnimation,
+        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2m, techniques, "Dance");
         animControl.addAnim(dance);
 
@@ -226,7 +226,7 @@ public class FlashMobDemo extends ActionApplication {
          */
         animControl = oto.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
-        dance = TrackEdit.retargetAnimation(sinbadAnimation,
+        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2o, techniques, "Dance");
         animControl.addAnim(dance);
 
@@ -245,7 +245,7 @@ public class FlashMobDemo extends ActionApplication {
          */
         animControl = puppet.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
-        dance = TrackEdit.retargetAnimation(sinbadAnimation,
+        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2p, techniques, "Dance");
         animControl.addAnim(dance);
 
