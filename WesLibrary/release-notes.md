@@ -1,9 +1,15 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.0 released on TBD
+
+ + Moved 4 methods from `TrackEdit` to a new `AnimationEdit` class. (API change)
+ + Added a new `reverseAnimation()` method to the `AnimationEdit` class.
+ + Added a `ReverseAnimation` example.
+
 ## Version 0.3.12 released on 15 April 2019
 
  + Add method to apply a `Pose` to a `Skeleton`.
- + Add Oto and Puppet to the FlashMobDemo app.
+ + Add Oto and Puppet to the `FlashMobDemo` example.
  + Re-implement `Pose.preOrderIndices()`.
  + Base on version 2.25 of the jme3-utilities-heart library.
  + Target JME 3.2.3-stable .
