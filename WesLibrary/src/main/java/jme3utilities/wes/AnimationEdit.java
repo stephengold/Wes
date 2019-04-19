@@ -195,6 +195,31 @@ public class AnimationEdit {
     }
 
     /**
+     * Reverse the specified animation. All tracks in the animation must be
+     * bone/spatial tracks.
+     *
+     * @param sourceAnimation which animation to re-target (not null,
+     * unaffected)
+     * @param animationName name for the resulting animation (not null)
+     * @return a new animation
+     */
+    public static Animation reverseAnimation(Animation sourceAnimation,
+            String animationName) {
+        Validate.nonNull(animationName, "animation name");
+
+        float duration = sourceAnimation.getLength();
+        Animation result = new Animation(animationName, duration);
+
+        Track[] forwardTracks = sourceAnimation.getTracks();
+        for (Track forwardTrack : forwardTracks) {
+            Track newTrack = TrackEdit.reverse(forwardTrack);
+            result.addTrack(newTrack);
+        }
+
+        return result;
+    }
+
+    /**
      * Repair all tracks in which the 1st keyframe isn't at time=0.
      *
      * @param animation (not null)

@@ -30,7 +30,6 @@ import com.jme3.animation.AnimChannel;
 import com.jme3.animation.AnimControl;
 import com.jme3.animation.Animation;
 import com.jme3.animation.SkeletonControl;
-import com.jme3.animation.Track;
 import com.jme3.app.StatsAppState;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.input.KeyInput;
@@ -62,7 +61,7 @@ import jme3utilities.math.MyVector3f;
 import jme3utilities.ui.ActionApplication;
 import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
-import jme3utilities.wes.TrackEdit;
+import jme3utilities.wes.AnimationEdit;
 
 /**
  * App to demonstrate reversing an animation.
@@ -146,22 +145,14 @@ public class ReverseAnimation extends ActionApplication {
          */
         AnimControl animControl = sinbadModelRoot.getControl(AnimControl.class);
         Animation forward = animControl.getAnim("StandUpBack");
-        float duration = forward.getLength();
         String reverseName = "LieDown";
-        Animation reverse = new Animation(reverseName, duration);
-        Track[] forwardTracks = forward.getTracks();
-        for (Track forwardTrack : forwardTracks) {
-            Track newTrack = TrackEdit.reverse(forwardTrack);
-            reverse.addTrack(newTrack);
-        }
+        Animation reverse
+                = AnimationEdit.reverseAnimation(forward, reverseName);
         animControl.addAnim(reverse);
         /*
-         * Add an animation channel.
+         * Play the reversed "StandUpBack" animation repeatedly.
          */
         AnimChannel animChannel = animControl.createChannel();
-        /*
-         * Play the reversed "StandUpBack" animation.
-         */
         animChannel.setAnim(reverseName);
     }
 
