@@ -6,23 +6,21 @@ apply plugin: 'maven'
 group = 'jme3utilities'
 
 // select one source-code option
-//sourceCompatibility = '1.7'
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.7'
+//sourceCompatibility = '1.8'
 
 gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        // compile-time options:
+    tasks.withType(JavaCompile) { // compile-time options:
         options.compilerArgs << '-Xdiags:verbose'
         options.compilerArgs << '-Xlint:unchecked'
         options.deprecation = true
         options.encoding = 'UTF-8'
     }
-    tasks.withType(JavaExec) {
-        // runtime options:
+    tasks.withType(JavaExec) { // runtime options:
         classpath sourceSets.main.runtimeClasspath
         //doFirst { println commandLine }
         enableAssertions true
-        //jvmArgs '-verbosegc'
+        //jvmArgs '-verbose:gc'
         //jvmArgs '-Xms512m', '-Xmx512m'
         jvmArgs '-XX:+UseConcMarkSweepGC'
         //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
