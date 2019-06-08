@@ -9,14 +9,14 @@ if (!hasProperty('mainClass')) {
 }
 
 dependencies {
-    compile 'jme3utilities:jme3-utilities-ui:0.7.3'
-    compile "org.jmonkeyengine:jme3-desktop:$jmonkeyengineVersion"
-    runtime "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengineVersion"
-    compile "org.jmonkeyengine:jme3-plugins:$jmonkeyengineVersion"
-    runtime 'org.jmonkeyengine:jme3-testdata:3.1.0-stable'
+    implementation 'jme3utilities:jme3-utilities-ui:0.7.3'
+    implementation "org.jmonkeyengine:jme3-desktop:$jmonkeyengineVersion"
+    runtimeOnly "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengineVersion"
+    implementation "org.jmonkeyengine:jme3-plugins:$jmonkeyengineVersion"
+    runtimeOnly 'org.jmonkeyengine:jme3-testdata:3.1.0-stable'
 
-    //compile "jme3utilities:Wes:$wesVersion"
-    compile project(':WesLibrary')
+    //implementation "jme3utilities:Wes:$wesVersion"
+    implementation project(':WesLibrary')
 }
 
 // cleanup tasks
