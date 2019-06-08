@@ -1,9 +1,9 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.1 released on TBD
+## Version 0.4.1 released on 7 June 2019
 
- + Turn on Java 7 compatability by default.
- + Made the `gradlew` script executable.
+ + Turn on Java 7 compatibility by default.
+ + Make the `gradlew` script executable.
  + Base on version 2.28.1 of the jme3-utilities-heart library.
 
 ## Version 0.4.0 released on 18 April 2019
