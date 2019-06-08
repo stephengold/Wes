@@ -1,6 +1,12 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.0 released on 18 April 2018
+## Version 0.4.1 released on TBD
+
+ + Turn on Java 7 compatability by default.
+ + Made the `gradlew` script executable.
+ + Base on version 2.28.1 of the jme3-utilities-heart library.
+
+## Version 0.4.0 released on 18 April 2019
 
  + Move 4 methods from `TrackEdit` to a new `AnimationEdit` class. (API change)
  + Add a new `reverseAnimation()` method to the `AnimationEdit` class.
