@@ -4,9 +4,8 @@ apply plugin: 'java'
 
 group = 'jme3utilities'
 
-// select one source-code option
 sourceCompatibility = '1.7'
-//sourceCompatibility = '1.8'
+targetCompatibility = '1.7'
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) { // compile-time options:
@@ -17,6 +16,7 @@ gradle.projectsEvaluated {
     }
     tasks.withType(JavaExec) { // runtime options:
         classpath sourceSets.main.runtimeClasspath
+        //debug true
         //doFirst { println commandLine }
         enableAssertions true
         //jvmArgs '-verbose:gc'
@@ -28,7 +28,7 @@ gradle.projectsEvaluated {
 
 ext {
     // current versions of the libraries
-    jmonkeyengineVersion = '3.2.3-stable'
+    jmonkeyengineVersion = '3.2.4-stable'
     wesVersion = '0.4.1'
 }
 
@@ -51,5 +51,5 @@ task javadocJar(type: Jar, dependsOn: javadoc, description: 'Create a jar of jav
 
 // add javadoc/source jar tasks as artifacts
 artifacts {
-    archives jar, sourcesJar, javadocJar
+    archives sourcesJar, javadocJar
 }
