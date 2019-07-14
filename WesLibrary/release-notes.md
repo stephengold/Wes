@@ -5,6 +5,7 @@
  + Turn on Java 7 compatibility by default.
  + Make the `gradlew` script executable.
  + Base on version 2.28.1 of the jme3-utilities-heart library.
+ + Upgraded to Gradle v5.3.1 .
 
 ## Version 0.4.0 released on 18 April 2019
 
