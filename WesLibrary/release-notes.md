@@ -1,5 +1,9 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.2 released on 26 July 2019
+
+Base on version 2.30 of the jme3-utilities-heart library.
+
 ## Version 0.4.1 released on 7 June 2019
 
  + Turn on Java 7 compatibility by default.
