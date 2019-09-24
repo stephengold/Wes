@@ -138,7 +138,7 @@ For projects built using Maven or Gradle, it is sufficient to specify the
 dependency on the Wes library.  The build tools should automatically
 resolve the remaining dependencies automatically.
 
-Because Wes is not on JCenter yet, you have to explicitly specify the
+Because Wes is not on JCenter, you have to explicitly specify the
 repository location:
 
     repositories {
@@ -146,7 +146,7 @@ repository location:
         jcenter()
     }
     dependencies {
-        compile 'jme3utilities:Wes:0.4.2'
+        compile 'jme3utilities:Wes:0.4.3for32'
     }
 
 #### For Ant projects
@@ -154,8 +154,8 @@ repository location:
 For project built using Ant, download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/Wes/releases/tag/0.4.2
-   + https://github.com/stephengold/jme3-utilities/releases/tag/heart-2.30.0for32
+   + https://github.com/stephengold/Wes/releases/tag/0.4.3for32
+   + https://github.com/stephengold/jme3-utilities/releases/tag/heart-4.0.0for32
 
 You'll want both class JARs
 and probably the `-sources` and `-javadoc` JARs as well.
@@ -171,15 +171,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
     + Navigate to the "jme3-utilities" project folder.
     + Open the "heart" sub-project folder.
     + Navigate to the "build/libs" folder.
-    + Select the "jme3-utilities-heart-2.30.0for32.jar" file.
+    + Select the "jme3-utilities-heart-4.0.0for32.jar" file.
     + Click on the "Open" button.
  6. (optional) Add JARs for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "jme3-utilities-heart-2.30.0for32-javadoc.jar" file.
+    + Select the "jme3-utilities-heart-4.0.0for32-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "jme3-utilities-heart-2.30.0for32-sources.jar" file.
+    + Select the "jme3-utilities-heart-4.0.0for32-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` JAR(s).

@@ -1,9 +1,9 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.3for32 released on TBD
+## Version 0.4.3for32 released on 23 September 2019
 
  + Base on version 4.0 of the jme3-utilities-heart library.
- + Upgraded to Gradle v5.3.1 .
+ + Upgraded to Gradle v5.6.2 .
 
 ## Version 0.4.2 released on 26 July 2019
 

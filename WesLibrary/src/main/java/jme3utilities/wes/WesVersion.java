@@ -59,6 +59,6 @@ public class WesVersion {
      * @return branch and revision (not null, not empty)
      */
     public static String versionShort() {
-        return "master 0.4.3for32";
+        return "master 0.4.3for32+1";
     }
 }
