@@ -9,7 +9,7 @@ if (!hasProperty('mainClass')) {
 }
 
 dependencies {
-    implementation 'jme3utilities:jme3-utilities-ui:0.7.6for32'
+    implementation 'jme3utilities:jme3-utilities-ui:0.7.8for32'
     implementation "org.jmonkeyengine:jme3-desktop:$jmonkeyengineVersion"
     runtimeOnly "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengineVersion"
     implementation "org.jmonkeyengine:jme3-plugins:$jmonkeyengineVersion"
