@@ -148,26 +148,6 @@ public class Pose implements JmeCloneable {
     // new methods exposed
 
     /**
-     * Apply this Pose to an Armature.
-     *
-     * @param targetArmature the Armature to modify (not null)
-     */
-    public void applyTo(Armature targetArmature) {
-        Validate.nonNull(targetArmature, "target armature");
-        int numJoints = countBones();
-        assert targetArmature.getJointCount() == numJoints : numJoints;
-        /*
-         * Copy local transforms from Pose to Armature.
-         */
-        Transform tempTransform = new Transform();
-        for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
-            localTransform(jointIndex, tempTransform);
-            Joint targetJoint = targetArmature.getJoint(jointIndex);
-            targetJoint.setLocalTransform(tempTransform);
-        }
-    }
-
-    /**
      * Apply this Pose to a Skeleton. TODO rename applyTo()
      *
      * @param targetSkeleton the Skeleton to modify (not null)
@@ -184,6 +164,26 @@ public class Pose implements JmeCloneable {
             localTransform(boneIndex, tempTransform);
             Bone targetBone = targetSkeleton.getBone(boneIndex);
             MySkeleton.setLocalTransform(targetBone, tempTransform);
+        }
+    }
+
+    /**
+     * Apply this Pose to an Armature.
+     *
+     * @param targetArmature the Armature to modify (not null)
+     */
+    public void applyTo(Armature targetArmature) {
+        Validate.nonNull(targetArmature, "target armature");
+        int numJoints = countBones();
+        assert targetArmature.getJointCount() == numJoints : numJoints;
+        /*
+         * Copy local transforms from Pose to Armature.
+         */
+        Transform tempTransform = new Transform();
+        for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
+            localTransform(jointIndex, tempTransform);
+            Joint targetJoint = targetArmature.getJoint(jointIndex);
+            targetJoint.setLocalTransform(tempTransform);
         }
     }
 
@@ -562,20 +562,6 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation translation of the indexed joint/bone.
-     *
-     * @param boneIndex which joint/bone to translate (&ge;0)
-     * @param translation the desired translation (not null, unaffected)
-     */
-    public void setTranslation(int boneIndex, Vector3f translation) {
-        Validate.nonNegative(boneIndex, "bone index");
-        Validate.nonNull(translation, "translation");
-
-        Transform boneTransform = transforms.get(boneIndex);
-        boneTransform.setTranslation(translation);
-    }
-
-    /**
      * Configure this Pose for the specified Animation at the specified time.
      *
      * @param animation which Animation (not null, unaffected)
@@ -657,6 +643,20 @@ public class Pose implements JmeCloneable {
         for (Bone rootBone : rootBones) {
             retargetBones(rootBone, sourcePose, map);
         }
+    }
+
+    /**
+     * Alter the user/animation translation of the indexed joint/bone.
+     *
+     * @param boneIndex which joint/bone to translate (&ge;0)
+     * @param translation the desired translation (not null, unaffected)
+     */
+    public void setTranslation(int boneIndex, Vector3f translation) {
+        Validate.nonNegative(boneIndex, "bone index");
+        Validate.nonNull(translation, "translation");
+
+        Transform boneTransform = transforms.get(boneIndex);
+        boneTransform.setTranslation(translation);
     }
 
     /**
