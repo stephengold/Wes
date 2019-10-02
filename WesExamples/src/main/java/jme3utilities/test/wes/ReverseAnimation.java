@@ -26,10 +26,9 @@
  */
 package jme3utilities.test.wes;
 
-import com.jme3.animation.AnimChannel;
-import com.jme3.animation.AnimControl;
-import com.jme3.animation.Animation;
-import com.jme3.animation.SkeletonControl;
+import com.jme3.anim.AnimClip;
+import com.jme3.anim.AnimComposer;
+import com.jme3.anim.SkinningControl;
 import com.jme3.app.StatsAppState;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.input.KeyInput;
@@ -141,19 +140,17 @@ public class ReverseAnimation extends ActionApplication {
         addBox();
         addSinbad();
         /*
-         * Create a reversed version of the "StandUpBack" animation.
+         * Create a reversed version of the "StandUpBack" clip.
          */
-        AnimControl animControl = sinbadModelRoot.getControl(AnimControl.class);
-        Animation forward = animControl.getAnim("StandUpBack");
+        AnimComposer composer = sinbadModelRoot.getControl(AnimComposer.class);
+        AnimClip forward = composer.getAnimClip("StandUpBack");
         String reverseName = "LieDown";
-        Animation reverse
-                = AnimationEdit.reverseAnimation(forward, reverseName);
-        animControl.addAnim(reverse);
+        AnimClip reverse = AnimationEdit.reverseAnimation(forward, reverseName);
+        composer.addAnimClip(reverse);
         /*
-         * Play the reversed "StandUpBack" animation repeatedly.
+         * Play the reversed "StandUpBack" clip repeatedly.
          */
-        AnimChannel animChannel = animControl.createChannel();
-        animChannel.setAnim(reverseName);
+        composer.setCurrentAction(reverseName);
     }
 
     /**
@@ -250,10 +247,10 @@ public class ReverseAnimation extends ActionApplication {
         /*
          * Add a skeleton visualizer.
          */
-        SkeletonControl sc = sinbadModelRoot.getControl(SkeletonControl.class);
+        SkinningControl sc = sinbadModelRoot.getControl(SkinningControl.class);
         sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);
-        sv.setLineColor(ColorRGBA.Yellow); // TODO clean up visualization
+        sv.setLineColor(ColorRGBA.Yellow);
     }
 
     /**

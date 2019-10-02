@@ -26,6 +26,10 @@
  */
 package jme3utilities.test.wes;
 
+import com.jme3.anim.AnimClip;
+import com.jme3.anim.AnimComposer;
+import com.jme3.anim.Armature;
+import com.jme3.anim.SkinningControl;
 import com.jme3.animation.AnimChannel;
 import com.jme3.animation.AnimControl;
 import com.jme3.animation.Animation;
@@ -67,7 +71,6 @@ import jme3utilities.ui.ActionApplication;
 import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
-import jme3utilities.wes.TweenTransforms;
 
 /**
  * An animation retargeting demo.
@@ -91,38 +94,42 @@ public class FlashMobDemo extends ActionApplication {
     // *************************************************************************
     // fields
 
-    /*
+    /**
      * Sinbad's "Dance" animation
      */
-    private Animation sinbadAnimation;
-    /*
+    private AnimClip sinbadClip;
+    /**
      * list of animation channels
      */
-    final private List<AnimChannel> allChannels = new ArrayList<>(3);
-    /*
+    final private List<AnimChannel> allChannels = new ArrayList<>(5);
+    /**
+     * list of composers
+     */
+    final private List<AnimComposer> composers = new ArrayList<>(3);
+    /**
      * list of skeleton visualizers
      */
     final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
-    /*
+    /**
      * loaded Jaime model
      */
     private Node jaime;
-    /*
+    /**
      * loaded MhGame model
      */
     private Node mhGame;
-    /*
+    /**
      * loaded Oto model
      */
     private Node oto;
-    /*
+    /**
      * loaded Puppet model
      */
     private Node puppet;
-    /*
-     * Sinbad's Skeleton
+    /**
+     * Sinbad's Armature - TODO re-order fields
      */
-    private Skeleton sinbadSkeleton;
+    private Armature sinbadArmature;
     // *************************************************************************
     // new methods exposed
 
@@ -183,7 +190,6 @@ public class FlashMobDemo extends ActionApplication {
             sv.setLineColor(ColorRGBA.Yellow); // TODO clean up visualization
             rootNode.addControl(sv);
         }
-
         /*
          * Load the Sinbad-to-Jaime skeleton map.
          */
@@ -195,11 +201,9 @@ public class FlashMobDemo extends ActionApplication {
          */
         AnimControl animControl = jaime.getControl(AnimControl.class);
         Skeleton skeleton = animControl.getSkeleton();
-        TweenTransforms techniques = new TweenTransforms();
-        Animation dance = AnimationEdit.retargetAnimation(sinbadAnimation,
-                sinbadSkeleton, skeleton, s2j, techniques, "Dance");
+        Animation dance = AnimationEdit.retargetAnimation(sinbadClip,
+                sinbadArmature, skeleton, s2j, "Dance");
         animControl.addAnim(dance);
-
         /*
          * Load the Sinbad-to-MhGame skeleton map.
          */
@@ -209,12 +213,13 @@ public class FlashMobDemo extends ActionApplication {
         /*
          * Retarget the "Dance" animation from Sinbad to MhGame.
          */
-        animControl = mhGame.getControl(AnimControl.class);
-        skeleton = animControl.getSkeleton();
-        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
-                sinbadSkeleton, skeleton, s2m, techniques, "Dance");
-        animControl.addAnim(dance);
-
+        SkinningControl skinningControl
+                = mhGame.getControl(SkinningControl.class);
+        Armature armature = skinningControl.getArmature();
+        AnimClip danceClip = AnimationEdit.retargetAnimation(sinbadClip,
+                sinbadArmature, armature, s2m, "Dance");
+        AnimComposer composer = mhGame.getControl(AnimComposer.class);
+        composer.addAnimClip(danceClip);
         /*
          * Load the Sinbad-to-Oto skeleton map.
          */
@@ -224,12 +229,12 @@ public class FlashMobDemo extends ActionApplication {
         /*
          * Retarget the "Dance" animation from Sinbad to Oto.
          */
-        animControl = oto.getControl(AnimControl.class);
-        skeleton = animControl.getSkeleton();
-        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
-                sinbadSkeleton, skeleton, s2o, techniques, "Dance");
-        animControl.addAnim(dance);
-
+        skinningControl = oto.getControl(SkinningControl.class);
+        armature = skinningControl.getArmature();
+        danceClip = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
+                armature, s2o, "Dance");
+        composer = oto.getControl(AnimComposer.class);
+        composer.addAnimClip(danceClip);
         /*
          * Load the Puppet-to-Sinbad skeleton map.
          */
@@ -245,15 +250,20 @@ public class FlashMobDemo extends ActionApplication {
          */
         animControl = puppet.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
-        dance = AnimationEdit.retargetAnimation(sinbadAnimation,
-                sinbadSkeleton, skeleton, s2p, techniques, "Dance");
+        dance = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
+                skeleton, s2p, "Dance");
         animControl.addAnim(dance);
-
         /*
          * Play the "Dance" animation on all channels.
          */
         for (AnimChannel animChannel : allChannels) {
             animChannel.setAnim("Dance");
+        }
+        /*
+         * Play the "Dance" clip on all composers.
+         */
+        for (AnimComposer poser : composers) {
+            poser.setCurrentAction("Dance");
         }
     }
 
@@ -380,15 +390,14 @@ public class FlashMobDemo extends ActionApplication {
         center(mhGame);
         mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
         /*
-         * Add an animation channel.
+         * Add composer to the master list.
          */
-        AnimControl animControl = mhGame.getControl(AnimControl.class);
-        AnimChannel animChannel = animControl.createChannel();
-        allChannels.add(animChannel);
+        AnimComposer composer = mhGame.getControl(AnimComposer.class);
+        composers.add(composer);
         /*
          * Add a skeleton visualizer.
          */
-        SkeletonControl sc = mhGame.getControl(SkeletonControl.class);
+        SkinningControl sc = mhGame.getControl(SkinningControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
@@ -409,15 +418,14 @@ public class FlashMobDemo extends ActionApplication {
         center(oto);
         oto.move(0f, 0f, -1f); // directly behind Sinbad
         /*
-         * Add an animation channel.
+         * Add composer to the master list.
          */
-        AnimControl animControl = oto.getControl(AnimControl.class);
-        AnimChannel animChannel = animControl.createChannel();
-        allChannels.add(animChannel);
+        AnimComposer composer = oto.getControl(AnimComposer.class);
+        composers.add(composer);
         /*
          * Add a skeleton visualizer.
          */
-        SkeletonControl sc = oto.getControl(SkeletonControl.class);
+        SkinningControl sc = oto.getControl(SkinningControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
@@ -469,16 +477,15 @@ public class FlashMobDemo extends ActionApplication {
         center(cgModel);
         cgModel.move(0f, 0f, 1f); // in front of the origin
 
-        AnimControl animControl = cgModel.getControl(AnimControl.class);
-        sinbadAnimation = animControl.getAnim("Dance");
+        AnimComposer composer = cgModel.getControl(AnimComposer.class);
+        sinbadClip = composer.getAnimClip("Dance");
 
-        SkeletonControl sc = cgModel.getControl(SkeletonControl.class);
-        sinbadSkeleton = sc.getSkeleton();
+        SkinningControl sc = cgModel.getControl(SkinningControl.class);
+        sinbadArmature = sc.getArmature();
         /*
-         * Add an animation channel.
+         * Add composer to the master list.
          */
-        AnimChannel animChannel = animControl.createChannel();
-        allChannels.add(animChannel);
+        composers.add(composer);
         /*
          * Add a skeleton visualizer.
          */
