@@ -253,7 +253,7 @@ public class ReverseAnimation extends ActionApplication {
         SkeletonControl sc = sinbadModelRoot.getControl(SkeletonControl.class);
         sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);
-        sv.setLineColor(ColorRGBA.Yellow); // TODO clean up visualization
+        sv.setLineColor(ColorRGBA.Yellow);
     }
 
     /**

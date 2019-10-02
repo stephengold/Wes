@@ -91,35 +91,35 @@ public class FlashMobDemo extends ActionApplication {
     // *************************************************************************
     // fields
 
-    /*
+    /**
      * Sinbad's "Dance" animation
      */
     private Animation sinbadAnimation;
-    /*
+    /**
      * list of animation channels
      */
-    final private List<AnimChannel> allChannels = new ArrayList<>(3);
-    /*
+    final private List<AnimChannel> allChannels = new ArrayList<>(5);
+    /**
      * list of skeleton visualizers
      */
     final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
-    /*
+    /**
      * loaded Jaime model
      */
     private Node jaime;
-    /*
+    /**
      * loaded MhGame model
      */
     private Node mhGame;
-    /*
+    /**
      * loaded Oto model
      */
     private Node oto;
-    /*
+    /**
      * loaded Puppet model
      */
     private Node puppet;
-    /*
+    /**
      * Sinbad's Skeleton
      */
     private Skeleton sinbadSkeleton;
@@ -183,7 +183,6 @@ public class FlashMobDemo extends ActionApplication {
             sv.setLineColor(ColorRGBA.Yellow); // TODO clean up visualization
             rootNode.addControl(sv);
         }
-
         /*
          * Load the Sinbad-to-Jaime skeleton map.
          */
@@ -199,7 +198,6 @@ public class FlashMobDemo extends ActionApplication {
         Animation dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2j, techniques, "Dance");
         animControl.addAnim(dance);
-
         /*
          * Load the Sinbad-to-MhGame skeleton map.
          */
@@ -248,7 +246,6 @@ public class FlashMobDemo extends ActionApplication {
         dance = AnimationEdit.retargetAnimation(sinbadAnimation,
                 sinbadSkeleton, skeleton, s2p, techniques, "Dance");
         animControl.addAnim(dance);
-
         /*
          * Play the "Dance" animation on all channels.
          */
@@ -380,7 +377,7 @@ public class FlashMobDemo extends ActionApplication {
         center(mhGame);
         mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
         /*
-         * Add an animation channel.
+         * Add channel to the master list.
          */
         AnimControl animControl = mhGame.getControl(AnimControl.class);
         AnimChannel animChannel = animControl.createChannel();
@@ -409,7 +406,7 @@ public class FlashMobDemo extends ActionApplication {
         center(oto);
         oto.move(0f, 0f, -1f); // directly behind Sinbad
         /*
-         * Add an animation channel.
+         * Add channel to the master list.
          */
         AnimControl animControl = oto.getControl(AnimControl.class);
         AnimChannel animChannel = animControl.createChannel();
@@ -475,7 +472,7 @@ public class FlashMobDemo extends ActionApplication {
         SkeletonControl sc = cgModel.getControl(SkeletonControl.class);
         sinbadSkeleton = sc.getSkeleton();
         /*
-         * Add an animation channel.
+         * Add channel to the master list.
          */
         AnimChannel animChannel = animControl.createChannel();
         allChannels.add(animChannel);

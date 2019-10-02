@@ -117,7 +117,7 @@ public class TrackEdit {
             newScales[0] = neckTransform.getScale().clone();
         }
 
-        for (int newIndex = 1; newIndex < newCount; newIndex++) {
+        for (int newIndex = 1; newIndex < newCount; ++newIndex) {
             int oldIndex = newIndex + neckIndex;
 
             newTimes[newIndex] = oldTimes[oldIndex] - neckTime;
@@ -208,7 +208,7 @@ public class TrackEdit {
         /*
          * Fill the new arrays.
          */
-        for (int frameIndex = 0; frameIndex < newCount; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < newCount; ++frameIndex) {
             Quaternion rot1, rot2;
             Vector3f tra1, tra2, scale1, scale2;
             if (frameIndex < numCopy1) { // Copy from track1[frameIndex].
@@ -314,7 +314,7 @@ public class TrackEdit {
         /*
          * Fill the new arrays.
          */
-        for (int oldIndex = 0; oldIndex <= lastIndex; oldIndex++) {
+        for (int oldIndex = 0; oldIndex <= lastIndex; ++oldIndex) {
             int frameIndex = oldIndex + addFrames;
             newTimes[frameIndex] = oldTimes[oldIndex] + delayAmount;
 
@@ -378,7 +378,7 @@ public class TrackEdit {
             newScales = new Vector3f[newCount];
         }
 
-        for (int newIndex = 0; newIndex < newCount; newIndex++) {
+        for (int newIndex = 0; newIndex < newCount; ++newIndex) {
             int oldIndex;
             if (newIndex < startIndex) {
                 oldIndex = newIndex;
@@ -436,7 +436,7 @@ public class TrackEdit {
         Vector3f[] newScales = new Vector3f[newCount];
 
         boolean added = false;
-        for (int oldIndex = 0; oldIndex < oldCount; oldIndex++) {
+        for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
             float time = oldTimes[oldIndex];
             int newIndex = oldIndex;
             if (time > frameTime) {
@@ -561,7 +561,7 @@ public class TrackEdit {
             newScales = new Vector3f[newCount];
         }
 
-        for (int newIndex = 0; newIndex < newCount; newIndex++) {
+        for (int newIndex = 0; newIndex < newCount; ++newIndex) {
             int oldIndex = newIndex * factor;
 
             newTimes[newIndex] = oldTimes[oldIndex];
@@ -633,7 +633,7 @@ public class TrackEdit {
          */
         prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
-        for (int oldIndex = 0; oldIndex < oldCount; oldIndex++) {
+        for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
             float time = oldTimes[oldIndex];
             if (time != prevTime) {
                 newTimes[newIndex] = oldTimes[oldIndex];
@@ -716,11 +716,11 @@ public class TrackEdit {
     }
 
     /**
-     * Re-target the specified bone track from the specified source skeleton to
+     * Re-target the specified BoneTrack from the specified source skeleton to
      * the specified target skeleton using the specified map.
      *
-     * @param sourceAnimation the animation to re-target, or null for bind pose
-     * @param sourceTrack input bone track (not null, unaffected)
+     * @param sourceAnimation the Animation to re-target, or null for bind pose
+     * @param sourceTrack the input BoneTrack (not null, unaffected)
      * @param sourceSkeleton (not null, unaffected)
      * @param targetSkeleton (not null, unaffected)
      * @param targetBoneIndex index of the target bone (&ge;0)
@@ -754,7 +754,7 @@ public class TrackEdit {
         Vector3f[] scales = new Vector3f[numKeyframes];
         Pose sourcePose = new Pose(sourceSkeleton);
 
-        for (int frameIndex = 0; frameIndex < numKeyframes; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
             float trackTime = times[frameIndex];
             Pose targetPose = cache.get(trackTime);
             if (targetPose == null) {
@@ -764,8 +764,8 @@ public class TrackEdit {
                 targetPose.setToRetarget(sourcePose, map);
                 cache.put(trackTime, targetPose);
             }
-            Transform userTransform;
-            userTransform = targetPose.userTransform(targetBoneIndex, null);
+            Transform userTransform
+                    = targetPose.userTransform(targetBoneIndex, null);
             translations[frameIndex] = userTransform.getTranslation();
             rotations[frameIndex] = userTransform.getRotation();
             scales[frameIndex] = userTransform.getScale();
@@ -781,8 +781,8 @@ public class TrackEdit {
      * Copy the specified bone/spatial track, reversing the sequence of its
      * frames.
      *
-     * @param oldTrack input bone/spatial track (not null, unaffected)
-     * @return a new track of the same type as oldTrack
+     * @param oldTrack the input bone/spatial track (not null, unaffected)
+     * @return a new Track of the same type as oldTrack
      */
     public static Track reverse(Track oldTrack) {
         assert oldTrack instanceof BoneTrack
@@ -812,7 +812,7 @@ public class TrackEdit {
             newScales = new Vector3f[numFrames];
         }
 
-        for (int newIndex = 0; newIndex < numFrames; newIndex++) {
+        for (int newIndex = 0; newIndex < numFrames; ++newIndex) {
             int oldIndex = numFrames - newIndex - 1;
 
             newTimes[newIndex] = lastFrameTime - oldTimes[oldIndex];
@@ -852,7 +852,7 @@ public class TrackEdit {
         Track result = oldTrack.clone();
         float[] newTimes = result.getKeyFrameTimes(); // an alias
 
-        for (int frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
             float oldTime = oldTimes[frameIndex];
             assert oldTime <= oldDuration : oldTime;
 
@@ -960,7 +960,7 @@ public class TrackEdit {
 
         float[] oldTimes = oldTrack.getKeyFrameTimes();
         int numFrames = oldTimes.length;
-        for (int index = 0; index < numFrames; index++) {
+        for (int index = 0; index < numFrames; ++index) {
             if (oldTranslations != null) {
                 Vector3f translation = oldTranslations[index];
                 if (!MyVector3f.isZero(translation)) {
@@ -997,7 +997,7 @@ public class TrackEdit {
                     ? new Quaternion[numFrames] : null;
             Vector3f[] newScales = keepScales ? new Vector3f[numFrames] : null;
 
-            for (int index = 0; index < numFrames; index++) {
+            for (int index = 0; index < numFrames; ++index) {
                 newTimes[index] = oldTimes[index];
                 if (keepTranslations) {
                     newTranslations[index] = oldTranslations[index].clone();
@@ -1104,7 +1104,7 @@ public class TrackEdit {
             newScales = new Vector3f[newCount];
         }
 
-        for (int frameIndex = 0; frameIndex < newCount; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < newCount; ++frameIndex) {
             newTimes[frameIndex] = oldTimes[frameIndex];
             if (newTranslations != null) {
                 newTranslations[frameIndex]
@@ -1133,7 +1133,7 @@ public class TrackEdit {
      * @param duration duration of the animation (in seconds, &gt;0)
      * @param endWeight how much weight to give to the pre-existing end-time
      * keyframe, if one exists (&ge;0, &le;1)
-     * @return a new track of the same type as oldTrack
+     * @return a new Track of the same type as oldTrack
      */
     public static Track wrap(Track oldTrack, float duration, float endWeight) {
         assert oldTrack instanceof BoneTrack
@@ -1205,7 +1205,7 @@ public class TrackEdit {
             newScales[endIndex] = wrapScale.clone();
         }
 
-        for (int frameIndex = 1; frameIndex < endIndex; frameIndex++) {
+        for (int frameIndex = 1; frameIndex < endIndex; ++frameIndex) {
             newTimes[frameIndex] = oldTimes[frameIndex];
             if (newTranslations != null) {
                 newTranslations[frameIndex]

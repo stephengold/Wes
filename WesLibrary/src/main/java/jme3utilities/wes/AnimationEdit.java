@@ -134,36 +134,36 @@ public class AnimationEdit {
     }
 
     /**
-     * Re-target the specified animation from the specified source skeleton to
+     * Re-target the specified Animation from the specified source skeleton to
      * the specified target skeleton using the specified map.
      *
-     * @param sourceAnimation which animation to re-target (not null,
+     * @param sourceAnimation which Animation to re-target (not null,
      * unaffected)
      * @param sourceSkeleton (not null, unaffected)
      * @param targetSkeleton (not null, unaffected)
-     * @param map skeleton map to use (not null, unaffected)
-     * @param techniques tweening techniques to use (not null, unaffected)
-     * @param animationName name for the resulting animation (not null)
-     * @return a new animation
+     * @param map the skeleton map to use (not null, unaffected)
+     * @param techniques the tweening techniques to use (not null, unaffected)
+     * @param animationName name for the resulting Animation (not null)
+     * @return a new Animation
      */
     public static Animation retargetAnimation(Animation sourceAnimation,
             Skeleton sourceSkeleton, Skeleton targetSkeleton,
             SkeletonMapping map, TweenTransforms techniques,
             String animationName) {
         Validate.nonNull(sourceSkeleton, "source skeleton");
+        Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
         Validate.nonNull(techniques, "techniques");
         Validate.nonNull(animationName, "animation name");
         /*
-         * Start with an empty animation.
+         * Start with an empty Animation.
          */
         float duration = sourceAnimation.getLength();
         Animation result = new Animation(animationName, duration);
-
-        Map<Float, Pose> cache = new TreeMap<>();
         /*
-         * Add a bone track for each target bone that's mapped.
+         * Add a BoneTrack for each target bone that's mapped.
          */
+        Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
         for (int iTarget = 0; iTarget < numTargetBones; iTarget++) {
             Bone targetBone = targetSkeleton.getBone(iTarget);
@@ -195,13 +195,12 @@ public class AnimationEdit {
     }
 
     /**
-     * Reverse the specified animation. All tracks in the animation must be
+     * Reverse the specified Animation. All tracks in the Animation must be
      * bone/spatial tracks.
      *
-     * @param sourceAnimation which animation to re-target (not null,
-     * unaffected)
-     * @param animationName name for the resulting animation (not null)
-     * @return a new animation
+     * @param sourceAnimation which Animation to reverse (not null, unaffected)
+     * @param animationName name for the resulting Animation (not null)
+     * @return a new Animation
      */
     public static Animation reverseAnimation(Animation sourceAnimation,
             String animationName) {

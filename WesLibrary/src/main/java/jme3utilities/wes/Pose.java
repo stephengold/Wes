@@ -48,7 +48,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 
 /**
- * Encapsulate a pose for a particular skeleton.
+ * Encapsulate a pose for a particular Skeleton.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -64,14 +64,15 @@ public class Pose implements JmeCloneable {
     // fields
 
     /**
-     * user/animation transforms that describe this pose, one for each bone
+     * user/animation transforms that describe this Pose, one for each skeleton
+     * bone
      */
     private List<Transform> transforms;
     /**
-     * the skeleton on which this pose is based, or null for none
+     * Skeleton on which this Pose is based, or null for none
      * <p>
-     * This skeleton provides the name, index, parent, children, and bind
-     * transform of each bone. All other bone information is disregarded. In
+     * This Skeleton provides the name, index, parent, children, and bind
+     * transform of each Bone. All other Bone data are disregarded. In
      * particular, the bones' {local/model}{Pos/Rot/Scale} and userControl
      * fields are ignored.
      */
@@ -80,7 +81,7 @@ public class Pose implements JmeCloneable {
     // constructors
 
     /**
-     * Instantiate bind pose for the specified skeleton.
+     * Instantiate bind pose for the specified Skeleton.
      *
      * @param skeleton (may be null, otherwise an alias is created)
      */
@@ -95,16 +96,19 @@ public class Pose implements JmeCloneable {
         }
 
         transforms = new ArrayList<>(boneCount);
-        for (int boneIndex = 0; boneIndex < boneCount; boneIndex++) {
+
+        for (int boneIndex = 0; boneIndex < boneCount; ++boneIndex) {
             Transform transform = new Transform();
             transforms.add(transform);
         }
+
+        assert transforms.size() == boneCount;
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Apply this pose to a skeleton.
+     * Apply this Pose to the specified Skeleton. TODO rename applyTo()
      *
      * @param targetSkeleton the Skeleton to modify (not null)
      */
@@ -113,7 +117,7 @@ public class Pose implements JmeCloneable {
         int numBones = countBones();
         assert targetSkeleton.getBoneCount() == numBones : numBones;
         /*
-         * Copy local transforms from pose to skeleton.
+         * Copy local transforms from Pose to Skeleton.
          */
         Transform tempTransform = new Transform();
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
@@ -124,27 +128,29 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate the bind transform of the indexed bone.
+     * Copy the local bind transform of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
+     * @param boneIndex which bone (&ge;0)
      * @param storeResult (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform bindTransform(int boneIndex, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
+        Transform result
+                = (storeResult == null) ? new Transform() : storeResult;
 
         Bone bone = skeleton.getBone(boneIndex);
-        storeResult = MySkeleton.copyBindTransform(bone, storeResult);
+        MySkeleton.copyBindTransform(bone, result);
 
-        return storeResult;
+        return result;
     }
 
     /**
-     * Convert this pose to an animation. The resulting animation will have zero
+     * Convert this Pose to an Animation. The resulting Animation will have zero
      * duration, a single keyframe at t=0, and all its tracks will be
      * BoneTracks.
      *
-     * @param animationName name for the new animation (not null)
+     * @param animationName name for the new Animation (not null)
      * @return a new instance
      */
     public Animation capture(String animationName) {
@@ -159,7 +165,7 @@ public class Pose implements JmeCloneable {
          */
         int numBones = countBones();
         Transform transform = new Transform();
-        for (int boneIndex = 0; boneIndex < numBones; boneIndex++) {
+        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             userTransform(boneIndex, transform);
             if (!MyMath.isIdentity(transform)) {
                 Vector3f translation = transform.getTranslation();
@@ -175,7 +181,7 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Count the bones in this pose.
+     * Count the bones in this Pose.
      *
      * @return count (&ge;0)
      */
@@ -186,10 +192,10 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Find the index of the named bone in the skeleton of this pose.
+     * Find the index of the named Bone in this Pose.
      *
-     * @param boneName which bone (not null)
-     * @return bone index (&ge;0) or -1 if not found
+     * @param boneName which Bone (not null)
+     * @return the bone index (&ge;0) or -1 if not found
      */
     public int findBone(String boneName) {
         int result = skeleton.getBoneIndex(boneName);
@@ -197,46 +203,47 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate the local rotation of the indexed bone.
+     * Calculate the local rotation of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
-     * @return local rotation (either storeResult or a new instance)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the rotation in local coordinates (either storeResult or a new
+     * instance)
      */
     public Quaternion localRotation(int boneIndex, Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
         /*
-         * Start with the bone's bind transform.
+         * Start with the local bind rotation.
          */
         Bone bone = skeleton.getBone(boneIndex);
-        Quaternion bindRotation = bone.getBindRotation();
+        Quaternion bindRotation = bone.getBindRotation(); // alias
         /*
          * Apply its user/animation rotation.
          */
-        Transform transform = transforms.get(boneIndex);
-        Quaternion userRotation = transform.getRotation();
+        Transform userTransform = transforms.get(boneIndex);
+        Quaternion userRotation = userTransform.getRotation();
         storeResult = bindRotation.mult(userRotation, storeResult);
 
         return storeResult;
     }
 
     /**
-     * Calculate the local transform of the indexed bone.
+     * Calculate the local transform of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
-     * @return transform in local coordinates (either storeResult or a new
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the Transform in local coordinates (either storeResult or a new
      * instance)
      */
     public Transform localTransform(int boneIndex, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
         /*
-         * Start with the bone's bind transform.
+         * Start with the local bind transform.
          */
         storeResult = bindTransform(boneIndex, storeResult);
         /*
          * Apply the user/animation transform in a simple (yet peculiar) way
-         * to obtain the bone's local transform.
+         * to obtain the local transform.
          */
         Transform user = userTransform(boneIndex, null);
         storeResult.getTranslation().addLocal(user.getTranslation());
@@ -250,8 +257,8 @@ public class Pose implements JmeCloneable {
      * Calculate the location of the indexed bone in the coordinate system of an
      * animated spatial.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param boneIndex which bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
      * @return location in model space (either storeResult or a new instance)
      */
     public Vector3f modelLocation(int boneIndex, Vector3f storeResult) {
@@ -269,11 +276,11 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate the orientation of the indexed bone in the coordinate system of
+     * Calculate the orientation of the indexed Bone in the coordinate system of
      * an animated spatial.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
      * @return orientation in model space (either storeResult or a new instance)
      */
     public Quaternion modelOrientation(int boneIndex, Quaternion storeResult) {
@@ -301,12 +308,12 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate the model transform of the indexed bone. When applied as a left
+     * Calculate the model transform of the indexed Bone. When applied as a left
      * factor, the model transform converts from the bone's coordinate system to
      * the coordinate system of an animated spatial.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform modelTransform(int boneIndex, Transform storeResult) {
@@ -341,33 +348,32 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Enumerate all bones in a pre-order depth-first traversal of the skeleton,
+     * Enumerate all bones in a pre-order depth-first traversal of the Skeleton,
      * such that child bones are never visited before their ancestors.
      *
      * @return a new array of bone indices
      */
     public int[] preOrderIndices() {
-        if (skeleton == null) {
-            return new int[0];
-        }
-
-        List<Bone> list = MySkeleton.preOrderBones(skeleton);
-        int boneCount = skeleton.getBoneCount();
-        assert list.size() == boneCount : boneCount;
-
+        int boneCount = transforms.size();
         int[] result = new int[boneCount];
-        for (int index = 0; index < boneCount; ++index) {
-            Bone bone = list.get(index);
-            result[index] = skeleton.getBoneIndex(bone);
+
+        if (skeleton != null) {
+            List<Bone> list = MySkeleton.preOrderBones(skeleton);
+            assert list.size() == boneCount : boneCount;
+
+            for (int index = 0; index < boneCount; ++index) {
+                Bone bone = list.get(index);
+                result[index] = skeleton.getBoneIndex(bone);
+            }
         }
 
         return result;
     }
 
     /**
-     * Reset the rotation of the indexed bone to identity.
+     * Reset the user/animation rotation of the indexed Bone to identity.
      *
-     * @param boneIndex which bone (&ge;0)
+     * @param boneIndex which Bone (&ge;0)
      */
     public void resetRotation(int boneIndex) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -378,9 +384,9 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Reset the scale of the indexed bone to identity.
+     * Reset the user/animation scale of the indexed Bone to identity.
      *
-     * @param boneIndex which bone (&ge;0)
+     * @param boneIndex which Bone (&ge;0)
      */
     public void resetScale(int boneIndex) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -391,9 +397,9 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Reset the translation of the indexed bone to zero.
+     * Reset the user/animation translation of the indexed Bone to zero.
      *
-     * @param boneIndex which bone (&ge;0)
+     * @param boneIndex which Bone (&ge;0)
      */
     public void resetTranslation(int boneIndex) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -428,10 +434,10 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation transform of the indexed bone.
+     * Alter the user/animation transform of the indexed Bone.
      *
-     * @param boneIndex which bone to translate (&ge;0)
-     * @param transform (not null, unaffected)
+     * @param boneIndex which Bone to transform (&ge;0)
+     * @param transform the desired Transform (not null, unaffected)
      */
     public void set(int boneIndex, Transform transform) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -442,10 +448,10 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation rotation of the indexed bone.
+     * Alter the user/animation rotation of the indexed Bone.
      *
-     * @param boneIndex which bone to rotate (&ge;0)
-     * @param rotation (not null, unaffected)
+     * @param boneIndex which Bone to rotate (&ge;0)
+     * @param rotation the desired rotation (not null, unaffected)
      */
     public void setRotation(int boneIndex, Quaternion rotation) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -456,10 +462,11 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation scale of the indexed bone.
+     * Alter the user/animation scale of the indexed Bone.
      *
-     * @param boneIndex which bone to scale (&ge;0)
-     * @param scale (not null, unaffected)
+     * @param boneIndex which Bone to scale (&ge;0)
+     * @param scale the desired scale factor for each axis (not null,
+     * unaffected)
      */
     public void setScale(int boneIndex, Vector3f scale) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -473,7 +480,8 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation translation of the indexed bone.
+     * Alter the user/animation translation of the indexed bone. TODO re-order
+     * methods
      *
      * @param boneIndex which bone to translate (&ge;0)
      * @param translation (not null, unaffected)
@@ -487,11 +495,11 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Configure this pose for the specified animation at the specified time.
+     * Configure this Pose for the specified Animation at the specified time.
      *
-     * @param animation which animation (not null, unaffected)
-     * @param time animation time (in seconds)
-     * @param techniques tweening techniques to use (not null, unaffected)
+     * @param animation which Animation (not null, unaffected)
+     * @param time the animation time (in seconds)
+     * @param techniques the tweening techniques to use (not null, unaffected)
      */
     public void setToAnimation(Animation animation, float time,
             TweenTransforms techniques) {
@@ -499,7 +507,7 @@ public class Pose implements JmeCloneable {
         Validate.nonNull(techniques, "techniques");
 
         int numBones = transforms.size();
-        for (int boneIndex = 0; boneIndex < numBones; boneIndex++) {
+        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             Transform transform = transforms.get(boneIndex);
             BoneTrack track = MyAnimation.findBoneTrack(animation, boneIndex);
             if (track == null) {
@@ -512,21 +520,21 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Configure to represent bind pose.
+     * Configure this Pose to represent bind pose.
      */
     public void setToBind() {
-        int numBones = transforms.size();
-        for (int boneIndex = 0; boneIndex < numBones; boneIndex++) {
+        int count = transforms.size();
+        for (int boneIndex = 0; boneIndex < count; ++boneIndex) {
             Transform transform = transforms.get(boneIndex);
             transform.loadIdentity();
         }
     }
 
     /**
-     * Configure this pose by re-targeting the specified source pose.
+     * Configure this Pose by re-targeting the specified source pose.
      *
      * @param sourcePose which source pose to re-target (not null, unaffected)
-     * @param map skeleton map to use (not null, unaffected)
+     * @param map the skeleton map to use (not null, unaffected)
      */
     public void setToRetarget(Pose sourcePose, SkeletonMapping map) {
         Validate.nonNull(sourcePose, "source pose");
@@ -539,7 +547,7 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate skinning matrices for this pose.
+     * Calculate skinning matrices for this Pose.
      *
      * @param storeResult (modified if not null)
      * @return skinning matrices (either storeResult or a new instance)
@@ -564,11 +572,11 @@ public class Pose implements JmeCloneable {
         Quaternion msRotation = msTransform.getRotation();
         Vector3f msScale = msTransform.getScale();
 
-        for (int boneIndex = 0; boneIndex < numBones; boneIndex++) {
+        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             Bone bone = skeleton.getBone(boneIndex);
             modelTransform(boneIndex, msTransform);
             /*
-             * Calculate the skinning transform for the bone.
+             * Calculate the skinning transform for the Bone.
              * Compare with Bone.getOffsetTransform()
              */
             Vector3f mbiScale = bone.getModelBindInverseScale();
@@ -595,34 +603,35 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Calculate the user/animation rotation for the indexed bone to give it the
+     * Calculate the user/animation rotation for the indexed Bone to give it the
      * specified orientation in the coordinate system of an animated spatial.
      *
-     * @param boneIndex which bone (&ge;0)
-     * @param modelOrientation desired orientation (not null, unaffected)
+     * @param boneIndex which Bone (&ge;0)
+     * @param modelOrientation desired orientation (not null, not zero,
+     * unaffected)
      * @param storeResult (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Quaternion userForModel(int boneIndex, Quaternion modelOrientation,
             Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        Validate.nonNull(modelOrientation, "model orienation");
+        Validate.nonZero(modelOrientation, "model orienation");
 
         Bone bone = skeleton.getBone(boneIndex);
         Quaternion bind = bone.getBindRotation();
-        Quaternion inverseBind = bind.inverse();
         Quaternion local = localForModel(bone, modelOrientation, null);
+        Quaternion inverseBind = bind.inverse();
         storeResult = inverseBind.mult(local, storeResult);
 
         return storeResult;
     }
 
     /**
-     * Copy the user/animation rotation of the indexed bone.
+     * Copy the user/animation rotation of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
-     * @return user rotation (either storeResult or a new instance)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the user rotation (either storeResult or a new instance)
      */
     public Quaternion userRotation(int boneIndex, Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -634,11 +643,12 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Copy the user/animation scale of the indexed bone.
+     * Copy the user/animation scale of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
-     * @return user scale (either storeResult or a new instance)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the user scale factor for each axis (either storeResult or a new
+     * instance)
      */
     public Vector3f userScale(int boneIndex, Vector3f storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -650,10 +660,10 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Copy the user/animation transform of the indexed bone.
+     * Copy the user/animation transform of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform userTransform(int boneIndex, Transform storeResult) {
@@ -669,10 +679,10 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Copy the user/animation translation of the indexed bone.
+     * Copy the user/animation translation of the indexed Bone.
      *
-     * @param boneIndex which bone to use (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param boneIndex which Bone (&ge;0)
+     * @param storeResult storage for the result (modified if not null)
      * @return user translation (either storeResult or a new instance)
      */
     public Vector3f userTranslation(int boneIndex, Vector3f storeResult) {
@@ -687,9 +697,9 @@ public class Pose implements JmeCloneable {
     // Cloneable methods
 
     /**
-     * Create a deep copy of this pose.
+     * Create a deep copy of this Pose.
      *
-     * @return a new pose, equivalent to this one
+     * @return a new Pose, equivalent to this one
      */
     @Override
     public Pose clone() {
@@ -752,28 +762,12 @@ public class Pose implements JmeCloneable {
     // private methods
 
     /**
-     * Add the indices of the specified bone and its descendent to the specified
-     * list.
-     *
-     * @param bone starting bone in the skeleton (not null, unaffected)
-     * @param indexList list of bone indices (not null, appended to)
-     */
-    private void addPreOrderIndices(Bone bone, List<Integer> indexList) {
-        int boneIndex = skeleton.getBoneIndex(bone);
-        assert boneIndex >= 0 : boneIndex;
-        indexList.add(boneIndex);
-        for (Bone child : bone.getChildren()) {
-            addPreOrderIndices(child, indexList);
-        }
-    }
-
-    /**
-     * Calculate the local rotation for the specified bone to give it the
+     * Calculate the local rotation for the specified Bone to give it the
      * specified orientation in the coordinate system of an animated spatial.
      *
-     * @param bone which bone (not null, unaffected)
-     * @param modelOrientation desired orientation (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param bone which Bone (not null, unaffected)
+     * @param modelOrientation the desired orientation (not null, unaffected)
+     * @param storeResult storage for the result (modified if not null)
      * @return rotation (either storeResult or a new instance)
      */
     private Quaternion localForModel(Bone bone, Quaternion modelOrientation,
@@ -788,10 +782,10 @@ public class Pose implements JmeCloneable {
         if (parent == null) {
             storeResult.set(modelOrientation);
         } else {
-            int parentIndex = skeleton.getBoneIndex(parent);
             /*
              * Factor in the orientation of the parent bone.
              */
+            int parentIndex = skeleton.getBoneIndex(parent);
             Quaternion parentMo = modelOrientation(parentIndex, null);
             Quaternion parentImo = parentMo.inverse();
             parentImo.mult(modelOrientation, storeResult);
@@ -801,12 +795,12 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Configure the specified bone and its descendents by re-targeting the
+     * Configure the specified Bone and its descendents by re-targeting the
      * specified source pose. Note: recursive!
      *
-     * @param bone the bone to start with (not null, unaffected)
+     * @param bone the Bone to start with (not null, unaffected)
      * @param sourcePose which source pose to re-target (not null, unaffected)
-     * @param map skeleton map to use (not null, unaffected)
+     * @param map the skeleton map to use (not null, unaffected)
      */
     private void retargetBones(Bone bone, Pose sourcePose,
             SkeletonMapping map) {
