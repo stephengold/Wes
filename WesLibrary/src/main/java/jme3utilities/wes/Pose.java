@@ -165,26 +165,6 @@ public class Pose implements JmeCloneable {
     // new methods exposed
 
     /**
-     * Apply this Pose to the specified Skeleton.
-     *
-     * @param targetSkeleton the Skeleton to modify (not null)
-     */
-    public void applyTo(Skeleton targetSkeleton) {
-        Validate.nonNull(targetSkeleton, "target skeleton");
-        int numBones = countBones();
-        assert targetSkeleton.getBoneCount() == numBones : numBones;
-        /*
-         * Copy local transforms from Pose to Skeleton.
-         */
-        Transform tempTransform = new Transform();
-        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
-            localTransform(boneIndex, tempTransform);
-            Bone targetBone = targetSkeleton.getBone(boneIndex);
-            MySkeleton.setLocalTransform(targetBone, tempTransform);
-        }
-    }
-
-    /**
      * Apply this Pose to the specified Armature.
      *
      * @param targetArmature the Armature to modify (not null)
@@ -201,6 +181,26 @@ public class Pose implements JmeCloneable {
             localTransform(jointIndex, tempTransform);
             Joint targetJoint = targetArmature.getJoint(jointIndex);
             targetJoint.setLocalTransform(tempTransform);
+        }
+    }
+
+    /**
+     * Apply this Pose to the specified Skeleton.
+     *
+     * @param targetSkeleton the Skeleton to modify (not null)
+     */
+    public void applyTo(Skeleton targetSkeleton) {
+        Validate.nonNull(targetSkeleton, "target skeleton");
+        int numBones = countBones();
+        assert targetSkeleton.getBoneCount() == numBones : numBones;
+        /*
+         * Copy local transforms from Pose to Skeleton.
+         */
+        Transform tempTransform = new Transform();
+        for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
+            localTransform(boneIndex, tempTransform);
+            Bone targetBone = targetSkeleton.getBone(boneIndex);
+            MySkeleton.setLocalTransform(targetBone, tempTransform);
         }
     }
 
