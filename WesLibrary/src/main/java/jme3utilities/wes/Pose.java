@@ -480,21 +480,6 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Alter the user/animation translation of the indexed bone. TODO re-order
-     * methods
-     *
-     * @param boneIndex which bone to translate (&ge;0)
-     * @param translation (not null, unaffected)
-     */
-    public void setTranslation(int boneIndex, Vector3f translation) {
-        Validate.nonNegative(boneIndex, "bone index");
-        Validate.nonNull(translation, "translation");
-
-        Transform boneTransform = transforms.get(boneIndex);
-        boneTransform.setTranslation(translation);
-    }
-
-    /**
      * Configure this Pose for the specified Animation at the specified time.
      *
      * @param animation which Animation (not null, unaffected)
@@ -544,6 +529,20 @@ public class Pose implements JmeCloneable {
         for (Bone rootBone : rootBones) {
             retargetBones(rootBone, sourcePose, map);
         }
+    }
+
+    /**
+     * Alter the user/animation translation of the indexed Bone.
+     *
+     * @param boneIndex which bone to translate (&ge;0)
+     * @param translation (not null, unaffected)
+     */
+    public void setTranslation(int boneIndex, Vector3f translation) {
+        Validate.nonNegative(boneIndex, "bone index");
+        Validate.nonNull(translation, "translation");
+
+        Transform boneTransform = transforms.get(boneIndex);
+        boneTransform.setTranslation(translation);
     }
 
     /**
