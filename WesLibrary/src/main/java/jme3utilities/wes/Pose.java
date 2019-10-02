@@ -108,11 +108,11 @@ public class Pose implements JmeCloneable {
     // new methods exposed
 
     /**
-     * Apply this Pose to the specified Skeleton. TODO rename applyTo()
+     * Apply this Pose to the specified Skeleton.
      *
      * @param targetSkeleton the Skeleton to modify (not null)
      */
-    public void apply(Skeleton targetSkeleton) {
+    public void applyTo(Skeleton targetSkeleton) {
         Validate.nonNull(targetSkeleton, "target skeleton");
         int numBones = countBones();
         assert targetSkeleton.getBoneCount() == numBones : numBones;
