@@ -1,5 +1,10 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.3for33 released on TBD
+
+ + Add support for `Armature`, `AnimClip`, `AnimComposer`, and `Joint`. 
+ + Target JME 3.3.0-alpha5 .
+
 ## Version 0.4.3for32 released on 23 September 2019
 
  + Base on version 4.0 of the jme3-utilities-heart library.
