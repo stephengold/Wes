@@ -349,9 +349,9 @@ public class AnimationEdit {
     /**
      * Reverse the specified AnimClip.
      *
-     * @param sourceClip which AnimClip to reverse (not null, unaffected)
+     * @param sourceClip the AnimClip to reverse (not null, unaffected)
      * @param animationName name for the resulting AnimClip (not null)
-     * @return a new animation
+     * @return a new Animation
      */
     public static AnimClip reverseAnimation(AnimClip sourceClip,
             String animationName) {
