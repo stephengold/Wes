@@ -99,6 +99,10 @@ public class FlashMobDemo extends ActionApplication {
      */
     private AnimClip sinbadClip;
     /**
+     * Sinbad's Armature
+     */
+    private Armature sinbadArmature;
+    /**
      * list of animation channels
      */
     final private List<AnimChannel> allChannels = new ArrayList<>(5);
@@ -126,10 +130,6 @@ public class FlashMobDemo extends ActionApplication {
      * loaded Puppet model
      */
     private Node puppet;
-    /**
-     * Sinbad's Armature - TODO re-order fields
-     */
-    private Armature sinbadArmature;
     // *************************************************************************
     // new methods exposed
 
