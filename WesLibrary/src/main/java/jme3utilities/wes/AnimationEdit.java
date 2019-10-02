@@ -26,6 +26,12 @@
  */
 package jme3utilities.wes;
 
+import com.jme3.anim.AnimClip;
+import com.jme3.anim.AnimTrack;
+import com.jme3.anim.Armature;
+import com.jme3.anim.Joint;
+import com.jme3.anim.TransformTrack;
+import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
@@ -38,6 +44,7 @@ import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+import jme3utilities.Misc;
 import jme3utilities.MyAnimation;
 import jme3utilities.Validate;
 
@@ -65,6 +72,30 @@ public class AnimationEdit {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add the specified AnimTrack to the specified AnimClip.
+     *
+     * @param clip (not null, alias created)
+     * @param track (not null, modified)
+     */
+    public static void addTrack(AnimClip clip, AnimTrack track) {
+        Validate.nonNull(track, "track");
+
+        AnimTrack[] oldTracks = clip.getTracks();
+        AnimTrack[] newTracks;
+        if (oldTracks == null) {
+            newTracks = new AnimTrack[1];
+            newTracks[0] = track;
+        } else {
+            int oldNumTracks = oldTracks.length;
+            newTracks = new AnimTrack[oldNumTracks + 1];
+            System.arraycopy(oldTracks, 0, newTracks, 0, oldNumTracks);
+            newTracks[oldNumTracks] = track;
+        }
+
+        clip.setTracks(newTracks);
+    }
 
     /**
      * Extract a range from the specified animation.
@@ -134,36 +165,36 @@ public class AnimationEdit {
     }
 
     /**
-     * Re-target the specified animation from the specified source skeleton to
+     * Re-target the specified Animation from the specified source skeleton to
      * the specified target skeleton using the specified map.
      *
-     * @param sourceAnimation which animation to re-target (not null,
+     * @param sourceAnimation which Animation to re-target (not null,
      * unaffected)
      * @param sourceSkeleton (not null, unaffected)
      * @param targetSkeleton (not null, unaffected)
-     * @param map skeleton map to use (not null, unaffected)
-     * @param techniques tweening techniques to use (not null, unaffected)
-     * @param animationName name for the resulting animation (not null)
-     * @return a new animation
+     * @param map the skeleton map to use (not null, unaffected)
+     * @param techniques the tweening techniques to use (not null, unaffected)
+     * @param animationName name for the resulting Animation (not null)
+     * @return a new Animation
      */
     public static Animation retargetAnimation(Animation sourceAnimation,
             Skeleton sourceSkeleton, Skeleton targetSkeleton,
             SkeletonMapping map, TweenTransforms techniques,
             String animationName) {
         Validate.nonNull(sourceSkeleton, "source skeleton");
+        Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
         Validate.nonNull(techniques, "techniques");
         Validate.nonNull(animationName, "animation name");
         /*
-         * Start with an empty animation.
+         * Start with an empty Animation.
          */
         float duration = sourceAnimation.getLength();
         Animation result = new Animation(animationName, duration);
-
-        Map<Float, Pose> cache = new TreeMap<>();
         /*
-         * Add a bone track for each target bone that's mapped.
+         * Add a BoneTrack for each target bone that's mapped.
          */
+        Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
         for (int iTarget = 0; iTarget < numTargetBones; iTarget++) {
             Bone targetBone = targetSkeleton.getBone(iTarget);
@@ -195,13 +226,156 @@ public class AnimationEdit {
     }
 
     /**
-     * Reverse the specified animation. All tracks in the animation must be
+     * Re-target the specified Animation from the specified source armature to
+     * the specified target skeleton using the specified map.
+     *
+     * @param sourceClip which AnimClip to re-target (not null, unaffected)
+     * @param sourceArmature (not null, unaffected)
+     * @param targetSkeleton (not null, unaffected)
+     * @param map the skeleton map to use (not null, unaffected)
+     * @param animationName name for the resulting Animation (not null)
+     * @return a new Animation
+     */
+    public static Animation retargetAnimation(AnimClip sourceClip,
+            Armature sourceArmature, Skeleton targetSkeleton,
+            SkeletonMapping map, String animationName) {
+        Validate.nonNull(sourceArmature, "source armature");
+        Validate.nonNull(targetSkeleton, "target skeleton");
+        Validate.nonNull(map, "map");
+        Validate.nonNull(animationName, "animation name");
+        /*
+         * Start with an empty Animation.
+         */
+        float duration = (float) sourceClip.getLength();
+        Animation result = new Animation(animationName, duration);
+        /*
+         * Add a BoneTrack for each target bone that's mapped.
+         */
+        Map<Float, Pose> cache = new TreeMap<>();
+        int numTargetBones = targetSkeleton.getBoneCount();
+        for (int iTarget = 0; iTarget < numTargetBones; iTarget++) {
+            Bone targetBone = targetSkeleton.getBone(iTarget);
+            String targetName = targetBone.getName();
+            BoneMapping boneMapping = map.get(targetName);
+            if (boneMapping != null) {
+                String sourceName = boneMapping.getSourceName();
+                int iSource = sourceArmature.getJointIndex(sourceName);
+                TransformTrack sourceTrack
+                        = findJointTrack(sourceClip, iSource);
+                BoneTrack track = TrackEdit.retargetTrack(sourceClip,
+                        sourceTrack, sourceArmature, targetSkeleton, iTarget,
+                        map, cache);
+                result.addTrack(track);
+            }
+        }
+        /*
+         * Convert any non-joint tracks.
+         */
+        AnimTrack[] tracks = sourceClip.getTracks();
+        for (AnimTrack track : tracks) {
+            if (!isJointTrack(track)) {
+                // TODO
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Re-target the specified AnimClip from the specified source armature to
+     * the specified target armature using the specified map.
+     *
+     * @param sourceClip which AnimClip to re-target (not null, unaffected)
+     * @param sourceArmature (not null, unaffected)
+     * @param targetArmature (not null, unaffected)
+     * @param map the skeleton map to use (not null, unaffected)
+     * @param clipName name for the resulting AnimClip (not null)
+     * @return a new AnimClip
+     */
+    public static AnimClip retargetAnimation(AnimClip sourceClip,
+            Armature sourceArmature, Armature targetArmature,
+            SkeletonMapping map, String clipName) {
+        Validate.nonNull(sourceArmature, "source armature");
+        Validate.nonNull(targetArmature, "target armature");
+        Validate.nonNull(map, "map");
+        Validate.nonNull(clipName, "clip name");
+        /*
+         * Start with an empty AnimClip.
+         */
+        AnimClip result = new AnimClip(clipName);
+        /*
+         * Add a TransformTrack for each target joint that's mapped.
+         */
+        Map<Float, Pose> cache = new TreeMap<>();
+        int numTargetJoints = targetArmature.getJointCount();
+        for (int iTarget = 0; iTarget < numTargetJoints; iTarget++) {
+            Joint targetJoint = targetArmature.getJoint(iTarget);
+            String targetName = targetJoint.getName();
+            BoneMapping boneMapping = map.get(targetName);
+            if (boneMapping != null) {
+                String sourceName = boneMapping.getSourceName();
+                int iSource = sourceArmature.getJointIndex(sourceName);
+                TransformTrack sourceTrack
+                        = findJointTrack(sourceClip, iSource);
+                TransformTrack newTrack = TrackEdit.retargetTrack(sourceClip,
+                        sourceTrack, sourceArmature, targetArmature,
+                        targetJoint, map, cache);
+
+                int numSamples = newTrack.getTimes().length;
+                assert numSamples > 0 : numSamples;
+                assert newTrack.getTranslations().length == numSamples;
+                assert newTrack.getRotations().length == numSamples;
+                assert newTrack.getScales().length == numSamples;
+                assert newTrack.getLength() == sourceTrack.getLength();
+
+                addTrack(result, newTrack);
+            }
+        }
+        /*
+         * Copy any non-joint tracks.
+         */
+        AnimTrack[] tracks = sourceClip.getTracks();
+        for (AnimTrack track : tracks) {
+            if (!isJointTrack(track)) {
+                TransformTrack clone = (TransformTrack) Misc.deepCopy(track);
+                addTrack(result, clone);
+            }
+        }
+        assert result.getLength() == sourceClip.getLength();
+
+        return result;
+    }
+
+    /**
+     * Reverse the specified AnimClip.
+     *
+     * @param sourceClip which AnimClip to reverse (not null, unaffected)
+     * @param animationName name for the resulting AnimClip (not null)
+     * @return a new animation
+     */
+    public static AnimClip reverseAnimation(AnimClip sourceClip,
+            String animationName) {
+        Validate.nonNull(animationName, "animation name");
+
+        AnimClip result = new AnimClip(animationName);
+
+        AnimTrack[] forwardTracks = sourceClip.getTracks();
+        for (AnimTrack forwardTrack : forwardTracks) {
+            AnimTrack newTrack = TrackEdit.reverse(forwardTrack);
+            assert newTrack.getLength() == forwardTrack.getLength();
+            addTrack(result, newTrack);
+        }
+
+        return result;
+    }
+
+    /**
+     * Reverse the specified Animation. All tracks in the Animation must be
      * bone/spatial tracks.
      *
-     * @param sourceAnimation which animation to re-target (not null,
-     * unaffected)
-     * @param animationName name for the resulting animation (not null)
-     * @return a new animation
+     * @param sourceAnimation which Animation to reverse (not null, unaffected)
+     * @param animationName name for the resulting Animation (not null)
+     * @return a new Animation
      */
     public static Animation reverseAnimation(Animation sourceAnimation,
             String animationName) {
@@ -237,5 +411,58 @@ public class AnimationEdit {
         }
 
         return numTracksEdited;
+    }
+    // *************************************************************************
+    // private methods
+
+    /**
+     * Find a TransformTrack in a specified AnimClip for the indexed Joint. TODO
+     * use MyAnimation
+     *
+     * @param clip which AnimClip (not null, unaffected)
+     * @param jointIndex which Joint (&ge;0)
+     * @return the pre-existing instance, or null if not found
+     */
+    private static TransformTrack findJointTrack(AnimClip clip,
+            int jointIndex) {
+        Validate.nonNegative(jointIndex, "joint index");
+
+        AnimTrack[] tracks = clip.getTracks();
+        for (AnimTrack track : tracks) {
+            if (track instanceof TransformTrack) {
+                TransformTrack transformTrack = (TransformTrack) track;
+                HasLocalTransform target = transformTrack.getTarget();
+                if (target instanceof Joint) {
+                    Joint joint = (Joint) target;
+                    int trackJointIndex = joint.getId();
+                    if (jointIndex == trackJointIndex) {
+                        return transformTrack;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Test whether the specified AnimTrack targets a Joint. TODO use
+     * MyAnimation
+     *
+     * @param track the AnimTrack to test (not null, unaffected)
+     * @return true if it targets a Joint, otherwise false
+     */
+    private static boolean isJointTrack(AnimTrack track) {
+        boolean result = false;
+
+        if (track instanceof TransformTrack) {
+            TransformTrack transformTrack = (TransformTrack) track;
+            HasLocalTransform target = transformTrack.getTarget();
+            if (target instanceof Joint) {
+                result = true;
+            }
+        }
+
+        return result;
     }
 }
