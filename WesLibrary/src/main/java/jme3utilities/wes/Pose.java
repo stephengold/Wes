@@ -130,7 +130,7 @@ public class Pose implements JmeCloneable {
     /**
      * Copy the local bind transform of the indexed Bone.
      *
-     * @param boneIndex which bone (&ge;0)
+     * @param boneIndex which Bone (&ge;0)
      * @param storeResult (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
@@ -534,8 +534,8 @@ public class Pose implements JmeCloneable {
     /**
      * Alter the user/animation translation of the indexed Bone.
      *
-     * @param boneIndex which bone to translate (&ge;0)
-     * @param translation (not null, unaffected)
+     * @param boneIndex which Bone to translate (&ge;0)
+     * @param translation the desired translation (not null, unaffected)
      */
     public void setTranslation(int boneIndex, Vector3f translation) {
         Validate.nonNegative(boneIndex, "bone index");
@@ -572,12 +572,12 @@ public class Pose implements JmeCloneable {
         Vector3f msScale = msTransform.getScale();
 
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
-            Bone bone = skeleton.getBone(boneIndex);
             modelTransform(boneIndex, msTransform);
             /*
              * Calculate the skinning transform for the Bone.
              * Compare with Bone.getOffsetTransform()
              */
+            Bone bone = skeleton.getBone(boneIndex);
             Vector3f mbiScale = bone.getModelBindInverseScale();
             msScale.mult(mbiScale, skScale);
 
