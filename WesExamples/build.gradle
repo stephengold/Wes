@@ -2,11 +2,15 @@
 //   for this project. This initialization is applied in the "build.gradle"
 //   of the root project.
 
+apply plugin: 'application'
+
 description = 'demos, examples, and tests that do not generate reports'
 
+mainClassName = 'jme3utilities.test.wes.FlashMobDemo'
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'jme3utilities.test.wes.FlashMobDemo'
+    ext.mainClass = mainClassName
 }
+jar.manifest.attributes('Main-Class': mainClassName)
 
 dependencies {
     implementation 'jme3utilities:jme3-utilities-ui:0.7.8for32'
