@@ -261,6 +261,7 @@ public class FlashMobDemo extends ActionApplication {
         }
         /*
          * Play the "Dance" clip on all composers.
+         * TODO synchronize - see JME issue #1200
          */
         for (AnimComposer poser : composers) {
             poser.setCurrentAction("Dance");
