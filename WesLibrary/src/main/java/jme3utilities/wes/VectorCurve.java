@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017, Stephen Gold
+ Copyright (c) 2017-2019, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,8 @@ public class VectorCurve {
      */
     final private float[] times;
     /**
-     * 1st auxiliary slope/value for each interval, or null if not using splines
+     * first auxiliary slope/value for each interval, or null if not using
+     * splines
      */
     private Vector3f[] aux1s;
     /**
@@ -127,8 +128,8 @@ public class VectorCurve {
     // new methods exposed
 
     /**
-     * Access the 1st auxiliary slope/value for the indexed interval. Used only
-     * for splines.
+     * Access the first auxiliary slope/value for the indexed interval. Used
+     * only for splines.
      *
      * @param index which interval (&ge;0, &le;lastIndex)
      * @return the pre-existing instance (not null)
@@ -266,8 +267,10 @@ public class VectorCurve {
      * Used only for splines.
      *
      * @param index which interval (&ge;0, &le;lastIndex)
-     * @param auxPoint1 1st control point for interval (not null, alias created)
-     * @param auxPoint2 2nd control point for interval (not null, alias created)
+     * @param auxPoint1 the first control point for interval (not null, alias
+     * created)
+     * @param auxPoint2 the 2nd control point for interval (not null, alias
+     * created)
      */
     void setAuxPoints(int index, Vector3f auxPoint1, Vector3f auxPoint2) {
         Validate.nonNull(auxPoint1, "aux point 1");
