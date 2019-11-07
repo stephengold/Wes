@@ -1,9 +1,17 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.4for32 released on TBD
+
+ + Rename the `Pose.apply()` method to `applyTo()`. (API change)
+ + Add `normalizeQuaternions()` methods to the `AnimationEdit` and
+   `TrackEdit` classes.
+ + Base on version 4.1 of the jme3-utilities-heart library.
+ + Upgrade to Gradle v5.6.4 .
+
 ## Version 0.4.3for32 released on 23 September 2019
 
  + Base on version 4.0 of the jme3-utilities-heart library.
- + Upgraded to Gradle v5.6.2 .
+ + Upgrade to Gradle v5.6.2 .
 
 ## Version 0.4.2 released on 26 July 2019
 
@@ -14,7 +22,7 @@ Base on version 2.30 of the jme3-utilities-heart library.
  + Turn on Java 7 compatibility by default.
  + Make the `gradlew` script executable.
  + Base on version 2.28.1 of the jme3-utilities-heart library.
- + Upgraded to Gradle v5.3.1 .
+ + Upgrade to Gradle v5.3.1 .
 
 ## Version 0.4.0 released on 18 April 2019
 
