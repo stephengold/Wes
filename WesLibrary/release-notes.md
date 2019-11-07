@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.4for32 released on TBD
+## Version 0.4.4for32 released on 7 November 2019
 
  + Rename the `Pose.apply()` method to `applyTo()`. (API change)
  + Add `normalizeQuaternions()` methods to the `AnimationEdit` and
