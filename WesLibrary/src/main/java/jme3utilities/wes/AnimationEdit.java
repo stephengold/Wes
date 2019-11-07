@@ -113,10 +113,35 @@ public class AnimationEdit {
     }
 
     /**
+     * Normalize all quaternions in an animation.
+     *
+     * @param animation (not null, modified)
+     * @return the number of tracks edited (&ge;0)
+     */
+    public static int normalizeQuaternions(Animation animation) {
+        Track[] tracks = animation.getTracks();
+        int numTracks = tracks.length;
+
+        int numTracksEdited = 0;
+        for (int trackIndex = 0; trackIndex < numTracks; ++trackIndex) {
+            Track oldTrack = tracks[trackIndex];
+            if (oldTrack instanceof BoneTrack || oldTrack instanceof SpatialTrack) {
+                Track newTrack = TrackEdit.normalizeQuaternions(oldTrack);
+                if (oldTrack != newTrack) {
+                    ++numTracksEdited;
+                    tracks[trackIndex] = newTrack;
+                }
+            } // TODO other track types
+        }
+
+        return numTracksEdited;
+    }
+
+    /**
      * Remove repetitious keyframes from an animation.
      *
      * @param animation (not null, modified)
-     * @return number of tracks edited
+     * @return the number of tracks edited (&ge;0)
      */
     public static int removeRepeats(Animation animation) {
         int numTracksEdited = 0;
@@ -219,10 +244,10 @@ public class AnimationEdit {
     }
 
     /**
-     * Repair all tracks in which the 1st keyframe isn't at time=0.
+     * Repair all tracks in which the first keyframe isn't at time=0.
      *
      * @param animation (not null)
-     * @return number of tracks edited (&ge;0)
+     * @return the number of tracks edited (&ge;0)
      */
     public static int zeroFirst(Animation animation) {
         int numTracksEdited = 0;

@@ -337,10 +337,11 @@ public class TrackEdit {
 
     /**
      * Copy a bone/spatial track, deleting the indexed range of keyframes (which
-     * mustn't include the 1st keyframe).
+     * mustn't include the first keyframe).
      *
      * @param oldTrack input bone/spatial track (not null, unaffected)
-     * @param startIndex 1st keyframe to delete (&gt;0, &le;lastIndex)
+     * @param startIndex the index of the first keyframe to delete (&gt;0,
+     * &le;lastIndex)
      * @param deleteCount number of keyframes to delete (&gt;0, &lt;lastIndex)
      * @return a new track of the same type as oldTrack
      */
@@ -518,6 +519,43 @@ public class TrackEdit {
 
         } else {
             throw new IllegalArgumentException();
+        }
+
+        return result;
+    }
+
+    /**
+     * Normalize all quaternions in a bone/spatial track.
+     *
+     * @param oldTrack input bone/spatial track (not null, modified)
+     * @return a new track if changes are made, or else oldTrack
+     */
+    public static Track normalizeQuaternions(Track oldTrack) {
+        assert oldTrack instanceof BoneTrack || oldTrack instanceof SpatialTrack;
+
+        Track result = oldTrack;
+        Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
+        if (oldRotations != null) {
+            int numKeyframes = oldRotations.length;
+            Quaternion[] newRotations = new Quaternion[numKeyframes];
+
+            boolean changes = false;
+            for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
+                Quaternion oldQuat = oldRotations[frameIndex];
+                Quaternion newQuat = oldQuat.clone().normalizeLocal();
+                if (!newQuat.equals(oldQuat)) {
+                    changes = true;
+                }
+                newRotations[frameIndex] = newQuat;
+            }
+
+            if (changes) {
+                float[] times = oldTrack.getKeyFrameTimes();
+                Vector3f[] translations = MyAnimation.getTranslations(oldTrack);
+                Vector3f[] scales = MyAnimation.getScales(oldTrack);
+                result = newTrack(oldTrack, times, translations, newRotations,
+                        scales);
+            }
         }
 
         return result;
@@ -1125,9 +1163,9 @@ public class TrackEdit {
     }
 
     /**
-     * Copy a bone/spatial track, altering the track's 1st keyframe and end-time
-     * keyframe so that they precisely match. If the track doesn't end with a
-     * keyframe, append one.
+     * Copy a bone/spatial track, altering the track's first keyframe and
+     * end-time keyframe so that they precisely match. If the track doesn't end
+     * with a keyframe, append one.
      *
      * @param oldTrack input bone/spatial track (not null, unaffected)
      * @param duration duration of the animation (in seconds, &gt;0)
@@ -1232,8 +1270,8 @@ public class TrackEdit {
      *
      * @param weight2 how much weight to give to rot2, if neither rot1 nor rot2
      * is null (&ge;0, &le;1)
-     * @param rot1 1st input rotation (may be null, unaffected)
-     * @param rot2 2nd input rotation (may be null, unaffected)
+     * @param rot1 the first input rotation (may be null, unaffected)
+     * @param rot2 the 2nd input rotation (may be null, unaffected)
      * @return a new quaternion
      */
     private static Quaternion blendRotations(float weight2, Quaternion rot1,
@@ -1259,8 +1297,8 @@ public class TrackEdit {
      *
      * @param weight2 how much weight to give to scale2, if neither scale1 nor
      * scale2 is null (&ge;0, &le;1)
-     * @param scale1 1st input vector (may be null, unaffected)
-     * @param scale2 2nd input vector (may be null, unaffected)
+     * @param scale1 the first input vector (may be null, unaffected)
+     * @param scale2 the 2nd input vector (may be null, unaffected)
      * @return a new vector
      */
     private static Vector3f blendScales(float weight2, Vector3f scale1,
@@ -1286,8 +1324,8 @@ public class TrackEdit {
      *
      * @param weight2 how much weight to give to tra2, if neither tra1 nor tra2
      * is null (&ge;0, &le;1)
-     * @param tra1 1st input vector (may be null, unaffected)
-     * @param tra2 2nd input vector (may be null, unaffected)
+     * @param tra1 the first input vector (may be null, unaffected)
+     * @param tra2 the 2nd input vector (may be null, unaffected)
      * @return a new vector
      */
     private static Vector3f blendTranslations(float weight2, Vector3f tra1,
