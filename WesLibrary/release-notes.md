@@ -1,5 +1,9 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.5for32 released on TBD
+
+ + Add tolerances to the `normalizeQuaternions()` methods.
+
 ## Version 0.4.4for32 released on 7 November 2019
 
  + Rename the `Pose.apply()` method to `applyTo()`. (API change)
