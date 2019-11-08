@@ -527,11 +527,14 @@ public class TrackEdit {
     /**
      * Normalize all quaternions in a bone/spatial track.
      *
-     * @param oldTrack input bone/spatial track (not null, modified)
+     * @param oldTrack input bone/spatial track (not null, unaffected)
+     * @param tolerance for norms (&ge;0)
      * @return a new track if changes are made, or else oldTrack
      */
-    public static Track normalizeQuaternions(Track oldTrack) {
-        assert oldTrack instanceof BoneTrack || oldTrack instanceof SpatialTrack;
+    public static Track normalizeQuaternions(Track oldTrack, float tolerance) {
+        assert oldTrack instanceof BoneTrack
+                || oldTrack instanceof SpatialTrack;
+        Validate.nonNegative(tolerance, "tolerance");
 
         Track result = oldTrack;
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
@@ -542,11 +545,13 @@ public class TrackEdit {
             boolean changes = false;
             for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
                 Quaternion oldQuat = oldRotations[frameIndex];
-                Quaternion newQuat = oldQuat.clone().normalizeLocal();
-                if (!newQuat.equals(oldQuat)) {
+                double norm = MyQuaternion.lengthSquared(oldQuat);
+                double delta = Math.abs(1.0 - norm);
+                if (delta > tolerance) {
+                    Quaternion newQuat = oldQuat.clone().normalizeLocal();
+                    newRotations[frameIndex] = newQuat;
                     changes = true;
                 }
-                newRotations[frameIndex] = newQuat;
             }
 
             if (changes) {

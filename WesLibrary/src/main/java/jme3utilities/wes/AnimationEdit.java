@@ -116,17 +116,23 @@ public class AnimationEdit {
      * Normalize all quaternions in an animation.
      *
      * @param animation (not null, modified)
+     * @param tolerance for norms (&ge;0)
      * @return the number of tracks edited (&ge;0)
      */
-    public static int normalizeQuaternions(Animation animation) {
+    public static int normalizeQuaternions(Animation animation,
+            float tolerance) {
+        Validate.nonNegative(tolerance, "tolerance");
+        
         Track[] tracks = animation.getTracks();
         int numTracks = tracks.length;
 
         int numTracksEdited = 0;
         for (int trackIndex = 0; trackIndex < numTracks; ++trackIndex) {
             Track oldTrack = tracks[trackIndex];
-            if (oldTrack instanceof BoneTrack || oldTrack instanceof SpatialTrack) {
-                Track newTrack = TrackEdit.normalizeQuaternions(oldTrack);
+            if (oldTrack instanceof BoneTrack
+                    || oldTrack instanceof SpatialTrack) {
+                Track newTrack
+                        = TrackEdit.normalizeQuaternions(oldTrack, tolerance);
                 if (oldTrack != newTrack) {
                     ++numTracksEdited;
                     tracks[trackIndex] = newTrack;
