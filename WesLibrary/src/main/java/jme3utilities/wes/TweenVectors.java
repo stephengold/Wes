@@ -642,8 +642,9 @@ public enum TweenVectors {
      * @param interval length of the interval (&gt;0)
      * @param v1 function value at start of interval (not null, unaffected)
      * @param v2 function value at end of interval (not null, unaffected)
-     * @param m1 1st derivative at start of interval (not null, unaffected)
-     * @param m2 1st derivative at end of interval (not null, unaffected)
+     * @param m1 the first derivative at start of interval (not null,
+     * unaffected)
+     * @param m2 the first derivative at end of interval (not null, unaffected)
      * @param storeResult (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
@@ -918,7 +919,7 @@ public enum TweenVectors {
     }
 
     /**
-     * Estimate the 1st derivative of an unknown function between 2 indexed
+     * Estimate the first derivative of an unknown function between 2 indexed
      * points.
      *
      * @param dt length of the interval (&gt;0)
@@ -945,7 +946,7 @@ public enum TweenVectors {
     }
 
     /**
-     * Estimate the 1st derivative of an unknown function at the middle of 3
+     * Estimate the first derivative of an unknown function at the middle of 3
      * indexed points.
      *
      * @param dt01 length of the preceeding interval (&gt;0)

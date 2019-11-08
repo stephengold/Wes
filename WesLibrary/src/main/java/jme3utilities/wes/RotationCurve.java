@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017, Stephen Gold
+ Copyright (c) 2017-2019, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -61,7 +61,7 @@ public class RotationCurve {
      */
     final private float[] times;
     /**
-     * 1st control point of each interval, or null if not using splines
+     * first control point of each interval, or null if not using splines
      */
     private Quaternion[] controlPoint1s;
     /**
@@ -107,7 +107,7 @@ public class RotationCurve {
     // new methods exposed
 
     /**
-     * Access the 1st control point for the indexed interval.
+     * Access the first control point for the indexed interval.
      *
      * @param index which interval (&ge;0, &le;last)
      * @return the pre-existing instance (not null)
@@ -206,9 +206,9 @@ public class RotationCurve {
      * Alter the control points for the indexed interval. Used only for splines.
      *
      * @param index interval index (&ge;0, &le;last)
-     * @param controlPoint1 1st control point for interval (not null, alias
-     * created)
-     * @param controlPoint2 2nd control point for interval (not null, alias
+     * @param controlPoint1 the first control point for interval (not null,
+     * alias created)
+     * @param controlPoint2 the 2nd control point for interval (not null, alias
      * created)
      */
     void setControlPoints(int index, Quaternion controlPoint1,
