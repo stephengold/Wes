@@ -31,7 +31,6 @@ import com.jme3.anim.AnimTrack;
 import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
 import com.jme3.anim.TransformTrack;
-import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
@@ -153,7 +152,7 @@ public class AnimationEdit {
     public static int normalizeQuaternions(Animation animation,
             float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
-        
+
         Track[] tracks = animation.getTracks();
         int numTracks = tracks.length;
 
@@ -292,7 +291,7 @@ public class AnimationEdit {
                 String sourceName = boneMapping.getSourceName();
                 int iSource = sourceArmature.getJointIndex(sourceName);
                 TransformTrack sourceTrack
-                        = findJointTrack(sourceClip, iSource);
+                        = MyAnimation.findJointTrack(sourceClip, iSource);
                 BoneTrack track = TrackEdit.retargetTrack(sourceClip,
                         sourceTrack, sourceArmature, targetSkeleton, iTarget,
                         map, cache);
@@ -304,7 +303,7 @@ public class AnimationEdit {
          */
         AnimTrack[] tracks = sourceClip.getTracks();
         for (AnimTrack track : tracks) {
-            if (!isJointTrack(track)) {
+            if (!MyAnimation.isJointTrack(track)) {
                 // TODO
             }
         }
@@ -347,7 +346,7 @@ public class AnimationEdit {
                 String sourceName = boneMapping.getSourceName();
                 int iSource = sourceArmature.getJointIndex(sourceName);
                 TransformTrack sourceTrack
-                        = findJointTrack(sourceClip, iSource);
+                        = MyAnimation.findJointTrack(sourceClip, iSource);
                 TransformTrack newTrack = TrackEdit.retargetTrack(sourceClip,
                         sourceTrack, sourceArmature, targetArmature,
                         targetJoint, map, cache);
@@ -367,7 +366,7 @@ public class AnimationEdit {
          */
         AnimTrack[] tracks = sourceClip.getTracks();
         for (AnimTrack track : tracks) {
-            if (!isJointTrack(track)) {
+            if (!MyAnimation.isJointTrack(track)) {
                 TransformTrack clone = (TransformTrack) Misc.deepCopy(track);
                 addTrack(result, clone);
             }
@@ -442,58 +441,5 @@ public class AnimationEdit {
         }
 
         return numTracksEdited;
-    }
-    // *************************************************************************
-    // private methods
-
-    /**
-     * Find a TransformTrack in a specified AnimClip for the indexed Joint. TODO
-     * use MyAnimation
-     *
-     * @param clip which AnimClip (not null, unaffected)
-     * @param jointIndex which Joint (&ge;0)
-     * @return the pre-existing instance, or null if not found
-     */
-    private static TransformTrack findJointTrack(AnimClip clip,
-            int jointIndex) {
-        Validate.nonNegative(jointIndex, "joint index");
-
-        AnimTrack[] tracks = clip.getTracks();
-        for (AnimTrack track : tracks) {
-            if (track instanceof TransformTrack) {
-                TransformTrack transformTrack = (TransformTrack) track;
-                HasLocalTransform target = transformTrack.getTarget();
-                if (target instanceof Joint) {
-                    Joint joint = (Joint) target;
-                    int trackJointIndex = joint.getId();
-                    if (jointIndex == trackJointIndex) {
-                        return transformTrack;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Test whether the specified AnimTrack targets a Joint. TODO use
-     * MyAnimation
-     *
-     * @param track the AnimTrack to test (not null, unaffected)
-     * @return true if it targets a Joint, otherwise false
-     */
-    private static boolean isJointTrack(AnimTrack track) {
-        boolean result = false;
-
-        if (track instanceof TransformTrack) {
-            TransformTrack transformTrack = (TransformTrack) track;
-            HasLocalTransform target = transformTrack.getTarget();
-            if (target instanceof Joint) {
-                result = true;
-            }
-        }
-
-        return result;
     }
 }
