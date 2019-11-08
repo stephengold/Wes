@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.5for33 released on TBD
+## Version 0.4.5for33 released on 8 November 2019
 
  + Add `normalizeQuaternions()` methods to the `AnimationEdit` and
    `TrackEdit` classes.
