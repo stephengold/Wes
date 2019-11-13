@@ -167,14 +167,14 @@ you must explicitly specify its repository location:
 
 #### For Ant projects
 
-For project built using Ant, download the Wes and jme3-utilities-heart
+For project built using [Ant][], download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
    + https://github.com/stephengold/Wes/releases/tag/0.4.5for32
    + https://github.com/stephengold/jme3-utilities/releases/tag/heart-4.1.0for32
 
-You'll want both class JARs
-and probably the `-sources` and `-javadoc` JARs as well.
+You'll want both class jars
+and probably the `-sources` and `-javadoc` jar as well.
 
 Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
@@ -182,14 +182,14 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  2. Select "Properties to open the "Project Properties" dialog.
  3. Under "Categories:" select "Libraries".
  4. Click on the "Compile" tab.
- 5. Add the `jme3-utilities-heart` class JAR:
+ 5. Add the `jme3-utilities-heart` class jar:
     + Click on the "Add JAR/Folder" button.
     + Navigate to the "jme3-utilities" project folder.
     + Open the "heart" sub-project folder.
     + Navigate to the "build/libs" folder.
     + Select the "jme3-utilities-heart-4.1.0for32.jar" file.
     + Click on the "Open" button.
- 6. (optional) Add JARs for javadoc and sources:
+ 6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
     + Select the "jme3-utilities-heart-4.1.0for32-javadoc.jar" file.
@@ -198,9 +198,10 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
     + Select the "jme3-utilities-heart-4.1.0for32-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
- 7. Similarly, add the `Wes` JAR(s).
+ 7. Similarly, add the `Wes` jar(s).
  8. Click on the "OK" button to exit the "Project Properties" dialog.
 
+[ant]: https://ant.apache.org "Apache Ant Project"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
 [chrome]: https://www.google.com/chrome "Chrome"
@@ -214,8 +215,9 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
+[mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
-[utilities]: https://github.com/stephengold/jme3-utilities "Jme3-Utilities Project"
+[utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [winmerge]: http://winmerge.org "WinMerge Project"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
