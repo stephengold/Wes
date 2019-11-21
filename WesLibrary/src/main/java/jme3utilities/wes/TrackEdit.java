@@ -574,6 +574,52 @@ public class TrackEdit {
     }
 
     /**
+     * Normalize all quaternions in an AnimTrack.
+     *
+     * @param oldTrack input AnimTrack (not null, unaffected)
+     * @param tolerance for norms (&ge;0)
+     * @return a new track if changes are made, or else oldTrack
+     */
+    public static AnimTrack normalizeQuaternions(AnimTrack oldTrack,
+            float tolerance) {
+        Validate.nonNegative(tolerance, "tolerance");
+
+        AnimTrack result = oldTrack;
+        if (oldTrack instanceof MorphTrack) { // contains no quaternions
+            return result;
+        }
+
+        TransformTrack oldTt = (TransformTrack) oldTrack;
+        Quaternion[] oldRotations = oldTt.getRotations();
+        if (oldRotations != null) {
+            int numKeyframes = oldRotations.length;
+            Quaternion[] newRotations = new Quaternion[numKeyframes];
+
+            boolean changes = false;
+            for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
+                Quaternion oldQuat = oldRotations[frameIndex];
+                double norm = MyQuaternion.lengthSquared(oldQuat);
+                double delta = Math.abs(1.0 - norm);
+                if (delta > tolerance) {
+                    Quaternion newQuat = oldQuat.clone().normalizeLocal();
+                    newRotations[frameIndex] = newQuat;
+                    changes = true;
+                }
+            }
+
+            if (changes) {
+                float[] times = oldTt.getTimes();
+                Vector3f[] translations = oldTt.getTranslations();
+                Vector3f[] scales = oldTt.getScales();
+                result = new TransformTrack(oldTt.getTarget(), times,
+                        translations, newRotations, scales);
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Copy a bone/spatial track, uniformly reducing the number of keyframes by
      * the specified factor.
      *

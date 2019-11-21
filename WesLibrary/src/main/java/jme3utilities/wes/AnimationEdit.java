@@ -97,7 +97,7 @@ public class AnimationEdit {
     }
 
     /**
-     * Extract a range from the specified animation.
+     * Extract a range from the specified Animation.
      *
      * @param sourceAnimation the animation to extract from (not null,
      * unaffected)
@@ -143,7 +143,7 @@ public class AnimationEdit {
     }
 
     /**
-     * Normalize all quaternions in an animation.
+     * Normalize all quaternions in an Animation.
      *
      * @param animation (not null, modified)
      * @param tolerance for norms (&ge;0)
@@ -174,7 +174,34 @@ public class AnimationEdit {
     }
 
     /**
-     * Remove repetitious keyframes from an animation.
+     * Normalize all quaternions in an AnimClip.
+     *
+     * @param clip (not null, modified)
+     * @param tolerance for norms (&ge;0)
+     * @return the number of tracks edited (&ge;0)
+     */
+    public static int normalizeQuaternions(AnimClip clip, float tolerance) {
+        Validate.nonNegative(tolerance, "tolerance");
+
+        AnimTrack[] tracks = clip.getTracks();
+        int numTracks = tracks.length;
+
+        int numTracksEdited = 0;
+        for (int trackIndex = 0; trackIndex < numTracks; ++trackIndex) {
+            AnimTrack oldTrack = tracks[trackIndex];
+            AnimTrack newTrack
+                    = TrackEdit.normalizeQuaternions(oldTrack, tolerance);
+            if (oldTrack != newTrack) {
+                ++numTracksEdited;
+                tracks[trackIndex] = newTrack;
+            }
+        }
+
+        return numTracksEdited;
+    }
+
+    /**
+     * Remove repetitious keyframes from an Animation.
      *
      * @param animation (not null, modified)
      * @return the number of tracks edited (&ge;0)
@@ -195,8 +222,8 @@ public class AnimationEdit {
     }
 
     /**
-     * Re-target the specified Animation from the specified source skeleton to
-     * the specified target skeleton using the specified map.
+     * Re-target the specified Animation from the specified source Skeleton to
+     * the specified target Skeleton using the specified map.
      *
      * @param sourceAnimation which Animation to re-target (not null,
      * unaffected)
