@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.6for33 released on TBD
+## Version 0.4.6for33 released on 9 December 2019
 
  + Add a `normalizeQuaternions()` method for `AnimTrack`.
  + Synchronize the animations in `FlashMobDemo`.
