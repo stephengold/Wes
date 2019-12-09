@@ -258,13 +258,14 @@ public class FlashMobDemo extends ActionApplication {
          */
         for (AnimChannel animChannel : allChannels) {
             animChannel.setAnim("Dance");
+            animChannel.setTime(0f);
         }
         /*
          * Play the "Dance" clip on all composers.
-         * TODO synchronize - see JME issue #1200
          */
         for (AnimComposer poser : composers) {
             poser.setCurrentAction("Dance");
+            poser.setTime(AnimComposer.DEFAULT_LAYER, 0f);
         }
     }
 
