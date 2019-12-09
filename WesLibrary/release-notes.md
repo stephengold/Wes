@@ -1,5 +1,13 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.6for33 released on TBD
+
+ + Add a `normalizeQuaternions()` method for `AnimTrack`.
+ + Synchronize the animations in `FlashMobDemo`.
+ + Base on version 4.2 of the jme3-utilities-heart library.
+ + Upgrade to Gradle v6.0.1 .
+ + Target JME 3.3.0-beta1 .
+
 ## Version 0.4.5for33 released on 8 November 2019
 
  + Add `normalizeQuaternions()` methods to the `AnimationEdit` and
