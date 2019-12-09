@@ -1,6 +1,7 @@
 /.gradle/
 /.nb-gradle/
 /WesExamples/*.dll
+/WesExamples/*.dylib
 /WesExamples/*.so
 /WesExamples/build/
 /WesExamples/Written Assets/
