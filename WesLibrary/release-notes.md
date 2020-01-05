@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.7for33 released on TBD
+## Version 0.4.7for33 released on 4 January 2020
 
  + Improve animation synchronization in `FlashMobDemo`.
  + Add help nodes, anti-aliasing, and screenshots to the `FlashMobDemo`
