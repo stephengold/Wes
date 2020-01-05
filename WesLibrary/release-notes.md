@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.7for32 released on TBD
+## Version 0.4.7for32 released on 4 January 2020
 
  + Add help nodes, anti-aliasing, and screenshots to the `FlashMobDemo`
    and `ReverseAnimation` applications.
