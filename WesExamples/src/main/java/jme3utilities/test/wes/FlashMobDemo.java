@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019, Stephen Gold
+ Copyright (c) 2019-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -102,6 +102,10 @@ public class FlashMobDemo extends ActionApplication {
      * Sinbad's Armature
      */
     private Armature sinbadArmature;
+    /**
+     * true once {@link #startup1()} has completed, until then false
+     */
+    private boolean didStartup1 = false;
     /**
      * list of animation channels
      */
@@ -253,20 +257,6 @@ public class FlashMobDemo extends ActionApplication {
         dance = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
                 skeleton, s2p, "Dance");
         animControl.addAnim(dance);
-        /*
-         * Play the "Dance" animation on all channels.
-         */
-        for (AnimChannel animChannel : allChannels) {
-            animChannel.setAnim("Dance");
-            animChannel.setTime(0f);
-        }
-        /*
-         * Play the "Dance" clip on all composers.
-         */
-        for (AnimComposer poser : composers) {
-            poser.setCurrentAction("Dance");
-            poser.setTime(AnimComposer.DEFAULT_LAYER, 0f);
-        }
     }
 
     /**
@@ -306,6 +296,21 @@ public class FlashMobDemo extends ActionApplication {
             }
         }
         super.onAction(actionString, ongoing, tpf);
+    }
+
+    /**
+     * Callback invoked once per frame.
+     *
+     * @param tpf time interval between frames (in seconds, &ge;0)
+     */
+    @Override
+    public void simpleUpdate(float tpf) {
+        super.simpleUpdate(tpf);
+
+        if (!didStartup1) {
+            startup1();
+            didStartup1 = true;
+        }
     }
     // *************************************************************************
     // private methods
@@ -379,8 +384,7 @@ public class FlashMobDemo extends ActionApplication {
      * Attach an MhGame model to the root node.
      */
     private void addMhGame() {
-        mhGame = (Node) assetManager.loadModel(
-                "Models/MhGame/MhGame.mesh.xml");
+        mhGame = (Node) assetManager.loadModel("Models/MhGame/MhGame.mesh.xml");
         rootNode.attachChild(mhGame);
 
         List<Spatial> list
@@ -550,6 +554,27 @@ public class FlashMobDemo extends ActionApplication {
         float oldHeight = minMax[1].y - minMax[0].y;
 
         model.scale(height / oldHeight);
+    }
+
+    /**
+     * Initialization performed during the first invocation of
+     * {@link #simpleUpdate(float)}.
+     */
+    private void startup1() {
+        /*
+         * Play the "Dance" animation on all channels.
+         */
+        for (AnimChannel animChannel : allChannels) {
+            animChannel.setAnim("Dance");
+            animChannel.setTime(0f);
+        }
+        /*
+         * Play the "Dance" clip on all composers.
+         */
+        for (AnimComposer poser : composers) {
+            poser.setCurrentAction("Dance");
+            poser.setTime(AnimComposer.DEFAULT_LAYER, 0f);
+        }
     }
 
     /**
