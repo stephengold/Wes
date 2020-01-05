@@ -29,7 +29,9 @@ package jme3utilities.test.wes;
 import com.jme3.anim.AnimClip;
 import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
+import com.jme3.app.Application;
 import com.jme3.app.StatsAppState;
+import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
 import com.jme3.input.KeyInput;
@@ -65,7 +67,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * App to demonstrate reversing an animation.
+ * Demonstrate reversing an animation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -81,7 +83,7 @@ public class ReverseAnimation extends ActionApplication {
     /**
      * application name (for the title bar of the app's window)
      */
-    final static String applicationName
+    final private static String applicationName
             = ReverseAnimation.class.getSimpleName();
     // *************************************************************************
     // fields
@@ -102,7 +104,7 @@ public class ReverseAnimation extends ActionApplication {
     // new methods exposed
 
     /**
-     * Main entry point for the application.
+     * Main entry point for the ReverseAnimation application.
      *
      * @param ignored array of command-line arguments (not null)
      */
@@ -114,7 +116,7 @@ public class ReverseAnimation extends ActionApplication {
         Logger.getLogger(ALAudioRenderer.class.getName())
                 .setLevel(Level.SEVERE);
 
-        ReverseAnimation application = new ReverseAnimation();
+        Application application = new ReverseAnimation();
         /*
          * Customize the window's title bar.
          */
@@ -122,6 +124,7 @@ public class ReverseAnimation extends ActionApplication {
         settings.setTitle(applicationName);
 
         settings.setGammaCorrection(true);
+        settings.setSamples(4); // anti-aliasing
         settings.setVSync(true);
         application.setSettings(settings);
 
@@ -139,9 +142,19 @@ public class ReverseAnimation extends ActionApplication {
         Logger.getLogger(MeshLoader.class.getName()).setLevel(Level.SEVERE);
 
         configureCamera();
+
         ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
         viewPort.setBackgroundColor(bgColor);
+
         addLighting();
+        /*
+         * Capture a screenshot each time KEY_SYSRQ (the PrtSc key) is pressed.
+         */
+        ScreenshotAppState screenshotAppState
+                = new ScreenshotAppState("Written Assets/", "screenshot");
+        boolean success = stateManager.attach(screenshotAppState);
+        assert success;
+
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
         addSinbad();
