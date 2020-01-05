@@ -1,5 +1,12 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.7for32 released on TBD
+
+ + Add help nodes, anti-aliasing, and screenshots to the `FlashMobDemo`
+   and `ReverseAnimation` applications.
+ + Base on version 4.3 of the jme3-utilities-heart library.
+ + Upgrade to Gradle v6.0.1 .
+
 ## Version 0.4.5for32 released on 8 November 2019
 
 Add tolerances to the `normalizeQuaternions()` methods.
