@@ -34,6 +34,7 @@ import com.jme3.animation.SkeletonControl;
 import com.jme3.app.StatsAppState;
 import com.jme3.asset.AssetKey;
 import com.jme3.audio.openal.ALAudioRenderer;
+import com.jme3.font.Rectangle;
 import com.jme3.input.KeyInput;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
@@ -65,12 +66,13 @@ import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.ui.ActionApplication;
 import jme3utilities.ui.CameraOrbitAppState;
+import jme3utilities.ui.HelpUtils;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.TweenTransforms;
 
 /**
- * An animation retargeting demo.
+ * An ActionApplication to demonstrate animation retargeting.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -103,6 +105,10 @@ public class FlashMobDemo extends ActionApplication {
      * list of skeleton visualizers
      */
     final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
+    /**
+     * GUI node for displaying hotkey help/hints
+     */
+    private Node helpNode;
     /**
      * loaded Jaime model
      */
@@ -264,8 +270,19 @@ public class FlashMobDemo extends ActionApplication {
         dim.bind("dump scenes", KeyInput.KEY_P);
         dim.bind("signal orbitLeft", KeyInput.KEY_LEFT);
         dim.bind("signal orbitRight", KeyInput.KEY_RIGHT);
+        dim.bind("toggle help", KeyInput.KEY_H);
         dim.bind("toggle pause", KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
+
+        float x = 10f;
+        float y = cam.getHeight() - 40f;
+        float width = cam.getWidth() - 20f;
+        float height = cam.getHeight() - 20f;
+        Rectangle rectangle = new Rectangle(x, y, width, height);
+
+        float space = 20f;
+        helpNode = HelpUtils.buildNode(dim, rectangle, guiFont, space);
+        guiNode.attachChild(helpNode);
     }
 
     /**
@@ -281,6 +298,9 @@ public class FlashMobDemo extends ActionApplication {
             switch (actionString) {
                 case "dump scenes":
                     dumpScenes();
+                    return;
+                case "toggle help":
+                    toggleHelp();
                     return;
                 case "toggle pause":
                     togglePause();
@@ -538,6 +558,17 @@ public class FlashMobDemo extends ActionApplication {
         float oldHeight = minMax[1].y - minMax[0].y;
 
         model.scale(height / oldHeight);
+    }
+
+    /**
+     * Toggle visibility of the helpNode.
+     */
+    private void toggleHelp() {
+        if (helpNode.getCullHint() == Spatial.CullHint.Always) {
+            helpNode.setCullHint(Spatial.CullHint.Never);
+        } else {
+            helpNode.setCullHint(Spatial.CullHint.Always);
+        }
     }
 
     /**
