@@ -1,12 +1,20 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.7for33 released on TBD
+
+ + Improve animation synchronization in `FlashMobDemo`.
+ + Add help nodes, anti-aliasing, and screenshots to the `FlashMobDemo`
+   and `ReverseAnimation` applications.
+ + Base on version 4.3 of the jme3-utilities-heart library.
+ + Target the NEW JME 3.3.0-beta1 .
+
 ## Version 0.4.6for33 released on 9 December 2019
 
  + Add a `normalizeQuaternions()` method for `AnimTrack`.
  + Synchronize the animations in `FlashMobDemo`.
  + Base on version 4.2 of the jme3-utilities-heart library.
  + Upgrade to Gradle v6.0.1 .
- + Target JME 3.3.0-beta1 .
+ + Target JME v3.3.0-beta1, which was later deleted!
 
 ## Version 0.4.5for33 released on 8 November 2019
 
