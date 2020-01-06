@@ -27,7 +27,7 @@ Summary of features:
  + [Downloads](#downloads)
  + [Conventions](#conventions)
  + [History](#history)
- + [How to install the SDK and the Wes Project](#install)
+ + [How to build Wes from source](#build)
  + [How to add Wes to an existing project](#add)
  + [An overview of the demo applications](#demos)
  + [Acknowledgments](#acks)
@@ -52,8 +52,8 @@ Maven artifacts are available from
 ## Conventions
 
 Package names begin with
-`jme3utilities.wes` (if Stephen Gold holds the copyright) or
-`com.jme3.bullet` (if the jMonkeyEngine Project holds the copyright).
+`jme3utilities.` (if Stephen Gold holds the copyright) or
+`com.jme3.` (if the jMonkeyEngine Project holds the copyright).
 
 Both the source code and the pre-built libraries are compatible with JDK 7.
 
@@ -79,33 +79,58 @@ The evolution of Wes is chronicled in
 
 [Jump to table of contents](#toc)
 
-<a name="install"/>
+<a name="build"/>
 
-## How to install the SDK and the Wes Project
+## How to build Wes from source
 
-### jMonkeyEngine3 (jME3) Software Development Kit (SDK)
+Wes currently targets Version 3.2.4 of jMonkeyEngine.
+You are welcome to use the Engine without installing
+its Integrated Development Environment (IDE),
+but I use the IDE, so I tend to assume you will too.
 
-Wes currently targets version 3.2.4 of jMonkeyEngine.
-You are welcome to use the Engine without also using the SDK, but I use the SDK,
-and the following installation instructions assume you will too.
+### IDE setup
 
-The hardware and software requirements of the SDK are documented on
+If you already have the IDE installed, skip to step 6.
+
+The hardware and software requirements of the IDE are documented at
 [the JME wiki](https://jmonkeyengine.github.io/wiki/jme3/requirements.html).
 
- 1. Download a jMonkeyEngine 3.2 SDK from
+ 1. Download a jMonkeyEngine 3.2 Software Development Kit (SDK) from
     [GitHub](https://github.com/jMonkeyEngine/sdk/releases).
  2. Install the SDK, which includes:
     + the engine itself,
-    + an integrated development environment (IDE) based on NetBeans,
-    + various plugins, and
-    + the Blender 3D application.
- 3. To open the Wes project in the IDE (or NetBeans), you will need the
-    `Gradle Support` plugin.  Download and install it before proceeding.
-    If this plugin isn't shown in the IDE's "Plugins" tool,
-    you can download it from
-    [GitHub](https://github.com/kelemen/netbeans-gradle-project/releases).
-    You don't need this plugin if you merely want to use a pre-built Wes
-    release in an Ant project.
+    + an IDE based on [NetBeans][],
+    + various IDE plugins, and
+    + the [Blender 3D][blender] application.
+ 3. Open the IDE.
+ 4. The first time you open the IDE, it prompts you to
+    specify a folder for storing projects:
+    + Fill in the "Folder name" text box.
+    + Click on the "Set Project Folder" button.
+ 5. The first time you open the IDE, you should update
+    all the pre-installed plugins:
+    + Menu bar -> "Tools" -> "Plugins" to open the "Plugins" dialog.
+    + Click on the "Update" button to open the "Plugin Installer" wizard.
+    + Click on the "Next >" button.
+    + After the plugins have downloaded, click "Finish".
+    + The IDE will restart.
+ 6. In order to open the Wes Project in the IDE (or NetBeans),
+    you will need to install the `Gradle Support` plugin:
+    + Menu bar -> "Tools" -> "Plugins" to open the "Plugins" dialog.
+    + Click on the "Available Plugins" tab.
+    + Check the box next to "Gradle Support" in the "Gradle" category.
+     If this plugin isn't shown in the IDE's "Plugins" tool,
+     you can download it from
+     [GitHub](https://github.com/kelemen/netbeans-gradle-project/releases).
+    + Click on the "Install" button to open the "Plugin Installer" wizard.
+    + Click on the "Next >" button.
+    + Check the box next to
+     "I accept the terms in all the license agreements."
+    + Click on the "Install" button.
+    + When the "Verify Certificate" dialog appears,
+     click on the "Continue" button.
+    + Click on the "Finish" button.
+    + The IDE will restart.
 
 ### Source files
 
@@ -127,7 +152,7 @@ Clone the Wes repository using Git:
 10. Click on the "Finish" button.
 11. When the "Clone Completed" dialog appears, click on the "Open Project..."
     button.
-12. Expand the root project node to reveal the sub-projects.
+12. Expand the root project node to reveal the 2 sub-projects.
 13. Select both sub-projects using control-click, then click on the
     "Open" button.
 
@@ -136,6 +161,35 @@ Clone the Wes repository using Git:
  1. In the "Projects" window of the IDE,
     right-click on the "WesExamples" sub-project to select it.
  2. Select "Build".
+
+### How to build Wes without an IDE
+
+ 1. Install build software:
+   + a Java Development Kit and
+   + [Gradle]
+ 2. Download and extract the source code from GitHub:
+   + using Git:
+     + `git clone https://github.com/stephengold/Wes.git`
+     + `cd Wes`
+     + `git checkout 0.4.7for32`
+   + using a web browser:
+     + browse to [https://github.com/stephengold/Wes/releases/latest](https://github.com/stephengold/Wes/releases/latest)
+     + follow the "Source code (zip)" link
+     + save the ZIP file
+     + unzip the saved ZIP file
+     + `cd` to the extracted directory/folder
+ 3. Set the `JAVA_HOME` environment variable:
+   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
+   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+ 4. Run the Gradle wrapper:
+   + using Bash:  `./gradlew build`
+   + using Windows Command Prompt:  `.\gradlew build`
+
+After a successful build, new jars will be found in `WesLibrary/build/libs`.
+
+You can also install the library artifact to your local Maven cache:
+ + using Bash:  `./gradlew :WesLibrary:publishToMavenLocal`
+ + using Windows Command Prompt:  `.\gradlew :WesLibrary:publishToMavenLocal`
 
 [Jump to table of contents](#toc)
 
@@ -155,14 +209,14 @@ dependency on the Wes library.  The build tools should automatically
 resolve the remaining dependencies automatically.
 
 Because Wes is not on JCenter,
-you must explicitly specify its repository location:
+you must explicitly specify its repository URL:
 
     repositories {
         maven { url 'https://dl.bintray.com/stephengold/jme3utilities' }
         jcenter()
     }
     dependencies {
-        compile 'jme3utilities:Wes:0.4.5for32'
+        compile 'jme3utilities:Wes:0.4.7for32'
     }
 
 #### For Ant projects
@@ -170,11 +224,11 @@ you must explicitly specify its repository location:
 For project built using [Ant][], download the Wes and jme3-utilities-heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/Wes/releases/tag/0.4.5for32
-   + https://github.com/stephengold/jme3-utilities/releases/tag/heart-4.1.0for32
+   + https://github.com/stephengold/Wes/releases/tag/0.4.7for32
+   + https://github.com/stephengold/jme3-utilities/releases/tag/heart-4.3.0for32
 
 You'll want both class jars
-and probably the `-sources` and `-javadoc` jar as well.
+and probably the `-sources` and `-javadoc` jars as well.
 
 Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
@@ -187,21 +241,22 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
     + Navigate to the "jme3-utilities" project folder.
     + Open the "heart" sub-project folder.
     + Navigate to the "build/libs" folder.
-    + Select the "jme3-utilities-heart-4.1.0for32.jar" file.
+    + Select the "jme3-utilities-heart-4.3.0for32.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "jme3-utilities-heart-4.1.0for32-javadoc.jar" file.
+    + Select the "jme3-utilities-heart-4.3.0for32-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "jme3-utilities-heart-4.1.0for32-sources.jar" file.
+    + Select the "jme3-utilities-heart-4.3.0for32-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
  8. Click on the "OK" button to exit the "Project Properties" dialog.
 
 [ant]: https://ant.apache.org "Apache Ant Project"
+[blender]: https://docs.blender.org "Blender Project"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
 [chrome]: https://www.google.com/chrome "Chrome"
