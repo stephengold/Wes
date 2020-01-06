@@ -3,6 +3,12 @@ jme3utilities software packages Copyright (c) 2017-2020 Stephen Gold
 
 All rights reserved.
 
+Note: the following license does not apply to certain assets/resources
+(3 files in WesExamples/src/main/resources/Models/MhGame,
+10 files in WesExamples/src/main/resources/Models/MhGame/textures,
+ 2 files in WesExamples/src/main/resources/Models/Puppet)
+which are separately licensed.
+
 BSD 3-Clause License
 
 Redistribution and use in source and binary forms, with or without
