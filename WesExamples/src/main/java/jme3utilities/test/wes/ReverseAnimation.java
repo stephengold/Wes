@@ -31,7 +31,6 @@ import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
 import com.jme3.app.Application;
 import com.jme3.app.StatsAppState;
-import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
 import com.jme3.input.KeyInput;
@@ -67,7 +66,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * Demonstrate reversing an animation.
+ * An ActionApplications to demonstrate reversing an animation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -147,14 +146,6 @@ public class ReverseAnimation extends ActionApplication {
         viewPort.setBackgroundColor(bgColor);
 
         addLighting();
-        /*
-         * Capture a screenshot each time KEY_SYSRQ (the PrtSc key) is pressed.
-         */
-        ScreenshotAppState screenshotAppState
-                = new ScreenshotAppState("Written Assets/", "screenshot");
-        boolean success = stateManager.attach(screenshotAppState);
-        assert success;
-
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
         addSinbad();

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2019, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -27,11 +27,9 @@
 package jme3utilities.wes;
 
 import com.jme3.anim.AnimClip;
-import com.jme3.anim.AnimTrack;
 import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
 import com.jme3.anim.TransformTrack;
-import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
@@ -673,7 +671,7 @@ public class Pose implements JmeCloneable {
         int numJoints = transforms.size();
         for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
             Transform transform = transforms.get(jointIndex);
-            TransformTrack track = findTransformTrack(clip, jointIndex);
+            TransformTrack track = MyAnimation.findTransformTrack(clip, jointIndex);
             if (track == null) {
                 transform.loadIdentity();
             } else {
@@ -967,35 +965,6 @@ public class Pose implements JmeCloneable {
     }
     // *************************************************************************
     // private methods
-
-    /**
-     * Find a TransformTrack in a specified AnimClip for the indexed Joint. TODO
-     * use MyAnimation
-     *
-     * @param clip which AnimClip (not null, unaffected)
-     * @param jointIndex which joint (&ge;0)
-     * @return the pre-existing instance, or null if not found
-     */
-    private TransformTrack findTransformTrack(AnimClip clip, int jointIndex) {
-        TransformTrack result = null;
-
-        AnimTrack[] animTracks = clip.getTracks();
-        for (AnimTrack animTrack : animTracks) {
-            if (animTrack instanceof TransformTrack) {
-                TransformTrack track = (TransformTrack) animTrack;
-                HasLocalTransform target = track.getTarget();
-                if (target instanceof Joint) {
-                    int targetIndex = ((Joint) target).getId();
-                    if (targetIndex == jointIndex) {
-                        result = track;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
 
     /**
      * Calculate the local rotation for the specified Bone to give it the

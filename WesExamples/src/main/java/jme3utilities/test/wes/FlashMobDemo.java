@@ -36,7 +36,6 @@ import com.jme3.animation.Animation;
 import com.jme3.animation.Skeleton;
 import com.jme3.animation.SkeletonControl;
 import com.jme3.app.StatsAppState;
-import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.asset.AssetKey;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
@@ -76,7 +75,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * Demonstrate animation retargeting.
+ * An ActionApplication to demonstrate animation retargeting.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -188,14 +187,6 @@ public class FlashMobDemo extends ActionApplication {
         viewPort.setBackgroundColor(bgColor);
 
         addLighting();
-        /*
-         * Capture a screenshot each time KEY_SYSRQ (the PrtSc key) is pressed.
-         */
-        ScreenshotAppState screenshotAppState
-                = new ScreenshotAppState("Written Assets/", "screenshot");
-        boolean success = stateManager.attach(screenshotAppState);
-        assert success;
-
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
 
