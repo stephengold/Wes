@@ -19,7 +19,7 @@ javadocJar { archiveBaseName = project.ext.baseName }
 sourcesJar { archiveBaseName = project.ext.baseName }
 
 dependencies {
-    api 'jme3utilities:jme3-utilities-heart:4.3.0for32'
+    api 'jme3utilities:jme3-utilities-heart:4.5.0for32'
 }
 
 build.dependsOn('pom')
