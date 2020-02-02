@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2019, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-import jme3utilities.Misc;
+import jme3utilities.Heart;
 import jme3utilities.MyAnimation;
 import jme3utilities.Validate;
 
@@ -394,7 +394,7 @@ public class AnimationEdit {
         AnimTrack[] tracks = sourceClip.getTracks();
         for (AnimTrack track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {
-                TransformTrack clone = (TransformTrack) Misc.deepCopy(track);
+                TransformTrack clone = (TransformTrack) Heart.deepCopy(track);
                 addTrack(result, clone);
             }
         }

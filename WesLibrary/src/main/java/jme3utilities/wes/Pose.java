@@ -46,7 +46,7 @@ import com.jme3.util.clone.JmeCloneable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import jme3utilities.Misc;
+import jme3utilities.Heart;
 import jme3utilities.MyAnimation;
 import jme3utilities.MySkeleton;
 import jme3utilities.Validate;
@@ -116,7 +116,7 @@ public class Pose implements JmeCloneable {
         transforms = new ArrayList<>(jointCount);
 
         if (armature != null) {
-            Armature cloneArmature = (Armature) Misc.deepCopy(armature);
+            Armature cloneArmature = (Armature) Heart.deepCopy(armature);
             cloneArmature.applyBindPose();
 
             for (int jointIndex = 0; jointIndex < jointCount; ++jointIndex) {
