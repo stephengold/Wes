@@ -55,7 +55,7 @@ import com.jme3.system.AppSettings;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jme3utilities.Misc;
+import jme3utilities.Heart;
 import jme3utilities.MyAsset;
 import jme3utilities.MySpatial;
 import jme3utilities.debug.Dumper;
@@ -113,7 +113,7 @@ public class ReverseAnimation extends ActionApplication {
         /*
          * Mute the chatty loggers in certain packages.
          */
-        Misc.setLoggingLevels(Level.WARNING);
+        Heart.setLoggingLevels(Level.WARNING);
         Logger.getLogger(ALAudioRenderer.class.getName())
                 .setLevel(Level.SEVERE);
 
