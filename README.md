@@ -9,7 +9,7 @@ It contains 2 sub-projects:
  2. WesExamples: demos, examples, and test software (in Java)
 
 Java source code is provided under
-[a FreeBSD license](https://github.com/stephengold/Wes/blob/master/LICENSE).
+[a BSD license](https://github.com/stephengold/Wes/blob/master/LICENSE).
 
 Summary of features:
 
@@ -63,7 +63,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 
 ## History
 
-Much of the code was developed for the [Maud editor][maud].
+Much of the code was originally developed for the [Maud editor][maud].
 
 The retargeting code was originally developed by Rémy Bouquet (aka "nehon")
 for his [Bvhretarget Project][bvhretarget].
@@ -74,7 +74,7 @@ From September 2017 to January 2019, Wes was a sub-project of
 Since January 2019, the Wes Project has been a separate project at
 [GitHub][wes].
 
-The evolution of Wes is chronicled in
+The evolution of the project is chronicled in
 [its release notes](https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md).
 
 [Jump to table of contents](#toc)
@@ -171,9 +171,9 @@ Clone the Wes repository using Git:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout 0.4.7for32`
+     + `git checkout -b latest 0.4.7for32`
    + using a web browser:
-     + browse to [https://github.com/stephengold/Wes/releases/latest](https://github.com/stephengold/Wes/releases/latest)
+     + browse to [https://github.com/stephengold/Wes/releases/tag/0.4.7for32](https://github.com/stephengold/Wes/releases/tag/0.4.7for32)
      + follow the "Source code (zip)" link
      + save the ZIP file
      + unzip the saved ZIP file
@@ -197,7 +197,8 @@ You can also install the library artifact to your local Maven cache:
 
 ## How to add Wes to an existing project
 
-To add Wes to an existing JME3 project, simply add the library to the classpath.
+Adding the Wes Library to an existing JME3 project should be
+a simple matter of adding it to the classpath.
 
 The Wes library depends on the jme3-utilities-heart library,
 which in turn depends on the standard jme3-core library.
@@ -205,10 +206,10 @@ which in turn depends on the standard jme3-core library.
 #### For Gradle projects
 
 For projects built using Maven or Gradle, it is sufficient to specify the
-dependency on the Wes library.  The build tools should automatically
+dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies automatically.
 
-Because Wes is not on JCenter,
+Because Wes is not on JCenter yet,
 you must explicitly specify its repository URL:
 
     repositories {
@@ -262,9 +263,11 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [chrome]: https://www.google.com/chrome "Chrome"
 [elements]: http://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
+[heart]: https://github.com/stephengold/Heart "Heart Project"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
@@ -274,8 +277,8 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [netbeans]: https://netbeans.org "NetBeans Project"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
-[winmerge]: http://winmerge.org "WinMerge Project"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
+[winmerge]: http://winmerge.org "WinMerge Project"
 
 [Jump to table of contents](#toc)
 
@@ -297,7 +300,7 @@ artists and software developers:
 + the creators of (and contributors to) the following software:
     + the [FindBugs][] source-code analyzer
     + the [Git][] revision-control system and GitK commit viewer
-    + the [Google Chrome web browser][chrome]
+    + the [Firefox][] and [Google Chrome][chrome] web browsers
     + the [Gradle][] build tool
     + the Java compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
