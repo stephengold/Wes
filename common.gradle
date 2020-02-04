@@ -17,24 +17,28 @@ gradle.projectsEvaluated {
     tasks.withType(JavaExec) { // runtime options:
         classpath sourceSets.main.runtimeClasspath
         //debug true
+        //doFirst { println commandLine }
         enableAssertions true
         //jvmArgs '-verbose:gc'
+        //jvmArgs '-Xbatch'
         //jvmArgs '-Xms512m', '-Xmx512m'
+        //jvmArgs '-XX:+PrintCompilation'
         jvmArgs '-XX:+UseConcMarkSweepGC'
         //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
     }
 }
 
 ext {
-    // current versions of the libraries
+    // current versions of various libraries
     jmonkeyengineVersion = '3.2.4-stable'
     wesVersion = '0.4.7for32'
 }
 
 repositories {
     //mavenLocal()
+    //maven { url 'https://dl.bintray.com/stephengold/com.github.stephengold' }
     maven { url 'https://dl.bintray.com/stephengold/jme3utilities' }
-    maven { url 'https://dl.bintray.com/stephengold/org.jmonkeyengine' } // for testdata
+    maven { url 'https://dl.bintray.com/stephengold/org.jmonkeyengine' } // for jme3-testdata
     jcenter()
 }
 
