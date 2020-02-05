@@ -2,7 +2,7 @@
 
 apply plugin: 'java'
 
-group = 'jme3utilities'
+group = 'com.github.stephengold'
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
