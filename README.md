@@ -26,10 +26,10 @@ Summary of features:
 
  + [Downloads](#downloads)
  + [Conventions](#conventions)
- + [History](#history)
  + [How to build Wes from source](#build)
  + [How to add Wes to an existing project](#add)
  + [An overview of the demo applications](#demos)
+ + [History](#history)
  + [Acknowledgments](#acks)
 
 <a name="downloads"/>
@@ -56,26 +56,6 @@ Package names begin with
 `com.jme3.` (if the jMonkeyEngine Project holds the copyright).
 
 Both the source code and the pre-built libraries are compatible with JDK 7.
-
-[Jump to table of contents](#toc)
-
-<a name="history"/>
-
-## History
-
-Much of the code was originally developed for the [Maud editor][maud].
-
-The retargeting code was originally developed by Rémy Bouquet (aka "nehon")
-for his [Bvhretarget Project][bvhretarget].
-
-From September 2017 to January 2019, Wes was a sub-project of
-[the Jme3-utilities Project][utilities].
-
-Since January 2019, the Wes Project has been a separate project at
-[GitHub][wes].
-
-The evolution of the project is chronicled in
-[its release notes](https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md).
 
 [Jump to table of contents](#toc)
 
@@ -256,6 +236,21 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  7. Similarly, add the `Wes` jar(s).
  8. Click on the "OK" button to exit the "Project Properties" dialog.
 
+<a name="demos"/>
+
+## An overview of the demo applications
+
+### FlashMobDemo
+
+TODO
+
+### ReverseAnimation
+
+TODO
+
+[Jump to table of contents](#toc)
+
+
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
@@ -279,6 +274,24 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 [winmerge]: http://winmerge.org "WinMerge Project"
+
+<a name="history"/>
+
+## History
+
+Much of the code was originally developed for the [Maud editor][maud].
+
+The retargeting code was originally developed by Rémy Bouquet (aka "nehon")
+for his [Bvhretarget Project][bvhretarget].
+
+From September 2017 to January 2019, Wes was a sub-project of
+[the Jme3-utilities Project][utilities].
+
+Since January 2019, the Wes Project has been a separate project at
+[GitHub][wes].
+
+The evolution of the project is chronicled in
+[its release notes](https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md).
 
 [Jump to table of contents](#toc)
 
