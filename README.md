@@ -1,15 +1,15 @@
 <img height="150" src="https://i.imgur.com/1iPoJpl.png">
 
 The [Wes Project][wes] is about editing
-animations used in the [jMonkeyEngine Game Engine][jme].
+animations used in the [jMonkeyEngine game engine][jme].
 
 It contains 2 sub-projects:
 
  1. WesLibrary: the Wes runtime library (in Java)
  2. WesExamples: demos, examples, and test software (in Java)
 
-Java source code is provided under
-[a BSD license](https://github.com/stephengold/Wes/blob/master/LICENSE).
+Complete source code (in Java) is provided under
+[a BSD license][license].
 
 Summary of features:
 
@@ -42,7 +42,10 @@ Newer releases (since v0.3.9) can be downloaded from
 Older releases (v0.2.1 through v0.3.8) can be downloaded from
 [the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
 
-Maven artifacts are available from
+Newer Maven artifacts (since v0.4.8) are available from
+[JCenter](https://bintray.com/stephengold/com.github.stephengold/Wes).
+
+Older Maven artifacts (v0.2.0 through v0.4.7) are available from
 [JFrog Bintray](https://bintray.com/stephengold/jme3utilities/Wes).
 
 [Jump to table of contents](#toc)
@@ -73,7 +76,7 @@ but I use the IDE, so I tend to assume you will too.
 If you already have the IDE installed, skip to step 6.
 
 The hardware and software requirements of the IDE are documented at
-[the JME wiki](https://jmonkeyengine.github.io/wiki/jme3/requirements.html).
+[the jMonkeyEngine wiki](https://jmonkeyengine.github.io/wiki/jme3/requirements.html).
 
  1. Download a jMonkeyEngine 3.2 Software Development Kit (SDK) from
     [GitHub](https://github.com/jMonkeyEngine/sdk/releases).
@@ -151,9 +154,9 @@ Clone the Wes repository using Git:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.4.7for32`
+     + `git checkout -b latest 0.4.8for32`
    + using a web browser:
-     + browse to [https://github.com/stephengold/Wes/releases/tag/0.4.7for32](https://github.com/stephengold/Wes/releases/tag/0.4.7for32)
+     + browse to [https://github.com/stephengold/Wes/releases/tag/0.4.8for32][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + unzip the saved ZIP file
@@ -165,9 +168,10 @@ Clone the Wes repository using Git:
    + using Bash:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
-After a successful build, new jars will be found in `WesLibrary/build/libs`.
+After a successful build,
+Maven artifacts will be found in `WesLibrary/build/libs`.
 
-You can also install the library artifact to your local Maven cache:
+You can install the Maven artifacts to your local cache:
  + using Bash:  `./gradlew :WesLibrary:publishToMavenLocal`
  + using Windows Command Prompt:  `.\gradlew :WesLibrary:publishToMavenLocal`
 
@@ -177,10 +181,10 @@ You can also install the library artifact to your local Maven cache:
 
 ## How to add Wes to an existing project
 
-Adding the Wes Library to an existing JME3 project should be
+Adding the Wes Library to an existing [jMonkeyEngine][jme] project should be
 a simple matter of adding it to the classpath.
 
-The Wes library depends on the jme3-utilities-heart library,
+The Wes Library depends on [the Heart Library][heart],
 which in turn depends on the standard jme3-core library.
 
 #### For Gradle projects
@@ -189,24 +193,20 @@ For projects built using Maven or Gradle, it is sufficient to specify the
 dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies automatically.
 
-Because Wes is not on JCenter yet,
-you must explicitly specify its repository URL:
-
     repositories {
-        maven { url 'https://dl.bintray.com/stephengold/jme3utilities' }
         jcenter()
     }
     dependencies {
-        compile 'jme3utilities:Wes:0.4.7for32'
+        compile 'com.github.stephengold:Wes:0.4.8for32'
     }
 
 #### For Ant projects
 
-For project built using [Ant][], download the Wes and jme3-utilities-heart
+For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/Wes/releases/tag/0.4.7for32
-   + https://github.com/stephengold/jme3-utilities/releases/tag/heart-4.3.0for32
+   + https://github.com/stephengold/Wes/releases/tag/0.4.8for32
+   + https://github.com/stephengold/Heart/releases/tag/5.0.0for32
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -217,24 +217,24 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  2. Select "Properties to open the "Project Properties" dialog.
  3. Under "Categories:" select "Libraries".
  4. Click on the "Compile" tab.
- 5. Add the `jme3-utilities-heart` class jar:
+ 5. Add the `Heart` class jar:
     + Click on the "Add JAR/Folder" button.
-    + Navigate to the "jme3-utilities" project folder.
-    + Open the "heart" sub-project folder.
-    + Navigate to the "build/libs" folder.
-    + Select the "jme3-utilities-heart-4.3.0for32.jar" file.
+    + Navigate to the download folder.
+    + Select the "Heart-5.0.0for32.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "jme3-utilities-heart-4.3.0for32-javadoc.jar" file.
+    + Select the "Heart-5.0.0for32-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "jme3-utilities-heart-4.3.0for32-sources.jar" file.
+    + Select the "Heart-5.0.0for32-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
  8. Click on the "OK" button to exit the "Project Properties" dialog.
+
+[Jump to table of contents](#toc)
 
 <a name="demos"/>
 
@@ -247,8 +247,6 @@ TODO
 ### ReverseAnimation
 
 TODO
-
-[Jump to table of contents](#toc)
 
 
 [ant]: https://ant.apache.org "Apache Ant Project"
@@ -264,7 +262,10 @@ TODO
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [jfrog]: https://www.jfrog.com "JFrog"
-[jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
+[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
+[latest]: https://github.com/stephengold/Wes/releases/tag/0.4.8for32 "latest release"
+[license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
+[log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
@@ -275,9 +276,14 @@ TODO
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 [winmerge]: http://winmerge.org "WinMerge Project"
 
+[Jump to table of contents](#toc)
+
 <a name="history"/>
 
 ## History
+
+The evolution of the project is chronicled in
+[its release notes][log].
 
 Much of the code was originally developed for the [Maud editor][maud].
 
@@ -289,9 +295,6 @@ From September 2017 to January 2019, Wes was a sub-project of
 
 Since January 2019, the Wes Project has been a separate project at
 [GitHub][wes].
-
-The evolution of the project is chronicled in
-[its release notes](https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md).
 
 [Jump to table of contents](#toc)
 
@@ -311,23 +314,24 @@ artists and software developers:
 + [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
 + the creators of (and contributors to) the following software:
-    + the [FindBugs][] source-code analyzer
-    + the [Git][] revision-control system and GitK commit viewer
-    + the [Firefox][] and [Google Chrome][chrome] web browsers
-    + the [Gradle][] build tool
+    + the [FindBugs] source-code analyzer
+    + the [Git] revision-control system and GitK commit viewer
+    + the [Firefox] and [Google Chrome][chrome] web browsers
+    + the [Gradle] build tool
     + the Java compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + the [Linux Mint][mint] operating system
     + LWJGL, the Lightweight Java Game Library
-    + the [MakeHuman][] Community
-    + the [Markdown][] document conversion tool
+    + the [MakeHuman] Community
+    + the [Markdown] document-conversion tool
     + Microsoft Windows
-    + the [NetBeans][] integrated development environment
+    + the [NetBeans] integrated development environment
     + the PMD source-code analyzer
-    + the [WinMerge][] differencing and merging tool
+    + the [WinMerge] differencing and merging tool
 
-I am grateful to [JFrog][] and [Github][] for providing free hosting for the
-Wes Project and many other open-source projects.
+I am grateful to [JFrog] and [Github]
+for providing free hosting for this project
+and many other open-source projects.
 
 I'm also grateful to my dear Holly, for keeping me sane.
 
