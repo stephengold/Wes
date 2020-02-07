@@ -1,5 +1,11 @@
 # release notes for the Wes library and related examples
 
+## Version 0.4.8for33 released on TBD
+
+ + Change the Maven groupId to "com.github.stephengold" .
+ + Base on version 5.0 of the Heart library.
+ + Upgrade to Gradle v6.1.1 .
+
 ## Version 0.4.7for33 released on 4 January 2020
 
  + Improve animation synchronization in `FlashMobDemo`.
