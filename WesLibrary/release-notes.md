@@ -1,6 +1,6 @@
 # release notes for the Wes library and related examples
 
-## Version 0.4.8for33 released on TBD
+## Version 0.4.8for33 released on 5 February 2020
 
  + Change the Maven groupId to "com.github.stephengold" .
  + Base on version 5.0 of the Heart library.
