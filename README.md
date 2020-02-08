@@ -1,7 +1,7 @@
 <img height="150" src="https://i.imgur.com/1iPoJpl.png">
 
-The [Wes Project][wes] is about editing
-animations used in the [jMonkeyEngine game engine][jme].
+The [Wes Project][wes] is about editing animations used in the
+[jMonkeyEngine game engine][jme].
 
 It contains 2 sub-projects:
 
@@ -82,7 +82,7 @@ The hardware and software requirements of the IDE are documented at
     [GitHub](https://github.com/jMonkeyEngine/sdk/releases).
  2. Install the SDK, which includes:
     + the engine itself,
-    + an IDE based on [NetBeans][],
+    + an IDE based on [NetBeans],
     + various IDE plugins, and
     + the [Blender 3D][blender] application.
  3. Open the IDE.
@@ -185,7 +185,8 @@ Adding the Wes Library to an existing [jMonkeyEngine][jme] project should be
 a simple matter of adding it to the classpath.
 
 The Wes Library depends on [the Heart Library][heart],
-which in turn depends on the standard jme3-core library.
+which in turn depends on
+the standard jme3-core library from jMonkeyEngine.
 
 #### For Gradle projects
 
@@ -205,8 +206,8 @@ resolve the remaining dependencies automatically.
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
-   + https://github.com/stephengold/Wes/releases/tag/0.4.8for32
-   + https://github.com/stephengold/Heart/releases/tag/5.0.0for32
+ + https://github.com/stephengold/Wes/releases/tag/0.4.8for32
+ + https://github.com/stephengold/Heart/releases/tag/5.0.0for32
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -240,6 +241,10 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
 ## An overview of the demo applications
 
+Demo applications have been created to showcase certain features of Wes.
+The following demos are found in the `jme3utilities.wes.test` package of
+the WesExamples sub-project:
+
 ### FlashMobDemo
 
 TODO
@@ -247,6 +252,8 @@ TODO
 ### ReverseAnimation
 
 TODO
+
+[Jump to table of contents](#toc)
 
 
 [ant]: https://ant.apache.org "Apache Ant Project"
@@ -264,8 +271,8 @@ TODO
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Wes/releases/tag/0.4.8for32 "latest release"
-[license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
-[log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
+[license]: https://github.com/stephengold/Wes/blob/for_jME3.2/LICENSE "Wes license"
+[log]: https://github.com/stephengold/Wes/blob/for_jME3.2/WesLibrary/release-notes.md "release log"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
@@ -276,14 +283,12 @@ TODO
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 [winmerge]: http://winmerge.org "WinMerge Project"
 
-[Jump to table of contents](#toc)
 
 <a name="history"/>
 
 ## History
 
-The evolution of the project is chronicled in
-[its release notes][log].
+The evolution of the project is chronicled in [its release log][log].
 
 Much of the code was originally developed for the [Maud editor][maud].
 
@@ -293,7 +298,7 @@ for his [Bvhretarget Project][bvhretarget].
 From September 2017 to January 2019, Wes was a sub-project of
 [the Jme3-utilities Project][utilities].
 
-Since January 2019, the Wes Project has been a separate project at
+Since January 2019, Wes has been a separate project at
 [GitHub][wes].
 
 [Jump to table of contents](#toc)
