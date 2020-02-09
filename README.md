@@ -29,6 +29,7 @@ Summary of features:
  + [How to build Wes from source](#build)
  + [How to add Wes to an existing project](#add)
  + [An overview of the demo applications](#demos)
+ + [External links](#links)
  + [History](#history)
  + [Acknowledgments](#acks)
 
@@ -255,6 +256,12 @@ TODO
 
 [Jump to table of contents](#toc)
 
+<a name="links"/>
+
+## External links
+
+  + [the Minie Physics Library page](https://jmonkeystore.com/38308161-c3cf-4e23-8754-528ca8387c11) 
+    at [JmonkeyStore](https://jmonkeystore.com/)
 
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
