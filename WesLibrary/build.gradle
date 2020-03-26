@@ -19,7 +19,7 @@ javadocJar { archiveBaseName = project.ext.baseName }
 sourcesJar { archiveBaseName = project.ext.baseName }
 
 dependencies {
-    api 'com.github.stephengold:Heart:5.1.0for33'
+    api 'com.github.stephengold:Heart:5.2.0for33'
 }
 
 build.dependsOn('pom')
