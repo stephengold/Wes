@@ -23,20 +23,19 @@ gradle.projectsEvaluated {
         //jvmArgs '-Xbatch'
         //jvmArgs '-Xms512m', '-Xmx512m'
         //jvmArgs '-XX:+PrintCompilation'
-        jvmArgs '-XX:+UseConcMarkSweepGC'
-        //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
+        //jvmArgs '-XX:+UseConcMarkSweepGC'
+        jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
     }
 }
 
 ext {
     // current versions of various libraries
-    jmonkeyengineVersion = '3.3.0-beta1'
+    jmonkeyengineVersion = '3.3.0-stable'
     wesVersion = '0.4.8for33'
 }
 
 repositories {
     //mavenLocal()
-    //maven { url 'https://dl.bintray.com/stephengold/com.github.stephengold' }
     maven { url 'https://dl.bintray.com/stephengold/org.jmonkeyengine' } // for jme3-testdata
     jcenter()
 }
