@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.4.9 released on TBD
+## Version 0.4.9 released on 1 April 2020
 
  + Base on version 5.2.1 of the Heart Library.
  + Upgrade to Gradle v6.3 .
