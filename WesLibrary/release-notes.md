@@ -1,9 +1,15 @@
-# release notes for the Wes library and related examples
+# release log for the Wes library and related examples
+
+## Version 0.4.9 released on TBD
+
+ + Base on version 5.2.1 of the Heart Library.
+ + Upgrade to Gradle v6.3 .
+ + Target JME version 3.3.0-stable .
 
 ## Version 0.4.8for33 released on 5 February 2020
 
  + Change the Maven groupId to "com.github.stephengold" .
- + Base on version 5.0 of the Heart library.
+ + Base on version 5.0 of the Heart Library.
  + Upgrade to Gradle v6.1.1 .
 
 ## Version 0.4.7for33 released on 4 January 2020

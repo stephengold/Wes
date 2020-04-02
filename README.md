@@ -67,87 +67,6 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 
 ## How to build Wes from source
 
-Wes currently targets Version 3.2.4 of jMonkeyEngine.
-You are welcome to use the Engine without installing
-its Integrated Development Environment (IDE),
-but I use the IDE, so I tend to assume you will too.
-
-### IDE setup
-
-If you already have the IDE installed, skip to step 6.
-
-The hardware and software requirements of the IDE are documented at
-[the jMonkeyEngine wiki](https://jmonkeyengine.github.io/wiki/jme3/requirements.html).
-
- 1. Download a jMonkeyEngine 3.2 Software Development Kit (SDK) from
-    [GitHub](https://github.com/jMonkeyEngine/sdk/releases).
- 2. Install the SDK, which includes:
-    + the engine itself,
-    + an IDE based on [NetBeans],
-    + various IDE plugins, and
-    + the [Blender 3D][blender] application.
- 3. Open the IDE.
- 4. The first time you open the IDE, it prompts you to
-    specify a folder for storing projects:
-    + Fill in the "Folder name" text box.
-    + Click on the "Set Project Folder" button.
- 5. The first time you open the IDE, you should update
-    all the pre-installed plugins:
-    + Menu bar -> "Tools" -> "Plugins" to open the "Plugins" dialog.
-    + Click on the "Update" button to open the "Plugin Installer" wizard.
-    + Click on the "Next >" button.
-    + After the plugins have downloaded, click "Finish".
-    + The IDE will restart.
- 6. In order to open the Wes Project in the IDE (or NetBeans),
-    you will need to install the `Gradle Support` plugin:
-    + Menu bar -> "Tools" -> "Plugins" to open the "Plugins" dialog.
-    + Click on the "Available Plugins" tab.
-    + Check the box next to "Gradle Support" in the "Gradle" category.
-     If this plugin isn't shown in the IDE's "Plugins" tool,
-     you can download it from
-     [GitHub](https://github.com/kelemen/netbeans-gradle-project/releases).
-    + Click on the "Install" button to open the "Plugin Installer" wizard.
-    + Click on the "Next >" button.
-    + Check the box next to
-     "I accept the terms in all the license agreements."
-    + Click on the "Install" button.
-    + When the "Verify Certificate" dialog appears,
-     click on the "Continue" button.
-    + Click on the "Finish" button.
-    + The IDE will restart.
-
-### Source files
-
-Clone the Wes repository using Git:
-
- 1. Open the "Clone Repository" wizard in the IDE:
-     + Menu bar -> "Team" -> "Git" -> "Clone..." or
-     + Menu bar -> "Team" -> "Remote" -> "Clone..."
- 2. For "Repository URL:" specify
-    `https://github.com/stephengold/Wes.git`
- 3. Clear the "User:" and "Password:" text boxes.
- 4. For "Clone into:" specify a writable folder (on a local filesystem)
-    that doesn't already contain "Wes".
- 5. Click on the "Next >" button.
- 6. Make sure the "master" remote branch is checked.
- 7. Click on the "Next >" button again.
- 8. Make sure the Checkout Branch is set to "master".
- 9. Make sure the "Scan for NetBeans Projects after Clone" box is checked.
-10. Click on the "Finish" button.
-11. When the "Clone Completed" dialog appears, click on the "Open Project..."
-    button.
-12. Expand the root project node to reveal the 2 sub-projects.
-13. Select both sub-projects using control-click, then click on the
-    "Open" button.
-
-### Build the project
-
- 1. In the "Projects" window of the IDE,
-    right-click on the "WesExamples" sub-project to select it.
- 2. Select "Build".
-
-### How to build Wes without an IDE
-
  1. Install build software:
    + a Java Development Kit and
    + [Gradle]
@@ -155,9 +74,9 @@ Clone the Wes repository using Git:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.4.8for32`
+     + `git checkout -b latest 0.4.9`
    + using a web browser:
-     + browse to [https://github.com/stephengold/Wes/releases/tag/0.4.8for32][latest]
+     + browse to [https://github.com/stephengold/Wes/releases/tag/0.4.9][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + unzip the saved ZIP file
@@ -199,7 +118,7 @@ resolve the remaining dependencies automatically.
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.4.8for32'
+        compile 'com.github.stephengold:Wes:0.4.9'
     }
 
 #### For Ant projects
@@ -207,8 +126,8 @@ resolve the remaining dependencies automatically.
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.4.8for32
- + https://github.com/stephengold/Heart/releases/tag/5.0.0for32
+ + https://github.com/stephengold/Wes/releases/tag/0.4.9
+ + https://github.com/stephengold/Heart/releases/tag/5.2.1
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -222,15 +141,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  5. Add the `Heart` class jar:
     + Click on the "Add JAR/Folder" button.
     + Navigate to the download folder.
-    + Select the "Heart-5.0.0for32.jar" file.
+    + Select the "Heart-5.2.1.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "Heart-5.0.0for32-javadoc.jar" file.
+    + Select the "Heart-5.2.1-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "Heart-5.0.0for32-sources.jar" file.
+    + Select the "Heart-5.2.1-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
@@ -260,7 +179,7 @@ TODO
 
 ## External links
 
-  + [the Minie Physics Library page](https://jmonkeystore.com/38308161-c3cf-4e23-8754-528ca8387c11) 
+  + [the Minie Physics Library page](https://jmonkeystore.com/38308161-c3cf-4e23-8754-528ca8387c11)
     at [JmonkeyStore](https://jmonkeystore.com/)
 
 [ant]: https://ant.apache.org "Apache Ant Project"
@@ -277,7 +196,7 @@ TODO
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
-[latest]: https://github.com/stephengold/Wes/releases/tag/0.4.8for32 "latest release"
+[latest]: https://github.com/stephengold/Wes/releases/tag/0.4.9 "latest release"
 [license]: https://github.com/stephengold/Wes/blob/for_jME3.2/LICENSE "Wes license"
 [log]: https://github.com/stephengold/Wes/blob/for_jME3.2/WesLibrary/release-notes.md "release log"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
