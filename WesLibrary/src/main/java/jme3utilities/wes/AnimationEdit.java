@@ -30,6 +30,7 @@ import com.jme3.anim.AnimClip;
 import com.jme3.anim.AnimTrack;
 import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
+import com.jme3.anim.MorphTrack;
 import com.jme3.anim.TransformTrack;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
@@ -99,13 +100,13 @@ public class AnimationEdit {
     /**
      * Extract a range from the specified Animation.
      *
-     * @param sourceAnimation the animation to extract from (not null,
+     * @param sourceAnimation the Animation to extract from (not null,
      * unaffected)
      * @param startTime the start of the range (in seconds, &gt;0, &le;endTime)
      * @param endTime the end of the range (in seconds, &ge;startTime)
      * @param techniques tweening techniques to use (unaffected)
-     * @param newAnimationName a name for the resulting animation (not null)
-     * @return a new animation
+     * @param newAnimationName a name for the resulting Animation (not null)
+     * @return a new Animation
      */
     public static Animation extractAnimation(Animation sourceAnimation,
             float startTime, float endTime, TweenTransforms techniques,
@@ -115,7 +116,7 @@ public class AnimationEdit {
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
         Validate.nonNull(newAnimationName, "new animation name");
         /*
-         * Start with an empty animation.
+         * Start with an empty Animation.
          */
         float newDuration = endTime - startTime;
         Animation result = new Animation(newAnimationName, newDuration);
@@ -137,6 +138,51 @@ public class AnimationEdit {
                 newTrack = sourceTrack.clone(); // TODO other track types
             }
             result.addTrack(newTrack);
+        }
+
+        return result;
+    }
+
+    /**
+     * Extract a range from the specified AnimClip.
+     *
+     * @param sourceClip the AnimClip to extract from (not null, unaffected)
+     * @param startTime the start of the range (in seconds, &gt;0, &le;endTime)
+     * @param endTime the end of the range (in seconds, &ge;startTime)
+     * @param techniques tweening techniques to use (unaffected)
+     * @param newClipName a name for the resulting AnimClip (not null)
+     * @return a new AnimClip
+     */
+    public static AnimClip extractAnimation(AnimClip sourceClip,
+            float startTime, float endTime, TweenTransforms techniques,
+            String newClipName) {
+        Validate.nonNull(sourceClip, "source clip");
+        Validate.inRange(startTime, "start time", 0f, endTime);
+        Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
+        Validate.nonNull(newClipName, "new clip name");
+        /*
+         * Start with an empty AnimClip.
+         */
+        AnimClip result = new AnimClip(newClipName);
+
+        AnimTrack[] sourceTracks = sourceClip.getTracks();
+        for (AnimTrack sourceTrack : sourceTracks) {
+            if (sourceTrack instanceof MorphTrack) {
+                throw new UnsupportedOperationException();
+            } else {
+                TransformTrack oldTrack = (TransformTrack) sourceTrack;
+                Transform endTransform
+                        = techniques.interpolate(endTime, oldTrack, null);
+                TransformTrack newTrack
+                        = TrackEdit.truncate(oldTrack, endTime, endTransform);
+                if (startTime > 0f) {
+                    Transform startTransform
+                            = techniques.interpolate(startTime, oldTrack, null);
+                    newTrack = TrackEdit.behead(newTrack, startTime,
+                            startTransform);
+                }
+                addTrack(result, newTrack);
+            }
         }
 
         return result;
@@ -408,7 +454,7 @@ public class AnimationEdit {
      *
      * @param sourceClip the AnimClip to reverse (not null, unaffected)
      * @param animationName name for the resulting AnimClip (not null)
-     * @return a new Animation
+     * @return a new AnimClip
      */
     public static AnimClip reverseAnimation(AnimClip sourceClip,
             String animationName) {
