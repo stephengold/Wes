@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2018, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
  */
 package jme3utilities.wes;
 
+import com.jme3.anim.TransformTrack;
 import com.jme3.animation.BoneTrack;
 import com.jme3.animation.SpatialTrack;
 import com.jme3.animation.Track;
@@ -104,7 +105,7 @@ public class TweenTransforms implements Cloneable {
      * @param duration animation duration (in seconds, &gt;0)
      * @param fallback values to use for missing track data (may be null,
      * unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform interpolate(float time, Track track, float duration,
@@ -121,6 +122,40 @@ public class TweenTransforms implements Cloneable {
                 rotations, scales, fallback, storeResult);
 
         return storeResult;
+    }
+
+    /**
+     * Interpolate between keyframes in a TransformTrack using these techniques.
+     *
+     * @param time (in seconds)
+     * @param track the input track (not null, unaffected)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the transform (either storeResult or a new instance)
+     */
+    public Transform interpolate(float time, TransformTrack track,
+            Transform storeResult) {
+        Transform result = (storeResult == null)
+                ? new Transform() : storeResult;
+        float[] times = track.getTimes();
+        int lastFrame = times.length - 1;
+
+        if (lastFrame == 0) { // single-frame track
+            result.setTranslation(track.getTranslations()[0]);
+            result.setRotation(track.getRotations()[0]);
+            result.setScale(track.getScales()[0]);
+
+        } else {
+            float cycleTime = times[lastFrame];
+            Validate.inRange(time, "time", times[0], cycleTime);
+
+            Vector3f[] translations = track.getTranslations();
+            Quaternion[] rotations = track.getRotations();
+            Vector3f[] scales = track.getScales();
+            interpolate(time, times, cycleTime, translations, rotations,
+                    scales, null, result);
+        }
+
+        return result;
     }
 
     /**
