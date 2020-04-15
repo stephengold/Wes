@@ -48,6 +48,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import jme3utilities.MyAnimation;
 import jme3utilities.Validate;
+import jme3utilities.math.MyArray;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
@@ -141,6 +142,59 @@ public class TrackEdit {
 
         Track result = newTrack(oldTrack, newTimes, newTranslations,
                 newRotations, newScales);
+
+        return result;
+    }
+
+    /**
+     * Copy a TransformTrack, deleting everything before the specified time and
+     * making that the start of the new track.
+     *
+     * @param oldTrack the input TransformTrack (not null, unaffected)
+     * @param neckTime the cutoff time (in seconds, &gt;0)
+     * @param neckTransform the Transform of target at the neck time (not null,
+     * unaffected)
+     * @return a new TransformTrack with the same target and t[0]=0
+     */
+    public static TransformTrack behead(TransformTrack oldTrack, float neckTime,
+            Transform neckTransform) {
+        Validate.positive(neckTime, "neck time");
+
+        float[] oldTimes = oldTrack.getTimes();
+        assert neckTime >= oldTimes[0];
+        int oldCount = oldTimes.length;
+
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        Quaternion[] oldRotations = oldTrack.getRotations();
+        Vector3f[] oldScales = oldTrack.getScales();
+
+        int neckIndex = findPreviousKeyframeIndex(oldTrack, neckTime);
+        int newCount = oldCount - neckIndex;
+        assert newCount > 0 : newCount;
+        /*
+         * Allocate new arrays.
+         */
+        float[] newTimes = new float[newCount];
+        newTimes[0] = 0f;
+        Vector3f[] newTranslations = new Vector3f[newCount];
+        newTranslations[0] = neckTransform.getTranslation().clone();
+        Quaternion[] newRotations = new Quaternion[newCount];
+        newRotations[0] = neckTransform.getRotation().clone();
+        Vector3f[] newScales = new Vector3f[newCount];
+        newScales[0] = neckTransform.getScale().clone();
+
+        for (int newIndex = 1; newIndex < newCount; ++newIndex) {
+            int oldIndex = newIndex + neckIndex;
+
+            newTimes[newIndex] = oldTimes[oldIndex] - neckTime;
+            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            newRotations[newIndex] = oldRotations[oldIndex].clone();
+            newScales[newIndex] = oldScales[oldIndex].clone();
+        }
+
+        HasLocalTransform target = oldTrack.getTarget();
+        TransformTrack result = new TransformTrack(target, newTimes,
+                newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1000,12 +1054,14 @@ public class TrackEdit {
             oldTimes = oldTransformTrack.getTimes();
             int numFrames = oldTimes.length;
             lastFrameTime = oldTimes[numFrames - 1];
-            newTimes = new float[numFrames];
 
             Vector3f[] oldTranslations = oldTransformTrack.getTranslations();
             Quaternion[] oldRotations = oldTransformTrack.getRotations();
             Vector3f[] oldScales = oldTransformTrack.getScales();
-
+            /*
+             * Allocate new arrays.
+             */
+            newTimes = new float[numFrames];
             Vector3f[] newTranslations = new Vector3f[numFrames];
             Quaternion[] newRotations = new Quaternion[numFrames];
             Vector3f[] newScales = new Vector3f[numFrames];
@@ -1287,7 +1343,9 @@ public class TrackEdit {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
-
+        /*
+         * Allocate new arrays.
+         */
         int numFrames = oldTimes.length;
         float[] newTimes = new float[numFrames];
         System.arraycopy(oldTimes, 0, newTimes, 0, numFrames);
@@ -1369,6 +1427,54 @@ public class TrackEdit {
         Track result = newTrack(oldTrack, newTimes, newTranslations,
                 newRotations, newScales);
 
+        return result;
+    }
+
+    /**
+     * Copy a TransformTrack, truncating it at the specified time.
+     *
+     * @param oldTrack input TransformTrack (not null, unaffected)
+     * @param endTime cutoff time (&ge;0)
+     * @param endTransform transform of target at the end time (unaffected)
+     * @return a new TransformTrack with the same target and t[0]=0
+     */
+    public static TransformTrack truncate(TransformTrack oldTrack,
+            float endTime, Transform endTransform) {
+        Validate.nonNegative(endTime, "end time");
+        /*
+         * Access the old arrays.
+         */
+        float[] oldTimes = oldTrack.getTimes();
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        Quaternion[] oldRotations = oldTrack.getRotations();
+        Vector3f[] oldScales = oldTrack.getScales();
+        /*
+         * Allocate new arrays.
+         */
+        int lastFrame = findPreviousKeyframeIndex(oldTrack, endTime);
+        int newCount = 2 + lastFrame;
+        float[] newTimes = new float[newCount];
+        Vector3f[] newTranslations = new Vector3f[newCount];
+        Quaternion[] newRotations = new Quaternion[newCount];
+        Vector3f[] newScales = new Vector3f[newCount];
+
+        for (int frameIndex = 0; frameIndex <= lastFrame; ++frameIndex) {
+            newTimes[frameIndex] = oldTimes[frameIndex] - oldTimes[0];
+            newTranslations[frameIndex] = oldTranslations[frameIndex].clone();
+            newRotations[frameIndex] = oldRotations[frameIndex].clone();
+            newScales[frameIndex] = oldScales[frameIndex].clone();
+        }
+        int frameIndex = lastFrame + 1;
+        newTimes[frameIndex] = endTime;
+        newTranslations[frameIndex] = endTransform.getTranslation().clone();
+        newRotations[frameIndex] = endTransform.getRotation().clone();
+        newScales[frameIndex] = endTransform.getScale().clone();
+
+        HasLocalTransform target = oldTrack.getTarget();
+        TransformTrack result = new TransformTrack(target, newTimes,
+                newTranslations, newRotations, newScales);
+
+        assert (float) result.getLength() == endTime;
         return result;
     }
 
@@ -1553,6 +1659,25 @@ public class TrackEdit {
             result = MyVector3f.lerp(weight2, tra1, tra2, null);
         }
 
+        return result;
+    }
+
+    /**
+     * Find the index of the last keyframe at or before the specified time in
+     * the specified TransformTrack. TODO move to MyANimation
+     *
+     * @param track the TransformTrack to search (not null, unaffected)
+     * @param time the track time (in seconds, &ge;0)
+     * @return the keyframe's index (&ge;0)
+     */
+    private static int findPreviousKeyframeIndex(TransformTrack track,
+            float time) {
+        Validate.nonNegative(time, "time");
+
+        float[] times = track.getTimes();
+        int result = MyArray.findPreviousIndex(time, times);
+
+        assert result >= 0 : result;
         return result;
     }
 }
