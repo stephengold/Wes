@@ -67,7 +67,7 @@ import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.TweenTransforms;
 
 /**
- * An ActionApplications to demonstrate trimming an animation.
+ * An ActionApplications to demonstrate trimming and stretching an AnimClip.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -155,18 +155,21 @@ public class TrimAnimation extends ActionApplication {
          */
         AnimComposer composer = sinbadModelRoot.getControl(AnimComposer.class);
         AnimClip slice = composer.getAnimClip("SliceHorizontal");
-        String trimmedName = "Warn";
         float startTime = 0.308f;
         float endTime = 0.344f;
         TweenTransforms techniques = new TweenTransforms();
         AnimClip trimmed = AnimationEdit.extractAnimation(slice, startTime,
-                endTime, techniques, trimmedName);
-        composer.addAnimClip(trimmed);
+                endTime, techniques, "");
         /*
-         * Play the trimmed clip repeatedly, in slow motion.
+         * Create a version of the trimmed clip that runs 15x slower/longer.
          */
-        composer.setCurrentAction(trimmedName);
-        composer.setGlobalSpeed(0.07f);
+        float newDuration = 15f * (endTime - startTime);
+        AnimClip warn = AnimationEdit.setDuration(trimmed, newDuration, "warn");
+        composer.addAnimClip(warn);
+        /*
+         * Play the resulting clip repeatedly.
+         */
+        composer.setCurrentAction("warn");
     }
 
     /**
