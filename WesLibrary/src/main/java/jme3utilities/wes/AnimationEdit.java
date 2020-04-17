@@ -497,6 +497,36 @@ public class AnimationEdit {
     }
 
     /**
+     * Alter the duration of the specified AnimClip.
+     *
+     * @param sourceClip the AnimClip to alter (not null, unaffected)
+     * @param newDuration the desired duration (in seconds, &ge;0)
+     * @param animationName name for the resulting AnimClip (not null)
+     * @return a new AnimClip
+     */
+    public static AnimClip setDuration(AnimClip sourceClip, float newDuration,
+            String animationName) {
+        Validate.nonNull(animationName, "animation name");
+
+        AnimClip result = new AnimClip(animationName);
+
+        AnimTrack[] oldTracks = sourceClip.getTracks();
+        for (AnimTrack sourceTrack : oldTracks) {
+            if (sourceTrack instanceof MorphTrack) {
+                throw new UnsupportedOperationException();
+            } else {
+                TransformTrack oldTrack = (TransformTrack) sourceTrack;
+                AnimTrack newTrack
+                        = TrackEdit.setDuration(oldTrack, newDuration);
+                assert newTrack.getLength() == newDuration;
+                addTrack(result, newTrack);
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Repair all tracks in which the first keyframe isn't at time=0.
      *
      * @param animation (not null)
