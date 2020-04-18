@@ -42,6 +42,7 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import java.util.Map;
@@ -591,91 +592,139 @@ public class TrackEdit {
     }
 
     /**
-     * Normalize all quaternions in a bone/spatial track.
+     * Normalize all quaternions in a morph/transform track if any of them are
+     * out of tolerance.
      *
-     * @param oldTrack input bone/spatial track (not null, unaffected)
-     * @param tolerance for norms (&ge;0)
-     * @return a new track if changes are made, or else oldTrack
+     * @param inputTrack the input transform/morph track (not null, unaffected)
+     * @param tolerance the tolerance for norms (&ge;0)
+     * @return a new track if changes were made, or else inputTrack
      */
-    public static Track normalizeQuaternions(Track oldTrack, float tolerance) {
-        assert oldTrack instanceof BoneTrack
-                || oldTrack instanceof SpatialTrack;
+    public static AnimTrack normalizeQuaternions(AnimTrack inputTrack,
+            float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
 
-        Track result = oldTrack;
-        Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
-        if (oldRotations != null) {
-            int numKeyframes = oldRotations.length;
-            assert numKeyframes > 0 : numKeyframes;
-            Quaternion[] newRotations = new Quaternion[numKeyframes];
+        AnimTrack result = inputTrack;
+        if (inputTrack instanceof MorphTrack) { // contains no quaternions
+            return result;
+        }
 
-            boolean changes = false;
-            for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
-                Quaternion oldQuat = oldRotations[frameIndex];
-                double norm = MyQuaternion.lengthSquared(oldQuat);
-                double delta = Math.abs(1.0 - norm);
-                if (delta > tolerance) {
-                    Quaternion newQuat = oldQuat.clone().normalizeLocal();
-                    newRotations[frameIndex] = newQuat;
-                    changes = true;
-                }
-            }
+        TransformTrack oldTrack = (TransformTrack) inputTrack;
+        Quaternion[] oldRotations = oldTrack.getRotations();
+        if (oldRotations == null) {
+            return result;
+        }
 
-            if (changes) {
-                float[] times = oldTrack.getKeyFrameTimes();
-                Vector3f[] translations = MyAnimation.getTranslations(oldTrack);
-                Vector3f[] scales = MyAnimation.getScales(oldTrack);
-                result = newTrack(oldTrack, times, translations, newRotations,
-                        scales);
+        int numFrames = oldRotations.length;
+        assert numFrames > 0 : numFrames;
+        boolean changes = false;
+        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
+            Quaternion oldQuat = oldRotations[frameIndex];
+            double norm = MyQuaternion.lengthSquared(oldQuat);
+            double delta = Math.abs(1.0 - norm);
+            if (delta > tolerance) {
+                changes = true;
             }
         }
+        if (!changes) {
+            return result;
+        }
+
+        float[] oldTimes = oldTrack.getTimes();
+        assert oldTimes.length == numFrames;
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        assert oldTranslations.length == numFrames;
+        Vector3f[] oldScales = oldTrack.getScales();
+        assert oldScales.length == numFrames;
+        /*
+         * Allocate new arrays.
+         */
+        float[] times = new float[numFrames];
+        Vector3f[] translations = new Vector3f[numFrames];
+        Quaternion[] rotations = new Quaternion[numFrames];
+        Vector3f[] scales = new Vector3f[numFrames];
+
+        for (int frameI = 0; frameI < numFrames; ++frameI) {
+            times[frameI] = oldTimes[frameI];
+            translations[frameI] = oldTranslations[frameI].clone();
+            rotations[frameI] = oldRotations[frameI].clone().normalizeLocal();
+            scales[frameI] = oldScales[frameI].clone();
+        }
+
+        HasLocalTransform target = oldTrack.getTarget();
+        result = new TransformTrack(target, times, translations, rotations,
+                scales);
 
         return result;
     }
 
     /**
-     * Normalize all quaternions in an AnimTrack. TODO re-order methods
+     * Normalize all quaternions in a bone/spatial track if any of them are out
+     * of tolerance.
      *
-     * @param oldTrack input AnimTrack (not null, unaffected)
-     * @param tolerance for norms (&ge;0)
+     * @param inputTrack the input bone/spatial track (not null, unaffected)
+     * @param tolerance the tolerance for norms (&ge;0)
      * @return a new track if changes are made, or else oldTrack
      */
-    public static AnimTrack normalizeQuaternions(AnimTrack oldTrack,
+    public static Track normalizeQuaternions(Track inputTrack,
             float tolerance) {
+        assert inputTrack instanceof BoneTrack
+                || inputTrack instanceof SpatialTrack;
         Validate.nonNegative(tolerance, "tolerance");
 
-        AnimTrack result = oldTrack;
-        if (oldTrack instanceof MorphTrack) { // contains no quaternions
+        Track result = inputTrack;
+        Quaternion[] oldRotations = MyAnimation.getRotations(inputTrack);
+        if (oldRotations == null) {
             return result;
         }
 
-        TransformTrack oldTt = (TransformTrack) oldTrack;
-        Quaternion[] oldRotations = oldTt.getRotations();
-        if (oldRotations != null) {
-            int numKeyframes = oldRotations.length;
-            assert numKeyframes > 0 : numKeyframes;
-            Quaternion[] newRotations = new Quaternion[numKeyframes];
-
-            boolean changes = false;
-            for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
-                Quaternion oldQuat = oldRotations[frameIndex];
-                double norm = MyQuaternion.lengthSquared(oldQuat);
-                double delta = Math.abs(1.0 - norm);
-                if (delta > tolerance) {
-                    Quaternion newQuat = oldQuat.clone().normalizeLocal();
-                    newRotations[frameIndex] = newQuat;
-                    changes = true;
-                }
-            }
-
-            if (changes) {
-                float[] times = oldTt.getTimes();
-                Vector3f[] translations = oldTt.getTranslations();
-                Vector3f[] scales = oldTt.getScales();
-                result = new TransformTrack(oldTt.getTarget(), times,
-                        translations, newRotations, scales);
+        int numFrames = oldRotations.length;
+        assert numFrames > 0 : numFrames;
+        boolean changes = false;
+        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
+            Quaternion oldQuat = oldRotations[frameIndex];
+            double norm = MyQuaternion.lengthSquared(oldQuat);
+            double delta = Math.abs(1.0 - norm);
+            if (delta > tolerance) {
+                changes = true;
             }
         }
+        if (!changes) {
+            return result;
+        }
+
+        float[] oldTimes = inputTrack.getKeyFrameTimes();
+        assert oldTimes.length == numFrames;
+        Vector3f[] oldTranslations = MyAnimation.getTranslations(inputTrack);
+        Vector3f[] oldScales = MyAnimation.getScales(inputTrack);
+        /*
+         * Allocate new arrays.
+         */
+        float[] times = new float[numFrames];
+        Vector3f[] translations = null;
+        if (oldTranslations != null) {
+            assert oldTranslations.length == numFrames;
+            translations = new Vector3f[numFrames];
+        }
+        Quaternion[] rotations = new Quaternion[numFrames];
+        Vector3f[] scales = null;
+        if (oldScales != null) {
+            assert oldScales.length == numFrames;
+            scales = new Vector3f[numFrames];
+        }
+
+        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
+            times[frameIndex] = oldTimes[frameIndex];
+            if (translations != null) {
+                translations[frameIndex] = oldTranslations[frameIndex].clone();
+            }
+            rotations[frameIndex] = oldRotations[frameIndex].clone();
+            if (scales != null) {
+                scales[frameIndex] = oldScales[frameIndex].clone();
+            }
+        }
+
+        result = newTrack(inputTrack, times, translations, rotations,
+                scales);
 
         return result;
     }
@@ -1047,25 +1096,41 @@ public class TrackEdit {
      * Copy the specified transform/morph track, reversing the sequence of its
      * frames.
      *
-     * @param oldTrack the input transform/morph track (not null, unaffected)
-     * @return a new AnimTrack of the same type as oldTrack
+     * @param inputTrack the input transform/morph track (not null, unaffected)
+     * @return a new AnimTrack with the same type and target as oldTrack, with
+     * t[0]=0
      */
-    public static AnimTrack reverse(AnimTrack oldTrack) {
-        AnimTrack result;
-        float[] oldTimes, newTimes;
-        float lastFrameTime;
+    public static AnimTrack reverse(AnimTrack inputTrack) {
+        Validate.nonNull(inputTrack, "input track");
 
-        if (oldTrack instanceof MorphTrack) {
-            result = null;
-            // TODO new MorphTrack(target, newTimes, weights, numTargets);
+        AnimTrack result;
+        float[] newTimes;
+        float[] oldTimes = getKeyFrameTimes(inputTrack);
+        int numFrames = oldTimes.length;
+        float lastFrameTime = oldTimes[numFrames - 1];
+
+        if (inputTrack instanceof MorphTrack) {
+            MorphTrack oldMorphTrack = (MorphTrack) inputTrack;
+            float[] oldWeights = oldMorphTrack.getWeights();
+            assert oldWeights.length == numFrames;
+            /*
+             * Allocate new arrays.
+             */
+            newTimes = new float[numFrames];
+            float[] weights = new float[numFrames];
+
+            for (int newIndex = 0; newIndex < numFrames; ++newIndex) {
+                int oldIndex = numFrames - newIndex - 1;
+                newTimes[newIndex] = lastFrameTime - oldTimes[oldIndex];
+                weights[newIndex] = oldWeights[oldIndex];
+            }
+
+            Geometry target = oldMorphTrack.getTarget();
+            int nbMorph = target.getMesh().getMorphTargets().length;
+            result = new MorphTrack(target, newTimes, weights, nbMorph);
 
         } else {
-            TransformTrack oldTransformTrack = (TransformTrack) oldTrack;
-            HasLocalTransform target = oldTransformTrack.getTarget();
-            oldTimes = oldTransformTrack.getTimes();
-            int numFrames = oldTimes.length;
-            assert numFrames > 0 : numFrames;
-            lastFrameTime = oldTimes[numFrames - 1];
+            TransformTrack oldTransformTrack = (TransformTrack) inputTrack;
 
             Vector3f[] oldTranslations = oldTransformTrack.getTranslations();
             Quaternion[] oldRotations = oldTransformTrack.getRotations();
@@ -1086,6 +1151,7 @@ public class TrackEdit {
                 newScales[newIndex] = oldScales[oldIndex].clone();
             }
 
+            HasLocalTransform target = oldTransformTrack.getTarget();
             result = new TransformTrack(target, newTimes, newTranslations,
                     newRotations, newScales);
         }
@@ -1097,17 +1163,17 @@ public class TrackEdit {
      * Copy the specified bone/spatial track, reversing the sequence of its
      * frames.
      *
-     * @param oldTrack the input bone/spatial track (not null, unaffected)
+     * @param inputTrack the input bone/spatial track (not null, unaffected)
      * @return a new Track of the same type as oldTrack
      */
-    public static Track reverse(Track oldTrack) {
-        assert oldTrack instanceof BoneTrack
-                || oldTrack instanceof SpatialTrack;
+    public static Track reverse(Track inputTrack) {
+        assert inputTrack instanceof BoneTrack
+                || inputTrack instanceof SpatialTrack;
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
-        Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
-        Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
-        Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
+        float[] oldTimes = inputTrack.getKeyFrameTimes();
+        Vector3f[] oldTranslations = MyAnimation.getTranslations(inputTrack);
+        Quaternion[] oldRotations = MyAnimation.getRotations(inputTrack);
+        Vector3f[] oldScales = MyAnimation.getScales(inputTrack);
 
         int numFrames = oldTimes.length;
         float lastFrameTime = oldTimes[numFrames - 1];
@@ -1143,7 +1209,7 @@ public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
+        Track result = newTrack(inputTrack, newTimes, newTranslations,
                 newRotations, newScales);
 
         return result;
@@ -1749,7 +1815,7 @@ public class TrackEdit {
 
     /**
      * Find the index of the last keyframe at or before the specified time in
-     * the specified TransformTrack. TODO move to MyANimation
+     * the specified TransformTrack. TODO move to MyAnimation
      *
      * @param track the TransformTrack to search (not null, unaffected)
      * @param time the track time (in seconds, &ge;0)
@@ -1763,6 +1829,33 @@ public class TrackEdit {
         int result = MyArray.findPreviousIndex(time, times);
 
         assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Access the time array of the specified track. TODO move to MyAnimation
+     *
+     * @param object the input track (a MorphTrack, TransformTrack, or Track)
+     * @return the pre-existing array (not null, length > 0)
+     */
+    private static float[] getKeyFrameTimes(Object object) {
+        float[] result;
+        if (object instanceof MorphTrack) {
+            MorphTrack morphTrack = (MorphTrack) object;
+            result = morphTrack.getTimes();
+        } else if (object instanceof Track) {
+            Track t = (Track) object;
+            result = t.getKeyFrameTimes();
+        } else if (object instanceof TransformTrack) {
+            TransformTrack transformTrack = (TransformTrack) object;
+            result = transformTrack.getTimes();
+        } else {
+            String className = object.getClass().getSimpleName();
+            throw new IllegalArgumentException(className);
+        }
+
+        assert result != null;
+        assert result.length > 0 : result.length;
         return result;
     }
 }
