@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.5.0 released on TBD
+## Version 0.5.0 released on 22 May 2020
 
  + Added methods to better support the new animation system:
    + `AnimationEdit.extractAnimation()` for `AnimClip`
