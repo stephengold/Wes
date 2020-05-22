@@ -174,6 +174,7 @@ public class ReverseAnimation extends ActionApplication {
         dim.bind("signal orbitLeft", KeyInput.KEY_LEFT);
         dim.bind("signal orbitRight", KeyInput.KEY_RIGHT);
         dim.bind("toggle help", KeyInput.KEY_H);
+        dim.bind("toggle pause", KeyInput.KEY_PAUSE);
         dim.bind("toggle pause", KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
 
