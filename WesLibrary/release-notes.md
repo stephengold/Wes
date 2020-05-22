@@ -1,5 +1,19 @@
 # release log for the Wes library and related examples
 
+## Version 0.5.0 released on TBD
+
+ + Added methods to better support the new animation system:
+   + `AnimationEdit.extractAnimation()` for `AnimClip`
+   + `AnimationEdit.setDuration()` for `AnimClip`
+   + `TrackEdit.behead()` for `TransformTrack`
+   + `TrackEdit.reverse()` for `MorphTrack`
+   + `TrackEdit.setDuration()` for `TransformTrack`
+   + `TrackEdit.truncate()` for `TransformTrack`
+   + `TweenTransforms.interpolate()` for `TransformTrack`
+ + Added the `TrimAnimation` example app.
+ + Base on v5.4 of the Heart Library and v0.8.3 of jme3-utilities-ui.
+ + Upgrade to Gradle v6.4.1 .
+
 ## Version 0.4.9 released on 1 April 2020
 
  + Base on version 5.2.1 of the Heart Library.
