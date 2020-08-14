@@ -9,7 +9,7 @@ It contains 2 sub-projects:
  2. WesExamples: demos, examples, and test software (in Java)
 
 Complete source code (in Java) is provided under
-[a BSD license][license].
+[a 3-clause BSD license][license].
 
 Summary of features:
 
@@ -186,7 +186,7 @@ the Sinbad model to generate a "warn" clip.
 
 ## External links
 
-  + [the Minie Physics Library page](https://jmonkeystore.com/38308161-c3cf-4e23-8754-528ca8387c11)
+  + [the Wes Animation Toolkit page](https://jmonkeystore.com/15054f52-c439-4bfb-9a73-80260b486333)
     at [JmonkeyStore](https://jmonkeystore.com/)
 
 [ant]: https://ant.apache.org "Apache Ant Project"
@@ -201,6 +201,7 @@ the Sinbad model to generate a "warn" clip.
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
+[imgur]: https://imgur.com/ "Imgur"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
@@ -216,6 +217,7 @@ the Sinbad model to generate a "warn" clip.
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 [winmerge]: http://winmerge.org "WinMerge Project"
 
+[Jump to table of contents](#toc)
 
 <a name="history"/>
 
@@ -267,7 +269,7 @@ artists and software developers:
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
-I am grateful to [JFrog] and [Github]
+I am grateful to [JFrog] and [Github], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 
