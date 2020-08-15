@@ -1815,7 +1815,7 @@ public class TrackEdit {
 
     /**
      * Find the index of the last keyframe at or before the specified time in
-     * the specified TransformTrack. TODO move to MyAnimation
+     * the specified TransformTrack. TODO use MyAnimation
      *
      * @param track the TransformTrack to search (not null, unaffected)
      * @param time the track time (in seconds, &ge;0)
@@ -1833,7 +1833,7 @@ public class TrackEdit {
     }
 
     /**
-     * Access the time array of the specified track. TODO move to MyAnimation
+     * Access the time array of the specified track. TODO use MyAnimation
      *
      * @param object the input track (a MorphTrack, TransformTrack, or Track)
      * @return the pre-existing array (not null, length > 0)
