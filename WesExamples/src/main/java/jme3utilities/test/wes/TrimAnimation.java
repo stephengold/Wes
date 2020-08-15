@@ -271,8 +271,7 @@ public class TrimAnimation extends ActionApplication {
                 "Models/Sinbad/Sinbad.mesh.xml");
         rootNode.attachChild(sinbadModelRoot);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(sinbadModelRoot, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(sinbadModelRoot);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }

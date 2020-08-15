@@ -361,8 +361,7 @@ public class FlashMobDemo extends ActionApplication {
         jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
         rootNode.attachChild(jaime);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(jaime, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(jaime);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
@@ -410,8 +409,7 @@ public class FlashMobDemo extends ActionApplication {
         mhGame = (Node) assetManager.loadModel("Models/MhGame/MhGame.mesh.xml");
         rootNode.attachChild(mhGame);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(mhGame, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(mhGame);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
@@ -438,8 +436,7 @@ public class FlashMobDemo extends ActionApplication {
         oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
         rootNode.attachChild(oto);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(oto, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(oto);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
@@ -467,8 +464,7 @@ public class FlashMobDemo extends ActionApplication {
         puppet = (Node) n.getChild(0);
         rootNode.attachChild(puppet);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(puppet, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(puppet);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
@@ -497,8 +493,7 @@ public class FlashMobDemo extends ActionApplication {
                 "Models/Sinbad/Sinbad.mesh.xml");
         rootNode.attachChild(cgModel);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(cgModel, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(cgModel);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
