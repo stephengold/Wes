@@ -19,6 +19,11 @@ dependencies {
     implementation 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
     runtimeOnly 'org.jmonkeyengine:jme3-testdata:3.1.0-stable'
 
+    // WesExamples doesn't use jme3-blender or jme3-jogg
+    //  -- they are included solely to avoid warnings from AssetConfig
+    runtimeOnly 'org.jmonkeyengine:jme3-blender:' + jmonkeyengineVersion
+    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jmonkeyengineVersion
+
     //implementation "jme3utilities:Wes:$wesVersion"
     implementation project(':WesLibrary')
 }
