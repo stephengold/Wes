@@ -1,4 +1,6 @@
-# GitHub workflow for commits pushed to the Wes repo
+---
+# GitHub workflow for commits pushed to the Wes repo - all branches
+
 name: CI at GitHub
 on: [push]
 
@@ -7,31 +9,31 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-16.04
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-java@v1
-      with:
-        java-version: 8
-    - uses: gradle/wrapper-validation-action@v1
-    - run: ./gradlew build --console=plain --no-daemon
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - uses: gradle/wrapper-validation-action@v1
+      - run: ./gradlew build --console=plain --no-daemon --stacktrace
 
-  Java11-MacOS64:
+  Java11-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - uses: gradle/wrapper-validation-action@v1
-    - run: ./gradlew build --console=plain --no-daemon
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: gradle/wrapper-validation-action@v1
+      - run: ./gradlew build --console=plain --no-daemon --stacktrace
 
   Java11-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - uses: gradle/wrapper-validation-action@v1
-    - run: ./gradlew build --console=plain --no-daemon
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: gradle/wrapper-validation-action@v1
+      - run: ./gradlew build --console=plain --no-daemon --stacktrace
