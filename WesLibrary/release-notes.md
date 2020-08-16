@@ -1,5 +1,10 @@
 # release log for the Wes library and related examples
 
+## Version 0.5.1 released on TBD
+
+ + Based on v6.0 of the Heart Library and v0.9.0 of jme3-utilities-ui.
+ + Upgrade to Gradle v6.6 .
+
 ## Version 0.5.0 released on 22 May 2020
 
  + Added methods to better support the new animation system:

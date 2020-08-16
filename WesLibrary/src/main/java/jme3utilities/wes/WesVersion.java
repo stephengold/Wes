@@ -54,11 +54,11 @@ public class WesVersion {
     // new methods exposed
 
     /**
-     * Read the terse version string for this library.
+     * Determine the terse version string for this library.
      *
      * @return branch and revision (not null, not empty)
      */
     public static String versionShort() {
-        return "master 0.5.0-SNAPSHOT";
+        return "master 0.5.1";
     }
 }
