@@ -74,7 +74,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.5.0`
+     + `git checkout -b latest 0.5.1`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -118,7 +118,7 @@ resolve the remaining dependencies automatically.
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.5.0'
+        compile 'com.github.stephengold:Wes:0.5.1'
     }
 
 #### For Ant projects
@@ -126,8 +126,8 @@ resolve the remaining dependencies automatically.
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.5.0
- + https://github.com/stephengold/Heart/releases/tag/5.4.0
+ + https://github.com/stephengold/Wes/releases/tag/0.5.1
+ + https://github.com/stephengold/Heart/releases/tag/6.0.0
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -141,15 +141,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  5. Add the `Heart` class jar:
     + Click on the "Add JAR/Folder" button.
     + Navigate to the download folder.
-    + Select the "Heart-5.4.0.jar" file.
+    + Select the "Heart-6.0.0.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "Heart-5.4.0-javadoc.jar" file.
+    + Select the "Heart-6.0.0-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "Heart-5.4.0-sources.jar" file.
+    + Select the "Heart-6.0.0-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
