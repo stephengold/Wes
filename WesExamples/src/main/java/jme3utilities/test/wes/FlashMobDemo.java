@@ -168,6 +168,7 @@ public class FlashMobDemo extends ActionApplication {
         settings.setVSync(true);
         application.setSettings(settings);
 
+        settings.setAudioRenderer(null);
         application.start();
     }
     // *************************************************************************
