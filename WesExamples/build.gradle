@@ -46,3 +46,14 @@ task cleanSOs(type: Delete) {
 task cleanWrittenAssets(type: Delete) {
     delete 'Written Assets'
 }
+
+// run the example apps
+task runFlashMobDemo(type: JavaExec) {
+    main 'jme3utilities.test.wes.FlashMobDemo'
+}
+task runReverseAnimation(type: JavaExec) {
+    main 'jme3utilities.test.wes.ReverseAnimation'
+}
+task runTrimAnimation(type: JavaExec) {
+    main 'jme3utilities.test.wes.TrimAnimation'
+}
