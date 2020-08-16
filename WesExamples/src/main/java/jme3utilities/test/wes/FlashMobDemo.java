@@ -275,11 +275,10 @@ public class FlashMobDemo extends ActionApplication {
         InputMode dim = getDefaultInputMode();
 
         dim.bind("dump scenes", KeyInput.KEY_P);
-        dim.bind("signal orbitLeft", KeyInput.KEY_LEFT);
-        dim.bind("signal orbitRight", KeyInput.KEY_RIGHT);
+        dim.bindSignal("orbitLeft", KeyInput.KEY_LEFT);
+        dim.bindSignal("orbitRight", KeyInput.KEY_RIGHT);
         dim.bind("toggle help", KeyInput.KEY_H);
-        dim.bind("toggle pause", KeyInput.KEY_PAUSE);
-        dim.bind("toggle pause", KeyInput.KEY_PERIOD);
+        dim.bind("toggle pause", KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
 
         float x = 10f;
