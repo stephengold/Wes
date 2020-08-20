@@ -29,16 +29,19 @@ package jme3utilities.wes;
 import com.jme3.anim.AnimClip;
 import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
+import com.jme3.anim.SkinningControl;
 import com.jme3.anim.TransformTrack;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
 import com.jme3.animation.Skeleton;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Matrix4f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.control.AbstractControl;
 import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import com.jme3.util.clone.Cloner;
@@ -53,7 +56,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 
 /**
- * Encapsulate a pose for a particular Armature or Skeleton.
+ * Encapsulate a pose for a specific Armature or Skeleton.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -471,6 +474,27 @@ public class Pose implements JmeCloneable {
         }
 
         return storeResult;
+    }
+
+    /**
+     * Instantiate bind pose for the specified SkeletonControl or
+     * SkinningControl.
+     *
+     * @param sControl the Control to use (not null, must be a SkeletonControl
+     * or a SkinningControl)
+     * @return a new instance
+     */
+    public static Pose newInstance(AbstractControl sControl) {
+        Pose result;
+        if (sControl instanceof SkeletonControl) {
+            Skeleton skeleton = ((SkeletonControl) sControl).getSkeleton();
+            result = new Pose(skeleton);
+        } else {
+            Armature armature = ((SkinningControl) sControl).getArmature();
+            result = new Pose(armature);
+        }
+
+        return result;
     }
 
     /**
