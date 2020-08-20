@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -62,7 +62,8 @@ public enum SmoothRotations {
      * @param samples input function values (not null, unaffected, same length
      * as times)
      * @param width width of time window (&ge;0, &le;cycleTime)
-     * @param storeResult (distinct from samples, modified if not null)
+     * @param storeResult storage for the result (distinct from samples,
+     * modified if not null)
      * @return array of smoothed quaternions (either storeResult or a new
      * instance)
      */
@@ -113,7 +114,7 @@ public enum SmoothRotations {
      * @param samples input function values (not null, unaffected, same length
      * as times, each not null)
      * @param width width of time window (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return array of smoothed quaternions (either storeResult or a new
      * instance)
      */
@@ -169,7 +170,7 @@ public enum SmoothRotations {
      * @param samples input function values (not null, unaffected, each not
      * null)
      * @param width width of time window (&ge;0, &le;cycleTime)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return array of smoothed quaternions (either storeResult or a new
      * instance)
      */

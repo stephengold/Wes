@@ -209,7 +209,7 @@ public class Pose implements JmeCloneable {
      * Copy the local bind transform of the indexed joint/bone.
      *
      * @param boneIndex which joint/bone (&ge;0)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform bindTransform(int boneIndex, Transform storeResult) {
@@ -750,7 +750,7 @@ public class Pose implements JmeCloneable {
     /**
      * Calculate skinning matrices for this Pose.
      *
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the results (modified if not null)
      * @return skinning matrices (either storeResult or a new instance)
      */
     public Matrix4f[] skin(Matrix4f[] storeResult) {
@@ -821,7 +821,7 @@ public class Pose implements JmeCloneable {
      * @param boneIndex which joint/bone (&ge;0)
      * @param modelOrientation desired orientation (not null, not zero,
      * unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Quaternion userForModel(int boneIndex, Quaternion modelOrientation,

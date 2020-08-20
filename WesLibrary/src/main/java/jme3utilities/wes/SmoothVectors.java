@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -62,7 +62,8 @@ public enum SmoothVectors {
      * @param samples input function values (not null, unaffected, same length
      * as times)
      * @param width width of time window (&ge;0, &le;cycleTime)
-     * @param storeResult (distinct from samples, modified if not null)
+     * @param storeResult storage for the result (distinct from samples,
+     * modified if not null)
      * @return array of smoothed vectors (either storeResult or a new instance)
      */
     public Vector3f[] smooth(float[] times, float cycleTime, Vector3f[] samples,
@@ -112,7 +113,8 @@ public enum SmoothVectors {
      * @param samples input function values (not null, unaffected, same length
      * as times, each not null)
      * @param width width of time window (&ge;0)
-     * @param storeResult (distinct from samples, modified if not null)
+     * @param storeResult storage for the result (distinct from samples,
+     * modified if not null)
      * @return array of smoothed vectors (either storeResult or a new instance)
      */
     public static Vector3f[] lerp(float[] times, Vector3f[] samples,
@@ -166,7 +168,8 @@ public enum SmoothVectors {
      * @param samples input function values (not null, unaffected, each not
      * null)
      * @param width width of time window (&ge;0, &le;cycleTime)
-     * @param storeResult (distinct from samples, modified if not null)
+     * @param storeResult storage for the result (distinct from samples,
+     * modified if not null)
      * @return array of smoothed vectors (either storeResult or a new instance)
      */
     public static Vector3f[] loopLerp(int last, float[] times, float cycleTime,

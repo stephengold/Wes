@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2019, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -86,7 +86,7 @@ public enum TweenVectors {
      * order)
      * @param samples function values (not null, unaffected, same length as
      * times)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public Vector3f cubicSpline(float time, float[] times,
@@ -190,7 +190,7 @@ public enum TweenVectors {
      * @param cycleTime end time for looping (&ge;times[last])
      * @param samples function values (not null, unaffected, same length as
      * times)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public Vector3f interpolate(float time, float[] times, float cycleTime,
@@ -263,7 +263,7 @@ public enum TweenVectors {
      *
      * @param time parameter value
      * @param curve curve parameters (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public Vector3f interpolate(float time, VectorCurve curve,
@@ -308,7 +308,7 @@ public enum TweenVectors {
      * order)
      * @param samples function values (not null, unaffected, same length as
      * times, each not null)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public static Vector3f lerp(float time, float[] times, Vector3f[] samples,
@@ -349,7 +349,7 @@ public enum TweenVectors {
      * times[0]==0)
      * @param cycleTime cycle time (&gt;times[last])
      * @param samples function values (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public Vector3f loopCubicSpline(float time, int last, float[] times,
@@ -457,7 +457,7 @@ public enum TweenVectors {
      * times[0]==0)
      * @param cycleTime cycle time (&gt;times[last])
      * @param samples function values (not null, unaffected, each not null)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     public static Vector3f loopLerp(float time, int last, float[] times,
@@ -557,7 +557,7 @@ public enum TweenVectors {
      * @param v1 function value at start of interval (not null, unaffected)
      * @param v2 function value at end of interval (not null, unaffected)
      * @param v3 function value following v2 (not null, != v2, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     private static Vector3f centripetal(float tt, Vector3f v0, Vector3f v1,
@@ -602,7 +602,7 @@ public enum TweenVectors {
      * @param dt01 square root of distance from v0 to v1 (&gt;0)
      * @param dt12 square root of distance from v1 to v2 (&gt;0)
      * @param dt23 square root of distance from v2 to v3 (&gt;0)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     private static Vector3f centripetal(float tt, Vector3f v0, Vector3f v1,
@@ -645,7 +645,7 @@ public enum TweenVectors {
      * @param m1 the first derivative at start of interval (not null,
      * unaffected)
      * @param m2 the first derivative at end of interval (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     private static Vector3f cubicSpline(float t, float interval, Vector3f v1,
@@ -925,7 +925,7 @@ public enum TweenVectors {
      * @param dt length of the interval (&gt;0)
      * @param v1 function value at the start point (not null, unaffected)
      * @param v2 function value at the end point (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return a derivative vector (either storeResult or a new instance)
      */
     private Vector3f slope(float dt, Vector3f v1, Vector3f v2,
@@ -954,7 +954,7 @@ public enum TweenVectors {
      * @param v0 function value at the previous point (not null, unaffected)
      * @param v1 function value at the current point (not null, unaffected)
      * @param v2 function value at the next point (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return a derivative vector (either storeResult or a new instance)
      */
     private Vector3f slope(float dt01, float dt12, Vector3f v0,
@@ -998,7 +998,7 @@ public enum TweenVectors {
      *
      * @param time parameter value (&ge;0, &le;cycleTime)
      * @param curve vector curve (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
     private Vector3f spline(float time, VectorCurve curve,

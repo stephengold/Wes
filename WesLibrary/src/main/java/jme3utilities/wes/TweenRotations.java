@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2018, Stephen Gold
+ Copyright (c) 2017-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -88,7 +88,7 @@ public enum TweenRotations {
      * @param cycleTime end time for looping (&ge;times[lastIndex])
      * @param samples function values (not null, unaffected, same length as
      * times, each norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -162,7 +162,7 @@ public enum TweenRotations {
      *
      * @param time parameter value
      * @param curve curve parameters (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -211,7 +211,7 @@ public enum TweenRotations {
      * order)
      * @param samples function values (not null, unaffected, same length as
      * times, each norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -253,7 +253,7 @@ public enum TweenRotations {
      * times[0]==0)
      * @param cycleTime cycle time (&gt;times[lastIndex])
      * @param samples function values (not null, unaffected, each norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -300,7 +300,7 @@ public enum TweenRotations {
      * times[0]==0)
      * @param cycleTime cycle time (&gt;times[lastIndex])
      * @param samples function values (not null, unaffected, each norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -401,7 +401,7 @@ public enum TweenRotations {
      * order)
      * @param samples function values (not null, unaffected, same length as
      * times, norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -451,7 +451,7 @@ public enum TweenRotations {
      * @param q2 function value at end of interval (not null, unaffected,
      * norm=1)
      * @param q3 function value following q1 (not null, unaffected, norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -490,7 +490,7 @@ public enum TweenRotations {
      * @param t descaled parameter value (&ge;0, &le;1)
      * @param q0 function value at t=0 (not null, unaffected, norm=1)
      * @param q1 function value at t=1 (not null, unaffected, norm=1)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -544,7 +544,7 @@ public enum TweenRotations {
      *
      * @param time parameter value (&ge;0, &le;cycleTime)
      * @param curve rotation curve (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -692,7 +692,7 @@ public enum TweenRotations {
      *
      * @param time parameter value (&ge;times[0])
      * @param curve rotation curve (not null, unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */

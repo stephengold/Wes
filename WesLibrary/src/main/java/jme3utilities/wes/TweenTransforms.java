@@ -169,7 +169,7 @@ public class TweenTransforms implements Cloneable {
      * @param scales (may be null, unaffected, same length as times)
      * @param fallback values to use for missing track data (may be null,
      * unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return transform (either storeResult or a new instance)
      */
     public Transform interpolate(float time, float[] times, float duration,
@@ -359,7 +359,7 @@ public class TweenTransforms implements Cloneable {
      * @param duration (in seconds)
      * @param fallback values to use for missing track data (may be null,
      * unaffected)
-     * @param storeResult (modified if not null)
+     * @param storeResult storage for the result (modified if not null)
      * @return a transform (either storeResult or a new instance)
      */
     public Transform transform(Track track, float time, float duration,
