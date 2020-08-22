@@ -712,7 +712,8 @@ public class Pose implements JmeCloneable {
         int numJoints = transforms.size();
         for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
             Transform transform = transforms.get(jointIndex);
-            TransformTrack track = MyAnimation.findTransformTrack(clip, jointIndex);
+            TransformTrack track
+                    = MyAnimation.findTransformTrack(clip, jointIndex);
             if (track == null) {
                 transform.loadIdentity();
             } else {
