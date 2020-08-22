@@ -1,5 +1,12 @@
 # release log for the Wes library and related examples
 
+## Version 0.5.2 released on TBD
+
+ + Bugfix: `TrackEdit.normalizeQuaternions()` was ineffective.
+ + Added a factory method to construct a `Pose` from a `SkeletonControl`
+   or `SkinningControl`.
+ + Enhanced a `Pose` constructor to reduce cloning.
+
 ## Version 0.5.1 released on 16 August 2020
 
  + Base on v6.0 of the Heart Library and v0.9.0 of jme3-utilities-ui.
