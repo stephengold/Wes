@@ -717,14 +717,14 @@ public class TrackEdit {
             if (translations != null) {
                 translations[frameIndex] = oldTranslations[frameIndex].clone();
             }
-            rotations[frameIndex] = oldRotations[frameIndex].clone();
+            rotations[frameIndex]
+                    = oldRotations[frameIndex].clone().normalizeLocal();
             if (scales != null) {
                 scales[frameIndex] = oldScales[frameIndex].clone();
             }
         }
 
-        result = newTrack(inputTrack, times, translations, rotations,
-                scales);
+        result = newTrack(inputTrack, times, translations, rotations, scales);
 
         return result;
     }
