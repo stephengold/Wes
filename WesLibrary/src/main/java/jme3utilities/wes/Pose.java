@@ -41,15 +41,17 @@ import com.jme3.math.Matrix4f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.control.AbstractControl;
 import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import com.jme3.util.clone.Cloner;
 import com.jme3.util.clone.JmeCloneable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import jme3utilities.Heart;
 import jme3utilities.MyAnimation;
 import jme3utilities.MySkeleton;
 import jme3utilities.Validate;
@@ -119,14 +121,29 @@ public class Pose implements JmeCloneable {
         transforms = new ArrayList<>(jointCount);
 
         if (armature != null) {
-            Armature cloneArmature = (Armature) Heart.deepCopy(armature);
-            cloneArmature.applyBindPose();
+            Cloner cloner = new Cloner();
+            /*
+             * Clone the Armature, but not any of its target geometries
+             * or attachment nodes.
+             */
+            for (Joint joint : armature.getJointList()) {
+                Node attachment = MySkeleton.getAttachments(joint);
+                if (attachment != null) {
+                    cloner.setClonedValue(attachment, attachment);
+                }
+                Geometry target = getTargetGeometry(joint);
+                if (target != null) {
+                    cloner.setClonedValue(target, target);
+                }
+            }
+            Armature clonedArmature = cloner.clone(armature);
+            clonedArmature.applyBindPose();
 
             for (int jointIndex = 0; jointIndex < jointCount; ++jointIndex) {
                 Transform transform = new Transform();
                 transforms.add(transform);
 
-                Joint cloneJoint = cloneArmature.getJoint(jointIndex);
+                Joint cloneJoint = clonedArmature.getJoint(jointIndex);
                 Transform bindTransform = cloneJoint.getLocalTransform();
                 bindTransforms.add(bindTransform);
             }
@@ -989,6 +1006,31 @@ public class Pose implements JmeCloneable {
     }
     // *************************************************************************
     // private methods
+
+    /**
+     * Access the target geometry of the specified Joint. TODO use MySpatial
+     *
+     * @param joint the Joint to read (not null, unaffected)
+     * @return the pre-existing instance, or null if none
+     */
+    private static Geometry getTargetGeometry(Joint joint) {
+        Field attachNodeField;
+        try {
+            attachNodeField = Joint.class.getDeclaredField("targetGeometry");
+        } catch (NoSuchFieldException exception) {
+            throw new RuntimeException(exception);
+        }
+        attachNodeField.setAccessible(true);
+
+        Geometry result;
+        try {
+            result = (Geometry) attachNodeField.get(joint);
+        } catch (IllegalAccessException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return result;
+    }
 
     /**
      * Calculate the local rotation for the specified Bone to give it the
