@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.5.2 released on TBD
+## Version 0.5.2 released on 22 August 2020
 
  + Bugfix: `TrackEdit.normalizeQuaternions()` was ineffective.
  + Added a factory method to construct a `Pose` from a `SkeletonControl`
