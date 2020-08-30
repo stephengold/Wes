@@ -717,12 +717,8 @@ public class Pose implements JmeCloneable {
             if (track == null) {
                 transform.loadIdentity();
             } else {
-                Transform b = bindTransform(jointIndex, null); // TODO garbage
                 track.getDataAtTime(time, transform);
-                transform.getTranslation().subtractLocal(b.getTranslation());
-                Quaternion userRotation = transform.getRotation();
-                b.getRotation().inverseLocal().mult(userRotation, userRotation);
-                transform.getScale().divideLocal(b.getScale());
+                userForLocal(jointIndex, transform, transform);
             }
         }
     }
@@ -829,6 +825,34 @@ public class Pose implements JmeCloneable {
         }
 
         return storeResult;
+    }
+
+    /**
+     * Determine the user/animation Transform for the indexed joint/bone to give
+     * it the specified local Transform.
+     *
+     * @param boneIndex the index of the subject bone/joint (&ge;0)
+     * @param localTransform the desired local Transform (not null)
+     * @param storeResult storage for the result (modified if not null, may be
+     * localTransform)
+     * @return the required user Transform (either storeResult or a new
+     * instance)
+     */
+    public Transform userForLocal(int boneIndex, Transform localTransform,
+            Transform storeResult) {
+        Validate.nonNegative(boneIndex, "bone index");
+        Validate.nonNull(localTransform, "local transform");
+        Transform result = (storeResult == null) ? new Transform()
+                : storeResult;
+
+        result.set(localTransform);
+        Transform bind = bindTransform(boneIndex, null); // TODO garbage
+        result.getTranslation().subtractLocal(bind.getTranslation());
+        Quaternion userRotation = result.getRotation();
+        bind.getRotation().inverseLocal().mult(userRotation, userRotation);
+        result.getScale().divideLocal(bind.getScale());
+
+        return result;
     }
 
     /**
