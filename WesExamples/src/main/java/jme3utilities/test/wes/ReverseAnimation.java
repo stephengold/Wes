@@ -29,7 +29,6 @@ package jme3utilities.test.wes;
 import com.jme3.anim.AnimClip;
 import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
-import com.jme3.app.Application;
 import com.jme3.app.StatsAppState;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
@@ -66,7 +65,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * An ActionApplications to demonstrate reversing an animation.
+ * An ActionApplication to demonstrate reversing an animation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -88,11 +87,15 @@ public class ReverseAnimation extends ActionApplication {
     // fields
 
     /**
-     * GUI node for displaying hotkey help/hints
+     * Node for displaying hotkey help in the GUI scene
      */
     private Node helpNode;
     /**
-     * root node of the Sinbad model
+     * Node for displaying "toggle help: H" in the GUI scene
+     */
+    private Node minHelpNode;
+    /**
+     * root node of the loaded Sinbad model
      */
     private Node sinbadModelRoot;
     /**
@@ -115,7 +118,7 @@ public class ReverseAnimation extends ActionApplication {
         Logger.getLogger(ALAudioRenderer.class.getName())
                 .setLevel(Level.SEVERE);
 
-        Application application = new ReverseAnimation();
+        ReverseAnimation application = new ReverseAnimation();
         /*
          * Customize the window's title bar.
          */
@@ -177,16 +180,10 @@ public class ReverseAnimation extends ActionApplication {
         dim.bind("toggle help", KeyInput.KEY_H);
         dim.bind("toggle pause", KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
-
-        float x = 10f;
-        float y = cam.getHeight() - 40f;
-        float width = cam.getWidth() - 20f;
-        float height = cam.getHeight() - 20f;
-        Rectangle rectangle = new Rectangle(x, y, width, height);
-
-        float space = 20f;
-        helpNode = HelpUtils.buildNode(dim, rectangle, guiFont, space);
-        guiNode.attachChild(helpNode);
+        /*
+         * The help node can't be created until all hotkeys are bound.
+         */
+        addHelp();
     }
 
     /**
@@ -236,6 +233,19 @@ public class ReverseAnimation extends ActionApplication {
     }
 
     /**
+     * Attach a Node to display hotkey help.
+     */
+    private void addHelp() {
+        float x = 10f;
+        float y = cam.getHeight() - 40f;
+        float width = cam.getWidth() - 20f;
+        float height = cam.getHeight() - 20f;
+        Rectangle rectangle = new Rectangle(x, y, width, height);
+
+        attachHelpNode(rectangle);
+    }
+
+    /**
      * Add lighting and shadows to the scene.
      */
     private void addLighting() {
@@ -262,8 +272,7 @@ public class ReverseAnimation extends ActionApplication {
                 "Models/Sinbad/Sinbad.mesh.xml");
         rootNode.attachChild(sinbadModelRoot);
 
-        List<Spatial> list
-                = MySpatial.listSpatials(sinbadModelRoot, Spatial.class, null);
+        List<Spatial> list = MySpatial.listSpatials(sinbadModelRoot);
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
@@ -276,6 +285,39 @@ public class ReverseAnimation extends ActionApplication {
         sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);
         sv.setLineColor(ColorRGBA.Yellow);
+    }
+
+    /**
+     * Generate full and minimal versions of the hotkey help. Attach the minimal
+     * one to the GUI scene.
+     *
+     * @param bounds the desired screen coordinates (not null, unaffected)
+     */
+    private void attachHelpNode(Rectangle bounds) {
+        InputMode inputMode = getDefaultInputMode();
+        float extraSpace = 20f;
+        helpNode = HelpUtils.buildNode(inputMode, bounds, guiFont, extraSpace);
+        helpNode.move(0f, 0f, 1f); // move (slightly) to the front
+
+        InputMode dummyMode = new InputMode("dummy") {
+            @Override
+            protected void defaultBindings() {
+            }
+
+            @Override
+            public void onAction(String s, boolean b, float f) {
+            }
+        };
+        dummyMode.bind("toggle help", KeyInput.KEY_H);
+
+        float width = 100f; // in pixels
+        float height = bounds.height;
+        float x = bounds.x + bounds.width - width;
+        float y = bounds.y;
+        Rectangle dummyBounds = new Rectangle(x, y, width, height);
+
+        minHelpNode = HelpUtils.buildNode(dummyMode, dummyBounds, guiFont, 0f);
+        guiNode.attachChild(minHelpNode);
     }
 
     /**
@@ -293,7 +335,7 @@ public class ReverseAnimation extends ActionApplication {
     }
 
     /**
-     * Configure the camera during startup.
+     * Configure the Camera during startup.
      */
     private void configureCamera() {
         flyCam.setDragToRotate(true);
@@ -336,13 +378,15 @@ public class ReverseAnimation extends ActionApplication {
     }
 
     /**
-     * Toggle visibility of the helpNode.
+     * Toggle between the full help node and the minimal one.
      */
     private void toggleHelp() {
-        if (helpNode.getCullHint() == Spatial.CullHint.Always) {
-            helpNode.setCullHint(Spatial.CullHint.Never);
+        if (helpNode.getParent() == null) {
+            minHelpNode.removeFromParent();
+            guiNode.attachChild(helpNode);
         } else {
-            helpNode.setCullHint(Spatial.CullHint.Always);
+            helpNode.removeFromParent();
+            guiNode.attachChild(minHelpNode);
         }
     }
 
