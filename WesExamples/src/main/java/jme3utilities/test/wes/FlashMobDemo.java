@@ -39,6 +39,7 @@ import com.jme3.app.StatsAppState;
 import com.jme3.asset.AssetKey;
 import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
+import com.jme3.input.CameraInput;
 import com.jme3.input.KeyInput;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
@@ -129,19 +130,19 @@ public class FlashMobDemo extends ActionApplication {
      */
     private Node minHelpNode;
     /**
-     * loaded Jaime model
+     * root node of the loaded Jaime model
      */
     private Node jaime;
     /**
-     * loaded MhGame model
+     * root node of the loaded MhGame model
      */
     private Node mhGame;
     /**
-     * loaded Oto model
+     * root node of the loaded Oto model
      */
     private Node oto;
     /**
-     * loaded Puppet model
+     * root node of the loaded Puppet model
      */
     private Node puppet;
     // *************************************************************************
@@ -280,6 +281,8 @@ public class FlashMobDemo extends ActionApplication {
         InputMode dim = getDefaultInputMode();
 
         dim.bind("dump scenes", KeyInput.KEY_P);
+        dim.bindSignal(CameraInput.FLYCAM_LOWER, KeyInput.KEY_DOWN);
+        dim.bindSignal(CameraInput.FLYCAM_RISE, KeyInput.KEY_UP);
         dim.bindSignal("orbitLeft", KeyInput.KEY_LEFT);
         dim.bindSignal("orbitRight", KeyInput.KEY_RIGHT);
         dim.bind("toggle help", KeyInput.KEY_H);
@@ -576,7 +579,7 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Configure the camera during startup.
+     * Configure the Camera during startup.
      */
     private void configureCamera() {
         flyCam.setDragToRotate(true);
