@@ -1,5 +1,15 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.0 released on TBD
+
+ + Added a `userForLocal()` method to the `Pose` class.
+ + Added methods to better support the new animation system:
+   + a `captureToClip()` method in the `Pose` class
+   + 12 methods in the `TrackEdit` class
+   + `removeRepeats()` and `zeroFirst()` methods for `AnimClip`
+ + Improved the example applications.
+ + Upgrade to Gradle v6.6.1 .
+
 ## Version 0.5.2 released on 22 August 2020
 
  + Bugfix: `TrackEdit.normalizeQuaternions()` was ineffective.
