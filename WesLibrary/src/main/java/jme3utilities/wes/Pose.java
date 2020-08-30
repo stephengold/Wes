@@ -27,10 +27,12 @@
 package jme3utilities.wes;
 
 import com.jme3.anim.AnimClip;
+import com.jme3.anim.AnimTrack;
 import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
 import com.jme3.anim.SkinningControl;
 import com.jme3.anim.TransformTrack;
+import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
@@ -276,6 +278,47 @@ public class Pose implements JmeCloneable {
                 result.addTrack(track);
             }
         }
+
+        return result;
+    }
+
+    /**
+     * Convert this Pose to a new AnimClip. The result will have zero duration,
+     * a single keyframe at t=0, and all its tracks will be TransformTracks.
+     *
+     * @param clipName name for the new clip (not null)
+     * @return a new instance
+     */
+    public AnimClip captureToClip(String clipName) {
+        Validate.nonNull(clipName, "clip name");
+        /*
+         * Start with an empty clip.
+         */
+        AnimClip result = new AnimClip(clipName);
+        /*
+         * Add a TransformTrack for each Joint
+         * with a non-identity local transform.
+         */
+        int numJoints = countBones();
+        List<AnimTrack> trackList = new ArrayList<>(numJoints);
+        for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
+            Transform transform = localTransform(jointIndex, null);
+            if (!MyMath.isIdentity(transform)) {
+                HasLocalTransform target = armature.getJoint(jointIndex);
+                float[] times = {0f};
+                Vector3f[] translations = {transform.getTranslation()};
+                Quaternion[] rotations = {transform.getRotation()};
+                Vector3f[] scales = {transform.getScale()};
+                TransformTrack track = new TransformTrack(target, times,
+                        translations, rotations, scales);
+                trackList.add(track);
+            }
+        }
+
+        int numTracks = trackList.size();
+        AnimTrack[] trackArray = new AnimTrack[numTracks];
+        trackList.toArray(trackArray);
+        result.setTracks(trackArray);
 
         return result;
     }
