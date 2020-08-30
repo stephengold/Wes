@@ -121,9 +121,13 @@ public class FlashMobDemo extends ActionApplication {
      */
     final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
     /**
-     * GUI node for displaying hotkey help/hints
+     * Node for displaying hotkey help in the GUI scene
      */
     private Node helpNode;
+    /**
+     * Node for displaying "toggle help: H" in the GUI scene
+     */
+    private Node minHelpNode;
     /**
      * loaded Jaime model
      */
@@ -281,16 +285,10 @@ public class FlashMobDemo extends ActionApplication {
         dim.bind("toggle help", KeyInput.KEY_H);
         dim.bind("toggle pause", KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
-
-        float x = 10f;
-        float y = cam.getHeight() - 40f;
-        float width = cam.getWidth() - 20f;
-        float height = cam.getHeight() - 20f;
-        Rectangle rectangle = new Rectangle(x, y, width, height);
-
-        float space = 20f;
-        helpNode = HelpUtils.buildNode(dim, rectangle, guiFont, space);
-        guiNode.attachChild(helpNode);
+        /*
+         * The help node can't be created until all hotkeys are bound.
+         */
+        addHelp();
     }
 
     /**
@@ -352,6 +350,19 @@ public class FlashMobDemo extends ActionApplication {
         Material material = MyAsset.createShadedMaterial(assetManager, color);
         geometry.setMaterial(material);
         geometry.setShadowMode(RenderQueue.ShadowMode.Receive);
+    }
+
+    /**
+     * Attach a Node to display hotkey help.
+     */
+    private void addHelp() {
+        float x = 10f;
+        float y = cam.getHeight() - 40f;
+        float width = cam.getWidth() - 20f;
+        float height = cam.getHeight() - 20f;
+        Rectangle rectangle = new Rectangle(x, y, width, height);
+
+        attachHelpNode(rectangle);
     }
 
     /**
@@ -518,6 +529,39 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
+     * Generate full and minimal versions of the hotkey help. Attach the minimal
+     * one to the GUI scene.
+     *
+     * @param bounds the desired screen coordinates (not null, unaffected)
+     */
+    private void attachHelpNode(Rectangle bounds) {
+        InputMode inputMode = getDefaultInputMode();
+        float extraSpace = 20f;
+        helpNode = HelpUtils.buildNode(inputMode, bounds, guiFont, extraSpace);
+        helpNode.move(0f, 0f, 1f); // move (slightly) to the front
+
+        InputMode dummyMode = new InputMode("dummy") {
+            @Override
+            protected void defaultBindings() {
+            }
+
+            @Override
+            public void onAction(String s, boolean b, float f) {
+            }
+        };
+        dummyMode.bind("toggle help", KeyInput.KEY_H);
+
+        float width = 100f; // in pixels
+        float height = bounds.height;
+        float x = bounds.x + bounds.width - width;
+        float y = bounds.y;
+        Rectangle dummyBounds = new Rectangle(x, y, width, height);
+
+        minHelpNode = HelpUtils.buildNode(dummyMode, dummyBounds, guiFont, 0f);
+        guiNode.attachChild(minHelpNode);
+    }
+
+    /**
      * Translate a model's center so that the model rests on the X-Z plane, and
      * its center lies on the Y axis.
      */
@@ -596,13 +640,15 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Toggle visibility of the helpNode.
+     * Toggle between the full help node and the minimal one.
      */
     private void toggleHelp() {
-        if (helpNode.getCullHint() == Spatial.CullHint.Always) {
-            helpNode.setCullHint(Spatial.CullHint.Never);
+        if (helpNode.getParent() == null) {
+            minHelpNode.removeFromParent();
+            guiNode.attachChild(helpNode);
         } else {
-            helpNode.setCullHint(Spatial.CullHint.Always);
+            helpNode.removeFromParent();
+            guiNode.attachChild(minHelpNode);
         }
     }
 
