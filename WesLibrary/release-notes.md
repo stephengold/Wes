@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.6.0 released on TBD
+## Version 0.6.0 released on 29 August 2020
 
  + Added a `userForLocal()` method to the `Pose` class.
  + Added methods to better support the new animation system:

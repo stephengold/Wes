@@ -74,7 +74,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.5.2`
+     + `git checkout -b latest 0.6.0`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -118,7 +118,7 @@ resolve the remaining dependencies automatically.
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.5.2'
+        compile 'com.github.stephengold:Wes:0.6.0'
     }
 
 #### For Ant projects
@@ -126,7 +126,7 @@ resolve the remaining dependencies automatically.
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.5.2
+ + https://github.com/stephengold/Wes/releases/tag/0.6.0
  + https://github.com/stephengold/Heart/releases/tag/6.0.0
 
 You'll want both class jars
