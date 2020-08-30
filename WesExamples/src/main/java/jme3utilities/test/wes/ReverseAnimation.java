@@ -344,8 +344,8 @@ public class ReverseAnimation extends ActionApplication {
         flyCam.setDragToRotate(true);
         flyCam.setMoveSpeed(4f);
 
-        cam.setLocation(new Vector3f(2.85f, 3.46f, 5.29f));
-        cam.setRotation(new Quaternion(-0.054f, 0.946336f, -0.2308f, -0.2197f));
+        cam.setLocation(new Vector3f(0.42f, 1.67f, 3.47f));
+        cam.setRotation(new Quaternion(-0.009f, 0.990377f, -0.1142f, -0.0777f));
 
         CameraOrbitAppState orbitState
                 = new CameraOrbitAppState(cam, "orbitLeft", "orbitRight");
