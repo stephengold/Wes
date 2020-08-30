@@ -268,6 +268,28 @@ public class AnimationEdit {
     }
 
     /**
+     * Remove repetitious keyframes from an AnimClip.
+     *
+     * @param clip (not null, modified)
+     * @return the number of tracks edited (&ge;0)
+     */
+    public static int removeRepeats(AnimClip clip) {
+        int numTracksEdited = 0;
+        AnimTrack[] tracks = clip.getTracks();
+        for (AnimTrack track : tracks) {
+            if (track instanceof TransformTrack) {
+                boolean removed
+                        = TrackEdit.removeRepeats((TransformTrack) track);
+                if (removed) {
+                    ++numTracksEdited;
+                }
+            } // TODO other track types
+        }
+
+        return numTracksEdited;
+    }
+
+    /**
      * Re-target the specified Animation from the specified source Skeleton to
      * the specified target Skeleton using the specified map.
      *
@@ -537,6 +559,31 @@ public class AnimationEdit {
         Track[] tracks = animation.getTracks();
         for (Track track : tracks) {
             float[] times = track.getKeyFrameTimes(); // an alias
+            if (times[0] != 0f) {
+                times[0] = 0f;
+                ++numTracksEdited;
+            }
+        }
+
+        return numTracksEdited;
+    }
+
+    /**
+     * Repair all tracks in which the first keyframe isn't at time=0.
+     *
+     * @param clip the AnimClip to repair (not null)
+     * @return the number of tracks edited (&ge;0)
+     */
+    public static int zeroFirst(AnimClip clip) {
+        int numTracksEdited = 0;
+        AnimTrack[] tracks = clip.getTracks();
+        for (AnimTrack track : tracks) {
+            float[] times;
+            if (track instanceof MorphTrack) {
+                times = ((MorphTrack) track).getTimes();
+            } else {
+                times = ((TransformTrack) track).getTimes();
+            }
             if (times[0] != 0f) {
                 times[0] = 0f;
                 ++numTracksEdited;
