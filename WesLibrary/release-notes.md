@@ -1,5 +1,9 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.1 released on 6 September 2020
+
+ + Bugfix: Pose calculates skinning incorrectly for an Armature
+
 ## Version 0.6.0 released on 29 August 2020
 
  + Added a `userForLocal()` method to the `Pose` class.
