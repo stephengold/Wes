@@ -74,7 +74,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.6.0`
+     + `git checkout -b latest 0.6.1`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -108,25 +108,45 @@ The Wes Library depends on [the Heart Library][heart],
 which in turn depends on
 the standard jme3-core library from jMonkeyEngine.
 
-#### For Gradle projects
-
 For projects built using Maven or Gradle, it is sufficient to specify the
 dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies automatically.
+
+#### Gradle-built projects
+
+Add to the project’s "build.gradle" file:
 
     repositories {
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.6.0'
+        compile 'com.github.stephengold:Wes:0.6.1'
     }
 
-#### For Ant projects
+#### Maven-built projects
+
+Add to the project’s "pom.xml" file:
+
+    <repositories>
+      <repository>
+        <id>jcenter</id>
+        <url>https://jcenter.bintray.com/</url>
+      </repository>
+    </repositories>
+
+    <dependency>
+      <groupId>com.github.stephengold</groupId>
+      <artifactId>Wes</artifactId>
+      <version>0.6.1</version>
+      <type>pom</type>
+    </dependency>
+
+#### Ant-built projects
 
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.6.0
+ + https://github.com/stephengold/Wes/releases/tag/0.6.1
  + https://github.com/stephengold/Heart/releases/tag/6.0.0
 
 You'll want both class jars
