@@ -78,8 +78,9 @@ public class Pose implements JmeCloneable {
     /**
      * Armature on which this Pose is based, or null for none
      * <p>
-     * This Armature provides the name, index, parent, and children of each
-     * Joint. All other Joint data are disregarded.
+     * This Armature provides the name, index, parent, children, and inverse
+     * bind transform of each Joint. The bind transforms are calculated during
+     * instantiation. All other Joint data are disregarded.
      */
     private Armature armature;
     /**
@@ -94,10 +95,10 @@ public class Pose implements JmeCloneable {
     /**
      * Skeleton on which this Pose is based, or null for none
      * <p>
-     * This Skeleton provides the name, index, parent, children, and bind
-     * transform of each Bone. All other Bone data are disregarded. In
-     * particular, the bones' {local/model}{Pos/Rot/Scale} and userControl
-     * fields are ignored.
+     * This Skeleton provides the name, index, parent, children, bind transform,
+     * and inverse bind transform of each Bone. All other Bone data are
+     * disregarded. In particular, the bones' {local/model}{Pos/Rot/Scale} and
+     * userControl fields are ignored.
      */
     private Skeleton skeleton;
     // *************************************************************************
@@ -832,39 +833,40 @@ public class Pose implements JmeCloneable {
 
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             modelTransform(boneIndex, msTransform);
-            /*
-             * Calculate the skinning transform for the joint/bone.
-             * Compare with Bone.getOffsetTransform()
-             */
-            Quaternion mbiRotation;
-            Vector3f mbiScale, mbiTranslation;
-            if (skeleton == null) {
-                Joint joint = armature.getJoint(boneIndex);
-                Matrix4f mbi = joint.getInverseModelBindMatrix();
-                mbiTranslation = mbi.toTranslationVector();
-                mbiRotation = mbi.toRotationQuat();
-                mbiScale = mbi.toScaleVector();
-            } else {
-                Bone bone = skeleton.getBone(boneIndex);
-                mbiTranslation = bone.getModelBindInversePosition();
-                mbiRotation = bone.getModelBindInverseRotation();
-                mbiScale = bone.getModelBindInverseScale();
-            }
-            msScale.mult(mbiScale, skScale);
-
-            msRotation.mult(mbiRotation, skRotation);
-            skRotation.toRotationMatrix(skRotMatrix);
-
-            skScale.mult(mbiTranslation, skTranslation);
-            skRotation.mult(skTranslation, skTranslation);
-            skTranslation.addLocal(msTranslation);
-
             Matrix4f matrix4f = storeResult[boneIndex];
             if (matrix4f == null) {
                 matrix4f = new Matrix4f();
                 storeResult[boneIndex] = matrix4f;
             }
-            matrix4f.setTransform(skTranslation, skScale, skRotMatrix);
+            /*
+             * Calculate the skinning transform for the joint/bone.
+             * Compare with Bone.getOffsetTransform() and
+             * SeparateJointModelTransform.getOffsetTransform().
+             *
+             * TODO handle MatrixJointModelTransform differently?
+             */
+            if (skeleton == null) {
+                msTransform.toTransformMatrix(matrix4f);
+                Joint joint = armature.getJoint(boneIndex);
+                Matrix4f mbi = joint.getInverseModelBindMatrix();
+                matrix4f.mult(mbi, matrix4f);
+
+            } else {
+                Bone bone = skeleton.getBone(boneIndex);
+                Vector3f mbiTranslation = bone.getModelBindInversePosition();
+                Quaternion mbiRotation = bone.getModelBindInverseRotation();
+                Vector3f mbiScale = bone.getModelBindInverseScale();
+                msScale.mult(mbiScale, skScale);
+
+                msRotation.mult(mbiRotation, skRotation);
+                skRotation.toRotationMatrix(skRotMatrix);
+
+                skScale.mult(mbiTranslation, skTranslation);
+                skRotation.mult(skTranslation, skTranslation);
+                skTranslation.addLocal(msTranslation);
+
+                matrix4f.setTransform(skTranslation, skScale, skRotMatrix);
+            }
         }
 
         return storeResult;
