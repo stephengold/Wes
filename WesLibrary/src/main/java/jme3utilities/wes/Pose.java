@@ -50,7 +50,6 @@ import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import com.jme3.util.clone.Cloner;
 import com.jme3.util.clone.JmeCloneable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -134,7 +133,7 @@ public class Pose implements JmeCloneable {
                 if (attachment != null) {
                     cloner.setClonedValue(attachment, attachment);
                 }
-                Geometry target = getTargetGeometry(joint);
+                Geometry target = MySkeleton.getTargetGeometry(joint);
                 if (target != null) {
                     cloner.setClonedValue(target, target);
                 }
@@ -1076,31 +1075,6 @@ public class Pose implements JmeCloneable {
     }
     // *************************************************************************
     // private methods
-
-    /**
-     * Access the target geometry of the specified Joint. TODO use MySpatial
-     *
-     * @param joint the Joint to read (not null, unaffected)
-     * @return the pre-existing instance, or null if none
-     */
-    private static Geometry getTargetGeometry(Joint joint) {
-        Field attachNodeField;
-        try {
-            attachNodeField = Joint.class.getDeclaredField("targetGeometry");
-        } catch (NoSuchFieldException exception) {
-            throw new RuntimeException(exception);
-        }
-        attachNodeField.setAccessible(true);
-
-        Geometry result;
-        try {
-            result = (Geometry) attachNodeField.get(joint);
-        } catch (IllegalAccessException exception) {
-            throw new RuntimeException(exception);
-        }
-
-        return result;
-    }
 
     /**
      * Calculate the local rotation for the specified Bone to give it the

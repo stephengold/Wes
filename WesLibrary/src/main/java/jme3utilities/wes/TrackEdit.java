@@ -172,7 +172,8 @@ public class TrackEdit {
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
 
-        int neckIndex = findPreviousKeyframeIndex(oldTrack, neckTime);
+        int neckIndex
+                = MyAnimation.findPreviousKeyframeIndex(oldTrack, neckTime);
         int newCount = oldCount - neckIndex;
         assert newCount > 0 : newCount;
         /*
@@ -1527,7 +1528,7 @@ public class TrackEdit {
 
         AnimTrack result;
         float[] newTimes;
-        float[] oldTimes = getKeyFrameTimes(inputTrack);
+        float[] oldTimes = MyAnimation.getKeyFrameTimes(inputTrack);
         int numFrames = oldTimes.length;
         float lastFrameTime = oldTimes[numFrames - 1];
 
@@ -2116,7 +2117,8 @@ public class TrackEdit {
         /*
          * Allocate new arrays.
          */
-        int lastFrame = findPreviousKeyframeIndex(oldTrack, endTime);
+        int lastFrame
+                = MyAnimation.findPreviousKeyframeIndex(oldTrack, endTime);
         int newCount = 2 + lastFrame;
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = new Vector3f[newCount];
@@ -2417,52 +2419,6 @@ public class TrackEdit {
             result = MyVector3f.lerp(weight2, tra1, tra2, null);
         }
 
-        return result;
-    }
-
-    /**
-     * Find the index of the last keyframe at or before the specified time in
-     * the specified TransformTrack. TODO use MyAnimation
-     *
-     * @param track the TransformTrack to search (not null, unaffected)
-     * @param time the track time (in seconds, &ge;0)
-     * @return the keyframe's index (&ge;0)
-     */
-    private static int findPreviousKeyframeIndex(TransformTrack track,
-            float time) {
-        Validate.nonNegative(time, "time");
-
-        float[] times = track.getTimes();
-        int result = MyArray.findPreviousIndex(time, times);
-
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Access the time array of the specified track. TODO use MyAnimation
-     *
-     * @param object the input track (a MorphTrack, TransformTrack, or Track)
-     * @return the pre-existing array (not null, length > 0)
-     */
-    private static float[] getKeyFrameTimes(Object object) {
-        float[] result;
-        if (object instanceof MorphTrack) {
-            MorphTrack morphTrack = (MorphTrack) object;
-            result = morphTrack.getTimes();
-        } else if (object instanceof Track) {
-            Track t = (Track) object;
-            result = t.getKeyFrameTimes();
-        } else if (object instanceof TransformTrack) {
-            TransformTrack transformTrack = (TransformTrack) object;
-            result = transformTrack.getTimes();
-        } else {
-            String className = object.getClass().getSimpleName();
-            throw new IllegalArgumentException(className);
-        }
-
-        assert result != null;
-        assert result.length > 0 : result.length;
         return result;
     }
 }
