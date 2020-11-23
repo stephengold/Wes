@@ -64,6 +64,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Heart;
+import jme3utilities.InfluenceUtil;
 import jme3utilities.MyAsset;
 import jme3utilities.MySpatial;
 import jme3utilities.debug.Dumper;
@@ -205,7 +206,7 @@ public class FlashMobDemo extends ActionApplication {
          * Configure the skeleton visualizers.
          */
         for (SkeletonVisualizer sv : visualizers) {
-            sv.setLineColor(ColorRGBA.Yellow); // TODO clean up visualization
+            sv.setLineColor(ColorRGBA.Yellow);
             rootNode.addControl(sv);
         }
         /*
@@ -394,6 +395,7 @@ public class FlashMobDemo extends ActionApplication {
          */
         SkeletonControl sc = jaime.getControl(SkeletonControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
+        InfluenceUtil.hideNonInfluencers(sv, sc);
         visualizers.add(sv);
     }
 
@@ -496,6 +498,7 @@ public class FlashMobDemo extends ActionApplication {
          */
         SkeletonControl sc = puppet.getControl(SkeletonControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
+        InfluenceUtil.hideNonInfluencers(sv, sc);
         visualizers.add(sv);
     }
 
