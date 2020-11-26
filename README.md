@@ -67,9 +67,8 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 
 ## How to build Wes from source
 
- 1. Install build software:
-   + a Java Development Kit and
-   + [Gradle]
+ 1. Install a [Java Development Kit (JDK)][openJDK],
+    if you don't already have one.
  2. Download and extract the source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
@@ -232,6 +231,7 @@ the Sinbad model to generate a "warn" clip.
 [maud]: https://github.com/stephengold/Maud "Maud editor"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
+[openJDK]: https://openjdk.java.net "OpenJDK Project"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
