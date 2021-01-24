@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -658,7 +658,7 @@ public class TrackEdit {
     public static TransformTrack insertKeyframe(TransformTrack oldTrack,
             float frameTime, Transform transform) {
         Validate.positive(frameTime, "keyframe time");
-        //assert MyAnimation.findKeyframeIndex(oldTrack, frameTime) == -1; TODO
+        assert MyAnimation.findKeyframeIndex(oldTrack, frameTime) == -1;
 
         float[] oldTimes = oldTrack.getTimes();
         Vector3f[] oldTranslations = oldTrack.getTranslations();
