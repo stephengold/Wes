@@ -44,9 +44,18 @@ publishToMavenLocal.doLast {
 publishing {
     publications {
         maven(MavenPublication) {
+            artifact javadocJar
+            artifact sourcesJar
             artifactId artifact
             from components.java
             pom {
+                description = 'An animation editing/retargeting library for jMonkeyEngine'
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        name = 'Stephen Gold'
+                    }
+                }
                 licenses {
                     license {
                         distribution = 'repo'
@@ -54,8 +63,25 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
+                name = 'com.github.stephengold:Heart'
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/Wes.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/Wes.git'
+                    url = 'https://github.com/stephengold/Heart/tree/master'
+                }
+                url = 'https://github.com/stephengold/Heart'
             }
             version project.ext.version
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : "Unknown user"
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : "Unknown password"
+            }
+            name = 'OSSRH'
+            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
         }
     }
 }
