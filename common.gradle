@@ -46,6 +46,7 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
     dependsOn 'classes'
     description 'Create a JAR of source files.'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from sourceSets.main.allJava
 }
 task javadocJar(type: Jar) {
