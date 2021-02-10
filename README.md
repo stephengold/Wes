@@ -1,7 +1,7 @@
 <img height="150" src="https://i.imgur.com/1iPoJpl.png">
 
-The [Wes Project][wes] is about editing animations used in the
-[jMonkeyEngine game engine][jme].
+[The Wes Project][wes] is about editing animations used in
+[the jMonkeyEngine (JME) game engine][jme].
 
 It contains 2 sub-projects:
 
@@ -43,10 +43,13 @@ Newer releases (since v0.3.9) can be downloaded from
 Older releases (v0.2.1 through v0.3.8) can be downloaded from
 [the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
 
-Newer Maven artifacts (since v0.4.8) are available from
+Newer Maven artifacts (since v0.6.2) are available from
+[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
+
+Old Maven artifacts (v0.4.8 thru v0.6.1) are available from
 [JCenter](https://bintray.com/stephengold/com.github.stephengold/Wes).
 
-Older Maven artifacts (v0.2.0 through v0.4.7) are available from
+The oldest Maven artifacts (v0.2.0 through v0.4.7) are available from
 [JFrog Bintray](https://bintray.com/stephengold/jme3utilities/Wes).
 
 [Jump to table of contents](#toc)
@@ -73,7 +76,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.6.1`
+     + `git checkout -b latest 0.6.2`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -116,10 +119,11 @@ resolve the remaining dependencies.
 Add to the project’s "build.gradle" file:
 
     repositories {
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.6.1'
+        compile 'com.github.stephengold:Wes:0.6.2'
     }
 
 #### Maven-built projects
@@ -127,6 +131,10 @@ Add to the project’s "build.gradle" file:
 Add to the project’s "pom.xml" file:
 
     <repositories>
+      <repository>
+        <id>mvnrepository</id>
+        <url>https://repo1.maven.org/maven2/</url>
+      </repository>
       <repository>
         <id>jcenter</id>
         <url>https://jcenter.bintray.com/</url>
@@ -136,7 +144,7 @@ Add to the project’s "pom.xml" file:
     <dependency>
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
-      <version>0.6.1</version>
+      <version>0.6.2</version>
       <type>pom</type>
     </dependency>
 
@@ -145,8 +153,8 @@ Add to the project’s "pom.xml" file:
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.6.1
- + https://github.com/stephengold/Heart/releases/tag/6.0.0
+ + https://github.com/stephengold/Wes/releases/tag/0.6.2
+ + https://github.com/stephengold/Heart/releases/tag/6.4.2
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -160,15 +168,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  5. Add the `Heart` class jar:
     + Click on the "Add JAR/Folder" button.
     + Navigate to the download folder.
-    + Select the "Heart-6.0.0.jar" file.
+    + Select the "Heart-6.4.2.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "Heart-6.0.0-javadoc.jar" file.
+    + Select the "Heart-6.4.2-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "Heart-6.0.0-sources.jar" file.
+    + Select the "Heart-6.4.2-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
@@ -232,6 +240,7 @@ the Sinbad model to generate a "warn" clip.
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [openJDK]: https://openjdk.java.net "OpenJDK Project"
+[sonatype]: https://www.sonatype.com "Sonatype"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
@@ -275,8 +284,8 @@ artists and software developers:
 + Paul Speed, for helpful insights
 + the creators of (and contributors to) the following software:
     + the [FindBugs] source-code analyzer
-    + the [Git] revision-control system and GitK commit viewer
     + the [Firefox] and [Google Chrome][chrome] web browsers
+    + the [Git] revision-control system and GitK commit viewer
     + the [Gradle] build tool
     + the Java compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
@@ -289,7 +298,7 @@ artists and software developers:
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
-I am grateful to [JFrog] and [Github], and [Imgur]
+I am grateful to [Github], [Sonatype], [JFrog], and Imgur
 for providing free hosting for this project
 and many other open-source projects.
 
