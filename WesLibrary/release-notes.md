@@ -1,5 +1,11 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.2 released on TBD
+
+ + Published to MavenLocal instead of JCenter.
+ + Base on v6.4.2 of the Heart Library and v0.9.2 of jme3-utilities-ui.
+ + Upgrade to Gradle v6.8.2 .
+
 ## Version 0.6.1 released on 6 September 2020
 
 Bugfix: `Pose` calculates skinning incorrectly for an `Armature`.
