@@ -8,7 +8,7 @@ plugins {
     id 'signing'
 }
 
-description = 'the Wes animation editing/retargeting library for jMonkeyEngine'
+description = 'An animation editing/retargeting library for jMonkeyEngine'
 ext {
     artifact = 'Wes'
     version = wesVersion
@@ -49,7 +49,7 @@ publishing {
             artifactId artifact
             from components.java
             pom {
-                description = 'An animation editing/retargeting library for jMonkeyEngine'
+                description = project.description
                 developers {
                     developer {
                         email = 'sgold@sonic.net'
@@ -63,13 +63,13 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
-                name = 'com.github.stephengold:Heart'
+                name = 'com.github.stephengold:' + artifact
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/Wes.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Wes.git'
                     url = 'https://github.com/stephengold/Heart/tree/master'
                 }
-                url = 'https://github.com/stephengold/Heart'
+                url = 'https://github.com/stephengold/Wes'
             }
             version project.ext.version
         }
