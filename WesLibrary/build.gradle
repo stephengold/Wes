@@ -67,7 +67,7 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/Wes.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Wes.git'
-                    url = 'https://github.com/stephengold/Heart/tree/master'
+                    url = 'https://github.com/stephengold/Wes/tree/master'
                 }
                 url = 'https://github.com/stephengold/Wes'
             }
