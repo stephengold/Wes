@@ -8,7 +8,7 @@ plugins {
     id 'signing'
 }
 
-description = 'An animation editing/retargeting library for jMonkeyEngine'
+description = 'an animation editing/retargeting library for jMonkeyEngine'
 ext {
     artifact = 'Wes'
     version = wesVersion
@@ -77,8 +77,8 @@ publishing {
     repositories {
         maven {
             credentials {
-                username = project.hasProperty('ossrhUsername') ? ossrhUsername : "Unknown user"
-                password = project.hasProperty('ossrhPassword') ? ossrhPassword : "Unknown password"
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
             }
             name = 'OSSRH'
             url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
