@@ -12,7 +12,7 @@ description = 'an animation editing/retargeting library for jMonkeyEngine'
 ext {
     artifact = 'Wes'
     version = wesVersion
-    baseName = "$artifact-$version"
+    baseName = "${artifact}-${version}"
 }
 
 jar { archiveBaseName = project.ext.baseName }
@@ -69,7 +69,7 @@ publishing {
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Wes.git'
                     url = 'https://github.com/stephengold/Wes/tree/master'
                 }
-                suppressPomMetadataWarningsFor("apiElements") // Gradle issue #16555
+                suppressPomMetadataWarningsFor('apiElements') // Gradle issue #16555
                 url = 'https://github.com/stephengold/Wes'
             }
             version project.ext.version
