@@ -145,7 +145,6 @@ Add to the project’s "pom.xml" file:
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
       <version>0.6.2</version>
-      <type>pom</type>
     </dependency>
 
 #### Ant-built projects
