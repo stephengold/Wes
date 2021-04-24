@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.6.3+for34 released on TBD
+## Version 0.6.3+for34 released on 24 April 2021
 
  + Base on v6.4.3+for34 of the Heart Library
    and v0.9.3+for34 of jme3-utilities-ui.
