@@ -13,15 +13,14 @@ if (!hasProperty('mainClass')) {
 jar.manifest.attributes('Main-Class': mainClassName)
 
 dependencies {
-    implementation 'com.github.stephengold:jme3-utilities-ui:0.9.2'
+    implementation 'com.github.stephengold:jme3-utilities-ui:0.9.3+for34'
     implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
     runtimeOnly 'org.jmonkeyengine:jme3-lwjgl:' + jmonkeyengineVersion
     implementation 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-testdata:3.1.0-stable'
+    runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jmonkeyengineVersion
 
-    // WesExamples doesn't use jme3-blender or jme3-jogg
-    //  -- they are included solely to avoid warnings from AssetConfig
-    runtimeOnly 'org.jmonkeyengine:jme3-blender:' + jmonkeyengineVersion
+    // WesExamples doesn't use jme3-jogg
+    //  -- it is included solely to avoid warnings from AssetConfig
     runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jmonkeyengineVersion
 
     //implementation "jme3utilities:Wes:$wesVersion"
