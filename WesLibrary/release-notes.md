@@ -1,5 +1,12 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.3+for34 released on TBD
+
+ + Base on v6.4.3+for34 of the Heart Library
+   and v0.9.3+for34 of jme3-utilities-ui.
+ + Target JME version 3.4.0-beta1 .
+ + Upgrade to Gradle v7.0 .
+
 ## Version 0.6.2 released on 9 Februrary 2021
 
  + Published to MavenCentral instead of JCenter.
