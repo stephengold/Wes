@@ -46,11 +46,7 @@ Older releases (v0.2.1 through v0.3.8) can be downloaded from
 Newer Maven artifacts (since v0.6.2) are available from
 [MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
 
-Old Maven artifacts (v0.4.8 thru v0.6.1) are available from
-[JCenter](https://bintray.com/stephengold/com.github.stephengold/Wes).
-
-The oldest Maven artifacts (v0.2.0 through v0.4.7) are available from
-[JFrog Bintray](https://bintray.com/stephengold/jme3utilities/Wes).
+Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
 
 [Jump to table of contents](#toc)
 
@@ -133,10 +129,6 @@ Add to the project’s "pom.xml" file:
       <repository>
         <id>mvnrepository</id>
         <url>https://repo1.maven.org/maven2/</url>
-      </repository>
-      <repository>
-        <id>jcenter</id>
-        <url>https://jcenter.bintray.com/</url>
       </repository>
     </repositories>
 
