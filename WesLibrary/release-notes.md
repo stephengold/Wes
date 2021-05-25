@@ -1,5 +1,9 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.4+for34: released on TBD
+
+Bugfix: `TrackEdit.truncate()` generates repetitious keyframes (Wes issue #2)
+
 ## Version 0.6.4+for34: released on 24 May 2021
 
  + Added a `simplify()` method with tolerance to the `TrackEdit` class.
