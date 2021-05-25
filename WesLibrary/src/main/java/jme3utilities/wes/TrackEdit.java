@@ -68,6 +68,10 @@ public class TrackEdit {
      */
     final private static Logger logger
             = Logger.getLogger(TrackEdit.class.getName());
+    /**
+     * local copy of {@link com.jme3.math.Vector3f#UNIT_XYZ}
+     */
+    final private static Vector3f scaleIdentity = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
     // constructors
 
@@ -1910,6 +1914,56 @@ public class TrackEdit {
             if (oldScales != null) {
                 Vector3f scale = oldScales[index];
                 if (!MyVector3f.isScaleIdentity(scale)) {
+                    keepScales = true;
+                }
+            }
+        }
+
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        Quaternion[] oldRotations = oldTrack.getRotations();
+
+        float[] newTimes = new float[numFrames];
+        Vector3f[] newTranslations = new Vector3f[numFrames];
+        Quaternion[] newRotations = new Quaternion[numFrames];
+        Vector3f[] newScales = keepScales ? new Vector3f[numFrames] : null;
+
+        for (int index = 0; index < numFrames; ++index) {
+            newTimes[index] = oldTimes[index];
+            newTranslations[index] = oldTranslations[index].clone();
+            newRotations[index] = oldRotations[index].clone();
+            if (keepScales) {
+                newScales[index] = oldScales[index].clone();
+            }
+        }
+
+        HasLocalTransform target = oldTrack.getTarget();
+        TransformTrack result = new TransformTrack(target, newTimes,
+                newTranslations, newRotations, newScales);
+
+        return result;
+    }
+
+    /**
+     * Copy a TransformTrack, deleting the scale component if it consists
+     * entirely of approximate identities.
+     *
+     * @param oldTrack the input track (not null, unaffected)
+     * @param tolerance the tolerance to use when testing for identity (&ge;0)
+     * @return a new TransformTrack with the same target
+     */
+    public static TransformTrack simplify(TransformTrack oldTrack,
+            float tolerance) {
+        Validate.nonNegative(tolerance, "tolerance");
+        boolean keepScales = false;
+
+        float[] oldTimes = oldTrack.getTimes();
+        int numFrames = oldTimes.length;
+        assert numFrames > 0 : numFrames;
+        Vector3f[] oldScales = oldTrack.getScales();
+        for (int index = 0; index < numFrames; ++index) {
+            if (oldScales != null) {
+                Vector3f scale = oldScales[index];
+                if (!scale.isSimilar(scaleIdentity, tolerance)) {
                     keepScales = true;
                 }
             }
