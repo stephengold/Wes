@@ -2169,27 +2169,31 @@ public class TrackEdit {
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
         /*
-         * Allocate new arrays.
+         * Allocate new arrays. Avoid creating a repetitious keyframe.
          */
         int lastFrame
                 = MyAnimation.findPreviousKeyframeIndex(oldTrack, endTime);
-        int newCount = 2 + lastFrame;
+        int newCount = lastFrame + 1;
+        if (oldTimes[lastFrame] != endTime) {
+            ++newCount;
+        }
+        lastFrame = newCount - 1;
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = new Vector3f[newCount];
         Quaternion[] newRotations = new Quaternion[newCount];
         Vector3f[] newScales = new Vector3f[newCount];
 
-        for (int frameIndex = 0; frameIndex <= lastFrame; ++frameIndex) {
+        for (int frameIndex = 0; frameIndex < lastFrame; ++frameIndex) {
             newTimes[frameIndex] = oldTimes[frameIndex] - oldTimes[0];
             newTranslations[frameIndex] = oldTranslations[frameIndex].clone();
             newRotations[frameIndex] = oldRotations[frameIndex].clone();
             newScales[frameIndex] = oldScales[frameIndex].clone();
         }
-        int frameIndex = lastFrame + 1;
-        newTimes[frameIndex] = endTime;
-        newTranslations[frameIndex] = endTransform.getTranslation().clone();
-        newRotations[frameIndex] = endTransform.getRotation().clone();
-        newScales[frameIndex] = endTransform.getScale().clone();
+
+        newTimes[lastFrame] = endTime;
+        newTranslations[lastFrame] = endTransform.getTranslation().clone();
+        newRotations[lastFrame] = endTransform.getRotation().clone();
+        newScales[lastFrame] = endTransform.getScale().clone();
 
         HasLocalTransform target = oldTrack.getTarget();
         TransformTrack result = new TransformTrack(target, newTimes,
