@@ -1,5 +1,11 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.4+for34: released on TBD
+
+ + Added a `simplify()` method with tolerance to the `TrackEdit` class.
+ + Target JME version 3.4.0-beta4 .
+ + Upgrade to Gradle v7.0.2 .
+
 ## Version 0.6.3+for34 released on 24 April 2021
 
  + Base on v6.4.3+for34 of the Heart Library
