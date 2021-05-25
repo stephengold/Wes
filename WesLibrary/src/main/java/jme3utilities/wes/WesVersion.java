@@ -59,6 +59,6 @@ public class WesVersion {
      * @return branch and revision (not null, not empty)
      */
     public static String versionShort() {
-        return "master 0.6.5+for34";
+        return "master 0.6.6+for34-SNAPSHOT";
     }
 }
