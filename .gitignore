@@ -2,6 +2,7 @@
 *.dylib
 *.so
 /.gradle/
+/.idea/
 /.nb-gradle/
 /WesExamples/build/
 /WesExamples/Written Assets/
