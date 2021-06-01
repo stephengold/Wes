@@ -20,7 +20,7 @@ javadocJar { archiveBaseName = project.ext.baseName }
 sourcesJar { archiveBaseName = project.ext.baseName }
 
 dependencies {
-    api 'com.github.stephengold:Heart:6.4.3+for34'
+    api 'com.github.stephengold:Heart:6.4.4'
 }
 
 // publishing tasks
