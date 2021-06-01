@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.6.6: released on TBD
+## Version 0.6.6: released on 1 June 2021
 
  + Handle null components in transform tracks.
  + Target JME version 3.4.0-stable .

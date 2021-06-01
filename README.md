@@ -13,10 +13,11 @@ Complete source code (in Java) is provided under
 
 Summary of features:
 
+ + extract a time-range from an animation
+ + resample an animation track at a new frame rate
  + retarget animations from one model/skeleton to another
  + interpolate between keyframes using a wide assortment of algorithms
  + reverse an animation track
- + trim a track in the time domain (behead and/or truncate)
  + chain 2 tracks together
  + repair certain issues with animation tracks
 
@@ -72,7 +73,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.6.3+for33`
+     + `git checkout -b latest 0.6.6`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -118,7 +119,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.6.3+for33'
+        compile 'com.github.stephengold:Wes:0.6.6'
     }
 
 #### Maven-built projects
@@ -135,7 +136,7 @@ Add to the project’s "pom.xml" file:
     <dependency>
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
-      <version>0.6.3+for33</version>
+      <version>0.6.6</version>
     </dependency>
 
 #### Ant-built projects
@@ -143,7 +144,7 @@ Add to the project’s "pom.xml" file:
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.6.3+for33
+ + https://github.com/stephengold/Wes/releases/tag/0.6.6
  + https://github.com/stephengold/Heart/releases/tag/6.4.3+for33
 
 You'll want both class jars
