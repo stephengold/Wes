@@ -185,20 +185,35 @@ public class TrackEdit {
          */
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        newTranslations[0] = neckTransform.getTranslation().clone();
-        Quaternion[] newRotations = new Quaternion[newCount];
-        newRotations[0] = neckTransform.getRotation().clone();
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+            newTranslations[0] = neckTransform.getTranslation().clone();
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+            newRotations[0] = neckTransform.getRotation().clone();
+        }
         Vector3f[] newScales = new Vector3f[newCount];
-        newScales[0] = neckTransform.getScale().clone();
+        if (oldScales != null) {
+            newScales = new Vector3f[newCount];
+            newScales[0] = neckTransform.getScale().clone();
+        }
 
         for (int newIndex = 1; newIndex < newCount; ++newIndex) {
             int oldIndex = newIndex + neckIndex;
 
             newTimes[newIndex] = oldTimes[oldIndex] - neckTime;
-            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-            newRotations[newIndex] = oldRotations[oldIndex].clone();
-            newScales[newIndex] = oldScales[oldIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            }
+            if (newRotations != null) {
+                newRotations[newIndex] = oldRotations[oldIndex].clone();
+            }
+            if (newScales != null) {
+                newScales[newIndex] = oldScales[oldIndex].clone();
+            }
         }
 
         HasLocalTransform target = oldTrack.getTarget();
@@ -542,8 +557,14 @@ public class TrackEdit {
          * Allocate new arrays.
          */
         float[] newTimes = new float[newCount];
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        Quaternion[] newRotations = new Quaternion[newCount];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+        }
         Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
@@ -558,8 +579,12 @@ public class TrackEdit {
             }
 
             newTimes[newIndex] = oldTimes[oldIndex];
-            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-            newRotations[newIndex] = oldRotations[oldIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            }
+            if (newRotations != null) {
+                newRotations[newIndex] = oldRotations[oldIndex].clone();
+            }
             if (newScales != null) {
                 newScales[newIndex] = oldScales[oldIndex].clone();
             }
@@ -697,8 +722,16 @@ public class TrackEdit {
             }
 
             newTimes[newIndex] = oldTimes[oldIndex];
-            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-            newRotations[newIndex] = oldRotations[oldIndex].clone();
+            if (oldTranslations == null) {
+                newTranslations[newIndex] = new Vector3f();
+            } else {
+                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            }
+            if (oldRotations == null) {
+                newRotations[newIndex] = new Quaternion();
+            } else {
+                newRotations[newIndex] = oldRotations[oldIndex].clone();
+            }
             if (oldScales == null) {
                 newScales[newIndex] = new Vector3f(1f, 1f, 1f);
             } else {
@@ -803,22 +836,32 @@ public class TrackEdit {
         float[] oldTimes = oldTrack.getTimes();
         assert oldTimes.length == numFrames;
         Vector3f[] oldTranslations = oldTrack.getTranslations();
-        assert oldTranslations.length == numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
-        assert oldScales.length == numFrames;
         /*
          * Allocate new arrays.
          */
         float[] times = new float[numFrames];
-        Vector3f[] translations = new Vector3f[numFrames];
+        Vector3f[] translations = null;
+        if (oldTranslations != null) {
+            assert oldTranslations.length == numFrames;
+            translations = new Vector3f[numFrames];
+        }
         Quaternion[] rotations = new Quaternion[numFrames];
-        Vector3f[] scales = new Vector3f[numFrames];
+        Vector3f[] scales = null;
+        if (oldScales != null) {
+            assert oldScales.length == numFrames;
+            scales = new Vector3f[numFrames];
+        }
 
         for (int frameI = 0; frameI < numFrames; ++frameI) {
             times[frameI] = oldTimes[frameI];
-            translations[frameI] = oldTranslations[frameI].clone();
+            if (translations != null) {
+                translations[frameI] = oldTranslations[frameI].clone();
+            }
             rotations[frameI] = oldRotations[frameI].clone().normalizeLocal();
-            scales[frameI] = oldScales[frameI].clone();
+            if (scales != null) {
+                scales[frameI] = oldScales[frameI].clone();
+            }
         }
 
         HasLocalTransform target = oldTrack.getTarget();
@@ -982,8 +1025,14 @@ public class TrackEdit {
          * Allocate new arrays.
          */
         float[] newTimes = new float[newCount];
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        Quaternion[] newRotations = new Quaternion[newCount];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+        }
         Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
@@ -993,8 +1042,12 @@ public class TrackEdit {
             int oldIndex = newIndex * factor;
 
             newTimes[newIndex] = oldTimes[oldIndex];
-            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-            newRotations[newIndex] = oldRotations[oldIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            }
+            if (newRotations != null) {
+                newRotations[newIndex] = oldRotations[oldIndex].clone();
+            }
             if (newScales != null) {
                 newScales[newIndex] = oldScales[oldIndex].clone();
             }
@@ -1114,8 +1167,14 @@ public class TrackEdit {
          * Allocate new arrays.
          */
         float[] newTimes = new float[newCount];
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        Quaternion[] newRotations = new Quaternion[newCount];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+        }
         Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
@@ -1129,8 +1188,12 @@ public class TrackEdit {
             float time = oldTimes[oldIndex];
             if (time != prevTime) {
                 newTimes[newIndex] = oldTimes[oldIndex];
-                newTranslations[newIndex] = oldTranslations[oldIndex];
-                newRotations[newIndex] = oldRotations[oldIndex];
+                if (newTranslations != null) {
+                    newTranslations[newIndex] = oldTranslations[oldIndex];
+                }
+                if (newRotations != null) {
+                    newRotations[newIndex] = oldRotations[oldIndex];
+                }
                 if (newScales != null) {
                     newScales[newIndex] = oldScales[oldIndex];
                 }
@@ -1237,8 +1300,16 @@ public class TrackEdit {
                 newRotations[frameI] = transform.getRotation().clone();
                 newScales[frameI] = transform.getScale().clone();
             } else {
-                newTranslations[frameI] = oldTranslations[frameI].clone();
-                newRotations[frameI] = oldRotations[frameI].clone();
+                if (oldTranslations == null) {
+                    newTranslations[frameI] = new Vector3f();
+                } else {
+                    newTranslations[frameI] = oldTranslations[frameI].clone();
+                }
+                if (oldRotations == null) {
+                    newRotations[frameI] = new Quaternion();
+                } else {
+                    newRotations[frameI] = oldRotations[frameI].clone();
+                }
                 if (oldScales == null) {
                     newScales[frameI] = new Vector3f(1f, 1f, 1f);
                 } else {
@@ -1264,12 +1335,20 @@ public class TrackEdit {
     public static TransformTrack resample(TransformTrack oldTrack,
             float[] newTimes) {
         int numSamples = newTimes.length;
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
         /*
          * Allocate new arrays.
          */
-        Vector3f[] newTranslations = new Vector3f[numSamples];
-        Quaternion[] newRotations = new Quaternion[numSamples];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[numSamples];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[numSamples];
+        }
         Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = new Vector3f[numSamples];
@@ -1280,8 +1359,12 @@ public class TrackEdit {
             Transform transform = new Transform();
             oldTrack.getDataAtTime(time, transform);
 
-            newTranslations[frameIndex] = transform.getTranslation();
-            newRotations[frameIndex] = transform.getRotation();
+            if (newTranslations != null) {
+                newTranslations[frameIndex] = transform.getTranslation();
+            }
+            if (newRotations != null) {
+                newRotations[frameIndex] = transform.getRotation();
+            }
             if (newScales != null) {
                 newScales[frameIndex] = transform.getScale();
             }
@@ -1400,7 +1483,6 @@ public class TrackEdit {
                 translations, rotations, scales);
 
         return result;
-
     }
 
     /**
@@ -1566,16 +1648,31 @@ public class TrackEdit {
              * Allocate new arrays.
              */
             newTimes = new float[numFrames];
-            Vector3f[] newTranslations = new Vector3f[numFrames];
-            Quaternion[] newRotations = new Quaternion[numFrames];
-            Vector3f[] newScales = new Vector3f[numFrames];
+            Vector3f[] newTranslations = null;
+            if (oldTranslations != null) {
+                newTranslations = new Vector3f[numFrames];
+            }
+            Quaternion[] newRotations = null;
+            if (oldRotations != null) {
+                newRotations = new Quaternion[numFrames];
+            }
+            Vector3f[] newScales = null;
+            if (oldScales != null) {
+                newScales = new Vector3f[numFrames];
+            }
 
             for (int newIndex = 0; newIndex < numFrames; ++newIndex) {
-                int oldIndex = numFrames - newIndex - 1;
-                newTimes[newIndex] = lastFrameTime - oldTimes[oldIndex];
-                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-                newRotations[newIndex] = oldRotations[oldIndex].clone();
-                newScales[newIndex] = oldScales[oldIndex].clone();
+                int oldI = numFrames - newIndex - 1;
+                newTimes[newIndex] = lastFrameTime - oldTimes[oldI];
+                if (newTranslations != null) {
+                    newTranslations[newIndex] = oldTranslations[oldI].clone();
+                }
+                if (newRotations != null) {
+                    newRotations[newIndex] = oldRotations[oldI].clone();
+                }
+                if (newScales != null) {
+                    newScales[newIndex] = oldScales[oldI].clone();
+                }
             }
 
             HasLocalTransform target = oldTransformTrack.getTarget();
@@ -1712,34 +1809,55 @@ public class TrackEdit {
             newCount = oldCount;
         }
         float[] newTimes = new float[newCount];
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        Quaternion[] newRotations = new Quaternion[newCount];
-        Vector3f[] newScales = new Vector3f[newCount];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+        }
+        Vector3f[] newScales = null;
+        if (oldScales != null) {
+            newScales = new Vector3f[newCount];
+        }
 
-        for (int frameIndex = 0; frameIndex < oldCount; ++frameIndex) {
+        for (int frameI = 0; frameI < oldCount; ++frameI) {
             float newTime;
             if (oldDuration == 0f) {
-                assert frameIndex == 0 : frameIndex;
+                assert frameI == 0 : frameI;
                 newTime = 0f;
             } else {
-                float oldTime = oldTimes[frameIndex] - oldTimes[0];
+                float oldTime = oldTimes[frameI] - oldTimes[0];
                 newTime = newDuration * oldTime / oldDuration;
                 newTime = FastMath.clamp(newTime, 0f, newDuration);
             }
-            newTimes[frameIndex] = newTime;
+            newTimes[frameI] = newTime;
 
-            newTranslations[frameIndex] = oldTranslations[frameIndex].clone();
-            newRotations[frameIndex] = oldRotations[frameIndex].clone();
-            newScales[frameIndex] = oldScales[frameIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[frameI] = oldTranslations[frameI].clone();
+            }
+            if (newRotations != null) {
+                newRotations[frameI] = oldRotations[frameI].clone();
+            }
+            if (newScales != null) {
+                newScales[frameI] = oldScales[frameI].clone();
+            }
         }
         if (oldDuration == 0f && newDuration > 0f) {
             int oldIndex = oldCount - 1;
             int newIndex = oldCount;
             newTimes[newIndex] = newDuration;
 
-            newTranslations[newIndex] = oldTranslations[oldIndex].clone();
-            newRotations[newIndex] = oldRotations[oldIndex].clone();
-            newScales[newIndex] = oldScales[oldIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[newIndex] = oldTranslations[oldIndex].clone();
+            }
+            if (newRotations != null) {
+                newRotations[newIndex] = oldRotations[oldIndex].clone();
+            }
+            if (newScales != null) {
+                newScales[newIndex] = oldScales[oldIndex].clone();
+            }
         }
 
         HasLocalTransform target = oldTrack.getTarget();
@@ -1898,7 +2016,7 @@ public class TrackEdit {
 
     /**
      * Copy a TransformTrack, deleting the scale component if it consists
-     * entirely of identities.
+     * entirely of identities. TODO handle translation and rotation identities
      *
      * @param oldTrack the input track (not null, unaffected)
      * @return a new TransformTrack with the same target
@@ -1911,7 +2029,7 @@ public class TrackEdit {
         assert numFrames > 0 : numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
         for (int index = 0; index < numFrames; ++index) {
-            if (oldScales != null) {
+            if (oldScales != null) { // TODO avoid looping
                 Vector3f scale = oldScales[index];
                 if (!MyVector3f.isScaleIdentity(scale)) {
                     keepScales = true;
@@ -1923,14 +2041,24 @@ public class TrackEdit {
         Quaternion[] oldRotations = oldTrack.getRotations();
 
         float[] newTimes = new float[numFrames];
-        Vector3f[] newTranslations = new Vector3f[numFrames];
-        Quaternion[] newRotations = new Quaternion[numFrames];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[numFrames];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[numFrames];
+        }
         Vector3f[] newScales = keepScales ? new Vector3f[numFrames] : null;
 
         for (int index = 0; index < numFrames; ++index) {
             newTimes[index] = oldTimes[index];
-            newTranslations[index] = oldTranslations[index].clone();
-            newRotations[index] = oldRotations[index].clone();
+            if (newTranslations != null) {
+                newTranslations[index] = oldTranslations[index].clone();
+            }
+            if (newRotations != null) {
+                newRotations[index] = oldRotations[index].clone();
+            }
             if (keepScales) {
                 newScales[index] = oldScales[index].clone();
             }
@@ -1945,7 +2073,8 @@ public class TrackEdit {
 
     /**
      * Copy a TransformTrack, deleting the scale component if it consists
-     * entirely of approximate identities.
+     * entirely of approximate identities. TODO handle translation and rotation
+     * identities
      *
      * @param oldTrack the input track (not null, unaffected)
      * @param tolerance the tolerance to use when testing for identity (&ge;0)
@@ -1961,7 +2090,7 @@ public class TrackEdit {
         assert numFrames > 0 : numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
         for (int index = 0; index < numFrames; ++index) {
-            if (oldScales != null) {
+            if (oldScales != null) { // TODO avoid looping
                 Vector3f scale = oldScales[index];
                 if (!scale.isSimilar(scaleIdentity, tolerance)) {
                     keepScales = true;
@@ -1973,16 +2102,26 @@ public class TrackEdit {
         Quaternion[] oldRotations = oldTrack.getRotations();
 
         float[] newTimes = new float[numFrames];
-        Vector3f[] newTranslations = new Vector3f[numFrames];
-        Quaternion[] newRotations = new Quaternion[numFrames];
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[numFrames];
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[numFrames];
+        }
         Vector3f[] newScales = keepScales ? new Vector3f[numFrames] : null;
 
-        for (int index = 0; index < numFrames; ++index) {
-            newTimes[index] = oldTimes[index];
-            newTranslations[index] = oldTranslations[index].clone();
-            newRotations[index] = oldRotations[index].clone();
+        for (int frameI = 0; frameI < numFrames; ++frameI) {
+            newTimes[frameI] = oldTimes[frameI];
+            if (newTranslations != null) {
+                newTranslations[frameI] = oldTranslations[frameI].clone();
+            }
+            if (newRotations != null) {
+                newRotations[frameI] = oldRotations[frameI].clone();
+            }
             if (keepScales) {
-                newScales[index] = oldScales[index].clone();
+                newScales[frameI] = oldScales[frameI].clone();
             }
         }
 
@@ -2077,10 +2216,16 @@ public class TrackEdit {
         float[] newTimes = new float[numFrames];
         System.arraycopy(oldTimes, 0, newTimes, 0, numFrames);
 
-        Vector3f[] newTranslations = smoothTranslations.smooth(oldTimes,
-                duration, oldTranslations, width, null);
-        Quaternion[] newRotations = smoothRotations.smooth(oldTimes, duration,
-                oldRotations, width, null);
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = smoothTranslations.smooth(oldTimes,
+                    duration, oldTranslations, width, null);
+        }
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = smoothRotations.smooth(oldTimes, duration,
+                    oldRotations, width, null);
+        }
         Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = smoothScales.smooth(oldTimes, duration, oldScales,
@@ -2183,11 +2328,23 @@ public class TrackEdit {
         Quaternion[] newRotations = new Quaternion[newCount];
         Vector3f[] newScales = new Vector3f[newCount];
 
-        for (int frameIndex = 0; frameIndex < lastFrame; ++frameIndex) {
-            newTimes[frameIndex] = oldTimes[frameIndex] - oldTimes[0];
-            newTranslations[frameIndex] = oldTranslations[frameIndex].clone();
-            newRotations[frameIndex] = oldRotations[frameIndex].clone();
-            newScales[frameIndex] = oldScales[frameIndex].clone();
+        for (int frameI = 0; frameI < lastFrame; ++frameI) {
+            newTimes[frameI] = oldTimes[frameI] - oldTimes[0];
+            if (oldTranslations == null) {
+                newTranslations[frameI] = new Vector3f();
+            } else {
+                newTranslations[frameI] = oldTranslations[frameI].clone();
+            }
+            if (oldRotations == null) {
+                newRotations[frameI] = new Quaternion();
+            } else {
+                newRotations[frameI] = oldRotations[frameI].clone();
+            }
+            if (oldScales == null) {
+                newScales[frameI] = new Vector3f(1f, 1f, 1f);
+            } else {
+                newScales[frameI] = oldScales[frameI].clone();
+            }
         }
 
         newTimes[lastFrame] = endTime;
@@ -2331,7 +2488,7 @@ public class TrackEdit {
         int newCount;
         Vector3f wrapTranslation = new Vector3f();
         Quaternion wrapRotation = new Quaternion();
-        Vector3f wrapScale = new Vector3f();
+        Vector3f wrapScale = new Vector3f(1f, 1f, 1f);
 
         int endIndex = MyArray.findPreviousIndex(duration, oldTimes);
         if (endIndex >= 0 && oldTimes[endIndex] != duration) {
@@ -2341,17 +2498,25 @@ public class TrackEdit {
         if (endIndex == -1) { // doesn't end with a keyframe, ignore endWeight
             endIndex = oldCount;
             newCount = oldCount + 1;
-            wrapTranslation.set(oldTranslations[0]);
-            wrapRotation.set(oldRotations[0]);
+            if (oldTranslations != null) {
+                wrapTranslation.set(oldTranslations[0]);
+            }
+            if (oldRotations != null) {
+                wrapRotation.set(oldRotations[0]);
+            }
             if (oldScales != null) {
                 wrapScale.set(oldScales[0]);
             }
         } else {
             newCount = oldCount;
-            MyVector3f.lerp(endWeight, oldTranslations[0],
-                    oldTranslations[endIndex], wrapTranslation);
-            MyQuaternion.slerp(endWeight, oldRotations[0],
-                    oldRotations[endIndex], wrapRotation);
+            if (oldTranslations != null) {
+                MyVector3f.lerp(endWeight, oldTranslations[0],
+                        oldTranslations[endIndex], wrapTranslation);
+            }
+            if (oldRotations != null) {
+                MyQuaternion.slerp(endWeight, oldRotations[0],
+                        oldRotations[endIndex], wrapRotation);
+            }
             if (oldScales != null) {
                 MyVector3f.lerp(endWeight, oldScales[0], oldScales[endIndex],
                         wrapScale);
@@ -2365,13 +2530,19 @@ public class TrackEdit {
         newTimes[0] = 0f;
         newTimes[endIndex] = duration;
 
-        Vector3f[] newTranslations = new Vector3f[newCount];
-        newTranslations[0] = wrapTranslation.clone();
-        newTranslations[endIndex] = wrapTranslation.clone();
+        Vector3f[] newTranslations = null;
+        if (oldTranslations != null) {
+            newTranslations = new Vector3f[newCount];
+            newTranslations[0] = wrapTranslation.clone();
+            newTranslations[endIndex] = wrapTranslation.clone();
+        }
 
-        Quaternion[] newRotations = new Quaternion[newCount];
-        newRotations[0] = wrapRotation.clone();
-        newRotations[endIndex] = wrapRotation.clone();
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[newCount];
+            newRotations[0] = wrapRotation.clone();
+            newRotations[endIndex] = wrapRotation.clone();
+        }
 
         Vector3f[] newScales = null;
         if (oldScales != null) {
@@ -2382,9 +2553,13 @@ public class TrackEdit {
 
         for (int frameIndex = 1; frameIndex < endIndex; ++frameIndex) {
             newTimes[frameIndex] = oldTimes[frameIndex];
-            newTranslations[frameIndex]
-                    = oldTranslations[frameIndex].clone();
-            newRotations[frameIndex] = oldRotations[frameIndex].clone();
+            if (newTranslations != null) {
+                newTranslations[frameIndex]
+                        = oldTranslations[frameIndex].clone();
+            }
+            if (newRotations != null) {
+                newRotations[frameIndex] = oldRotations[frameIndex].clone();
+            }
             if (newScales != null) {
                 newScales[frameIndex] = oldScales[frameIndex].clone();
             }
