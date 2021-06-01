@@ -2028,8 +2028,8 @@ public class TrackEdit {
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
-        for (int index = 0; index < numFrames; ++index) {
-            if (oldScales != null) { // TODO avoid looping
+        if (oldScales != null) {
+            for (int index = 0; index < numFrames; ++index) {
                 Vector3f scale = oldScales[index];
                 if (!MyVector3f.isScaleIdentity(scale)) {
                     keepScales = true;
@@ -2089,8 +2089,8 @@ public class TrackEdit {
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
-        for (int index = 0; index < numFrames; ++index) {
-            if (oldScales != null) { // TODO avoid looping
+        if (oldScales != null) {
+            for (int index = 0; index < numFrames; ++index) {
                 Vector3f scale = oldScales[index];
                 if (!scale.isSimilar(scaleIdentity, tolerance)) {
                     keepScales = true;
