@@ -11,3 +11,6 @@ subprojects {
 task('publishToMavenLocal') {
     dependsOn ':WesLibrary:publishToMavenLocal'
 }
+task('release') {
+    dependsOn ':WesLibrary:publishMavenPublicationToOSSRHRepository'
+}
