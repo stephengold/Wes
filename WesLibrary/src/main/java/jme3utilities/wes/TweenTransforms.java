@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -237,7 +237,7 @@ public class TweenTransforms implements Cloneable {
             newScales = new Vector3f[numSamples];
         }
 
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time = newTimes[frameIndex];
             Transform transform
                     = transform(oldTrack, time, duration, null, null);
@@ -277,7 +277,7 @@ public class TweenTransforms implements Cloneable {
 
         int numSamples = 1 + (int) Math.floor(duration * sampleRate);
         float[] newTimes = new float[numSamples];
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time = frameIndex / sampleRate;
             if (time > duration) {
                 time = duration;
@@ -306,7 +306,7 @@ public class TweenTransforms implements Cloneable {
         Validate.positive(duration, "duration");
 
         float[] newTimes = new float[numSamples];
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time;
             if (frameIndex == numSamples - 1) {
                 time = duration;

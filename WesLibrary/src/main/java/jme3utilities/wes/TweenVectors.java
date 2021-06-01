@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -145,7 +145,7 @@ public enum TweenVectors {
             case CentripetalSpline:
             case LoopCentripetalSpline:
                 int index0;
-                for (index0 = index1 - 1; index0 >= 0; index0--) {
+                for (index0 = index1 - 1; index0 >= 0; --index0) {
                     if (MyVector3f.ne(samples[index0], v1)) {
                         break;
                     }
@@ -158,7 +158,7 @@ public enum TweenVectors {
                     v0 = samples[index0];
                 }
                 int index3;
-                for (index3 = index2 + 1; index3 <= last; index3++) {
+                for (index3 = index2 + 1; index3 <= last; ++index3) {
                     if (MyVector3f.ne(samples[index3], v2)) {
                         break;
                     }
@@ -691,7 +691,7 @@ public enum TweenVectors {
         float cycleTime = curve.getCycleTime();
         Vector3f[] samples = curve.getSamples();
 
-        for (int index1 = 0; index1 <= lastIndex; index1++) {
+        for (int index1 = 0; index1 <= lastIndex; ++index1) {
             float inter12;
             int index2;
             if (index1 < lastIndex) {
@@ -796,7 +796,7 @@ public enum TweenVectors {
         setLastIndex(curve, lastIndex);
         float[] times = curve.getTimes();
 
-        for (int index1 = 0; index1 <= lastIndex; index1++) {
+        for (int index1 = 0; index1 <= lastIndex; ++index1) {
             Vector3f v1 = samples[index1];
             int index2;
             float inter12;
@@ -842,7 +842,7 @@ public enum TweenVectors {
                 case CentripetalSpline:
                 case LoopCentripetalSpline:
                     int index0;
-                    for (index0 = index1 - 1; index0 >= 0; index0--) {
+                    for (index0 = index1 - 1; index0 >= 0; --index0) {
                         if (MyVector3f.ne(samples[index0], v1)) {
                             break;
                         }
@@ -855,7 +855,7 @@ public enum TweenVectors {
                         v0 = samples[index0];
                     }
                     int index3;
-                    for (index3 = index2 + 1; index3 <= lastIndex; index3++) {
+                    for (index3 = index2 + 1; index3 <= lastIndex; ++index3) {
                         if (MyVector3f.ne(samples[index3], v2)) {
                             break;
                         }

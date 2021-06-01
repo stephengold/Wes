@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -131,7 +131,7 @@ public enum SmoothRotations {
 
         int last = times.length - 1;
         float halfWidth = width / 2f;
-        for (int i = 0; i <= last; i++) {
+        for (int i = 0; i <= last; ++i) {
             Quaternion sumQuaternion = storeResult[i];
             if (sumQuaternion == null) {
                 sumQuaternion = new Quaternion();
@@ -141,7 +141,7 @@ public enum SmoothRotations {
             }
             float iTime = times[i];
             float sumWeight = 0f;
-            for (int j = 0; j <= last; j++) {
+            for (int j = 0; j <= last; ++j) {
                 float jTime = times[j];
                 float dt = iTime - jTime;
                 dt = FastMath.abs(dt);
@@ -187,7 +187,7 @@ public enum SmoothRotations {
         }
 
         float halfWidth = width / 2f;
-        for (int i = 0; i <= last; i++) {
+        for (int i = 0; i <= last; ++i) {
             Quaternion sumQuaternion = storeResult[i];
             if (sumQuaternion == null) {
                 sumQuaternion = new Quaternion();
@@ -197,7 +197,7 @@ public enum SmoothRotations {
             }
             float iTime = times[i];
             float sumWeight = 0f;
-            for (int j = 0; j <= last; j++) {
+            for (int j = 0; j <= last; ++j) {
                 float jTime = times[j];
                 float dt = MyMath.modulo(iTime - jTime, cycleTime);
                 if (dt > cycleTime / 2f) {

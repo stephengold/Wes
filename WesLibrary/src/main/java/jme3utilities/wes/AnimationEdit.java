@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -321,7 +321,7 @@ public class AnimationEdit {
          */
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
-        for (int iTarget = 0; iTarget < numTargetBones; iTarget++) {
+        for (int iTarget = 0; iTarget < numTargetBones; ++iTarget) {
             Bone targetBone = targetSkeleton.getBone(iTarget);
             String targetName = targetBone.getName();
             BoneMapping boneMapping = map.get(targetName);
@@ -378,7 +378,7 @@ public class AnimationEdit {
          */
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
-        for (int iTarget = 0; iTarget < numTargetBones; iTarget++) {
+        for (int iTarget = 0; iTarget < numTargetBones; ++iTarget) {
             Bone targetBone = targetSkeleton.getBone(iTarget);
             String targetName = targetBone.getName();
             BoneMapping boneMapping = map.get(targetName);
@@ -433,7 +433,7 @@ public class AnimationEdit {
          */
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetJoints = targetArmature.getJointCount();
-        for (int iTarget = 0; iTarget < numTargetJoints; iTarget++) {
+        for (int iTarget = 0; iTarget < numTargetJoints; ++iTarget) {
             Joint targetJoint = targetArmature.getJoint(iTarget);
             String targetName = targetJoint.getName();
             BoneMapping boneMapping = map.get(targetName);

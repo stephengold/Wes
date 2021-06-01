@@ -1235,7 +1235,7 @@ public class TrackEdit {
         Quaternion[] newRotations = new Quaternion[frameCount];
         Vector3f[] newScales = new Vector3f[frameCount];
 
-        for (int frameI = 0; frameI < frameCount; frameI++) {
+        for (int frameI = 0; frameI < frameCount; ++frameI) {
             newTimes[frameI] = oldTimes[frameI];
             if (frameI == frameIndex) {
                 newTranslations[frameI] = transform.getTranslation().clone();
@@ -1293,7 +1293,7 @@ public class TrackEdit {
         Quaternion[] newRotations = new Quaternion[frameCount];
         Vector3f[] newScales = new Vector3f[frameCount];
 
-        for (int frameI = 0; frameI < frameCount; frameI++) {
+        for (int frameI = 0; frameI < frameCount; ++frameI) {
             newTimes[frameI] = oldTimes[frameI];
             if (frameI == frameIndex) {
                 newTranslations[frameI] = transform.getTranslation().clone();
@@ -1354,7 +1354,7 @@ public class TrackEdit {
             newScales = new Vector3f[numSamples];
         }
 
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time = newTimes[frameIndex];
             Transform transform = new Transform();
             oldTrack.getDataAtTime(time, transform);
@@ -1392,7 +1392,7 @@ public class TrackEdit {
 
         int numSamples = 1 + (int) Math.floor(duration * sampleRate);
         float[] newTimes = new float[numSamples];
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time = frameIndex / sampleRate;
             if (time > duration) {
                 time = duration;
@@ -1418,7 +1418,7 @@ public class TrackEdit {
         Validate.positive(duration, "duration");
 
         float[] newTimes = new float[numSamples];
-        for (int frameIndex = 0; frameIndex < numSamples; frameIndex++) {
+        for (int frameIndex = 0; frameIndex < numSamples; ++frameIndex) {
             float time;
             if (frameIndex == numSamples - 1) {
                 time = duration;

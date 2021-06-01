@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -626,7 +626,7 @@ public enum TweenRotations {
         float cycleTime = curve.getCycleTime();
         Quaternion[] samples = curve.getSamples();
 
-        for (int index1 = 0; index1 <= lastIndex; index1++) {
+        for (int index1 = 0; index1 <= lastIndex; ++index1) {
             int index0 = (index1 == 0) ? lastIndex : index1 - 1;
             int index2;
             float inter12; // interval between keyframes
@@ -659,7 +659,7 @@ public enum TweenRotations {
 
         float[] times = curve.getTimes();
 
-        for (int index1 = 0; index1 <= lastIndex; index1++) {
+        for (int index1 = 0; index1 <= lastIndex; ++index1) {
             // TODO try substituting q for a at the ends of the spline
             int index0;
             if (index1 == 0) {

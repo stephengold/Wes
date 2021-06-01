@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -130,7 +130,7 @@ public enum SmoothVectors {
 
         int last = times.length - 1;
         float halfWidth = width / 2f;
-        for (int i = 0; i <= last; i++) {
+        for (int i = 0; i <= last; ++i) {
             Vector3f sumVector = storeResult[i];
             if (sumVector == null) {
                 sumVector = new Vector3f();
@@ -140,7 +140,7 @@ public enum SmoothVectors {
             }
             float iTime = times[i];
             float sumWeight = 0f;
-            for (int j = 0; j <= last; j++) {
+            for (int j = 0; j <= last; ++j) {
                 float jTime = times[j];
                 float dt = iTime - jTime;
                 dt = FastMath.abs(dt);
@@ -185,7 +185,7 @@ public enum SmoothVectors {
         }
 
         float halfWidth = width / 2f;
-        for (int i = 0; i <= last; i++) {
+        for (int i = 0; i <= last; ++i) {
             Vector3f sumVector = storeResult[i];
             if (sumVector == null) {
                 sumVector = new Vector3f();
@@ -195,7 +195,7 @@ public enum SmoothVectors {
             }
             float iTime = times[i];
             float sumWeight = 0f;
-            for (int j = 0; j <= last; j++) {
+            for (int j = 0; j <= last; ++j) {
                 float jTime = times[j];
                 float dt = MyMath.modulo(iTime - jTime, cycleTime);
                 if (dt > cycleTime / 2f) {
