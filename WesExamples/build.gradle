@@ -48,11 +48,11 @@ task cleanWrittenAssets(type: Delete) {
 
 // run the example apps
 task runFlashMobDemo(type: JavaExec) {
-    main 'jme3utilities.test.wes.FlashMobDemo'
+    mainClass = 'jme3utilities.test.wes.FlashMobDemo'
 }
 task runReverseAnimation(type: JavaExec) {
-    main 'jme3utilities.test.wes.ReverseAnimation'
+    mainClass = 'jme3utilities.test.wes.ReverseAnimation'
 }
 task runTrimAnimation(type: JavaExec) {
-    main 'jme3utilities.test.wes.TrimAnimation'
+    mainClass = 'jme3utilities.test.wes.TrimAnimation'
 }
