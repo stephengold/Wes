@@ -153,7 +153,7 @@ and probably the `-sources` and `-javadoc` jars as well.
 Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
  1. Right-click on the project (not its assets) in the "Projects" window.
- 2. Select "Properties to open the "Project Properties" dialog.
+ 2. Select "Properties" to open the "Project Properties" dialog.
  3. Under "Categories:" select "Libraries".
  4. Click on the "Compile" tab.
  5. Add the `Heart` class jar:

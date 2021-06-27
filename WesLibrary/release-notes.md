@@ -22,7 +22,7 @@ Bugfix: `TrackEdit.truncate()` generates repetitious keyframes (Wes issue #2)
  + Target JME version 3.4.0-beta1 .
  + Upgrade to Gradle v7.0 .
 
-## Version 0.6.2 released on 9 Februrary 2021
+## Version 0.6.2 released on 9 February 2021
 
  + Published to MavenCentral instead of JCenter.
  + Base on v6.4.2 of the Heart Library and v0.9.2 of jme3-utilities-ui.

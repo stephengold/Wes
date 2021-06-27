@@ -949,7 +949,7 @@ public enum TweenVectors {
      * Estimate the first derivative of an unknown function at the middle of 3
      * indexed points.
      *
-     * @param dt01 length of the preceeding interval (&gt;0)
+     * @param dt01 length of the preceding interval (&gt;0)
      * @param dt12 length of the following interval (&gt;0)
      * @param v0 function value at the previous point (not null, unaffected)
      * @param v1 function value at the current point (not null, unaffected)
