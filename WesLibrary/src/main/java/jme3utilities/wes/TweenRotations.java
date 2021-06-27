@@ -581,7 +581,7 @@ public enum TweenRotations {
      * Precompute curve parameters for middle of 3 intervals in a spline.
      *
      * @param curve (not null, modified)
-     * @param index1
+     * @param index1 index of the q1 sample (&ge;0)
      * @param inter12 duration of interval (&gt;0)
      * @param q0 function value preceding q1 (not null, unaffected, norm=1)
      * @param q1 function value at start of interval (not null, unaffected,

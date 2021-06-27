@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2019, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -162,8 +162,6 @@ public class RotationCurve {
 
     /**
      * Read the index of the last point to use.
-     *
-     * @param newLastIndex new index (&ge;0)
      */
     int getLastIndex() {
         int lastIndex = controlPoint1s.length - 1;
