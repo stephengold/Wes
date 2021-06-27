@@ -821,8 +821,7 @@ public class TrackEdit {
         int numFrames = oldRotations.length;
         assert numFrames > 0 : numFrames;
         boolean changes = false;
-        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
-            Quaternion oldQuat = oldRotations[frameIndex];
+        for (Quaternion oldQuat : oldRotations) {
             double norm = MyQuaternion.lengthSquared(oldQuat);
             double delta = Math.abs(1.0 - norm);
             if (delta > tolerance) {
@@ -894,8 +893,7 @@ public class TrackEdit {
         int numFrames = oldRotations.length;
         assert numFrames > 0 : numFrames;
         boolean changes = false;
-        for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
-            Quaternion oldQuat = oldRotations[frameIndex];
+        for (Quaternion oldQuat : oldRotations) {
             double norm = MyQuaternion.lengthSquared(oldQuat);
             double delta = Math.abs(1.0 - norm);
             if (delta > tolerance) {

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -736,9 +736,7 @@ public class Pose implements JmeCloneable {
      * Configure this Pose to represent bind pose.
      */
     public void setToBind() {
-        int count = transforms.size();
-        for (int boneIndex = 0; boneIndex < count; ++boneIndex) {
-            Transform transform = transforms.get(boneIndex);
+        for (Transform transform : transforms) {
             transform.loadIdentity();
         }
     }
@@ -913,7 +911,7 @@ public class Pose implements JmeCloneable {
     public Quaternion userForModel(int boneIndex, Quaternion modelOrientation,
             Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        Validate.nonZero(modelOrientation, "model orienation");
+        Validate.nonZero(modelOrientation, "model orientation");
 
         Quaternion bind, local;
         if (skeleton == null) {
