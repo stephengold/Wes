@@ -204,8 +204,8 @@ the Sinbad model to generate a "warn" clip.
 
 ## External links
 
-  + [the Wes Animation Toolkit page](https://jmonkeystore.com/15054f52-c439-4bfb-9a73-80260b486333)
-    at [JmonkeyStore](https://jmonkeystore.com/)
+  + [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
+    at [JmonkeyStore](https://store.jmonkeyengine.org/)
 
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
