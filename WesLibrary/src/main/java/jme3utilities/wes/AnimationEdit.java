@@ -462,7 +462,7 @@ public class AnimationEdit {
         AnimTrack[] tracks = sourceClip.getTracks();
         for (AnimTrack track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {
-                TransformTrack clone = (TransformTrack) Heart.deepCopy(track);
+                AnimTrack clone = Heart.deepCopy(track);
                 addTrack(result, clone);
             }
         }
