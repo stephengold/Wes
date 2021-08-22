@@ -8,9 +8,11 @@ subprojects {
 
 // publishing tasks
 
-task('publishToMavenLocal') {
-    dependsOn ':WesLibrary:publishToMavenLocal'
+task('install') {
+    dependsOn ':WesLibrary:install'
+    description 'Installs Maven artifacts to the local repository.'
 }
 task('release') {
-    dependsOn ':WesLibrary:publishMavenPublicationToOSSRHRepository'
+    dependsOn ':WesLibrary:release'
+    description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
