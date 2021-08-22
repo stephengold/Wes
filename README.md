@@ -11,7 +11,23 @@ It contains 2 sub-projects:
 Complete source code (in Java) is provided under
 [a 3-clause BSD license][license].
 
-Summary of features:
+<a name="toc"/>
+
+## Contents of this document
+
++ [Important features](#features)
++ [How to add Wes to an existing project](#add)
++ [Downloads](#downloads)
++ [Conventions](#conventions)
++ [How to build Wes from source](#build)
++ [An overview of the demo applications](#demos)
++ [External links](#links)
++ [History](#history)
++ [Acknowledgments](#acks)
+
+<a name="features"/>
+
+## Important features
 
  + extract a time-range from an animation
  + resample an animation track at a new frame rate
@@ -20,80 +36,6 @@ Summary of features:
  + reverse an animation track
  + chain 2 tracks together
  + repair certain issues with animation tracks
-
-<a name="toc"/>
-
-## Contents of this document
-
- + [Downloads](#downloads)
- + [Conventions](#conventions)
- + [How to build Wes from source](#build)
- + [How to add Wes to an existing project](#add)
- + [An overview of the demo applications](#demos)
- + [External links](#links)
- + [History](#history)
- + [Acknowledgments](#acks)
-
-<a name="downloads"/>
-
-## Downloads
-
-Newer releases (since v0.3.9) can be downloaded from
-[GitHub](https://github.com/stephengold/Wes/releases).
-
-Older releases (v0.2.1 through v0.3.8) can be downloaded from
-[the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
-
-Newer Maven artifacts (since v0.6.2) are available from
-[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
-
-Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
-
-[Jump to table of contents](#toc)
-
-<a name="conventions"/>
-
-## Conventions
-
-Package names begin with
-`jme3utilities.` (if Stephen Gold holds the copyright) or
-`com.jme3.` (if the jMonkeyEngine Project holds the copyright).
-
-Both the source code and the pre-built libraries are compatible with JDK 7.
-
-[Jump to table of contents](#toc)
-
-<a name="build"/>
-
-## How to build Wes from source
-
- 1. Install a [Java Development Kit (JDK)][openJDK],
-    if you don't already have one.
- 2. Download and extract the source code from GitHub:
-   + using Git:
-     + `git clone https://github.com/stephengold/Wes.git`
-     + `cd Wes`
-     + `git checkout -b latest 0.6.7`
-   + using a web browser:
-     + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
-     + follow the "Source code (zip)" link
-     + save the ZIP file
-     + unzip the saved ZIP file
-     + `cd` to the extracted directory/folder
- 3. Set the `JAVA_HOME` environment variable:
-   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
-   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
-   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
- 4. Run the Gradle wrapper:
-   + using Bash or PowerShell:  `./gradlew build`
-   + using Windows Command Prompt:  `.\gradlew build`
-
-After a successful build,
-Maven artifacts will be found in `WesLibrary/build/libs`.
-
-You can install the Maven artifacts to your local respository:
- + using Bash or PowerShell:  `./gradlew install`
- + using Windows Command Prompt:  `.\gradlew install`
 
 [Jump to table of contents](#toc)
 
@@ -173,6 +115,69 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
  8. Click on the "OK" button to exit the "Project Properties" dialog.
+
+[Jump to table of contents](#toc)
+
+<a name="downloads"/>
+
+## Downloads
+
+Newer releases (since v0.3.9) can be downloaded from
+[GitHub](https://github.com/stephengold/Wes/releases).
+
+Older releases (v0.2.1 through v0.3.8) can be downloaded from
+[the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
+
+Newer Maven artifacts (since v0.6.2) are available from
+[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
+
+Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
+
+[Jump to table of contents](#toc)
+
+<a name="conventions"/>
+
+## Conventions
+
+Package names begin with
+`jme3utilities.` (if Stephen Gold holds the copyright) or
+`com.jme3.` (if the jMonkeyEngine Project holds the copyright).
+
+Both the source code and the pre-built libraries are compatible with JDK 7.
+
+[Jump to table of contents](#toc)
+
+<a name="build"/>
+
+## How to build Wes from source
+
+ 1. Install a [Java Development Kit (JDK)][openJDK],
+    if you don't already have one.
+ 2. Download and extract the source code from GitHub:
+   + using Git:
+     + `git clone https://github.com/stephengold/Wes.git`
+     + `cd Wes`
+     + `git checkout -b latest 0.6.7`
+   + using a web browser:
+     + browse to https://github.com/stephengold/Wes/releases/latest
+     + follow the "Source code (zip)" link
+     + save the ZIP file
+     + extract the contents of the saved ZIP file
+     + `cd` to the extracted directory/folder
+ 3. Set the `JAVA_HOME` environment variable:
+   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
+   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
+ 4. Run the [Gradle] wrapper:
+   + using Bash or PowerShell:  `./gradlew build`
+   + using Windows Command Prompt:  `.\gradlew build`
+
+After a successful build,
+Maven artifacts will be found in `WesLibrary/build/libs`.
+
+You can install the Maven artifacts to your local respository:
+ + using Bash or PowerShell:  `./gradlew install`
+ + using Windows Command Prompt:  `.\gradlew install`
 
 [Jump to table of contents](#toc)
 
