@@ -1,5 +1,10 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.7: released on TBD
+
+ + Base on v7.0.0 of the Heart Library and v0.9.5 of jme3-utilities-ui.
+ + Upgrade to Gradle v7.2 .
+
 ## Version 0.6.6: released on 1 June 2021
 
  + Handle null components in transform tracks.
