@@ -73,7 +73,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
-     + `git checkout -b latest 0.6.6`
+     + `git checkout -b latest 0.6.7`
    + using a web browser:
      + browse to [https://github.com/stephengold/Wes/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -83,16 +83,17 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
  3. Set the `JAVA_HOME` environment variable:
    + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
    + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
  4. Run the Gradle wrapper:
-   + using Bash:  `./gradlew build`
+   + using Bash or PowerShell:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
 After a successful build,
 Maven artifacts will be found in `WesLibrary/build/libs`.
 
-You can install the Maven artifacts to your local cache:
- + using Bash:  `./gradlew :WesLibrary:publishToMavenLocal`
- + using Windows Command Prompt:  `.\gradlew :WesLibrary:publishToMavenLocal`
+You can install the Maven artifacts to your local respository:
+ + using Bash or PowerShell:  `./gradlew install`
+ + using Windows Command Prompt:  `.\gradlew install`
 
 [Jump to table of contents](#toc)
 
@@ -107,7 +108,7 @@ The Wes Library depends on [the Heart Library][heart],
 which in turn depends on
 the standard jme3-core library from jMonkeyEngine.
 
-For projects built using Maven or Gradle, it is sufficient to specify the
+For projects built using Maven or [Gradle], it is sufficient to specify the
 dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies.
 
@@ -119,7 +120,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        compile 'com.github.stephengold:Wes:0.6.6'
+        compile 'com.github.stephengold:Wes:0.6.7'
     }
 
 #### Maven-built projects
@@ -136,7 +137,7 @@ Add to the project’s "pom.xml" file:
     <dependency>
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
-      <version>0.6.6</version>
+      <version>0.6.7</version>
     </dependency>
 
 #### Ant-built projects
@@ -144,8 +145,8 @@ Add to the project’s "pom.xml" file:
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.6.6
- + https://github.com/stephengold/Heart/releases/tag/6.4.3+for33
+ + https://github.com/stephengold/Wes/releases/tag/0.6.7
+ + https://github.com/stephengold/Heart/releases/tag/7.0.0
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -159,15 +160,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
  5. Add the `Heart` class jar:
     + Click on the "Add JAR/Folder" button.
     + Navigate to the download folder.
-    + Select the "Heart-6.4.3+for33.jar" file.
+    + Select the "Heart-7.0.0.jar" file.
     + Click on the "Open" button.
  6. (optional) Add jars for javadoc and sources:
     + Click on the "Edit" button.
     + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "Heart-6.4.3+for33-javadoc.jar" file.
+    + Select the "Heart-7.0.0-javadoc.jar" file.
     + Click on the "Open" button.
     + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "Heart-6.4.3+for33-sources.jar" file.
+    + Select the "Heart-7.0.0-sources.jar" file.
     + Click on the "Open" button again.
     + Click on the "OK" button to close the "Edit Jar Reference" dialog.
  7. Similarly, add the `Wes` jar(s).
@@ -207,6 +208,8 @@ the Sinbad model to generate a "warn" clip.
   + [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
     at [JmonkeyStore](https://store.jmonkeyengine.org/)
 
+[Jump to table of contents](#toc)
+
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
@@ -237,13 +240,13 @@ the Sinbad model to generate a "warn" clip.
 [wes]: https://github.com/stephengold/Wes "Wes Project"
 [winmerge]: http://winmerge.org "WinMerge Project"
 
-[Jump to table of contents](#toc)
 
 <a name="history"/>
 
 ## History
 
-The evolution of the project is chronicled in [its release log][log].
+The evolution of this project is chronicled in
+[its release log][log].
 
 Much of the code was originally developed for the [Maud editor][maud].
 
@@ -289,7 +292,7 @@ artists and software developers:
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
-I am grateful to [Github], [Sonatype], [JFrog], and Imgur
+I am grateful to [Github], [Sonatype], [JFrog], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 

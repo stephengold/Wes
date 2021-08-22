@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.6.7: released on TBD
+## Version 0.6.7: released on 22 August 2021
 
  + Base on v7.0.0 of the Heart Library and v0.9.5 of jme3-utilities-ui.
  + Upgrade to Gradle v7.2 .
