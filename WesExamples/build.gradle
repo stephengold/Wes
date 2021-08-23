@@ -15,7 +15,7 @@ jar.manifest.attributes('Main-Class': mainClassName)
 dependencies {
     implementation 'com.github.stephengold:jme3-utilities-ui:0.9.5'
     implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl:' + jmonkeyengineVersion
+    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jmonkeyengineVersion
     implementation 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
     runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jmonkeyengineVersion
 
