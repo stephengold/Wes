@@ -54,7 +54,7 @@ For projects built using Maven or [Gradle], it is sufficient to specify the
 dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies.
 
-#### Gradle-built projects
+### Gradle-built projects
 
 Add to the project’s "build.gradle" file:
 
@@ -65,7 +65,7 @@ Add to the project’s "build.gradle" file:
         compile 'com.github.stephengold:Wes:0.6.7'
     }
 
-#### Maven-built projects
+### Maven-built projects
 
 Add to the project’s "pom.xml" file:
 
@@ -82,7 +82,7 @@ Add to the project’s "pom.xml" file:
       <version>0.6.7</version>
     </dependency>
 
-#### Ant-built projects
+### Ant-built projects
 
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
@@ -153,13 +153,13 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 
  1. Install a [Java Development Kit (JDK)][openJDK],
     if you don't already have one.
- 2. Download and extract the source code from GitHub:
+ 2. Download and extract the Wes source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
      + `git checkout -b latest 0.6.7`
    + using a web browser:
-     + browse to https://github.com/stephengold/Wes/releases/latest
+     + browse to [the latest release](https://github.com/stephengold/Wes/releases/latest)
      + follow the "Source code (zip)" link
      + save the ZIP file
      + extract the contents of the saved ZIP file
@@ -175,7 +175,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 After a successful build,
 Maven artifacts will be found in `WesLibrary/build/libs`.
 
-You can install the Maven artifacts to your local respository:
+You can install the Maven artifacts to your local Maven respository:
  + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
@@ -286,7 +286,7 @@ artists and software developers:
     + the [Firefox] and [Google Chrome][chrome] web browsers
     + the [Git] revision-control system and GitK commit viewer
     + the [Gradle] build tool
-    + the Java compiler, standard doclet, and runtime environment
+    + the Java compiler, standard doclet, and virtual machine
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + the [Linux Mint][mint] operating system
     + LWJGL, the Lightweight Java Game Library
