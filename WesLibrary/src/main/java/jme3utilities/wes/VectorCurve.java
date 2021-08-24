@@ -263,7 +263,7 @@ public class VectorCurve {
     }
 
     /**
-     * Alter the auxiliary auxiliary slopes/values for the indexed interval.
+     * Alter the auxiliary slopes/values for the indexed interval.
      * Used only for splines.
      *
      * @param index which interval (&ge;0, &le;lastIndex)
