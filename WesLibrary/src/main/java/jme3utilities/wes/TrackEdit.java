@@ -194,7 +194,7 @@ public class TrackEdit {
             newRotations = new Quaternion[newCount];
             newRotations[0] = neckTransform.getRotation().clone();
         }
-        Vector3f[] newScales = new Vector3f[newCount];
+        Vector3f[] newScales = null;
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
             newScales[0] = neckTransform.getScale().clone();
