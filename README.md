@@ -215,37 +215,6 @@ the Sinbad model to generate a "warn" clip.
 
 [Jump to table of contents](#toc)
 
-[ant]: https://ant.apache.org "Apache Ant Project"
-[blender]: https://docs.blender.org "Blender Project"
-[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
-[bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
-[chrome]: https://www.google.com/chrome "Chrome"
-[elements]: http://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
-[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
-[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
-[git]: https://git-scm.com "Git"
-[github]: https://github.com "GitHub"
-[gradle]: https://gradle.org "Gradle Project"
-[heart]: https://github.com/stephengold/Heart "Heart Project"
-[imgur]: https://imgur.com/ "Imgur"
-[jfrog]: https://www.jfrog.com "JFrog"
-[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
-[latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
-[license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
-[log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
-[makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
-[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
-[maud]: https://github.com/stephengold/Maud "Maud editor"
-[mint]: https://linuxmint.com "Linux Mint Project"
-[netbeans]: https://netbeans.org "NetBeans Project"
-[openJDK]: https://openjdk.java.net "OpenJDK Project"
-[sonatype]: https://www.sonatype.com "Sonatype"
-[utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
-[vegdahl]: http://www.cessen.com "Nathan Vegdahl"
-[wes]: https://github.com/stephengold/Wes "Wes Project"
-[winmerge]: http://winmerge.org "WinMerge Project"
-
-
 <a name="history"/>
 
 ## History
@@ -307,3 +276,33 @@ If I've misattributed anything or left anyone out, please let me know so I can
 correct the situation: sgold@sonic.net
 
 [Jump to table of contents](#toc)
+
+[ant]: https://ant.apache.org "Apache Ant Project"
+[blender]: https://docs.blender.org "Blender Project"
+[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
+[bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
+[chrome]: https://www.google.com/chrome "Chrome"
+[elements]: http://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
+[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
+[git]: https://git-scm.com "Git"
+[github]: https://github.com "GitHub"
+[gradle]: https://gradle.org "Gradle Project"
+[heart]: https://github.com/stephengold/Heart "Heart Project"
+[imgur]: https://imgur.com/ "Imgur"
+[jfrog]: https://www.jfrog.com "JFrog"
+[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
+[latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
+[license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
+[log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
+[makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[maud]: https://github.com/stephengold/Maud "Maud editor"
+[mint]: https://linuxmint.com "Linux Mint Project"
+[netbeans]: https://netbeans.org "NetBeans Project"
+[openJDK]: https://openjdk.java.net "OpenJDK Project"
+[sonatype]: https://www.sonatype.com "Sonatype"
+[utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
+[vegdahl]: http://www.cessen.com "Nathan Vegdahl"
+[wes]: https://github.com/stephengold/Wes "Wes Project"
+[winmerge]: http://winmerge.org "WinMerge Project"
