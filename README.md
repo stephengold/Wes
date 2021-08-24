@@ -175,7 +175,7 @@ Both the source code and the pre-built libraries are compatible with JDK 7.
 After a successful build,
 Maven artifacts will be found in `WesLibrary/build/libs`.
 
-You can install the Maven artifacts to your local Maven respository:
+You can install the Maven artifacts to your local Maven repository:
  + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
