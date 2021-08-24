@@ -150,7 +150,7 @@ public enum TweenRotations {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -195,7 +195,7 @@ public enum TweenRotations {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -386,7 +386,7 @@ public enum TweenRotations {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return result;
@@ -529,7 +529,7 @@ public enum TweenRotations {
                     }
                     break;
                 default:
-                    throw new IllegalStateException();
+                    throw new IllegalStateException("this = " + this);
             }
         } else {
             storeResult.set(q0);

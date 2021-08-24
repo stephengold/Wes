@@ -98,7 +98,7 @@ public enum SmoothVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;

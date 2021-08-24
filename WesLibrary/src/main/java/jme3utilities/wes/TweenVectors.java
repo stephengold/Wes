@@ -175,7 +175,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -251,7 +251,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -292,7 +292,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -441,7 +441,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -541,7 +541,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return result;
@@ -780,7 +780,7 @@ public enum TweenVectors {
                     break;
 
                 default:
-                    throw new IllegalStateException();
+                    throw new IllegalStateException("this = " + this);
             }
         }
     }
@@ -887,7 +887,7 @@ public enum TweenVectors {
                     break;
 
                 default:
-                    throw new IllegalStateException();
+                    throw new IllegalStateException("this = " + this);
             }
         }
     }
@@ -914,7 +914,7 @@ public enum TweenVectors {
                 curve.setLastIndex(lastIndex, allocateDts);
                 break;
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
     }
 
@@ -986,7 +986,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;
@@ -1048,7 +1048,7 @@ public enum TweenVectors {
                 break;
 
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("this = " + this);
         }
 
         return storeResult;

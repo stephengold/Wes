@@ -788,7 +788,7 @@ public class TrackEdit {
             result = newSpatialTrack;
 
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(oldTrack.getClass().getName());
         }
 
         return result;
@@ -1927,7 +1927,7 @@ public class TrackEdit {
             spatialTrack.setKeyframes(times, translations, rotations, scales);
 
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(track.getClass().getName());
         }
     }
 
