@@ -571,7 +571,7 @@ public class FlashMobDemo extends ActionApplication {
      * Translate a model's center so that the model rests on the X-Z plane, and
      * its center lies on the Y axis.
      */
-    private void center(Spatial model) {
+    private static void center(Spatial model) {
         Vector3f[] minMax = MySpatial.findMinMaxCoords(model);
         Vector3f center = MyVector3f.midpoint(minMax[0], minMax[1], null);
         Vector3f offset = new Vector3f(center.x, minMax[0].y, center.z);
@@ -617,7 +617,7 @@ public class FlashMobDemo extends ActionApplication {
      * @param model (not null, modified)
      * @param height (in world units)
      */
-    private void setHeight(Spatial model, float height) {
+    private static void setHeight(Spatial model, float height) {
         Vector3f[] minMax = MySpatial.findMinMaxCoords(model);
         float oldHeight = minMax[1].y - minMax[0].y;
 
