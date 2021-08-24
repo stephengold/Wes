@@ -802,11 +802,11 @@ public class TrackEdit {
      * @param tolerance the tolerance for norms (&ge;0)
      * @return a new track if changes were made, or else inputTrack
      */
-    public static AnimTrack normalizeQuaternions(AnimTrack inputTrack,
+    public static AnimTrack<?> normalizeQuaternions(AnimTrack<?> inputTrack,
             float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
 
-        AnimTrack result = inputTrack;
+        AnimTrack<?> result = inputTrack;
         if (inputTrack instanceof MorphTrack) { // contains no quaternions
             return result;
         }
@@ -1606,10 +1606,10 @@ public class TrackEdit {
      * @return a new AnimTrack with the same type and target as oldTrack, with
      * t[0]=0
      */
-    public static AnimTrack reverse(AnimTrack inputTrack) {
+    public static AnimTrack<?> reverse(AnimTrack<?> inputTrack) {
         Validate.nonNull(inputTrack, "input track");
 
-        AnimTrack result;
+        AnimTrack<?> result;
         float[] newTimes;
         float[] oldTimes = MyAnimation.getKeyFrameTimes(inputTrack);
         int numFrames = oldTimes.length;

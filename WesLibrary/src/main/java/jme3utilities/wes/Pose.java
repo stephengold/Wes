@@ -300,7 +300,7 @@ public class Pose implements JmeCloneable {
          * with a non-identity local transform.
          */
         int numJoints = countBones();
-        List<AnimTrack> trackList = new ArrayList<>(numJoints);
+        List<AnimTrack<?>> trackList = new ArrayList<>(numJoints);
         for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
             Transform transform = localTransform(jointIndex, null);
             if (!MyMath.isIdentity(transform)) {
@@ -316,7 +316,7 @@ public class Pose implements JmeCloneable {
         }
 
         int numTracks = trackList.size();
-        AnimTrack[] trackArray = new AnimTrack[numTracks];
+        AnimTrack<?>[] trackArray = new AnimTrack[numTracks];
         trackList.toArray(trackArray);
         result.setTracks(trackArray);
 

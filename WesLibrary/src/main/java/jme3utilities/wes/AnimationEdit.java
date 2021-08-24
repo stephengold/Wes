@@ -79,11 +79,11 @@ public class AnimationEdit {
      * @param clip (not null, alias created)
      * @param track (not null, modified)
      */
-    public static void addTrack(AnimClip clip, AnimTrack track) {
+    public static void addTrack(AnimClip clip, AnimTrack<?> track) {
         Validate.nonNull(track, "track");
 
-        AnimTrack[] oldTracks = clip.getTracks();
-        AnimTrack[] newTracks;
+        AnimTrack<?>[] oldTracks = clip.getTracks();
+        AnimTrack<?>[] newTracks;
         if (oldTracks == null) {
             newTracks = new AnimTrack[1];
             newTracks[0] = track;
@@ -165,8 +165,8 @@ public class AnimationEdit {
          */
         AnimClip result = new AnimClip(newClipName);
 
-        AnimTrack[] sourceTracks = sourceClip.getTracks();
-        for (AnimTrack sourceTrack : sourceTracks) {
+        AnimTrack<?>[] sourceTracks = sourceClip.getTracks();
+        for (AnimTrack<?> sourceTrack : sourceTracks) {
             if (sourceTrack instanceof MorphTrack) {
                 throw new UnsupportedOperationException();
             } else {
@@ -229,13 +229,13 @@ public class AnimationEdit {
     public static int normalizeQuaternions(AnimClip clip, float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
 
-        AnimTrack[] tracks = clip.getTracks();
+        AnimTrack<?>[] tracks = clip.getTracks();
         int numTracks = tracks.length;
 
         int numTracksEdited = 0;
         for (int trackIndex = 0; trackIndex < numTracks; ++trackIndex) {
-            AnimTrack oldTrack = tracks[trackIndex];
-            AnimTrack newTrack
+            AnimTrack<?> oldTrack = tracks[trackIndex];
+            AnimTrack<?> newTrack
                     = TrackEdit.normalizeQuaternions(oldTrack, tolerance);
             if (oldTrack != newTrack) {
                 ++numTracksEdited;
@@ -275,8 +275,8 @@ public class AnimationEdit {
      */
     public static int removeRepeats(AnimClip clip) {
         int numTracksEdited = 0;
-        AnimTrack[] tracks = clip.getTracks();
-        for (AnimTrack track : tracks) {
+        AnimTrack<?>[] tracks = clip.getTracks();
+        for (AnimTrack<?> track : tracks) {
             if (track instanceof TransformTrack) {
                 boolean removed
                         = TrackEdit.removeRepeats((TransformTrack) track);
@@ -396,8 +396,8 @@ public class AnimationEdit {
         /*
          * Convert any non-joint tracks.
          */
-        AnimTrack[] tracks = sourceClip.getTracks();
-        for (AnimTrack track : tracks) {
+        AnimTrack<?>[] tracks = sourceClip.getTracks();
+        for (AnimTrack<?> track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {
                 // TODO
             }
@@ -459,10 +459,10 @@ public class AnimationEdit {
         /*
          * Copy any non-joint tracks.
          */
-        AnimTrack[] tracks = sourceClip.getTracks();
-        for (AnimTrack track : tracks) {
+        AnimTrack<?>[] tracks = sourceClip.getTracks();
+        for (AnimTrack<?> track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {
-                AnimTrack clone = Heart.deepCopy(track);
+                AnimTrack<?> clone = Heart.deepCopy(track);
                 addTrack(result, clone);
             }
         }
@@ -484,9 +484,9 @@ public class AnimationEdit {
 
         AnimClip result = new AnimClip(animationName);
 
-        AnimTrack[] forwardTracks = sourceClip.getTracks();
-        for (AnimTrack forwardTrack : forwardTracks) {
-            AnimTrack newTrack = TrackEdit.reverse(forwardTrack);
+        AnimTrack<?>[] forwardTracks = sourceClip.getTracks();
+        for (AnimTrack<?> forwardTrack : forwardTracks) {
+            AnimTrack<?> newTrack = TrackEdit.reverse(forwardTrack);
             assert newTrack.getLength() == forwardTrack.getLength();
             addTrack(result, newTrack);
         }
@@ -532,13 +532,13 @@ public class AnimationEdit {
 
         AnimClip result = new AnimClip(animationName);
 
-        AnimTrack[] oldTracks = sourceClip.getTracks();
-        for (AnimTrack sourceTrack : oldTracks) {
+        AnimTrack<?>[] oldTracks = sourceClip.getTracks();
+        for (AnimTrack<?> sourceTrack : oldTracks) {
             if (sourceTrack instanceof MorphTrack) {
                 throw new UnsupportedOperationException();
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
-                AnimTrack newTrack
+                AnimTrack<?> newTrack
                         = TrackEdit.setDuration(oldTrack, newDuration);
                 assert newTrack.getLength() == newDuration;
                 addTrack(result, newTrack);
@@ -576,8 +576,8 @@ public class AnimationEdit {
      */
     public static int zeroFirst(AnimClip clip) {
         int numTracksEdited = 0;
-        AnimTrack[] tracks = clip.getTracks();
-        for (AnimTrack track : tracks) {
+        AnimTrack<?>[] tracks = clip.getTracks();
+        for (AnimTrack<?> track : tracks) {
             float[] times;
             if (track instanceof MorphTrack) {
                 times = ((MorphTrack) track).getTimes();
