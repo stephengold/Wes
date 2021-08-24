@@ -619,7 +619,7 @@ public enum TweenRotations {
      * @param curve (not null, modified)
      * @param lastIndex index of the last point to use (&ge;0)
      */
-    private void precomputeLoopSpline(RotationCurve curve, int lastIndex) {
+    private static void precomputeLoopSpline(RotationCurve curve, int lastIndex) {
         curve.setLastIndex(lastIndex);
 
         float[] times = curve.getTimes();
@@ -652,7 +652,7 @@ public enum TweenRotations {
      *
      * @param curve (not null, modified)
      */
-    private void precomputeSpline(RotationCurve curve) {
+    private static void precomputeSpline(RotationCurve curve) {
         Quaternion[] samples = curve.getSamples();
         int lastIndex = samples.length - 1;
         curve.setLastIndex(lastIndex);

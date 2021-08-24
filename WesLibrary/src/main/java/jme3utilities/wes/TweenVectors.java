@@ -928,7 +928,7 @@ public enum TweenVectors {
      * @param storeResult storage for the result (modified if not null)
      * @return a derivative vector (either storeResult or a new instance)
      */
-    private Vector3f slope(float dt, Vector3f v1, Vector3f v2,
+    private static Vector3f slope(float dt, Vector3f v1, Vector3f v2,
             Vector3f storeResult) {
         assert dt > 0f : dt;
         assert v1 != null;
