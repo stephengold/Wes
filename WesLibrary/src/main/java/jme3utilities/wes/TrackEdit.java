@@ -170,7 +170,6 @@ public class TrackEdit {
         float[] oldTimes = oldTrack.getTimes();
         assert neckTime >= oldTimes[0];
         int oldCount = oldTimes.length;
-        assert oldCount > 0 : oldCount;
 
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
@@ -1763,7 +1762,6 @@ public class TrackEdit {
 
             float newTime;
             if (oldDuration == 0f) {
-                assert frameIndex == 0 : frameIndex;
                 assert oldTime == 0f : oldTime;
                 newTime = 0f;
             } else {

@@ -330,7 +330,6 @@ public class Pose implements JmeCloneable {
      */
     public int countBones() {
         int count = transforms.size();
-        assert count >= 0 : count;
         return count;
     }
 
