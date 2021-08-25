@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class WesVersion {
+final public class WesVersion {
     // *************************************************************************
     // constants and loggers
 
