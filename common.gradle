@@ -31,7 +31,7 @@ gradle.projectsEvaluated {
 ext {
     // current versions of various libraries
     jmonkeyengineVersion = '3.4.0-stable'
-    wesVersion = '0.6.7-SNAPSHOT'
+    wesVersion = '0.6.8-SNAPSHOT'
 }
 
 repositories {
