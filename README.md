@@ -87,7 +87,7 @@ Add to the project’s "pom.xml" file:
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/0.6.7
+ + https://github.com/stephengold/Wes/releases/tag/latest
  + https://github.com/stephengold/Heart/releases/tag/7.0.0
 
 You'll want both class jars
