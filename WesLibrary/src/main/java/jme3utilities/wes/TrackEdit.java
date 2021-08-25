@@ -240,12 +240,12 @@ public class TrackEdit {
         Validate.inRange(startTime2, "start time for track2", 0f, newDuration);
 
         float[] times1 = track1.getKeyFrameTimes();
-        Vector3f[] tras1 = MyAnimation.getTranslations(track1);
+        Vector3f[] translations1 = MyAnimation.getTranslations(track1);
         Quaternion[] rots1 = MyAnimation.getRotations(track1);
         Vector3f[] scales1 = MyAnimation.getScales(track1);
 
         float[] times2 = track2.getKeyFrameTimes();
-        Vector3f[] tras2 = MyAnimation.getTranslations(track2);
+        Vector3f[] translations2 = MyAnimation.getTranslations(track2);
         Quaternion[] rots2 = MyAnimation.getRotations(track2);
         Vector3f[] scales2 = MyAnimation.getScales(track2);
         /*
@@ -278,7 +278,7 @@ public class TrackEdit {
          */
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
-        if (tras1 != null || tras2 != null) {
+        if (translations1 != null || translations2 != null) {
             newTranslations = new Vector3f[newCount];
         }
         Quaternion[] newRotations = null;
@@ -297,7 +297,7 @@ public class TrackEdit {
             Vector3f tra1, tra2, scale1, scale2;
             if (frameIndex < numCopy1) { // Copy from track1[frameIndex].
                 newTimes[frameIndex] = times1[frameIndex];
-                tra1 = (tras1 == null) ? null : tras1[frameIndex];
+                tra1 = (translations1 == null) ? null : translations1[frameIndex];
                 rot1 = (rots1 == null) ? null : rots1[frameIndex];
                 scale1 = (scales1 == null) ? null : scales1[frameIndex];
                 tra2 = null;
@@ -310,7 +310,7 @@ public class TrackEdit {
                 tra1 = null;
                 rot1 = null;
                 scale1 = null;
-                tra2 = (tras2 == null) ? null : tras2[index2];
+                tra2 = (translations2 == null) ? null : translations2[index2];
                 rot2 = (rots2 == null) ? null : rots2[index2];
                 scale2 = (scales2 == null) ? null : scales2[index2];
 
@@ -319,10 +319,10 @@ public class TrackEdit {
                 assert frameIndex == last1;
                 assert lastTime1 == startTime2;
                 newTimes[frameIndex] = startTime2;
-                tra1 = (tras1 == null) ? null : tras1[frameIndex];
+                tra1 = (translations1 == null) ? null : translations1[frameIndex];
                 rot1 = (rots1 == null) ? null : rots1[frameIndex];
                 scale1 = (scales1 == null) ? null : scales1[frameIndex];
-                tra2 = (tras2 == null) ? null : tras2[0];
+                tra2 = (translations2 == null) ? null : translations2[0];
                 rot2 = (rots2 == null) ? null : rots2[0];
                 scale2 = (scales2 == null) ? null : scales2[0];
             }
