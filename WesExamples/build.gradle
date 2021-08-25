@@ -2,7 +2,9 @@
 //   for this project. This initialization is applied in the "build.gradle"
 //   of the root project.
 
-apply plugin: 'application'
+plugins {
+    id 'application'
+}
 
 description = 'demos, examples, and tests that do not generate reports'
 
