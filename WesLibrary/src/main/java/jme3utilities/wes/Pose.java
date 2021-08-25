@@ -996,33 +996,6 @@ public class Pose implements JmeCloneable {
         return storeResult;
     }
     // *************************************************************************
-    // Cloneable methods
-
-    /**
-     * Create a deep copy of this Pose.
-     *
-     * @return a new Pose, equivalent to this one
-     */
-    @Override
-    public Pose clone() {
-        Pose clone;
-        try {
-            clone = (Pose) super.clone();
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-
-        int numTransforms = transforms.size();
-        List<Transform> originalTransforms = transforms;
-        transforms = new ArrayList<>(numTransforms);
-        for (Transform t : originalTransforms) {
-            Transform tClone = t.clone();
-            transforms.add(tClone);
-        }
-
-        return clone;
-    }
-    // *************************************************************************
     // JmeCloneable methods
 
     /**
