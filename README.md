@@ -17,9 +17,9 @@ Complete source code (in Java) is provided under
 
 + [Important features](#features)
 + [How to add Wes to an existing project](#add)
++ [How to build Wes from source](#build)
 + [Downloads](#downloads)
 + [Conventions](#conventions)
-+ [How to build Wes from source](#build)
 + [An overview of the demo applications](#demos)
 + [External links](#links)
 + [History](#history)
@@ -118,35 +118,6 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
 [Jump to table of contents](#toc)
 
-<a name="downloads"/>
-
-## Downloads
-
-Newer releases (since v0.3.9) can be downloaded from
-[GitHub](https://github.com/stephengold/Wes/releases).
-
-Older releases (v0.2.1 through v0.3.8) can be downloaded from
-[the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
-
-Newer Maven artifacts (since v0.6.2) are available from
-[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
-
-Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
-
-[Jump to table of contents](#toc)
-
-<a name="conventions"/>
-
-## Conventions
-
-Package names begin with
-`jme3utilities.` (if Stephen Gold holds the copyright) or
-`com.jme3.` (if the jMonkeyEngine Project holds the copyright).
-
-Both the source code and the pre-built libraries are compatible with JDK 7.
-
-[Jump to table of contents](#toc)
-
 <a name="build"/>
 
 ## How to build Wes from source
@@ -178,6 +149,35 @@ Maven artifacts will be found in `WesLibrary/build/libs`.
 You can install the Maven artifacts to your local Maven repository:
  + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
+
+[Jump to table of contents](#toc)
+
+<a name="downloads"/>
+
+## Downloads
+
+Newer releases (since v0.3.9) can be downloaded from
+[GitHub](https://github.com/stephengold/Wes/releases).
+
+Older releases (v0.2.1 through v0.3.8) can be downloaded from
+[the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
+
+Newer Maven artifacts (since v0.6.2) are available from
+[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
+
+Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
+
+[Jump to table of contents](#toc)
+
+<a name="conventions"/>
+
+## Conventions
+
+Package names begin with
+`jme3utilities.` (if Stephen Gold holds the copyright) or
+`com.jme3.` (if the jMonkeyEngine Project holds the copyright).
+
+Both the source code and the pre-built libraries are compatible with JDK 7.
 
 [Jump to table of contents](#toc)
 
