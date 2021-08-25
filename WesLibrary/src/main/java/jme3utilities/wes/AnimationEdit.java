@@ -168,7 +168,7 @@ public class AnimationEdit {
         AnimTrack<?>[] sourceTracks = sourceClip.getTracks();
         for (AnimTrack<?> sourceTrack : sourceTracks) {
             if (sourceTrack instanceof MorphTrack) {
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException(); // TODO
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
                 Transform endTransform
@@ -535,7 +535,7 @@ public class AnimationEdit {
         AnimTrack<?>[] oldTracks = sourceClip.getTracks();
         for (AnimTrack<?> sourceTrack : oldTracks) {
             if (sourceTrack instanceof MorphTrack) {
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException(); // TODO
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
                 AnimTrack<?> newTrack
