@@ -75,6 +75,10 @@ public class ReverseAnimation extends ActionApplication {
     // constants and loggers
 
     /**
+     * speed setting to effectively freeze animations without freezing the camera
+     */
+    final private static float pausedSpeed = 1e-12f;
+    /**
      * message logger for this class
      */
     final public static Logger logger
@@ -397,7 +401,7 @@ public class ReverseAnimation extends ActionApplication {
      * Toggle all animations: paused/running.
      */
     private void togglePause() {
-        float newSpeed = (speed > 1e-12f) ? 1e-12f : 1f;
+        float newSpeed = (speed > pausedSpeed) ? pausedSpeed : 1f;
         setSpeed(newSpeed);
     }
 
