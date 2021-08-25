@@ -130,7 +130,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
      + `cd Wes`
      + `git checkout -b latest 0.6.7`
    + using a web browser:
-     + browse to [the latest release](https://github.com/stephengold/Wes/releases/latest)
+     + browse to [the latest release][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + extract the contents of the saved ZIP file
@@ -149,6 +149,10 @@ Maven artifacts will be found in `WesLibrary/build/libs`.
 You can install the Maven artifacts to your local Maven repository:
  + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
+
+You can restore the project to a pristine state:
+ + using Bash or PowerShell: `./gradlew clean`
+ + using Windows Command Prompt: `.\gradlew clean`
 
 [Jump to table of contents](#toc)
 
@@ -266,7 +270,7 @@ artists and software developers:
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
-I am grateful to [Github], [Sonatype], [JFrog], and [Imgur]
+I am grateful to [GitHub], [Sonatype], [JFrog], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 
@@ -276,6 +280,7 @@ If I've misattributed anything or left anyone out, please let me know, so I can
 correct the situation: sgold@sonic.net
 
 [Jump to table of contents](#toc)
+
 
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
