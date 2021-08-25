@@ -1,4 +1,4 @@
-<img height="150" src="https://i.imgur.com/1iPoJpl.png">
+<img height="150" src="https://i.imgur.com/1iPoJpl.png" alt="Wes Project logo">
 
 [The Wes Project][wes] is about editing animations used in
 [the jMonkeyEngine (JME) game engine][jme].
