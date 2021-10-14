@@ -258,19 +258,19 @@ artists and software developers:
 + Zi Ye, for creating the Sinbad model
 + [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
-+ the creators of (and contributors to) the following software:
++ plus the creators of (and contributors to) the following software:
     + the [FindBugs] source-code analyzer
-    + the [Firefox] and [Google Chrome][chrome] web browsers
+    + the [Firefox] and [Chrome] web browsers
     + the [Git] revision-control system and GitK commit viewer
     + the [Gradle] build tool
-    + the Java compiler, standard doclet, and virtual machine
+    + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
+    + the [Java] compiler, standard doclet, and virtual machine
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + the [Linux Mint][mint] operating system
     + LWJGL, the Lightweight Java Game Library
-    + the [MakeHuman] Community
+    + the [MakeHuman] 3-D character creation tool
     + the [Markdown] document-conversion tool
     + Microsoft Windows
-    + the [NetBeans] integrated development environment
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
@@ -288,7 +288,6 @@ correct the situation: sgold@sonic.net
 
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
-[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
 [chrome]: https://www.google.com/chrome "Chrome"
 [elements]: http://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
@@ -296,9 +295,12 @@ correct the situation: sgold@sonic.net
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
+[gltf]: https://www.khronos.org/gltf "glTF Project"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
+[idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [imgur]: https://imgur.com/ "Imgur"
+[java]: https://java.com "Java"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
@@ -309,6 +311,7 @@ correct the situation: sgold@sonic.net
 [maud]: https://github.com/stephengold/Maud "Maud editor"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
+[ogre]: http://www.ogre3d.org "Ogre Project"
 [openJDK]: https://openjdk.java.net "OpenJDK Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
