@@ -127,7 +127,11 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
  1. Install a [Java Development Kit (JDK)][openJDK],
     if you don't already have one.
- 2. Download and extract the Wes source code from GitHub:
+ 2. Point the `JAVA_HOME` environment variable to your JDK installation:
+   + using Bash:  `export JAVA_HOME="` *path to installation* `"`
+   + using Windows Command Prompt:  `set JAVA_HOME="` *path to installation* `"`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
+ 3. Download and extract the Wes source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Wes.git`
      + `cd Wes`
@@ -138,10 +142,6 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
      + save the ZIP file
      + extract the contents of the saved ZIP file
      + `cd` to the extracted directory/folder
- 3. Point the `JAVA_HOME` environment variable to your JDK installation:
-   + using Bash:  `export JAVA_HOME="` *path to installation* `"`
-   + using Windows Command Prompt:  `set JAVA_HOME="` *path to installation* `"`
-   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
  4. Run the [Gradle] wrapper:
    + using Bash or PowerShell:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
