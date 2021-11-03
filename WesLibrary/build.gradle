@@ -14,6 +14,7 @@ ext {
     artifact = 'Wes'
     version = wesVersion
     baseName = "${artifact}-${version}"
+    websiteUrl = 'https://github.com/stephengold/Wes'
 }
 
 jar { archiveBaseName = project.ext.baseName }
@@ -78,9 +79,9 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/Wes.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Wes.git'
-                    url = 'https://github.com/stephengold/Wes/tree/master'
+                    url = project.ext.websiteUrl + '/tree/master'
                 }
-                url = 'https://github.com/stephengold/Wes'
+                url = project.ext.websiteUrl
             }
             version project.ext.version
         }
