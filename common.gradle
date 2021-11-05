@@ -26,8 +26,7 @@ gradle.projectsEvaluated {
     }
 }
 
-ext {
-    // current versions of various libraries
+ext { // current versions of various libraries:
     jme3Version = '3.4.0-stable'
     wesVersion = '0.6.8-SNAPSHOT'
 }
@@ -40,13 +39,13 @@ repositories {
 // custom tasks for creating source/javadoc JARs
 task sourcesJar(type: Jar) {
     archiveClassifier = 'sources'
-    description 'Create a JAR of source files.'
+    description 'Creates a JAR of sourcecode.'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from sourceSets.main.allJava
 }
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
-    description 'Create a JAR of javadoc.'
+    description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
 }

@@ -6,7 +6,7 @@ plugins {
     id 'application'
 }
 
-description = 'demos, examples, and tests that do not generate reports'
+description = 'demos, examples, and non-automated tests'
 
 mainClassName = 'jme3utilities.test.wes.FlashMobDemo'
 if (!hasProperty('mainClass')) {
@@ -22,10 +22,10 @@ dependencies {
     runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jme3Version
 
     // WesExamples doesn't use jme3-jogg
-    //  -- it is included solely to avoid warnings from AssetConfig
+    //  -- it is included solely to avoid warnings from AssetConfig.
     runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
 
-    //implementation "com.github.stephengold:Wes:$wesVersion"
+    //implementation 'com.github.stephengold:Wes' + wesVersion
     implementation project(':WesLibrary')
 }
 

@@ -8,7 +8,7 @@ plugins {
     id 'signing'
 }
 
-description = 'An animation editing/retargeting library for jMonkeyEngine.'
+description = 'An animation editing/retargeting library for jMonkeyEngine'
 ext {
     group = 'com.github.stephengold'
     artifact = 'Wes'
