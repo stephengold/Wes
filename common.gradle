@@ -2,6 +2,11 @@
 
 apply plugin: 'java'
 
+ext { // current versions of various libraries:
+    jme3Version = '3.4.0-stable'
+    wesVersion = '0.6.8-SNAPSHOT'
+}
+
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
@@ -26,26 +31,23 @@ gradle.projectsEvaluated {
     }
 }
 
-ext { // current versions of various libraries:
-    jme3Version = '3.4.0-stable'
-    wesVersion = '0.6.8-SNAPSHOT'
-}
-
 repositories {
     //mavenLocal()
     mavenCentral()
 }
 
 // custom tasks for creating source/javadoc JARs
-task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    description 'Creates a JAR of sourcecode.'
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from sourceSets.main.allJava
-}
+
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    description 'Creates a JAR of sourcecode.'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from sourceSets.main.allJava
 }
