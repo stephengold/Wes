@@ -16,20 +16,21 @@ jar.manifest.attributes('Main-Class': mainClassName)
 
 dependencies {
     implementation 'com.github.stephengold:jme3-utilities-ui:0.9.5'
-    implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jmonkeyengineVersion
-    implementation 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jmonkeyengineVersion
+    implementation 'org.jmonkeyengine:jme3-desktop:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
+    implementation 'org.jmonkeyengine:jme3-plugins:' + jme3Version
+    runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jme3Version
 
     // WesExamples doesn't use jme3-jogg
     //  -- it is included solely to avoid warnings from AssetConfig
-    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jmonkeyengineVersion
+    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
 
-    //implementation "jme3utilities:Wes:$wesVersion"
+    //implementation "com.github.stephengold:Wes:$wesVersion"
     implementation project(':WesLibrary')
 }
 
 // cleanup tasks
+
 clean.dependsOn('cleanDLLs', 'cleanDyLibs', 'cleanLogs', 'cleanSOs', 'cleanWrittenAssets')
 
 task cleanDLLs(type: Delete) {
@@ -48,7 +49,8 @@ task cleanWrittenAssets(type: Delete) {
     delete 'Written Assets'
 }
 
-// run the example apps
+// tasks to run the example apps
+
 task runFlashMobDemo(type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.FlashMobDemo'
 }

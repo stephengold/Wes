@@ -1,4 +1,4 @@
-// Gradle settings and tasks common to all subprojects
+// Gradle settings and tasks common to all Wes subprojects
 
 apply plugin: 'java'
 
@@ -28,7 +28,7 @@ gradle.projectsEvaluated {
 
 ext {
     // current versions of various libraries
-    jmonkeyengineVersion = '3.4.0-stable'
+    jme3Version = '3.4.0-stable'
     wesVersion = '0.6.8-SNAPSHOT'
 }
 
