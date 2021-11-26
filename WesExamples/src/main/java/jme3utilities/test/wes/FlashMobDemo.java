@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2020, Stephen Gold
+ Copyright (c) 2019-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -86,7 +86,8 @@ public class FlashMobDemo extends ActionApplication {
     // constants and loggers
 
     /**
-     * speed setting to effectively freeze animations without freezing the camera
+     * speed setting to effectively freeze animations without freezing the
+     * camera
      */
     final private static float pausedSpeed = 1e-12f;
     /**

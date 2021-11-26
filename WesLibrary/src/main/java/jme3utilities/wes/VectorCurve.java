@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2019, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -263,8 +263,8 @@ public class VectorCurve {
     }
 
     /**
-     * Alter the auxiliary slopes/values for the indexed interval.
-     * Used only for splines.
+     * Alter the auxiliary slopes/values for the indexed interval. Used only for
+     * splines.
      *
      * @param index which interval (&ge;0, &le;lastIndex)
      * @param auxPoint1 the first control point for interval (not null, alias
