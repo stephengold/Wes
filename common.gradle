@@ -18,14 +18,11 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 }
 
 tasks.withType(JavaExec) { // Java runtime options:
-    classpath sourceSets.main.runtimeClasspath
-    //debug true
     enableAssertions true
     //jvmArgs '-verbose:gc'
     //jvmArgs '-Xbatch'
     //jvmArgs '-Xms512m', '-Xmx512m'
     //jvmArgs '-XX:+PrintCompilation'
-    //jvmArgs '-XX:+UseConcMarkSweepGC'
     jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
 }
 
