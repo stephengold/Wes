@@ -96,16 +96,14 @@ public enum TweenVectors {
         assert time >= times[0] : time;
         Validate.nonNull(samples, "samples");
         assert times.length == samples.length;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         int index1 = MyArray.findPreviousIndex(time, times);
         Vector3f v1 = samples[index1];
         int last = times.length - 1;
         if (index1 == last) {
-            storeResult.set(v1);
-            return storeResult;
+            result.set(v1);
+            return result;
         }
 
         int index2 = index1 + 1;
@@ -139,7 +137,7 @@ public enum TweenVectors {
                     m2 = slope(inter12, inter23, v1, v2, v3, null);
                 }
 
-                cubicSpline(t, inter12, v1, v2, m1, m2, storeResult);
+                cubicSpline(t, inter12, v1, v2, m1, m2, result);
                 break;
 
             case CentripetalSpline:
@@ -171,14 +169,14 @@ public enum TweenVectors {
                     v3 = samples[index3];
                 }
 
-                centripetal(t, v0, v1, v2, v3, storeResult);
+                centripetal(t, v0, v1, v2, v3, result);
                 break;
 
             default:
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -200,24 +198,22 @@ public enum TweenVectors {
         assert times.length == samples.length;
         int last = times.length - 1;
         assert cycleTime >= times[last] : cycleTime;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         if (last == 0 || time < times[0] || MyArray.countNe(samples) == 1) {
-            storeResult.set(samples[0]);
-            return storeResult;
+            result.set(samples[0]);
+            return result;
         }
 
         switch (this) {
             case CentripetalSpline:
             case CatmullRomSpline:
             case FdcSpline:
-                cubicSpline(time, times, samples, storeResult);
+                cubicSpline(time, times, samples, result);
                 break;
 
             case Lerp:
-                lerp(time, times, samples, storeResult);
+                lerp(time, times, samples, result);
                 break;
 
             case LoopCentripetalSpline:
@@ -226,13 +222,13 @@ public enum TweenVectors {
                 if (times[last] == cycleTime) {
                     if (last > 1) { // ignore the final point
                         loopCubicSpline(time, last - 1, times, cycleTime,
-                                samples, storeResult);
+                                samples, result);
                     } else { // fall back on acyclic
-                        cubicSpline(time, times, samples, storeResult);
+                        cubicSpline(time, times, samples, result);
                     }
                 } else {
                     loopCubicSpline(time, last, times, cycleTime, samples,
-                            storeResult);
+                            result);
                 }
                 break;
 
@@ -240,13 +236,12 @@ public enum TweenVectors {
                 if (times[last] == cycleTime) {
                     if (last > 1) { // ignore the final point
                         loopLerp(time, last - 1, times, cycleTime, samples,
-                                storeResult);
+                                result);
                     } else { // fall back on acyclic
-                        lerp(time, times, samples, storeResult);
+                        lerp(time, times, samples, result);
                     }
                 } else {
-                    loopLerp(time, last, times, cycleTime, samples,
-                            storeResult);
+                    loopLerp(time, last, times, cycleTime, samples, result);
                 }
                 break;
 
@@ -254,7 +249,7 @@ public enum TweenVectors {
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -269,9 +264,7 @@ public enum TweenVectors {
     public Vector3f interpolate(float time, VectorCurve curve,
             Vector3f storeResult) {
         Validate.nonNull(curve, "curve");
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         switch (this) {
             case CatmullRomSpline:
@@ -280,7 +273,7 @@ public enum TweenVectors {
             case LoopCatmullRomSpline:
             case LoopCentripetalSpline:
             case LoopFdcSpline:
-                spline(time, curve, storeResult);
+                spline(time, curve, result);
                 break;
 
             case Lerp:
@@ -288,14 +281,14 @@ public enum TweenVectors {
                 float[] times = curve.getTimes();
                 float cycleTime = curve.getCycleTime();
                 Vector3f[] samples = curve.getSamples();
-                interpolate(time, times, cycleTime, samples, storeResult);
+                interpolate(time, times, cycleTime, samples, result);
                 break;
 
             default:
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -318,25 +311,23 @@ public enum TweenVectors {
         assert time >= times[0] : time;
         Validate.nonNull(samples, "samples");
         assert times.length == samples.length;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         int index1 = MyArray.findPreviousIndex(time, times);
         Vector3f v1 = samples[index1];
 
         if (index1 >= times.length - 1) { // the last point
-            storeResult.set(samples[index1]);
+            result.set(samples[index1]);
         } else {
             int index2 = index1 + 1;
             float inter12 = times[index2] - times[index1];
             assert inter12 > 0f : inter12;
             float t = (time - times[index1]) / inter12;
             Vector3f v2 = samples[index2];
-            MyVector3f.lerp(t, v1, v2, storeResult);
+            MyVector3f.lerp(t, v1, v2, result);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -383,6 +374,7 @@ public enum TweenVectors {
         int index0, index3;
         float t = (time - times[index1]) / inter12;
 
+        Vector3f result;
         switch (this) {
             case LoopCatmullRomSpline:
             case LoopFdcSpline:
@@ -414,8 +406,7 @@ public enum TweenVectors {
                 Vector3f m1 = slope(inter01, inter12, v0, v1, v2, null);
                 Vector3f m2 = slope(inter12, inter23, v1, v2, v3, null);
 
-                storeResult = cubicSpline(t, inter12, v1, v2, m1, m2,
-                        storeResult);
+                result = cubicSpline(t, inter12, v1, v2, m1, m2, storeResult);
                 break;
 
             case LoopCentripetalSpline:
@@ -437,14 +428,14 @@ public enum TweenVectors {
 
                 v0 = samples[index0];
                 v3 = samples[index3];
-                storeResult = centripetal(t, v0, v1, v2, v3, storeResult);
+                result = centripetal(t, v0, v1, v2, v3, storeResult);
                 break;
 
             default:
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -469,9 +460,6 @@ public enum TweenVectors {
         assert times.length > last : times.length;
         assert samples.length > last : samples.length;
         assert cycleTime > times[last] : cycleTime;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
 
         int index1 = MyArray.findPreviousIndex(time, times);
         int index2; // keyframe index
@@ -488,9 +476,9 @@ public enum TweenVectors {
         float t = (time - times[index1]) / interval;
         Vector3f v1 = samples[index1];
         Vector3f v2 = samples[index2];
-        MyVector3f.lerp(t, v1, v2, storeResult);
+        Vector3f result = MyVector3f.lerp(t, v1, v2, storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -568,27 +556,25 @@ public enum TweenVectors {
         assert v1 != null;
         assert v2 != null;
         assert v3 != null;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         double ds12 = MyVector3f.distanceSquared(v1, v2);
         if (ds12 == 0.0) {
-            storeResult.set(v1);
+            result.set(v1);
         } else {
             float dt12 = (float) MyMath.fourthRoot(ds12);
             if (dt12 == 0f) {
-                storeResult.set(v1);
+                result.set(v1);
             } else {
                 double ds01 = MyVector3f.distanceSquared(v0, v1);
                 double ds23 = MyVector3f.distanceSquared(v2, v3);
                 float dt01 = (float) MyMath.fourthRoot(ds01);
                 float dt23 = (float) MyMath.fourthRoot(ds23);
-                centripetal(tt, v0, v1, v2, v3, dt01, dt12, dt23, storeResult);
+                centripetal(tt, v0, v1, v2, v3, dt01, dt12, dt23, result);
             }
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -617,9 +603,6 @@ public enum TweenVectors {
         assert dt01 > 0f : dt01;
         assert dt12 > 0f : dt12;
         assert dt23 > 0f : dt23;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
 
         float t = tt * dt12;
 
@@ -630,9 +613,9 @@ public enum TweenVectors {
         Vector3f b1 = MyVector3f.lerp((t + dt01) / (dt01 + dt12), a1, a2, null);
         Vector3f b2 = MyVector3f.lerp(t / (dt12 + dt23), a2, a3, null);
 
-        MyVector3f.lerp(t, b1, b2, storeResult);
+        Vector3f result = MyVector3f.lerp(t, b1, b2, storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -656,9 +639,7 @@ public enum TweenVectors {
         assert v2 != null;
         assert m1 != null;
         assert m2 != null;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         /*
          * Evaluate the 4 Hermite basis functions, which are all cubic.
          */
@@ -669,13 +650,13 @@ public enum TweenVectors {
         float h10 = t * u2;
         float h11 = t * t * (t - 1f);
 
-        storeResult.set(v1);
-        storeResult.multLocal(h00);
-        MyVector3f.accumulateScaled(storeResult, v2, h01);
-        MyVector3f.accumulateScaled(storeResult, m1, interval * h10);
-        MyVector3f.accumulateScaled(storeResult, m2, interval * h11);
+        result.set(v1);
+        result.multLocal(h00);
+        MyVector3f.accumulateScaled(result, v2, h01);
+        MyVector3f.accumulateScaled(result, m1, interval * h10);
+        MyVector3f.accumulateScaled(result, m2, interval * h11);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -919,8 +900,8 @@ public enum TweenVectors {
     }
 
     /**
-     * Estimate the first derivative of an unknown function between 2 indexed
-     * points.
+     * Estimate the first derivative of an unknown function between 2 points.
+     * TODO use MyVector3f.velocity()
      *
      * @param dt length of the interval (&gt;0)
      * @param v1 function value at the start point (not null, unaffected)
@@ -933,16 +914,11 @@ public enum TweenVectors {
         assert dt > 0f : dt;
         assert v1 != null;
         assert v2 != null;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
 
-        storeResult.x = v2.x - v1.x;
-        storeResult.y = v2.y - v1.y;
-        storeResult.z = v2.z - v1.z;
-        storeResult.divideLocal(dt);
+        Vector3f result = v2.subtract(v1, storeResult);
+        result.divideLocal(dt);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -964,32 +940,28 @@ public enum TweenVectors {
         assert v0 != null;
         assert v1 != null;
         assert v2 != null;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         switch (this) {
             case CatmullRomSpline:
             case LoopCatmullRomSpline:
                 float dt02 = dt01 + dt12;
-                storeResult.x = (v2.x - v0.x) / dt02;
-                storeResult.y = (v2.y - v0.y) / dt02;
-                storeResult.z = (v2.z - v0.z) / dt02;
+                slope(dt02, v0, v2, result);
                 break;
 
             case FdcSpline:
             case LoopFdcSpline:
-                storeResult.x = (v1.x - v0.x) / dt01 + (v2.x - v1.x) / dt12;
-                storeResult.y = (v1.y - v0.y) / dt01 + (v2.y - v1.y) / dt12;
-                storeResult.z = (v1.z - v0.z) / dt01 + (v2.z - v1.z) / dt12;
-                storeResult.divideLocal(2f);
+                result.x = (v1.x - v0.x) / dt01 + (v2.x - v1.x) / dt12;
+                result.y = (v1.y - v0.y) / dt01 + (v2.y - v1.y) / dt12;
+                result.z = (v1.z - v0.z) / dt01 + (v2.z - v1.z) / dt12;
+                result.divideLocal(2f);
                 break;
 
             default:
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -1004,9 +976,7 @@ public enum TweenVectors {
     private Vector3f spline(float time, VectorCurve curve,
             Vector3f storeResult) {
         assert time >= 0f : time;
-        if (storeResult == null) {
-            storeResult = new Vector3f();
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         float cycleTime = curve.getCycleTime();
         assert time <= cycleTime : time;
 
@@ -1029,21 +999,20 @@ public enum TweenVectors {
             case LoopFdcSpline:
                 Vector3f m1 = curve.getAux1(index1);
                 Vector3f m2 = curve.getAux2(index1);
-                cubicSpline(t, intervalDuration, v1, v2, m1, m2, storeResult);
+                cubicSpline(t, intervalDuration, v1, v2, m1, m2, result);
                 break;
 
             case CentripetalSpline:
             case LoopCentripetalSpline:
                 float dt12 = curve.getDt12(index1);
                 if (dt12 == 0f) {
-                    storeResult.set(v1);
+                    result.set(v1);
                 } else {
                     Vector3f v0 = curve.getAux1(index1);
                     Vector3f v3 = curve.getAux2(index1);
                     float dt01 = curve.getDt01(index1);
                     float dt23 = curve.getDt23(index1);
-                    centripetal(t, v0, v1, v2, v3, dt01, dt12, dt23,
-                            storeResult);
+                    centripetal(t, v0, v1, v2, v3, dt01, dt12, dt23, result);
                 }
                 break;
 
@@ -1051,6 +1020,6 @@ public enum TweenVectors {
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 }

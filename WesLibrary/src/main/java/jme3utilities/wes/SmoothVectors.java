@@ -73,27 +73,31 @@ public enum SmoothVectors {
         int last = times.length - 1;
         assert cycleTime >= times[last] : cycleTime;
         Validate.inRange(width, "width", 0f, cycleTime);
+
+        Vector3f[] result;
         if (storeResult == null) {
-            storeResult = new Vector3f[times.length];
+            result = new Vector3f[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         switch (this) {
             case Lerp:
-                lerp(times, samples, width, storeResult);
+                lerp(times, samples, width, result);
                 break;
 
             case LoopLerp:
                 if (times[last] == cycleTime) {
                     if (last > 1) { // ignore the final point
                         loopLerp(last - 1, times, cycleTime, samples, width,
-                                storeResult);
-                        storeResult[last] = storeResult[0].clone();
+                                result);
+                        result[last] = result[0].clone();
                     } else { // fall back on acyclic
-                        lerp(times, samples, width, storeResult);
+                        lerp(times, samples, width, result);
                     }
                 } else {
-                    loopLerp(last, times, cycleTime, samples, width,
-                            storeResult);
+                    loopLerp(last, times, cycleTime, samples, width, result);
                 }
                 break;
 
@@ -101,7 +105,7 @@ public enum SmoothVectors {
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -124,17 +128,22 @@ public enum SmoothVectors {
         Validate.nonNull(samples, "samples");
         assert times.length == samples.length;
         Validate.nonNegative(width, "width");
+
+        Vector3f[] result;
         if (storeResult == null) {
-            storeResult = new Vector3f[times.length];
+            result = new Vector3f[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         int last = times.length - 1;
         float halfWidth = width / 2f;
         for (int i = 0; i <= last; ++i) {
-            Vector3f sumVector = storeResult[i];
+            Vector3f sumVector = result[i];
             if (sumVector == null) {
                 sumVector = new Vector3f();
-                storeResult[i] = sumVector;
+                result[i] = sumVector;
             } else {
                 sumVector.zero();
             }
@@ -154,7 +163,7 @@ public enum SmoothVectors {
             sumVector.divideLocal(sumWeight);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -180,16 +189,21 @@ public enum SmoothVectors {
         assert samples.length > last : samples.length;
         assert cycleTime > times[last] : cycleTime;
         Validate.inRange(width, "width", 0f, cycleTime);
+
+        Vector3f[] result;
         if (storeResult == null) {
-            storeResult = new Vector3f[times.length];
+            result = new Vector3f[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         float halfWidth = width / 2f;
         for (int i = 0; i <= last; ++i) {
-            Vector3f sumVector = storeResult[i];
+            Vector3f sumVector = result[i];
             if (sumVector == null) {
                 sumVector = new Vector3f();
-                storeResult[i] = sumVector;
+                result[i] = sumVector;
             } else {
                 sumVector.zero();
             }
@@ -212,6 +226,6 @@ public enum SmoothVectors {
             sumVector.divideLocal(sumWeight);
         }
 
-        return storeResult;
+        return result;
     }
 }

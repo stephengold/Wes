@@ -118,10 +118,10 @@ public class TweenTransforms implements Cloneable {
         Quaternion[] rotations = MyAnimation.getRotations(track);
         Vector3f[] scales = MyAnimation.getScales(track);
 
-        storeResult = interpolate(time, times, duration, translations,
+        Transform result = interpolate(time, times, duration, translations,
                 rotations, scales, fallback, storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -177,30 +177,29 @@ public class TweenTransforms implements Cloneable {
             Transform fallback, Transform storeResult) {
         Validate.inRange(time, "time", 0f, duration);
         Validate.nonNull(times, "times");
-        if (storeResult == null) {
-            storeResult = new Transform();
-        }
+        Transform result
+                = (storeResult == null) ? new Transform() : storeResult;
 
         if (fallback == null) {
-            storeResult.loadIdentity();
+            result.loadIdentity();
         } else {
-            storeResult.set(fallback);
+            result.set(fallback);
         }
 
         if (translations != null) {
             tweenTranslations.interpolate(time, times, duration, translations,
-                    storeResult.getTranslation());
+                    result.getTranslation());
         }
         if (rotations != null) {
             tweenRotations.interpolate(time, times, duration, rotations,
-                    storeResult.getRotation());
+                    result.getRotation());
         }
         if (scales != null) {
             tweenScales.interpolate(time, times, duration, scales,
-                    storeResult.getScale());
+                    result.getScale());
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -365,9 +364,8 @@ public class TweenTransforms implements Cloneable {
     public Transform transform(Track track, float time, float duration,
             Transform fallback, Transform storeResult) {
         assert track instanceof BoneTrack || track instanceof SpatialTrack;
-        if (storeResult == null) {
-            storeResult = new Transform();
-        }
+        Transform result
+                = (storeResult == null) ? new Transform() : storeResult;
 
         float[] times = track.getKeyFrameTimes();
         int lastFrame = times.length - 1;
@@ -381,15 +379,15 @@ public class TweenTransforms implements Cloneable {
             /*
              * Copy the transform of the first frame.
              */
-            storeResult.loadIdentity();
+            result.loadIdentity();
             if (translations != null) {
-                storeResult.setTranslation(translations[0]);
+                result.setTranslation(translations[0]);
             }
             if (rotations != null) {
-                storeResult.setRotation(rotations[0]);
+                result.setRotation(rotations[0]);
             }
             if (scales != null) {
-                storeResult.setScale(scales[0]);
+                result.setScale(scales[0]);
             }
 
         } else {
@@ -397,10 +395,10 @@ public class TweenTransforms implements Cloneable {
              * Interpolate between frames.
              */
             interpolate(time, times, duration, translations, rotations, scales,
-                    fallback, storeResult);
+                    fallback, result);
         }
 
-        return storeResult;
+        return result;
     }
     // *************************************************************************
     // Object methods

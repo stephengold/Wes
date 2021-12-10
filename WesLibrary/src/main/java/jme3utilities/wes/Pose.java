@@ -376,9 +376,9 @@ public class Pose implements JmeCloneable {
          */
         Transform userTransform = transforms.get(boneIndex);
         Quaternion userRotation = userTransform.getRotation();
-        storeResult = bindRotation.mult(userRotation, storeResult);
+        Quaternion result = bindRotation.mult(userRotation, storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -394,17 +394,17 @@ public class Pose implements JmeCloneable {
         /*
          * Start with the local bind transform.
          */
-        storeResult = bindTransform(boneIndex, storeResult);
+        Transform result = bindTransform(boneIndex, storeResult);
         /*
          * Apply the user/animation transform in a simple (yet peculiar) way
          * to obtain the local transform.
          */
         Transform user = userTransform(boneIndex, null);
-        storeResult.getTranslation().addLocal(user.getTranslation());
-        storeResult.getRotation().multLocal(user.getRotation());
-        storeResult.getScale().multLocal(user.getScale());
+        result.getTranslation().addLocal(user.getTranslation());
+        result.getRotation().multLocal(user.getRotation());
+        result.getScale().multLocal(user.getScale());
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -418,15 +418,11 @@ public class Pose implements JmeCloneable {
     public Vector3f modelLocation(int boneIndex, Vector3f storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
 
-        Transform modelTransform = modelTransform(boneIndex, null);
-        Vector3f modelLocation = modelTransform.getTranslation();
-        if (storeResult == null) {
-            storeResult = modelLocation;
-        } else {
-            storeResult.set(modelLocation);
-        }
+        Transform modelTransform
+                = modelTransform(boneIndex, null); // TODO garbage
+        Vector3f result = modelTransform.getTranslation(storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -440,46 +436,39 @@ public class Pose implements JmeCloneable {
     public Quaternion modelOrientation(int boneIndex, Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
 
+        boolean isRoot;
+        int parentIndex;
         if (skeleton == null) {
             Joint joint = armature.getJoint(boneIndex);
             Joint parentJoint = joint.getParent();
-            if (parentJoint == null) {
-                /*
-                 * For a root joint, use the local rotation.
-                 */
-                storeResult = localRotation(boneIndex, storeResult);
-            } else {
-                int parentIndex = parentJoint.getId();
-                /*
-                 * For a non-root joint, use the parent's model orientation
-                 * times the local rotation.
-                 */
-                storeResult = modelOrientation(parentIndex, storeResult);
-                Quaternion localRotation = localRotation(boneIndex, null);
-                storeResult.multLocal(localRotation);
-            }
-
+            isRoot = (parentJoint == null);
+            parentIndex = armature.getJointIndex(parentJoint);
         } else {
             Bone bone = skeleton.getBone(boneIndex);
             Bone parentBone = bone.getParent();
-            if (parentBone == null) {
-                /*
-                 * For a root bone, use the local rotation.
-                 */
-                storeResult = localRotation(boneIndex, storeResult);
-            } else {
-                int parentIndex = skeleton.getBoneIndex(parentBone);
-                /*
-                 * For a non-root bone, use the parent's model orientation
-                 * times the local rotation.
-                 */
-                storeResult = modelOrientation(parentIndex, storeResult);
-                Quaternion localRotation = localRotation(boneIndex, null);
-                storeResult.multLocal(localRotation);
-            }
+            isRoot = (parentBone == null);
+            parentIndex = skeleton.getBoneIndex(parentBone);
         }
 
-        return storeResult;
+        Quaternion result
+                = (storeResult == null) ? new Quaternion() : storeResult;
+        if (isRoot) {
+            /*
+             * For a root joint/bone, use the local rotation.
+             */
+            localRotation(boneIndex, result);
+        } else {
+            /*
+             * For a non-root joint/bone, use the parent's model orientation
+             * times the local rotation.
+             */
+            modelOrientation(parentIndex, result);
+            Quaternion localRotation
+                    = localRotation(boneIndex, null); // TODO garbage
+            result.multLocal(localRotation);
+        }
+
+        return result;
     }
 
     /**
@@ -496,7 +485,7 @@ public class Pose implements JmeCloneable {
         /*
          * Start with the joint/bone local transform.
          */
-        storeResult = localTransform(boneIndex, storeResult);
+        Transform result = localTransform(boneIndex, storeResult);
 
         Transform parent = null;
         if (skeleton == null) {
@@ -517,14 +506,14 @@ public class Pose implements JmeCloneable {
         }
 
         if (parent != null) {
-            Transform local = storeResult.clone();
+            Transform local = result.clone();
             /*
              * Apply the parent's model transform in a very peculiar way
              * to obtain the bone's model transform.
              */
-            Vector3f mTranslation = storeResult.getTranslation();
-            Quaternion mRotation = storeResult.getRotation();
-            Vector3f mScale = storeResult.getScale();
+            Vector3f mTranslation = result.getTranslation();
+            Quaternion mRotation = result.getRotation();
+            Vector3f mScale = result.getScale();
             parent.getRotation().mult(local.getRotation(), mRotation);
             parent.getScale().mult(local.getScale(), mScale);
             parent.getRotation().mult(local.getTranslation(), mTranslation);
@@ -532,7 +521,7 @@ public class Pose implements JmeCloneable {
             mTranslation.addLocal(parent.getTranslation());
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -809,10 +798,12 @@ public class Pose implements JmeCloneable {
      */
     public Matrix4f[] skin(Matrix4f[] storeResult) {
         int numBones = transforms.size();
+        Matrix4f[] result;
         if (storeResult == null) {
-            storeResult = new Matrix4f[numBones];
+            result = new Matrix4f[numBones];
         } else {
-            assert storeResult.length >= numBones : numBones;
+            result = storeResult;
+            assert result.length >= numBones : numBones;
         }
         /*
          * Allocate temporary storage.
@@ -829,10 +820,10 @@ public class Pose implements JmeCloneable {
 
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             modelTransform(boneIndex, msTransform);
-            Matrix4f matrix4f = storeResult[boneIndex];
+            Matrix4f matrix4f = result[boneIndex];
             if (matrix4f == null) {
                 matrix4f = new Matrix4f();
-                storeResult[boneIndex] = matrix4f;
+                result[boneIndex] = matrix4f;
             }
             /*
              * Calculate the skinning transform for the joint/bone.
@@ -865,7 +856,7 @@ public class Pose implements JmeCloneable {
             }
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -923,9 +914,9 @@ public class Pose implements JmeCloneable {
             local = localForModel(bone, modelOrientation, null);
         }
         Quaternion inverseBind = bind.inverse();
-        storeResult = inverseBind.mult(local, storeResult);
+        Quaternion result = inverseBind.mult(local, storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -939,9 +930,9 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
 
         Transform transform = transforms.get(boneIndex);
-        storeResult = transform.getRotation(storeResult);
+        Quaternion result = transform.getRotation(storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -956,9 +947,9 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
 
         Transform transform = transforms.get(boneIndex);
-        storeResult = transform.getScale(storeResult);
+        Vector3f result = transform.getScale(storeResult);
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -970,14 +961,13 @@ public class Pose implements JmeCloneable {
      */
     public Transform userTransform(int boneIndex, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        if (storeResult == null) {
-            storeResult = new Transform();
-        }
 
         Transform transform = transforms.get(boneIndex);
-        storeResult.set(transform);
-
-        return storeResult;
+        if (storeResult == null) {
+            return transform.clone();
+        } else {
+            return storeResult.set(transform);
+        }
     }
 
     /**
@@ -991,9 +981,9 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
 
         Transform transform = transforms.get(boneIndex);
-        storeResult = transform.getTranslation(storeResult);
+        Vector3f result = transform.getTranslation(storeResult);
 
-        return storeResult;
+        return result;
     }
     // *************************************************************************
     // JmeCloneable methods
@@ -1059,13 +1049,12 @@ public class Pose implements JmeCloneable {
             Quaternion storeResult) {
         assert bone != null;
         assert modelOrientation != null;
-        if (storeResult == null) {
-            storeResult = new Quaternion();
-        }
+        Quaternion result
+                = (storeResult == null) ? new Quaternion() : storeResult;
 
         Bone parent = bone.getParent();
         if (parent == null) {
-            storeResult.set(modelOrientation);
+            result.set(modelOrientation);
         } else {
             /*
              * Factor in the orientation of the parent bone.
@@ -1073,10 +1062,10 @@ public class Pose implements JmeCloneable {
             int parentIndex = skeleton.getBoneIndex(parent);
             Quaternion parentMo = modelOrientation(parentIndex, null);
             Quaternion parentImo = parentMo.inverse();
-            parentImo.mult(modelOrientation, storeResult);
+            parentImo.mult(modelOrientation, result);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -1092,13 +1081,12 @@ public class Pose implements JmeCloneable {
             Quaternion storeResult) {
         assert joint != null;
         assert modelOrientation != null;
-        if (storeResult == null) {
-            storeResult = new Quaternion();
-        }
+        Quaternion result
+                = (storeResult == null) ? new Quaternion() : storeResult;
 
         Joint parent = joint.getParent();
         if (parent == null) {
-            storeResult.set(modelOrientation);
+            result.set(modelOrientation);
         } else {
             /*
              * Factor in the orientation of the parent joint.
@@ -1106,10 +1094,10 @@ public class Pose implements JmeCloneable {
             int parentIndex = parent.getId();
             Quaternion parentMo = modelOrientation(parentIndex, null);
             Quaternion parentImo = parentMo.inverse();
-            parentImo.mult(modelOrientation, storeResult);
+            parentImo.mult(modelOrientation, result);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**

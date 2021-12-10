@@ -74,27 +74,31 @@ public enum SmoothRotations {
         int last = times.length - 1;
         assert cycleTime >= times[last] : cycleTime;
         Validate.inRange(width, "width", 0f, cycleTime);
+
+        Quaternion[] result;
         if (storeResult == null) {
-            storeResult = new Quaternion[times.length];
+            result = new Quaternion[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         switch (this) {
             case Nlerp:
-                lerp(times, samples, width, storeResult);
+                lerp(times, samples, width, result);
                 break;
 
             case LoopNlerp:
                 if (times[last] == cycleTime) {
                     if (last > 1) { // ignore the final point
                         loopLerp(last - 1, times, cycleTime, samples, width,
-                                storeResult);
-                        storeResult[last] = storeResult[0].clone();
+                                result);
+                        result[last] = result[0].clone();
                     } else { // fall back on acyclic
-                        lerp(times, samples, width, storeResult);
+                        lerp(times, samples, width, result);
                     }
                 } else {
-                    loopLerp(last, times, cycleTime, samples, width,
-                            storeResult);
+                    loopLerp(last, times, cycleTime, samples, width, result);
                 }
                 break;
 
@@ -102,7 +106,7 @@ public enum SmoothRotations {
                 throw new IllegalStateException("this = " + this);
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -125,17 +129,22 @@ public enum SmoothRotations {
         Validate.nonNull(samples, "samples");
         assert times.length == samples.length;
         Validate.nonNegative(width, "width");
+
+        Quaternion[] result;
         if (storeResult == null) {
-            storeResult = new Quaternion[times.length];
+            result = new Quaternion[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         int last = times.length - 1;
         float halfWidth = width / 2f;
         for (int i = 0; i <= last; ++i) {
-            Quaternion sumQuaternion = storeResult[i];
+            Quaternion sumQuaternion = result[i];
             if (sumQuaternion == null) {
                 sumQuaternion = new Quaternion();
-                storeResult[i] = sumQuaternion;
+                result[i] = sumQuaternion;
             } else {
                 sumQuaternion.set(0f, 0f, 0f, 0f);
             }
@@ -156,7 +165,7 @@ public enum SmoothRotations {
             sumQuaternion.normalizeLocal();
         }
 
-        return storeResult;
+        return result;
     }
 
     /**
@@ -182,16 +191,20 @@ public enum SmoothRotations {
         assert samples.length > last : samples.length;
         assert cycleTime > times[last] : cycleTime;
         Validate.inRange(width, "width", 0f, cycleTime);
+        Quaternion[] result;
         if (storeResult == null) {
-            storeResult = new Quaternion[times.length];
+            result = new Quaternion[times.length];
+        } else {
+            result = storeResult;
+            assert result.length >= times.length;
         }
 
         float halfWidth = width / 2f;
         for (int i = 0; i <= last; ++i) {
-            Quaternion sumQuaternion = storeResult[i];
+            Quaternion sumQuaternion = result[i];
             if (sumQuaternion == null) {
                 sumQuaternion = new Quaternion();
-                storeResult[i] = sumQuaternion;
+                result[i] = sumQuaternion;
             } else {
                 sumQuaternion.set(0f, 0f, 0f, 0f);
             }
@@ -215,6 +228,6 @@ public enum SmoothRotations {
             sumQuaternion.normalizeLocal();
         }
 
-        return storeResult;
+        return result;
     }
 }
