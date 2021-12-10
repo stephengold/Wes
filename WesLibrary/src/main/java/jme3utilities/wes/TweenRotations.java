@@ -431,6 +431,27 @@ public enum TweenRotations {
     // private methods
 
     /**
+     * Set the sign of the specified Quaternion so that its dot product with
+     * another Quaternion is non-negative.
+     *
+     * @param qa the Quaternion to test (not null, unaffected)
+     * @param qb the Quaternion for comparison (not null, unaffected)
+     * @return a new instance if qa . qb &lt 0, otherwise qa
+     */
+    private static Quaternion align(Quaternion qa, Quaternion qb) {
+        Quaternion result;
+
+        if (qa.dot(qb) < 0f) {
+            result = qa.clone();
+            result.negate(); // modifies result!
+        } else {
+            result = qa;
+        }
+
+        return result;
+    }
+
+    /**
      * Interpolate between the 2 middle unit quaternions in a sequence of 4
      * using cubic-spline interpolation based on the Squad function.
      *
@@ -451,21 +472,9 @@ public enum TweenRotations {
          * Flip signs as necessary to make dot products of successive
          * sampled values non-negative.
          */
-        Quaternion qq0 = q0;
-        Quaternion qq2 = q2;
-        Quaternion qq3 = q3;
-        if (qq0.dot(q1) < 0f) {
-            qq0 = qq0.clone();
-            qq0.negate();
-        }
-        if (q1.dot(qq2) < 0f) {
-            qq2 = qq2.clone();
-            qq2.negate();
-        }
-        if (qq2.dot(qq3) < 0f) {
-            qq3 = qq3.clone();
-            qq3.negate();
-        }
+        Quaternion qq0 = align(q0, q1);
+        Quaternion qq2 = align(q2, q1);
+        Quaternion qq3 = align(q3, qq2);
         /*
          * Calculate Squad parameter "a" at either end of the central interval.
          */
@@ -561,7 +570,7 @@ public enum TweenRotations {
         Quaternion a2 = curve.getControlPoint2(index1);
         Quaternion q1 = curve.getStartValue(index1);
         Quaternion q2 = curve.getEndValue(index1);
-        Quaternion result= MyQuaternion.squad(t, q1, a1, a2, q2, storeResult);
+        Quaternion result = MyQuaternion.squad(t, q1, a1, a2, q2, storeResult);
 
         return result;
     }
@@ -586,21 +595,9 @@ public enum TweenRotations {
          * Flip signs as necessary to make dot products of successive
          * sampled values non-negative.
          */
-        Quaternion qq0 = q0;
-        Quaternion qq2 = q2;
-        Quaternion qq3 = q3;
-        if (qq0.dot(q1) < 0f) {
-            qq0 = qq0.clone();
-            qq0.negate();
-        }
-        if (q1.dot(qq2) < 0f) {
-            qq2 = qq2.clone();
-            qq2.negate();
-        }
-        if (qq2.dot(qq3) < 0f) {
-            qq3 = qq3.clone();
-            qq3.negate();
-        }
+        Quaternion qq0 = align(q0, q1);
+        Quaternion qq2 = align(q2, q1);
+        Quaternion qq3 = align(q3, qq2);
         curve.setParameters(index1, qq2, inter12);
 
         Quaternion a = MyQuaternion.squadA(qq0, q1, qq2, null);
