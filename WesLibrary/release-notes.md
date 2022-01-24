@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.6.8: released on TBD
+## Version 0.6.8: released on 23 January 2022
 
  + Bugfix:  logic error in the `TrackEdit.behead()` method
  + Deleted the `Pose.clone()` method.
