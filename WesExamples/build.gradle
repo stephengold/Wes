@@ -15,7 +15,7 @@ if (!hasProperty('mainClass')) {
 jar.manifest.attributes('Main-Class': mainClassName)
 
 dependencies {
-    implementation 'com.github.stephengold:jme3-utilities-ui:0.9.5'
+    implementation 'com.github.stephengold:jme3-utilities-ui:0.9.6'
     implementation 'org.jmonkeyengine:jme3-desktop:' + jme3Version
     runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
     implementation 'org.jmonkeyengine:jme3-plugins:' + jme3Version
