@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -2011,8 +2011,8 @@ public class TrackEdit {
     }
 
     /**
-     * Copy a TransformTrack, deleting the scale component if it consists
-     * entirely of identities. TODO handle translation and rotation identities
+     * Copy a TransformTrack, deleting any components that consist entirely of
+     * identities.
      *
      * @param oldTrack the input track (not null, unaffected)
      * @return a new TransformTrack with the same target
@@ -2023,6 +2023,7 @@ public class TrackEdit {
         float[] oldTimes = oldTrack.getTimes();
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
+
         Vector3f[] oldScales = oldTrack.getScales();
         if (oldScales != null) {
             for (int index = 0; index < numFrames; ++index) {
@@ -2033,26 +2034,41 @@ public class TrackEdit {
             }
         }
 
+        boolean keepTranslations = false;
         Vector3f[] oldTranslations = oldTrack.getTranslations();
+        if (oldTranslations != null) {
+            for (int index = 0; index < numFrames; ++index) {
+                Vector3f translation = oldTranslations[index];
+                if (!MyVector3f.isZero(translation)) {
+                    keepTranslations = true;
+                }
+            }
+        }
+
+        boolean keepRotations = false;
         Quaternion[] oldRotations = oldTrack.getRotations();
+        if (oldRotations != null) {
+            for (int index = 0; index < numFrames; ++index) {
+                Quaternion rotation = oldRotations[index];
+                if (!MyQuaternion.isRotationIdentity(rotation)) {
+                    keepRotations = true;
+                }
+            }
+        }
 
         float[] newTimes = new float[numFrames];
-        Vector3f[] newTranslations = null;
-        if (oldTranslations != null) {
-            newTranslations = new Vector3f[numFrames];
-        }
-        Quaternion[] newRotations = null;
-        if (oldRotations != null) {
-            newRotations = new Quaternion[numFrames];
-        }
+        Vector3f[] newTranslations
+                = keepTranslations ? new Vector3f[numFrames] : null;
+        Quaternion[] newRotations
+                = keepRotations ? new Quaternion[numFrames] : null;
         Vector3f[] newScales = keepScales ? new Vector3f[numFrames] : null;
 
         for (int index = 0; index < numFrames; ++index) {
             newTimes[index] = oldTimes[index];
-            if (newTranslations != null) {
+            if (keepTranslations) {
                 newTranslations[index] = oldTranslations[index].clone();
             }
-            if (newRotations != null) {
+            if (keepRotations) {
                 newRotations[index] = oldRotations[index].clone();
             }
             if (keepScales) {
