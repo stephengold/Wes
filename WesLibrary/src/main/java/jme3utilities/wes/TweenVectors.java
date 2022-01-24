@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -120,7 +120,7 @@ public enum TweenVectors {
                  */
                 Vector3f m1;
                 if (index1 == 0) {
-                    m1 = slope(inter12, v1, v2, null);
+                    m1 = MyVector3f.velocity(inter12, v1, v2, null);
                 } else {
                     int index0 = index1 - 1;
                     Vector3f v0 = samples[index0];
@@ -129,7 +129,7 @@ public enum TweenVectors {
                 }
                 Vector3f m2;
                 if (index2 == last) {
-                    m2 = slope(inter12, v1, v2, null);
+                    m2 = MyVector3f.velocity(inter12, v1, v2, null);
                 } else {
                     int index3 = index2 + 1;
                     Vector3f v3 = samples[index3];
@@ -801,7 +801,7 @@ public enum TweenVectors {
                      */
                     Vector3f m1;
                     if (index1 == 0) {
-                        m1 = slope(inter12, v1, v2, null);
+                        m1 = MyVector3f.velocity(inter12, v1, v2, null);
                     } else {
                         int index0 = index1 - 1;
                         Vector3f v0 = samples[index0];
@@ -810,7 +810,7 @@ public enum TweenVectors {
                     }
                     Vector3f m2;
                     if (index2 == lastIndex) {
-                        m2 = slope(inter12, v1, v2, null);
+                        m2 = MyVector3f.velocity(inter12, v1, v2, null);
                     } else {
                         int index3 = index2 + 1;
                         Vector3f v3 = samples[index3];
@@ -900,28 +900,6 @@ public enum TweenVectors {
     }
 
     /**
-     * Estimate the first derivative of an unknown function between 2 points.
-     * TODO use MyVector3f.velocity()
-     *
-     * @param dt length of the interval (&gt;0)
-     * @param v1 function value at the start point (not null, unaffected)
-     * @param v2 function value at the end point (not null, unaffected)
-     * @param storeResult storage for the result (modified if not null)
-     * @return a derivative vector (either storeResult or a new instance)
-     */
-    private static Vector3f slope(float dt, Vector3f v1, Vector3f v2,
-            Vector3f storeResult) {
-        assert dt > 0f : dt;
-        assert v1 != null;
-        assert v2 != null;
-
-        Vector3f result = v2.subtract(v1, storeResult);
-        result.divideLocal(dt);
-
-        return result;
-    }
-
-    /**
      * Estimate the first derivative of an unknown function at the middle of 3
      * indexed points.
      *
@@ -946,7 +924,7 @@ public enum TweenVectors {
             case CatmullRomSpline:
             case LoopCatmullRomSpline:
                 float dt02 = dt01 + dt12;
-                slope(dt02, v0, v2, result);
+                MyVector3f.velocity(dt02, v0, v2, result);
                 break;
 
             case FdcSpline:
