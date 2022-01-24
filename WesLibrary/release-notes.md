@@ -1,9 +1,22 @@
 # release log for the Wes library and related examples
 
+## Version 0.6.8: released on TBD
+
+ + Bugfix:  logic error in the `TrackEdit.behead()` method
+ + Deleted the `Pose.clone()` method.
+ + Added checks for translation and rotation identities
+   to the `TrackEdit.simplify(TransformTrack)` method.
+ + Finalized the `WesVersion` class.
+ + Added messages to 18 exceptions.
+ + Targeted JME version 3.4.0-stable and Java v8.
+ + Based on v7.2.0 of the Heart Library and v0.9.6 of jme3-utilities-ui.
+ + Began using LWJGL v3 and `AbstractDemo` in examples.
+ + Upgraded to Gradle v7.3.3 .
+
 ## Version 0.6.7: released on 22 August 2021
 
- + Base on v7.0.0 of the Heart Library and v0.9.5 of jme3-utilities-ui.
- + Upgrade to Gradle v7.2 .
+ + Based on v7.0.0 of the Heart Library and v0.9.5 of jme3-utilities-ui.
+ + Upgraded to Gradle v7.2 .
 
 ## Version 0.6.6: released on 1 June 2021
 
