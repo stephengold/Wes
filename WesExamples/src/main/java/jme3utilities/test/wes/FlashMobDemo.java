@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2021, Stephen Gold
+ Copyright (c) 2019-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -69,27 +69,20 @@ import jme3utilities.MyAsset;
 import jme3utilities.MySpatial;
 import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
-import jme3utilities.math.MyVector3f;
-import jme3utilities.ui.ActionApplication;
+import jme3utilities.ui.AbstractDemo;
 import jme3utilities.ui.CameraOrbitAppState;
-import jme3utilities.ui.HelpUtils;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * An ActionApplication to demonstrate animation retargeting.
+ * An AbstractDemo to demonstrate animation retargeting.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class FlashMobDemo extends ActionApplication {
+public class FlashMobDemo extends AbstractDemo {
     // *************************************************************************
     // constants and loggers
 
-    /**
-     * speed setting to effectively freeze animations without freezing the
-     * camera
-     */
-    final private static float pausedSpeed = 1e-12f;
     /**
      * message logger for this class
      */
@@ -127,14 +120,6 @@ public class FlashMobDemo extends ActionApplication {
      * list of skeleton visualizers
      */
     final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
-    /**
-     * Node for displaying hotkey help in the GUI scene
-     */
-    private Node helpNode;
-    /**
-     * Node for displaying "toggle help: H" in the GUI scene
-     */
-    private Node minHelpNode;
     /**
      * root node of the loaded Jaime model
      */
@@ -183,7 +168,7 @@ public class FlashMobDemo extends ActionApplication {
         application.start();
     }
     // *************************************************************************
-    // ActionApplication methods
+    // AbstractDemo methods
 
     /**
      * Initialize this application.
@@ -291,8 +276,8 @@ public class FlashMobDemo extends ActionApplication {
         dim.bindSignal(CameraInput.FLYCAM_RISE, KeyInput.KEY_UP);
         dim.bindSignal("orbitLeft", KeyInput.KEY_LEFT);
         dim.bindSignal("orbitRight", KeyInput.KEY_RIGHT);
-        dim.bind("toggle help", KeyInput.KEY_H);
-        dim.bind("toggle pause", KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
+        dim.bind(asToggleHelp, KeyInput.KEY_H);
+        dim.bind(asTogglePause, KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
         /*
          * The help node can't be created until all hotkeys are bound.
@@ -313,12 +298,6 @@ public class FlashMobDemo extends ActionApplication {
             switch (actionString) {
                 case "dump scenes":
                     dumpScenes();
-                    return;
-                case "toggle help":
-                    toggleHelp();
-                    return;
-                case "toggle pause":
-                    togglePause();
                     return;
                 case "toggle skeleton":
                     toggleSkeleton();
@@ -386,8 +365,8 @@ public class FlashMobDemo extends ActionApplication {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
         jaime.rotate(0f, FastMath.PI, 0f); // facing +Z
-        setHeight(jaime, 2f);
-        center(jaime);
+        setCgmHeight(jaime, 2f);
+        centerCgm(jaime);
         jaime.move(-2f, 0f, 0f); // behind Sinbad and to his right
         /*
          * Add an animation channel.
@@ -434,8 +413,8 @@ public class FlashMobDemo extends ActionApplication {
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
-        setHeight(mhGame, 2f);
-        center(mhGame);
+        setCgmHeight(mhGame, 2f);
+        centerCgm(mhGame);
         mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
         /*
          * Add composer to the master list.
@@ -461,8 +440,8 @@ public class FlashMobDemo extends ActionApplication {
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
-        setHeight(oto, 2f);
-        center(oto);
+        setCgmHeight(oto, 2f);
+        centerCgm(oto);
         oto.move(0f, 0f, -1f); // directly behind Sinbad
         /*
          * Add composer to the master list.
@@ -489,8 +468,8 @@ public class FlashMobDemo extends ActionApplication {
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
-        setHeight(puppet, 2f);
-        center(puppet);
+        setCgmHeight(puppet, 2f);
+        centerCgm(puppet);
         puppet.move(2f, 0f, 1f);
         /*
          * Add an animation channel.
@@ -519,8 +498,8 @@ public class FlashMobDemo extends ActionApplication {
         for (Spatial spatial : list) {
             spatial.setShadowMode(RenderQueue.ShadowMode.Cast);
         }
-        setHeight(cgModel, 2f);
-        center(cgModel);
+        setCgmHeight(cgModel, 2f);
+        centerCgm(cgModel);
         cgModel.move(0f, 0f, 1f); // in front of the origin
 
         AnimComposer composer = cgModel.getControl(AnimComposer.class);
@@ -537,53 +516,6 @@ public class FlashMobDemo extends ActionApplication {
          */
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
-    }
-
-    /**
-     * Generate full and minimal versions of the hotkey help. Attach the minimal
-     * one to the GUI scene.
-     *
-     * @param bounds the desired screen coordinates (not null, unaffected)
-     */
-    private void attachHelpNode(Rectangle bounds) {
-        InputMode inputMode = getDefaultInputMode();
-        float extraSpace = 20f;
-        helpNode = HelpUtils.buildNode(inputMode, bounds, guiFont, extraSpace);
-        helpNode.move(0f, 0f, 1f); // move (slightly) to the front
-
-        InputMode dummyMode = new InputMode("dummy") {
-            @Override
-            protected void defaultBindings() {
-            }
-
-            @Override
-            public void onAction(String s, boolean b, float f) {
-            }
-        };
-        dummyMode.bind("toggle help", KeyInput.KEY_H);
-
-        float width = 100f; // in pixels
-        float height = bounds.height;
-        float x = bounds.x + bounds.width - width;
-        float y = bounds.y;
-        Rectangle dummyBounds = new Rectangle(x, y, width, height);
-
-        minHelpNode = HelpUtils.buildNode(dummyMode, dummyBounds, guiFont, 0f);
-        guiNode.attachChild(minHelpNode);
-    }
-
-    /**
-     * Translate a model's center so that the model rests on the X-Z plane, and
-     * its center lies on the Y axis.
-     */
-    private static void center(Spatial model) {
-        Vector3f[] minMax = MySpatial.findMinMaxCoords(model);
-        Vector3f center = MyVector3f.midpoint(minMax[0], minMax[1], null);
-        Vector3f offset = new Vector3f(center.x, minMax[0].y, center.z);
-
-        Vector3f location = model.getWorldTranslation();
-        location.subtractLocal(offset);
-        MySpatial.setWorldLocation(model, location);
     }
 
     /**
@@ -617,19 +549,6 @@ public class FlashMobDemo extends ActionApplication {
     }
 
     /**
-     * Scale the specified model uniformly so that it has the specified height.
-     *
-     * @param model (not null, modified)
-     * @param height (in world units)
-     */
-    private static void setHeight(Spatial model, float height) {
-        Vector3f[] minMax = MySpatial.findMinMaxCoords(model);
-        float oldHeight = minMax[1].y - minMax[0].y;
-
-        model.scale(height / oldHeight);
-    }
-
-    /**
      * Initialization performed during the first invocation of
      * {@link #simpleUpdate(float)}.
      */
@@ -648,27 +567,6 @@ public class FlashMobDemo extends ActionApplication {
             poser.setCurrentAction("Dance");
             poser.setTime(AnimComposer.DEFAULT_LAYER, 0f);
         }
-    }
-
-    /**
-     * Toggle between the full help node and the minimal one.
-     */
-    private void toggleHelp() {
-        if (helpNode.getParent() == null) {
-            minHelpNode.removeFromParent();
-            guiNode.attachChild(helpNode);
-        } else {
-            helpNode.removeFromParent();
-            guiNode.attachChild(minHelpNode);
-        }
-    }
-
-    /**
-     * Toggle all animations: paused/running.
-     */
-    private void togglePause() {
-        float newSpeed = (speed > pausedSpeed) ? pausedSpeed : 1f;
-        setSpeed(newSpeed);
     }
 
     /**
