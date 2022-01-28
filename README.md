@@ -176,6 +176,7 @@ Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
 
 [Jump to table of contents](#toc)
 
+
 <a name="conventions"/>
 
 ## Conventions
@@ -184,9 +185,11 @@ Package names begin with
 `jme3utilities.` (if Stephen Gold holds the copyright) or
 `com.jme3.` (if the jMonkeyEngine Project holds the copyright).
 
-Both the source code and the pre-built libraries are compatible with JDK 7.
+The source code is compatible with JDK 7.
+The pre-built libraries are compatible with JDK 8.
 
 [Jump to table of contents](#toc)
+
 
 <a name="demos"/>
 
@@ -317,4 +320,4 @@ correct the situation: sgold@sonic.net
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
-[winmerge]: http://winmerge.org "WinMerge Project"
+[winmerge]: https://winmerge.org "WinMerge Project"
