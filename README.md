@@ -6,9 +6,9 @@
 It contains 2 sub-projects:
 
  1. WesLibrary: the Wes runtime library (in Java)
- 2. WesExamples: demos, examples, and test software (in Java)
+ 2. WesExamples: demos, examples, and non-automated test software (in Java)
 
-Complete source code (in Java) is provided under
+Complete source code is provided under
 [a 3-clause BSD license][license].
 
 
@@ -153,7 +153,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 After a successful build,
 Maven artifacts will be found in `WesLibrary/build/libs`.
 
-You can install the Maven artifacts to your local Maven repository:
+You can install the artifacts to your local Maven repository:
  + using Bash or PowerShell:  `./gradlew install`
  + using Windows Command Prompt:  `.\gradlew install`
 
@@ -171,7 +171,7 @@ You can restore the project to a pristine state:
 Newer releases (since v0.3.9) can be downloaded from
 [GitHub](https://github.com/stephengold/Wes/releases).
 
-Older releases (v0.2.1 through v0.3.8) can be downloaded from
+Old releases (v0.2.1 through v0.3.8) can be downloaded from
 [the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
 
 Newer Maven artifacts (since v0.6.2) are available from
@@ -227,7 +227,7 @@ the Sinbad model to generate a "warn" clip.
 ## External links
 
   + [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
-    at [JmonkeyStore](https://store.jmonkeyengine.org/)
+    at [JmonkeyStore](https://store.jmonkeyengine.org)
 
 [Jump to table of contents](#toc)
 
@@ -247,7 +247,7 @@ for his [Bvhretarget Project][bvhretarget].
 From September 2017 to January 2019, Wes was a sub-project of
 [the Jme3-utilities Project][utilities].
 
-Since January 2019, Wes has been a separate project at
+Since January 2019, Wes has been a separate project, hosted at
 [GitHub][wes].
 
 [Jump to table of contents](#toc)
@@ -280,6 +280,7 @@ artists and software developers:
     + LWJGL, the Lightweight Java Game Library
     + the [MakeHuman] 3-D character creation tool
     + the [Markdown] document-conversion tool
+    + the [Meld] visual merge tool
     + Microsoft Windows
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
@@ -319,6 +320,7 @@ correct the situation: sgold@sonic.net
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
+[meld]: https://meldmerge.org/ "Meld Tool"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [ogre]: http://www.ogre3d.org "Ogre Project"
