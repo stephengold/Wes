@@ -383,6 +383,78 @@ public class TrackEdit {
     }
 
     /**
+     * Copy a TransformTrack, converting it from a travelling animation to an
+     * in-place animation. This is accomplished by zeroing out any average
+     * linear velocity between (the translations of) the first and last frames.
+     * Rotations and scales aren't considered.
+     *
+     * @param oldTrack the input/source track (not null, must contain 2 or more
+     * translations, unaffected)
+     * @return a new track with the same target
+     */
+    public static TransformTrack convertToInPlace(TransformTrack oldTrack) {
+        Vector3f[] oldTranslations = oldTrack.getTranslations();
+        int numTranslations
+                = (oldTranslations == null) ? 0 : oldTranslations.length;
+        Validate.inRange(numTranslations, "number of translations",
+                2, Integer.MAX_VALUE);
+
+        float[] oldTimes = oldTrack.getTimes();
+        int frameCount = oldTimes.length;
+        int lastFrame = frameCount - 1;
+        float elapsed = oldTimes[lastFrame] - oldTimes[0];
+        if (elapsed == 0f) {
+            throw new IllegalArgumentException(
+                    "The first and last frames must not be simultaneous!");
+        }
+
+        Quaternion[] oldRotations = oldTrack.getRotations();
+        Vector3f[] oldScales = oldTrack.getScales();
+
+        // Allocate new arrays as needed.
+        float[] newTimes = new float[frameCount];
+        Vector3f[] newTranslations = new Vector3f[frameCount];
+        Quaternion[] newRotations = null;
+        if (oldRotations != null) {
+            newRotations = new Quaternion[frameCount];
+        }
+        Vector3f[] newScales = null;
+        if (oldScales != null) {
+            newScales = new Vector3f[frameCount];
+        }
+        /*
+         * Calculate the average linear velocity
+         * between the first and last frames in the track.
+         */
+        Vector3f startOffset = oldTranslations[0];
+        Vector3f endOffset = oldTranslations[lastFrame];
+        Vector3f velocity
+                = MyVector3f.velocity(elapsed, startOffset, endOffset, null);
+
+        for (int frameIndex = 0; frameIndex < frameCount; ++frameIndex) {
+            float time = oldTimes[frameIndex];
+            newTimes[frameIndex] = time;
+
+            Vector3f translation = oldTranslations[frameIndex].clone();
+            MyVector3f.accumulateScaled(translation, velocity, -time);
+            newTranslations[frameIndex] = translation;
+
+            if (newRotations != null) {
+                newRotations[frameIndex] = oldRotations[frameIndex].clone();
+            }
+            if (newScales != null) {
+                newScales[frameIndex] = oldScales[frameIndex].clone();
+            }
+        }
+
+        HasLocalTransform target = oldTrack.getTarget();
+        TransformTrack result = new TransformTrack(target, newTimes,
+                newTranslations, newRotations, newScales);
+
+        return result;
+    }
+
+    /**
      * Copy a track, delaying all its keyframes by the specified amount.
      *
      * @param oldTrack base track (not null, unaffected)
