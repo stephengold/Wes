@@ -31,13 +31,13 @@ Complete source code is provided under
 
 ## Important features
 
- + extract a time-range from an animation
- + resample an animation track at a new frame rate
- + retarget animations from one model/skeleton to another
- + interpolate between keyframes using a wide assortment of algorithms
- + reverse an animation track
- + chain 2 tracks together
- + repair certain issues with animation tracks
++ extract a time-range from an animation
++ resample an animation track at a new frame rate
++ retarget animations from one model/skeleton to another
++ interpolate between keyframes using a wide assortment of algorithms
++ reverse an animation track
++ chain 2 tracks together
++ repair certain issues with animation tracks
 
 [Jump to table of contents](#toc)
 
@@ -101,26 +101,26 @@ and probably the `-sources` and `-javadoc` jars as well.
 
 Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
- 1. Right-click on the project (not its assets) in the "Projects" window.
- 2. Select "Properties" to open the "Project Properties" dialog.
- 3. Under "Categories:" select "Libraries".
- 4. Click on the "Compile" tab.
- 5. Add the `Heart` class jar:
-    + Click on the "Add JAR/Folder" button.
-    + Navigate to the download folder.
-    + Select the "Heart-7.2.0.jar" file.
-    + Click on the "Open" button.
- 6. (optional) Add jars for javadoc and sources:
-    + Click on the "Edit" button.
-    + Click on the "Browse..." button to the right of "Javadoc:"
-    + Select the "Heart-7.2.0-javadoc.jar" file.
-    + Click on the "Open" button.
-    + Click on the "Browse..." button to the right of "Sources:"
-    + Select the "Heart-7.2.0-sources.jar" file.
-    + Click on the "Open" button again.
-    + Click on the "OK" button to close the "Edit Jar Reference" dialog.
- 7. Similarly, add the `Wes` jar(s).
- 8. Click on the "OK" button to exit the "Project Properties" dialog.
+1. Right-click on the project (not its assets) in the "Projects" window.
+2. Select "Properties" to open the "Project Properties" dialog.
+3. Under "Categories:" select "Libraries".
+4. Click on the "Compile" tab.
+5. Add the `Heart` class jar:
+  + Click on the "Add JAR/Folder" button.
+  + Navigate to the download folder.
+  + Select the "Heart-7.2.0.jar" file.
+  + Click on the "Open" button.
+6. (optional) Add jars for javadoc and sources:
+  + Click on the "Edit" button.
+  + Click on the "Browse..." button to the right of "Javadoc:"
+  + Select the "Heart-7.2.0-javadoc.jar" file.
+  + Click on the "Open" button.
+  + Click on the "Browse..." button to the right of "Sources:"
+  + Select the "Heart-7.2.0-sources.jar" file.
+  + Click on the "Open" button again.
+  + Click on the "OK" button to close the "Edit Jar Reference" dialog.
+7. Similarly, add the `Wes` jar(s).
+8. Click on the "OK" button to exit the "Project Properties" dialog.
 
 [Jump to table of contents](#toc)
 
@@ -132,8 +132,8 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 1. Install a [Java Development Kit (JDK)][openJDK],
    if you don't already have one.
 2. Point the `JAVA_HOME` environment variable to your JDK installation:
-  + using Bash:  `export JAVA_HOME="` *path to installation* `"`
-  + using Windows Command Prompt:  `set JAVA_HOME="` *path to installation* `"`
+  + using Bash: `export JAVA_HOME="` *path to installation* `"`
+  + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
 3. Download and extract the Wes source code from GitHub:
   + using Git:
@@ -154,12 +154,12 @@ After a successful build,
 Maven artifacts will be found in `WesLibrary/build/libs`.
 
 You can install the artifacts to your local Maven repository:
- + using Bash or PowerShell:  `./gradlew install`
- + using Windows Command Prompt:  `.\gradlew install`
++ using Bash or PowerShell: `./gradlew install`
++ using Windows Command Prompt: `.\gradlew install`
 
 You can restore the project to a pristine state:
- + using Bash or PowerShell: `./gradlew clean`
- + using Windows Command Prompt: `.\gradlew clean`
++ using Bash or PowerShell: `./gradlew clean`
++ using Windows Command Prompt: `.\gradlew clean`
 
 [Jump to table of contents](#toc)
 
@@ -226,8 +226,8 @@ the Sinbad model to generate a "warn" clip.
 
 ## External links
 
-  + [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
-    at [JmonkeyStore](https://store.jmonkeyengine.org)
++ [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
+  at [JmonkeyStore](https://store.jmonkeyengine.org)
 
 [Jump to table of contents](#toc)
 
