@@ -345,7 +345,7 @@ public class FlashMobDemo extends AbstractDemo {
      */
     private void addHelp() {
         float x = 10f;
-        float y = cam.getHeight() - 40f;
+        float y = cam.getHeight() - 10f;
         float width = cam.getWidth() - 20f;
         float height = cam.getHeight() - 20f;
         Rectangle rectangle = new Rectangle(x, y, width, height);
