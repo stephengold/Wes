@@ -349,10 +349,11 @@ public class TrackEdit {
      * Clone the specified track without cloning its target.
      *
      * @param track an AnimTrack or Track (not null)
-     * @return a new AnimTrack or Track
+     * @return a new track of the same type with the same target
      */
-    public static Object cloneTrack(Object track) {
-        Object result;
+    @SuppressWarnings("unchecked")
+    public static <T> T cloneTrack(T track) {
+        T result;
 
         if (track instanceof MorphTrack) {
             Cloner cloner = new Cloner();
@@ -363,7 +364,7 @@ public class TrackEdit {
             result = cloner.clone(track);
 
         } else if (track instanceof Track) {
-            result = ((Track) track).clone();
+            result = (T) ((Track) track).clone();
 
         } else if (track instanceof TransformTrack) {
             Cloner cloner = new Cloner();
