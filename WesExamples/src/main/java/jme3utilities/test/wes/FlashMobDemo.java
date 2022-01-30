@@ -111,7 +111,7 @@ public class FlashMobDemo extends AbstractDemo {
     /**
      * list of animation channels
      */
-    final private List<AnimChannel> allChannels = new ArrayList<>(5);
+    final private List<AnimChannel> allChannels = new ArrayList<>(2);
     /**
      * list of composers
      */
@@ -119,7 +119,7 @@ public class FlashMobDemo extends AbstractDemo {
     /**
      * list of skeleton visualizers
      */
-    final private List<SkeletonVisualizer> visualizers = new ArrayList<>(3);
+    final private List<SkeletonVisualizer> visualizers = new ArrayList<>(5);
     /**
      * root node of the loaded Jaime model
      */
