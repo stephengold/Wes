@@ -156,12 +156,11 @@ public class FlashMobDemo extends AbstractDemo {
         AppSettings settings = new AppSettings(true);
         settings.setTitle(applicationName);
 
+        settings.setAudioRenderer(null);
         settings.setGammaCorrection(true);
         settings.setSamples(4); // anti-aliasing
         settings.setVSync(true);
         application.setSettings(settings);
-
-        settings.setAudioRenderer(null);
         /*
          * Invoke the JME startup code,
          * which in turn invokes actionInitializeApplication().
