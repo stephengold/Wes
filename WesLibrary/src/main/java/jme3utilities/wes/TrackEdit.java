@@ -2076,7 +2076,7 @@ public class TrackEdit {
                     newScales[index] = oldScales[index].clone();
                 }
             }
-            result = TrackEdit.newTrack(oldTrack, newTimes, newTranslations,
+            result = newTrack(oldTrack, newTimes, newTranslations,
                     newRotations, newScales);
         }
 

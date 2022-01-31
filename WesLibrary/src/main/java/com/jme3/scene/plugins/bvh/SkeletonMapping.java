@@ -38,14 +38,6 @@ public class SkeletonMapping implements Cloneable, Savable {
      */
     private Map<String, BoneMapping> mappings = new HashMap<>(50);
     // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate an empty mapping.
-     */
-    public SkeletonMapping() {
-    }
-    // *************************************************************************
     // new methods exposed
 
     /**
