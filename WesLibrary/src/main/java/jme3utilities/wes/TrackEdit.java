@@ -225,8 +225,8 @@ public class TrackEdit {
     /**
      * Chain 2 bone/spatial tracks together to create a new track.
      *
-     * @param track1 base track (not null, unaffected)
-     * @param track2 track to append (not null, unaffected)
+     * @param track1 the track to play first (not null, unaffected)
+     * @param track2 the track to play last (not null, unaffected)
      * @param startTime2 start time for track2 in the result (in seconds, &ge;0,
      * &le;newDuration)
      * @param newDuration duration of the result (in seconds, &ge;start2)
@@ -386,7 +386,7 @@ public class TrackEdit {
      * Copy a TransformTrack, converting it from a travelling animation to an
      * in-place animation. This is accomplished by zeroing out any average
      * linear velocity between (the translations of) the first and last frames.
-     * Rotations and scales aren't considered.
+     * Rotations and scales aren't considered. Works best on cyclic animations.
      *
      * @param oldTrack the input/source track (not null, must contain 2 or more
      * translations, unaffected)

@@ -101,7 +101,8 @@ public class AnimationEdit {
 
     /**
      * Copy the specified AnimClip, converting it from a travelling animation to
-     * an in-place animation.
+     * an in-place animation. Rotations and scales aren't considered. Works best
+     * on cyclic animations.
      *
      * @param sourceClip the AnimClip to convert (not null, unaffected)
      * @param resultName name for the resulting AnimClip (not null)
