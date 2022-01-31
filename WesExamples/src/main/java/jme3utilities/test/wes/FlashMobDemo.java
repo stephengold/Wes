@@ -181,11 +181,10 @@ public class FlashMobDemo extends AbstractDemo {
         configureCamera();
 
         // Set the background to light blue.
-        ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
-        viewPort.setBackgroundColor(bgColor);
+        ColorRGBA backgroundColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
+        viewPort.setBackgroundColor(backgroundColor);
 
         addLighting();
-        stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
         addJaime();
         addMhGame();
@@ -253,6 +252,9 @@ public class FlashMobDemo extends AbstractDemo {
         dance = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
                 skeleton, s2p, "Dance");
         animControl.addAnim(dance);
+
+        // Start with skeleton and the render-statistics overlay hidden.
+        stateManager.getState(StatsAppState.class).toggleStats();
     }
 
     /**
