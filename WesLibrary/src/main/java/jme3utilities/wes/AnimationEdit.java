@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@ import com.jme3.animation.Skeleton;
 import com.jme3.animation.SpatialTrack;
 import com.jme3.animation.Track;
 import com.jme3.math.Transform;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import java.util.Map;
@@ -47,6 +48,7 @@ import java.util.logging.Logger;
 import jme3utilities.Heart;
 import jme3utilities.MyAnimation;
 import jme3utilities.Validate;
+import jme3utilities.math.MyArray;
 
 /**
  * Utility methods for editing JME animations.
@@ -95,6 +97,50 @@ public class AnimationEdit {
         }
 
         clip.setTracks(newTracks);
+    }
+
+    /**
+     * Copy the specified AnimClip, converting it from a travelling animation to
+     * an in-place animation.
+     *
+     * @param sourceClip the AnimClip to convert (not null, unaffected)
+     * @param resultName name for the resulting AnimClip (not null)
+     * @return a new AnimClip
+     */
+    public static AnimClip convertToInPlace(AnimClip sourceClip,
+            String resultName) {
+        Validate.nonNull(resultName, "result name");
+
+        // Start with an empty AnimClip.
+        AnimClip result = new AnimClip(resultName);
+
+        AnimTrack<?>[] tracks = sourceClip.getTracks();
+        for (AnimTrack<?> oldTrack : tracks) {
+            AnimTrack<?> newTrack = null;
+            /*
+             * If the track is a TransformTrack with 2 or more unique
+             * translations, zero out any average linear velocity
+             */
+            if (oldTrack instanceof TransformTrack) {
+                TransformTrack transformTrack = (TransformTrack) oldTrack;
+
+                Vector3f[] translations = transformTrack.getTranslations();
+                if (translations != null) {
+                    int numUnique = MyArray.countNe(translations);
+                    if (numUnique >= 2) {
+                        newTrack = TrackEdit.convertToInPlace(transformTrack);
+                    }
+                }
+            }
+
+            // If the track couldn't be converted, clone it.
+            if (newTrack == null) {
+                newTrack = TrackEdit.cloneTrack(oldTrack);
+            }
+            addTrack(result, newTrack);
+        }
+
+        return result;
     }
 
     /**
