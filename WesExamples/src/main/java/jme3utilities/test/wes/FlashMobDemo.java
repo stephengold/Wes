@@ -145,17 +145,14 @@ public class FlashMobDemo extends AbstractDemo {
      * @param ignored array of command-line arguments (not null)
      */
     public static void main(String[] ignored) {
-        /*
-         * Mute the chatty loggers in certain packages.
-         */
+        // Mute the chatty loggers in certain packages.
         Heart.setLoggingLevels(Level.WARNING);
         Logger.getLogger(ALAudioRenderer.class.getName())
                 .setLevel(Level.SEVERE);
 
         FlashMobDemo application = new FlashMobDemo();
-        /*
-         * Customize the window's title bar.
-         */
+
+        // Customize the window's title bar.
         AppSettings settings = new AppSettings(true);
         settings.setTitle(applicationName);
 
@@ -165,6 +162,10 @@ public class FlashMobDemo extends AbstractDemo {
         application.setSettings(settings);
 
         settings.setAudioRenderer(null);
+        /*
+         * Invoke the JME startup code,
+         * which in turn invokes actionInitializeApplication().
+         */
         application.start();
     }
     // *************************************************************************
@@ -180,48 +181,44 @@ public class FlashMobDemo extends AbstractDemo {
 
         configureCamera();
 
+        // Set the background to light blue.
         ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
         viewPort.setBackgroundColor(bgColor);
 
         addLighting();
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
-
         addJaime();
         addMhGame();
+        // TODO Ninja?
         addOto();
         addPuppet();
         addSinbad();
-        /*
-         * Configure the skeleton visualizers.
-         */
+
+        // Configure the skeleton visualizers.
         for (SkeletonVisualizer sv : visualizers) {
             sv.setLineColor(ColorRGBA.Yellow);
             rootNode.addControl(sv);
         }
-        /*
-         * Load the Sinbad-to-Jaime skeleton map.
-         */
+
+        // Load the Sinbad-to-Jaime skeleton map.
         AssetKey<SkeletonMapping> s2jKey
                 = new AssetKey<>("SkeletonMaps/SinbadToJaime.j3o");
         SkeletonMapping s2j = assetManager.loadAsset(s2jKey);
-        /*
-         * Retarget the "Dance" animation from Sinbad to Jaime.
-         */
+
+        // Retarget the "Dance" animation from Sinbad to Jaime.
         AnimControl animControl = jaime.getControl(AnimControl.class);
         Skeleton skeleton = animControl.getSkeleton();
         Animation dance = AnimationEdit.retargetAnimation(sinbadClip,
                 sinbadArmature, skeleton, s2j, "Dance");
         animControl.addAnim(dance);
-        /*
-         * Load the Sinbad-to-MhGame skeleton map.
-         */
+
+        // Load the Sinbad-to-MhGame skeleton map.
         AssetKey<SkeletonMapping> s2mKey
                 = new AssetKey<>("SkeletonMaps/SinbadToMhGame.j3o");
         SkeletonMapping s2m = assetManager.loadAsset(s2mKey);
-        /*
-         * Retarget the "Dance" animation from Sinbad to MhGame.
-         */
+
+        // Retarget the "Dance" animation from Sinbad to MhGame.
         SkinningControl skinningControl
                 = mhGame.getControl(SkinningControl.class);
         Armature armature = skinningControl.getArmature();
@@ -229,34 +226,29 @@ public class FlashMobDemo extends AbstractDemo {
                 sinbadArmature, armature, s2m, "Dance");
         AnimComposer composer = mhGame.getControl(AnimComposer.class);
         composer.addAnimClip(danceClip);
-        /*
-         * Load the Sinbad-to-Oto skeleton map.
-         */
+
+        // Load the Sinbad-to-Oto skeleton map.
         AssetKey<SkeletonMapping> s2oKey
                 = new AssetKey<>("SkeletonMaps/SinbadToOto.j3o");
         SkeletonMapping s2o = assetManager.loadAsset(s2oKey);
-        /*
-         * Retarget the "Dance" animation from Sinbad to Oto.
-         */
+
+        // Retarget the "Dance" animation from Sinbad to Oto.
         skinningControl = oto.getControl(SkinningControl.class);
         armature = skinningControl.getArmature();
         danceClip = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
                 armature, s2o, "Dance");
         composer = oto.getControl(AnimComposer.class);
         composer.addAnimClip(danceClip);
-        /*
-         * Load the Puppet-to-Sinbad skeleton map.
-         */
+
+        // Load the Puppet-to-Sinbad skeleton map.
         AssetKey<SkeletonMapping> p2sKey
                 = new AssetKey<>("SkeletonMaps/PuppetToSinbad.j3o");
         SkeletonMapping p2s = assetManager.loadAsset(p2sKey);
-        /*
-         * Invert the skeleton map.
-         */
+
+        // Invert the skeleton map.
         SkeletonMapping s2p = p2s.inverse();
-        /*
-         * Retarget the "Dance" animation from Sinbad to Puppet.
-         */
+
+        // Retarget the "Dance" animation from Sinbad to Puppet.
         animControl = puppet.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
         dance = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
@@ -270,7 +262,6 @@ public class FlashMobDemo extends AbstractDemo {
     @Override
     public void moreDefaultBindings() {
         InputMode dim = getDefaultInputMode();
-
         dim.bind("dump scenes", KeyInput.KEY_P);
         dim.bindSignal(CameraInput.FLYCAM_LOWER, KeyInput.KEY_DOWN);
         dim.bindSignal(CameraInput.FLYCAM_RISE, KeyInput.KEY_UP);
@@ -279,9 +270,8 @@ public class FlashMobDemo extends AbstractDemo {
         dim.bind(asToggleHelp, KeyInput.KEY_H);
         dim.bind(asTogglePause, KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
-        /*
-         * The help node can't be created until all hotkeys are bound.
-         */
+
+        // The help node can't be created until all hotkeys are bound.
         addHelp();
     }
 
@@ -310,7 +300,7 @@ public class FlashMobDemo extends AbstractDemo {
     /**
      * Callback invoked once per frame.
      *
-     * @param tpf time interval between frames (in seconds, &ge;0)
+     * @param tpf the time interval between frames (in seconds, &ge;0)
      */
     @Override
     public void simpleUpdate(float tpf) {
@@ -354,7 +344,7 @@ public class FlashMobDemo extends AbstractDemo {
     }
 
     /**
-     * Attach a Jaime model to the root node.
+     * Attach a Jaime model (with visualizer) to the root node.
      */
     private void addJaime() {
         jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
@@ -374,9 +364,8 @@ public class FlashMobDemo extends AbstractDemo {
         AnimControl animControl = jaime.getControl(AnimControl.class);
         AnimChannel animChannel = animControl.createChannel();
         allChannels.add(animChannel);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkeletonControl sc = jaime.getControl(SkeletonControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         InfluenceUtil.hideNonInfluencers(sv, sc);
@@ -570,7 +559,7 @@ public class FlashMobDemo extends AbstractDemo {
     }
 
     /**
-     * Toggle the skeleton visualizers on/off.
+     * Toggle all the skeleton visualizers on/off.
      */
     private void toggleSkeleton() {
         for (SkeletonVisualizer sv : visualizers) {
