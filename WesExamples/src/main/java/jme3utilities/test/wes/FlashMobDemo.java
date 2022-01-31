@@ -450,8 +450,8 @@ public class FlashMobDemo extends AbstractDemo {
      * Attach a Puppet model to the root node.
      */
     private void addPuppet() {
-        Node n = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
-        puppet = (Node) n.getChild(0);
+        Node loadedNode = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
+        puppet = (Node) loadedNode.getChild(0);
         rootNode.attachChild(puppet);
 
         List<Spatial> list = MySpatial.listSpatials(puppet);
