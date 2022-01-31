@@ -59,7 +59,7 @@ import jme3utilities.math.MyVector3f;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class TrackEdit {
+final public class TrackEdit {
     // *************************************************************************
     // constants and loggers
 
