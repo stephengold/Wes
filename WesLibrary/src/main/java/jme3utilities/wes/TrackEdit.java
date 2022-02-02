@@ -348,6 +348,7 @@ final public class TrackEdit {
     /**
      * Clone the specified track without cloning its target.
      *
+     * @param <T> the type of track to be cloned
      * @param track an AnimTrack or Track (not null)
      * @return a new track of the same type with the same target
      */
