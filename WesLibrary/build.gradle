@@ -48,7 +48,21 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
 }
 
-build.dependsOn('pom', 'pomAsc')
+build.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
+task('module', type: Copy) {
+    dependsOn 'generateMetadataFileForMavenPublication'
+    description 'Copies the module metadata to build/libs.'
+    from "${buildDir}/publications/maven/module.json"
+    into "${buildDir}/libs"
+    rename 'module.json', project.ext.baseName + '.module'
+}
+task('moduleAsc', type: Copy) {
+    dependsOn 'signMavenPublication'
+    description 'Copies the signature of the module metadata to build/libs.'
+    from "${buildDir}/publications/maven/module.json.asc"
+    into "${buildDir}/libs"
+    rename 'module.json.asc', project.ext.baseName + '.module.asc'
+}
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
     description 'Copies the Maven POM to build/libs.'
@@ -98,6 +112,9 @@ publishing {
             version project.ext.version
         }
     }
+    // Staging to OSSRH relies on the existence of 2 properties
+    // (ossrhUsername and ossrhPassword)
+    // which should be stored in ~/.gradle/gradle.properties
     repositories {
         maven {
             credentials {
@@ -116,9 +133,14 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // signing tasks
 
+// Signing relies on the existence of 3 properties
+// (signing.keyId, signing.password, and signing.secretKeyRingFile)
+// which should be stored in ~/.gradle/gradle.properties
+
 signing {
     sign publishing.publications.maven
 }
 tasks.withType(Sign) {
     onlyIf { rootProject.hasProperty('signing.keyId') }
 }
+signMavenPublication.dependsOn('module')
