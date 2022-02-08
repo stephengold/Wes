@@ -5,10 +5,10 @@
 
 It contains 2 sub-projects:
 
- 1. WesLibrary: the Wes runtime library (in Java)
- 2. WesExamples: demos, examples, and non-automated test software (in Java)
+ 1. WesLibrary: the Wes runtime library
+ 2. WesExamples: demos, examples, and non-automated test software
 
-Complete source code is provided under
+Complete source code (in Java) is provided under
 [a 3-clause BSD license][license].
 
 
@@ -51,7 +51,7 @@ a simple matter of adding it to the classpath.
 
 The Wes Library depends on [the Heart Library][heart],
 which in turn depends on
-the standard jme3-core library from jMonkeyEngine.
+the standard "jme3-core" library from jMonkeyEngine.
 
 For projects built using Maven or [Gradle], it is sufficient to specify the
 dependency on the Wes Library.  The build tools should automatically
@@ -93,8 +93,8 @@ Add to the project’s "pom.xml" file:
 For project built using [Ant], download the Wes and Heart
 libraries from GitHub:
 
- + https://github.com/stephengold/Wes/releases/tag/latest
- + https://github.com/stephengold/Heart/releases/tag/7.2.0
++ https://github.com/stephengold/Wes/releases/tag/latest
++ https://github.com/stephengold/Heart/releases/tag/7.2.0
 
 You'll want both class jars
 and probably the `-sources` and `-javadoc` jars as well.
@@ -320,7 +320,7 @@ correct the situation: sgold@sonic.net
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
-[meld]: https://meldmerge.org/ "Meld Tool"
+[meld]: https://meldmerge.org "Meld Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [ogre]: http://www.ogre3d.org "Ogre Project"
