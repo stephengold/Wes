@@ -301,7 +301,7 @@ correct the situation: sgold@sonic.net
 [blender]: https://docs.blender.org "Blender Project"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
 [chrome]: https://www.google.com/chrome "Chrome"
-[elements]: http://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
+[elements]: https://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [git]: https://git-scm.com "Git"
