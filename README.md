@@ -90,7 +90,7 @@ Add to the project’s "pom.xml" file:
 
 ### Ant-built projects
 
-For project built using [Ant], download the Wes and Heart
+For project built using [Ant], download the Wes and [Heart]
 libraries from GitHub:
 
 + https://github.com/stephengold/Wes/releases/tag/latest
@@ -105,7 +105,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 2. Select "Properties" to open the "Project Properties" dialog.
 3. Under "Categories:" select "Libraries".
 4. Click on the "Compile" tab.
-5. Add the `Heart` class jar:
+5. Add the [Heart] class jar:
   + Click on the "Add JAR/Folder" button.
   + Navigate to the download folder.
   + Select the "Heart-7.2.0.jar" file.
@@ -119,7 +119,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
   + Select the "Heart-7.2.0-sources.jar" file.
   + Click on the "Open" button again.
   + Click on the "OK" button to close the "Edit Jar Reference" dialog.
-7. Similarly, add the `Wes` jar(s).
+7. Similarly, add the Wes jar(s).
 8. Click on the "OK" button to exit the "Project Properties" dialog.
 
 [Jump to table of contents](#toc)
@@ -274,7 +274,7 @@ artists and software developers:
     + the [Git] revision-control system and GitK commit viewer
     + the [Gradle] build tool
     + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
-    + the [Java] compiler, standard doclet, and virtual machine
+    + the [Java] compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + the [Linux Mint][mint] operating system
     + LWJGL, the Lightweight Java Game Library
