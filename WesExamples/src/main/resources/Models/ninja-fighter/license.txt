@@ -1,0 +1,20 @@
+Licensing history for files in "src/main/resources/Models/ninja-fighter"
+
+Based on "Ninja Fighter Model":
+* downloaded from:   https://github.com/scenemax3d/3d-models/tree/main/ninja-fighter
+* download date:     10 February 2022
+* store URL:         https://store.jmonkeyengine.org/a881a40e-8f8e-4a52-a14a-c5c2b4646659
+* author:            adibarda (Adi Barda)
+* author URL:        https://github.com/scenemax3d
+* license type:      The Unlicense
+* license URL:       https://github.com/scenemax3d/3d-models/blob/main/LICENSE
+
+Files used without modification:
+* Ch24_1001_Diffuse.png
+* Ch24_1001_Glossiness.png 
+* Ch24_1001_Normal.png
+* ninja.bin
+* ninja.gltf
+
+Added files (also licensed The Unlicense):
+* license.txt
