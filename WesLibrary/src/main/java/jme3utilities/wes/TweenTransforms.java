@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -129,11 +129,13 @@ public class TweenTransforms implements Cloneable {
      *
      * @param time (in seconds)
      * @param track the input track (not null, unaffected)
+     * @param duration the animation-clip duration (in seconds) NOT the track
+     * duration!
      * @param storeResult storage for the result (modified if not null)
      * @return the transform (either storeResult or a new instance)
      */
     public Transform interpolate(float time, TransformTrack track,
-            Transform storeResult) {
+            float duration, Transform storeResult) {
         Transform result = (storeResult == null)
                 ? new Transform() : storeResult;
         float[] times = track.getTimes();
@@ -145,13 +147,10 @@ public class TweenTransforms implements Cloneable {
             result.setScale(track.getScales()[0]);
 
         } else {
-            float cycleTime = times[lastFrame];
-            Validate.inRange(time, "time", times[0], cycleTime);
-
             Vector3f[] translations = track.getTranslations();
             Quaternion[] rotations = track.getRotations();
             Vector3f[] scales = track.getScales();
-            interpolate(time, times, cycleTime, translations, rotations,
+            interpolate(time, times, duration, translations, rotations,
                     scales, null, result);
         }
 

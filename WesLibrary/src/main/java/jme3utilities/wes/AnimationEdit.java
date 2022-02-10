@@ -212,19 +212,20 @@ final public class AnimationEdit {
          */
         AnimClip result = new AnimClip(newClipName);
 
+        float duration = (float) sourceClip.getLength();
         AnimTrack<?>[] sourceTracks = sourceClip.getTracks();
         for (AnimTrack<?> sourceTrack : sourceTracks) {
             if (sourceTrack instanceof MorphTrack) {
                 throw new UnsupportedOperationException(); // TODO
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
-                Transform endTransform
-                        = techniques.interpolate(endTime, oldTrack, null);
+                Transform endTransform = techniques.interpolate(endTime,
+                        oldTrack, duration, null);
                 TransformTrack newTrack
                         = TrackEdit.truncate(oldTrack, endTime, endTransform);
                 if (startTime > 0f) {
-                    Transform startTransform
-                            = techniques.interpolate(startTime, oldTrack, null);
+                    Transform startTransform = techniques.interpolate(startTime,
+                            oldTrack, duration, null);
                     newTrack = TrackEdit.behead(newTrack, startTime,
                             startTransform);
                 }
