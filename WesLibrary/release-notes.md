@@ -1,5 +1,22 @@
 # release log for the Wes library and related examples
 
+## Version 0.7.0: released on TBD
+
+ + Made `TrackEdit.cloneTrack()` into a generic method. (API change)
+ + Finalized the `AnimationEdit` and `TrackEdit` classes. (API change)
+ + Bugfix:  `TrackEdit.reverse()` assumes a `MorphTrack`
+   has a exactly one target
+ + Added 7 public methods:
+   + `AnimationEdit.convertToInPlace()`
+   + `Pose.findSkeleton()`
+   + `TrackEdit.behead()` for a MorphTrack
+   + `TrackEdit.convertToInPlace()`
+   + `TrackEdit.removeRepeats()` for a MorphTrack
+   + `TrackEdit.setDuration()` for a MorphTrack
+   + `TrackEdit.truncate()` for a MorphTrack
+ + Based on v7.3.0 of the Heart Library and v0.9.9 of Acorus.
+ + Upgraded to Gradle v7.4.0 .
+
 ## Version 0.6.8: released on 23 January 2022
 
  + Bugfix:  logic error in the `TrackEdit.behead()` method
