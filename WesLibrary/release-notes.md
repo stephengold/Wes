@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.7.0: released on TBD
+## Version 0.7.0: released on 10 February 2022
 
  + Made `TrackEdit.cloneTrack()` into a generic method. (API change)
  + Finalized the `AnimationEdit` and `TrackEdit` classes. (API change)
