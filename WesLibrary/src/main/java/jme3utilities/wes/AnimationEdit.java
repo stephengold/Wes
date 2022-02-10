@@ -581,15 +581,16 @@ final public class AnimationEdit {
 
         AnimTrack<?>[] oldTracks = sourceClip.getTracks();
         for (AnimTrack<?> sourceTrack : oldTracks) {
+            AnimTrack<?> newTrack;
             if (sourceTrack instanceof MorphTrack) {
-                throw new UnsupportedOperationException(); // TODO
+                MorphTrack oldTrack = (MorphTrack) sourceTrack;
+                newTrack = TrackEdit.setDuration(oldTrack, newDuration);
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
-                AnimTrack<?> newTrack
-                        = TrackEdit.setDuration(oldTrack, newDuration);
-                assert newTrack.getLength() == newDuration;
-                addTrack(result, newTrack);
+                newTrack = TrackEdit.setDuration(oldTrack, newDuration);
             }
+            assert newTrack.getLength() == newDuration;
+            addTrack(result, newTrack);
         }
 
         return result;

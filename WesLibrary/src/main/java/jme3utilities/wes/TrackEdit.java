@@ -1704,7 +1704,7 @@ final public class TrackEdit {
             for (int newIndex = 0; newIndex < numFrames; ++newIndex) {
                 int oldIndex = numFrames - newIndex - 1;
                 newTimes[newIndex] = lastFrameTime - oldTimes[oldIndex];
-                weights[newIndex] = oldWeights[oldIndex];
+                weights[newIndex] = oldWeights[oldIndex]; // TODO copy all weights
             }
 
             Geometry target = oldMorphTrack.getTarget();
@@ -1808,6 +1808,75 @@ final public class TrackEdit {
 
         Track result = newTrack(inputTrack, newTimes, newTranslations,
                 newRotations, newScales);
+
+        return result;
+    }
+
+    /**
+     * Copy a MorphTrack, altering its duration and adjusting all its keyframe
+     * times proportionately.
+     *
+     * @param oldTrack input track (not null, unaffected)
+     * @param newDuration the desired duration (in seconds, &ge;0)
+     * @return a new MorphTrack with the same target and t[0]=0
+     */
+    public static MorphTrack setDuration(MorphTrack oldTrack,
+            float newDuration) {
+        Validate.nonNegative(newDuration, "new duration");
+
+        float[] oldTimes = oldTrack.getTimes();
+        int oldCount = oldTimes.length;
+        assert oldCount > 0 : oldCount;
+        float oldDuration = oldTimes[oldCount - 1] - oldTimes[0];
+        assert oldDuration >= 0f : oldCount;
+
+        float[] oldWeights = oldTrack.getWeights();
+        /*
+         * Allocate new arrays.
+         */
+        int newCount;
+        if (oldDuration == 0f && newDuration > 0f) {
+            newCount = oldCount + 1;
+        } else {
+            newCount = oldCount;
+        }
+        float[] newTimes = new float[newCount];
+        int numTargets = oldTrack.getNbMorphTargets();
+        float[] newWeights = new float[newCount * numTargets];
+
+        for (int frameI = 0; frameI < oldCount; ++frameI) {
+            float newTime;
+            if (oldDuration == 0f) {
+                assert frameI == 0 : frameI;
+                newTime = 0f;
+            } else {
+                float oldTime = oldTimes[frameI] - oldTimes[0];
+                newTime = newDuration * oldTime / oldDuration;
+                newTime = FastMath.clamp(newTime, 0f, newDuration);
+            }
+            newTimes[frameI] = newTime;
+
+            int startWeightI = frameI * numTargets;
+            for (int j = 0; j < numTargets; ++j) {
+                int weightI = startWeightI + j;
+                newWeights[weightI] = oldWeights[weightI];
+            }
+        }
+        if (oldDuration == 0f && newDuration > 0f) {
+            int oldIndex = oldCount - 1;
+            int newIndex = oldCount;
+            newTimes[newIndex] = newDuration;
+
+            int oldStart = oldIndex * numTargets;
+            int newState = newIndex * numTargets;
+            for (int j = 0; j < numTargets; ++j) {
+                newWeights[newState + j] = oldWeights[oldStart + j];
+            }
+        }
+
+        Geometry target = oldTrack.getTarget();
+        MorphTrack result
+                = new MorphTrack(target, newTimes, newWeights, numTargets);
 
         return result;
     }
