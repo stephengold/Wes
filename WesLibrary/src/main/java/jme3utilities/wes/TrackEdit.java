@@ -899,6 +899,7 @@ final public class TrackEdit {
             double delta = Math.abs(1.0 - norm);
             if (delta > tolerance) {
                 changes = true;
+                break;
             }
         }
         if (!changes) {
@@ -971,6 +972,7 @@ final public class TrackEdit {
             double delta = Math.abs(1.0 - norm);
             if (delta > tolerance) {
                 changes = true;
+                break;
             }
         }
         if (!changes) {
@@ -2104,6 +2106,7 @@ final public class TrackEdit {
                 Vector3f scale = oldScales[index];
                 if (!MyVector3f.isScaleIdentity(scale)) {
                     keepScales = true;
+                    break;
                 }
             }
         }
@@ -2115,6 +2118,7 @@ final public class TrackEdit {
                 Vector3f translation = oldTranslations[index];
                 if (!MyVector3f.isZero(translation)) {
                     keepTranslations = true;
+                    break;
                 }
             }
         }
@@ -2126,6 +2130,7 @@ final public class TrackEdit {
                 Quaternion rotation = oldRotations[index];
                 if (!MyQuaternion.isRotationIdentity(rotation)) {
                     keepRotations = true;
+                    break;
                 }
             }
         }
@@ -2180,6 +2185,7 @@ final public class TrackEdit {
                 Vector3f scale = oldScales[index];
                 if (!scale.isSimilar(scaleIdentity, tolerance)) {
                     keepScales = true;
+                    break;
                 }
             }
         }
