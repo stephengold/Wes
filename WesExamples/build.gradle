@@ -51,6 +51,9 @@ task cleanWrittenAssets(type: Delete) { // Acorus output directory
 
 // tasks to run the example apps
 
+task runConvertToInPlace(type: JavaExec) {
+    mainClass = 'jme3utilities.test.wes.ConvertToInPlace'
+}
 task runFlashMobDemo(type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.FlashMobDemo'
 }
