@@ -84,6 +84,60 @@ final public class TrackEdit {
     // new methods exposed
 
     /**
+     * Copy a MorphTrack, deleting everything before the specified time and
+     * making that the start of the new track.
+     *
+     * @param oldTrack the input MorphTrack (not null, unaffected)
+     * @param neckTime the cutoff time (in seconds, &gt;0)
+     * @param neckWeights the weights at the neck time (not null, unaffected)
+     * @return a new MorphTrack with the same target and t[0]=0
+     */
+    public static MorphTrack behead(MorphTrack oldTrack, float neckTime,
+            float[] neckWeights) {
+        Validate.positive(neckTime, "neck time");
+        Validate.nonNull(neckWeights, "neck weights");
+
+        float[] oldTimes = oldTrack.getTimes();
+        assert neckTime >= oldTimes[0] : neckTime;
+        int oldCount = oldTimes.length;
+        float[] oldWeights = oldTrack.getWeights();
+
+        int neckIndex = MyArray.findPreviousIndex(neckTime, oldTimes);
+        int newCount = oldCount - neckIndex;
+        assert newCount > 0 : newCount;
+        /*
+         * Allocate new arrays.
+         */
+        float[] newTimes = new float[newCount];
+        int numTargets = oldTrack.getNbMorphTargets();
+        float[] newWeights = new float[newCount * numTargets];
+
+        newTimes[0] = 0f;
+        for (int j = 0; j < numTargets; ++j) {
+            float weight = neckWeights[j];
+            newWeights[j] = weight;
+        }
+
+        for (int newIndex = 1; newIndex < newCount; ++newIndex) {
+            int oldIndex = newIndex + neckIndex;
+            newTimes[newIndex] = oldTimes[oldIndex] - neckTime;
+
+            int oldStart = oldIndex * numTargets;
+            int newStart = newIndex * numTargets;
+            for (int j = 0; j < numTargets; ++j) {
+                float weight = oldWeights[oldStart + j];
+                newWeights[newStart + j] = weight;
+            }
+        }
+
+        Geometry target = oldTrack.getTarget();
+        MorphTrack result
+                = new MorphTrack(target, newTimes, newWeights, numTargets);
+
+        return result;
+    }
+
+    /**
      * Copy a bone/spatial track, deleting everything before the specified time
      * and making that the start of the track.
      *
