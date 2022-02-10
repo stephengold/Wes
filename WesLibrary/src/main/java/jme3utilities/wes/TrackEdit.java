@@ -1143,22 +1143,10 @@ final public class TrackEdit {
         assert track instanceof BoneTrack || track instanceof SpatialTrack;
 
         float[] oldTimes = track.getKeyFrameTimes();
-        /*
-         * Count distinct keyframes.
-         */
-        float prevTime = Float.NEGATIVE_INFINITY;
-        int newCount = 0;
-        for (float time : oldTimes) {
-            if (time != prevTime) {
-                ++newCount;
-            }
-            prevTime = time;
-        }
-
         int oldCount = oldTimes.length;
-        assert oldCount > 0 : oldCount;
+        int newCount = countDistinctKeyframes(oldTimes);
         if (newCount == oldCount) {
-            return false;
+            return false; // nothing to remove
         }
 
         Vector3f[] oldTranslations = MyAnimation.getTranslations(track);
@@ -1183,7 +1171,7 @@ final public class TrackEdit {
         /*
          * Copy all non-repeated keyframes.
          */
-        prevTime = Float.NEGATIVE_INFINITY;
+        float prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
             float time = oldTimes[oldIndex];
@@ -1215,22 +1203,10 @@ final public class TrackEdit {
      */
     public static boolean removeRepeats(TransformTrack track) {
         float[] oldTimes = track.getTimes();
-        /*
-         * Count distinct keyframes.
-         */
-        float prevTime = Float.NEGATIVE_INFINITY;
-        int newCount = 0;
-        for (float time : oldTimes) {
-            if (time != prevTime) {
-                ++newCount;
-            }
-            prevTime = time;
-        }
-
         int oldCount = oldTimes.length;
-        assert oldCount > 0 : oldCount;
+        int newCount = countDistinctKeyframes(oldTimes);
         if (newCount == oldCount) {
-            return false;
+            return false; // nothing to remove
         }
 
         Vector3f[] oldTranslations = track.getTranslations();
@@ -1255,7 +1231,7 @@ final public class TrackEdit {
         /*
          * Copy all non-repeated keyframes.
          */
-        prevTime = Float.NEGATIVE_INFINITY;
+        float prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
             float time = oldTimes[oldIndex];
@@ -2814,5 +2790,22 @@ final public class TrackEdit {
         }
 
         return result;
+    }
+
+    /**
+     * Count distinct keyframes.
+     */
+    private static int countDistinctKeyframes(float[] timeArray) {
+        float previousTime = Float.NEGATIVE_INFINITY;
+        int newCount = 0;
+        for (float time : timeArray) {
+            assert time >= previousTime : time;
+            if (time != previousTime) {
+                ++newCount;
+            }
+            previousTime = time;
+        }
+
+        return newCount;
     }
 }
