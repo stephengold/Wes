@@ -1727,7 +1727,8 @@ final public class TrackEdit {
                 int oldStart = oldIndex * numTargets;
                 int newStart = newIndex * numTargets;
                 for (int j = 0; j < numTargets; ++j) {
-                    weights[newStart + j] = oldWeights[oldStart + j];
+                    float weight = oldWeights[oldStart + j];
+                    weights[newStart + j] = weight;
                 }
             }
 
@@ -1891,9 +1892,10 @@ final public class TrackEdit {
             newTimes[newIndex] = newDuration;
 
             int oldStart = oldIndex * numTargets;
-            int newState = newIndex * numTargets;
+            int newStart = newIndex * numTargets;
             for (int j = 0; j < numTargets; ++j) {
-                newWeights[newState + j] = oldWeights[oldStart + j];
+                float weight = oldWeights[oldStart + j];
+                newWeights[newStart + j] = weight;
             }
         }
 
