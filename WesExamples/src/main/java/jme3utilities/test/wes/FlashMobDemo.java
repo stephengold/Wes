@@ -188,7 +188,6 @@ public class FlashMobDemo extends AbstractDemo {
         addBox();
         addJaime();
         addMhGame();
-        // TODO Ninja?
         addOto();
         addPuppet();
         addSinbad();
