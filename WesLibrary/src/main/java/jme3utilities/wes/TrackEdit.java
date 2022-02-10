@@ -1134,6 +1134,49 @@ final public class TrackEdit {
     }
 
     /**
+     * Remove all repetitious keyframes from a MorphTrack.
+     *
+     * @param track the input track (not null, modified)
+     * @return true if 1 or more keyframes were removed, otherwise false
+     */
+    public static boolean removeRepeats(MorphTrack track) {
+        float[] oldTimes = track.getTimes();
+        int oldCount = oldTimes.length;
+        int newCount = countDistinctKeyframes(oldTimes);
+        if (newCount == oldCount) {
+            return false; // nothing to remove
+        }
+
+        float[] oldWeights = track.getWeights();
+        float[] newTimes = new float[newCount];
+        int numTargets = track.getNbMorphTargets();
+        float[] newWeights = new float[newCount * numTargets];
+        /*
+         * Copy all non-repeated keyframes.
+         */
+        float prevTime = Float.NEGATIVE_INFINITY;
+        int newIndex = 0;
+        for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
+            float time = oldTimes[oldIndex];
+            if (time != prevTime) {
+                newTimes[newIndex] = oldTimes[oldIndex];
+
+                int oldStart = oldIndex * numTargets;
+                int newStart = newIndex * numTargets;
+                for (int j = 0; j < numTargets; ++j) {
+                    float weight = oldWeights[oldStart + j];
+                    newWeights[newStart + j] = weight;
+                }
+                ++newIndex;
+            }
+            prevTime = time;
+        }
+
+        track.setKeyframes(newTimes, newWeights);
+        return true;
+    }
+
+    /**
      * Remove all repetitious keyframes from a bone/spatial track.
      *
      * @param track input bone/spatial track (not null, modified)

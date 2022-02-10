@@ -324,13 +324,15 @@ final public class AnimationEdit {
         int numTracksEdited = 0;
         AnimTrack<?>[] tracks = clip.getTracks();
         for (AnimTrack<?> track : tracks) {
-            if (track instanceof TransformTrack) {
-                boolean removed
-                        = TrackEdit.removeRepeats((TransformTrack) track);
-                if (removed) {
-                    ++numTracksEdited;
-                }
-            } // TODO other track types
+            boolean removed;
+            if (track instanceof MorphTrack) {
+                removed = TrackEdit.removeRepeats((MorphTrack) track);
+            } else {
+                removed = TrackEdit.removeRepeats((TransformTrack) track);
+            }
+            if (removed) {
+                ++numTracksEdited;
+            }
         }
 
         return numTracksEdited;
