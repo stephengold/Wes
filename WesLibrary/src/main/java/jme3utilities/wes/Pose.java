@@ -351,6 +351,19 @@ public class Pose implements JmeCloneable {
     }
 
     /**
+     * Access the Armature or Skeleton, if known.
+     *
+     * @return the pre-existing instance, or null
+     */
+    public Object findSkeleton() {
+        if (skeleton == null) {
+            return armature;
+        } else {
+            return skeleton;
+        }
+    }
+
+    /**
      * Calculate the local rotation of the indexed joint/bone.
      *
      * @param boneIndex which joint/bone (&ge;0)
