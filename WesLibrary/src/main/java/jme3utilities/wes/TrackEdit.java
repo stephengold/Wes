@@ -2426,6 +2426,59 @@ final public class TrackEdit {
     }
 
     /**
+     * Copy a MorphTrack, truncating it at the specified time.
+     *
+     * @param oldTrack input MorphTrack (not null, unaffected)
+     * @param endTime cutoff time (&ge;0)
+     * @param endWeights weights at the end time (not null, unaffected)
+     * @return a new MorphTrack with the same target and t[0]=0
+     */
+    public static MorphTrack truncate(MorphTrack oldTrack,
+            float endTime, float[] endWeights) {
+        Validate.nonNegative(endTime, "end time");
+        Validate.nonNull(endWeights, "end weights");
+        /*
+         * Access the old arrays.
+         */
+        float[] oldTimes = oldTrack.getTimes();
+        float[] oldWeights = oldTrack.getWeights();
+        /*
+         * Allocate new arrays. Avoid creating a repetitious keyframe.
+         */
+        int lastFrame = MyArray.findPreviousIndex(endTime, oldTimes);
+        int newCount = lastFrame + 1;
+        if (oldTimes[lastFrame] != endTime) {
+            ++newCount;
+        }
+        lastFrame = newCount - 1;
+        float[] newTimes = new float[newCount];
+        int numTargets = oldTrack.getNbMorphTargets();
+        float[] newWeights = new float[newCount * numTargets];
+
+        for (int frameI = 0; frameI < lastFrame; ++frameI) {
+            newTimes[frameI] = oldTimes[frameI] - oldTimes[0];
+            int startWeightI = frameI * numTargets;
+            for (int j = 0; j < numTargets; ++j) {
+                int weightI = startWeightI + j;
+                newWeights[weightI] = oldWeights[weightI];
+            }
+        }
+
+        newTimes[lastFrame] = endTime;
+        int startWeightI = lastFrame * numTargets;
+        for (int j = 0; j < numTargets; ++j) {
+            newWeights[startWeightI + j] = endWeights[j];
+        }
+
+        Geometry target = oldTrack.getTarget();
+        MorphTrack result
+                = new MorphTrack(target, newTimes, newWeights, numTargets);
+
+        assert (float) result.getLength() == endTime;
+        return result;
+    }
+
+    /**
      * Copy a bone/spatial track, truncating it at the specified time.
      *
      * @param oldTrack input bone/spatial track (not null, unaffected)
