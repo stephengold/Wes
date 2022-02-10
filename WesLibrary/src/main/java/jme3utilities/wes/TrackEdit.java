@@ -1713,22 +1713,26 @@ final public class TrackEdit {
         if (inputTrack instanceof MorphTrack) {
             MorphTrack oldMorphTrack = (MorphTrack) inputTrack;
             float[] oldWeights = oldMorphTrack.getWeights();
-            assert oldWeights.length == numFrames;
             /*
              * Allocate new arrays.
              */
             newTimes = new float[numFrames];
-            float[] weights = new float[numFrames];
+            int numTargets = oldMorphTrack.getNbMorphTargets();
+            float[] weights = new float[numFrames * numTargets];
 
             for (int newIndex = 0; newIndex < numFrames; ++newIndex) {
                 int oldIndex = numFrames - newIndex - 1;
                 newTimes[newIndex] = lastFrameTime - oldTimes[oldIndex];
-                weights[newIndex] = oldWeights[oldIndex]; // TODO copy all weights
+
+                int oldStart = oldIndex * numTargets;
+                int newStart = newIndex * numTargets;
+                for (int j = 0; j < numTargets; ++j) {
+                    weights[newStart + j] = oldWeights[oldStart + j];
+                }
             }
 
             Geometry target = oldMorphTrack.getTarget();
-            int nbMorph = target.getMesh().getMorphTargets().length;
-            result = new MorphTrack(target, newTimes, weights, nbMorph);
+            result = new MorphTrack(target, newTimes, weights, numTargets);
 
         } else {
             TransformTrack oldTransformTrack = (TransformTrack) inputTrack;
