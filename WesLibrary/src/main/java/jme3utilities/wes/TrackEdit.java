@@ -2949,7 +2949,7 @@ final public class TrackEdit {
     }
 
     /**
-     * Count distinct keyframes.
+     * Count distinct keyframes. TODO use MyArray.countNeSorted()
      */
     private static int countDistinctKeyframes(float[] timeArray) {
         float previousTime = Float.NEGATIVE_INFINITY;
