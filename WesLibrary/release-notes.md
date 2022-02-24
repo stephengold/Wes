@@ -1,10 +1,10 @@
 # release log for the Wes library and related examples
 
-## Version 0.7.1: released on TBD
+## Version 0.7.1: released on 24 February 2022
 
- + Bugfix:  `TweenTransforms` uses the wrong cycle time
-   to interpolate a `TransformTrack`.
-+ In WesExamples:
+ + Bugfix:  `TweenTransforms` uses the wrong cycle time to interpolate
+   a `TransformTrack`. (fix involves an API change to TweenTransforms)
+ + In WesExamples:
    + Added a demo app for `AnimationEdit.convertToInPlace()`.
    + Added Adi Barda's "ninja-fighter" model.
 

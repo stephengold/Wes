@@ -65,7 +65,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:Wes:0.7.0'
+        implementation 'com.github.stephengold:Wes:0.7.1'
     }
 
 For some older versions of Gradle,
@@ -85,7 +85,7 @@ Add to the project’s "pom.xml" file:
     <dependency>
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
-      <version>0.7.0</version>
+      <version>0.7.1</version>
     </dependency>
 
 ### Ant-built projects
@@ -139,7 +139,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
   + using Git:
     + `git clone https://github.com/stephengold/Wes.git`
     + `cd Wes`
-    + `git checkout -b latest 0.7.0`
+    + `git checkout -b latest 0.7.1`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link
@@ -204,6 +204,13 @@ Demo applications have been created to showcase certain features of Wes.
 The following demos are found in the `jme3utilities.wes.test` package of
 the WesExamples sub-project:
 
+### ConvertToInPlace
+
+Demonstrates converting the "hurricane_kick" animation
+(from Adi Barda's ninja-fighter model) to an in-place cyclic animation.
+The unmodified animation is shown on a white skeleton,
+synchronized with the converted animation, which is shown on a yellow skeleton.
+
 ### FlashMobDemo
 
 Demonstrates retargeting the "Dance" animation clip of the Sinbad model
@@ -265,6 +272,7 @@ artists and software developers:
   the [Bvhretarget Project][bvhretarget]
   (on which `BoneMapping` and `SkeletonMapping` are based)
   and also for many helpful insights
++ Adi Barda, for creating the ninja-fighter model.
 + Zi Ye, for creating the Sinbad model
 + [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
