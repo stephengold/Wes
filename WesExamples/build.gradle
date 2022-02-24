@@ -6,8 +6,6 @@ plugins {
     id 'application'
 }
 
-description = 'demos, examples, and non-automated tests'
-
 mainClassName = 'jme3utilities.test.wes.FlashMobDemo'
 if (!hasProperty('mainClass')) {
     ext.mainClass = mainClassName
