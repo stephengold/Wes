@@ -1,10 +1,18 @@
 # release log for the Wes library and related examples
 
+## Version 0.7.1: released on TBD
+
+ + Bugfix:  `TweenTransforms` uses the wrong cycle time
+   to interpolate a `TransformTrack`.
++ In WesExamples:
+   + Added a demo app for `AnimationEdit.convertToInPlace()`.
+   + Added Adi Barda's "ninja-fighter" model.
+
 ## Version 0.7.0: released on 10 February 2022
 
  + Made `TrackEdit.cloneTrack()` into a generic method. (API change)
  + Finalized the `AnimationEdit` and `TrackEdit` classes. (API change)
- + Bugfix:  `TrackEdit.reverse()` assumes a `MorphTrack`
+ + Bugfix:  `TrackEdit.reverse()` assumes a `MorphTrack`.
    has a exactly one target
  + Added 7 public methods:
    + `AnimationEdit.convertToInPlace()`
