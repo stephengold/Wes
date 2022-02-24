@@ -38,6 +38,9 @@ Complete source code (in Java) is provided under
 + reverse an animation track
 + chain 2 tracks together
 + repair certain issues with animation tracks
++ convert a traveling animation to an in-place cyclic animation
+
+Most of the features work with both the old and new animation systems.
 
 [Jump to table of contents](#toc)
 
