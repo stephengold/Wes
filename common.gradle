@@ -3,6 +3,11 @@
 apply plugin: 'java'
 
 ext {
+    jmeTarget = ''
+
+    // module coordinates of dependencies:
+    heartCoordinates = 'com.github.stephengold:Heart:7.4.0' + jmeTarget
+
     // current versions of libraries:
     jme3Version = '3.5.0-stable'
     wesVersion = '0.7.2-SNAPSHOT'
@@ -14,7 +19,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 tasks.withType(JavaCompile) { // Java compile-time options:
     options.compilerArgs << '-Xdiags:verbose'
     options.compilerArgs << '-Xlint:unchecked'
-    //options.deprecation = true
+    //options.deprecation = true // to provide detailed deprecation warnings
     options.encoding = 'UTF-8'
 }
 
@@ -29,6 +34,6 @@ tasks.withType(JavaExec) { // Java runtime options:
 }
 
 repositories {
-    //mavenLocal() // to use local SNAPSHOTs of libraries
+    //mavenLocal() // to find local SNAPSHOTs of libraries
     mavenCentral()
 }
