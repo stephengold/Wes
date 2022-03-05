@@ -37,7 +37,6 @@ import com.jme3.animation.Skeleton;
 import com.jme3.animation.SkeletonControl;
 import com.jme3.app.StatsAppState;
 import com.jme3.asset.AssetKey;
-import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
 import com.jme3.input.CameraInput;
 import com.jme3.input.KeyInput;
@@ -75,7 +74,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * An AbstractDemo to demonstrate animation retargeting.
+ * Demonstrate animation retargeting.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -142,29 +141,21 @@ public class FlashMobDemo extends AbstractDemo {
     /**
      * Main entry point for the FlashMobDemo application.
      *
-     * @param ignored array of command-line arguments (not null)
+     * @param arguments array of command-line arguments (not null)
      */
-    public static void main(String[] ignored) {
-        // Mute the chatty loggers in certain packages.
-        Heart.setLoggingLevels(Level.WARNING);
-        Logger.getLogger(ALAudioRenderer.class.getName())
-                .setLevel(Level.SEVERE);
-
+    public static void main(String[] arguments) {
         FlashMobDemo application = new FlashMobDemo();
+        Heart.setLoggingLevels(Level.WARNING);
 
-        // Customize the window's title bar.
-        AppSettings settings = new AppSettings(true);
-        settings.setTitle(applicationName);
-
+        boolean loadDefaults = true;
+        AppSettings settings = new AppSettings(loadDefaults);
         settings.setAudioRenderer(null);
         settings.setGammaCorrection(true);
         settings.setSamples(4); // anti-aliasing
+        settings.setTitle(applicationName); // Customize the window's title bar.
         settings.setVSync(true);
         application.setSettings(settings);
-        /*
-         * Invoke the JME startup code,
-         * which in turn invokes actionInitializeApplication().
-         */
+
         application.start();
     }
     // *************************************************************************
@@ -262,6 +253,7 @@ public class FlashMobDemo extends AbstractDemo {
     @Override
     public void moreDefaultBindings() {
         InputMode dim = getDefaultInputMode();
+
         dim.bind("dump scenes", KeyInput.KEY_P);
         dim.bindSignal(CameraInput.FLYCAM_LOWER, KeyInput.KEY_DOWN);
         dim.bindSignal(CameraInput.FLYCAM_RISE, KeyInput.KEY_UP);

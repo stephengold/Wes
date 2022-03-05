@@ -30,7 +30,6 @@ import com.jme3.anim.AnimClip;
 import com.jme3.anim.AnimComposer;
 import com.jme3.anim.SkinningControl;
 import com.jme3.app.StatsAppState;
-import com.jme3.audio.openal.ALAudioRenderer;
 import com.jme3.font.Rectangle;
 import com.jme3.input.CameraInput;
 import com.jme3.input.KeyInput;
@@ -64,7 +63,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * An AbstractDemo to demonstrate reversing an animation.
+ * Demonstrate reversing an animation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -99,29 +98,21 @@ public class ReverseAnimation extends AbstractDemo {
     /**
      * Main entry point for the ReverseAnimation application.
      *
-     * @param ignored array of command-line arguments (not null)
+     * @param arguments array of command-line arguments (not null)
      */
-    public static void main(String[] ignored) {
-        /*
-         * Mute the chatty loggers in certain packages.
-         */
-        Heart.setLoggingLevels(Level.WARNING);
-        Logger.getLogger(ALAudioRenderer.class.getName())
-                .setLevel(Level.SEVERE);
-
+    public static void main(String[] arguments) {
         ReverseAnimation application = new ReverseAnimation();
-        /*
-         * Customize the window's title bar.
-         */
-        AppSettings settings = new AppSettings(true);
-        settings.setTitle(applicationName);
+        Heart.setLoggingLevels(Level.WARNING);
 
+        boolean loadDefaults = true;
+        AppSettings settings = new AppSettings(loadDefaults);
+        settings.setAudioRenderer(null);
         settings.setGammaCorrection(true);
         settings.setSamples(4); // anti-aliasing
+        settings.setTitle(applicationName); // Customize the window's title bar.
         settings.setVSync(true);
         application.setSettings(settings);
 
-        settings.setAudioRenderer(null);
         application.start();
     }
     // *************************************************************************
@@ -173,9 +164,8 @@ public class ReverseAnimation extends AbstractDemo {
         dim.bind(asToggleHelp, KeyInput.KEY_H);
         dim.bind(asTogglePause, KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
-        /*
-         * The help node can't be created until all hotkeys are bound.
-         */
+
+        // The help node can't be created until all hotkeys are bound.
         addHelp();
     }
 

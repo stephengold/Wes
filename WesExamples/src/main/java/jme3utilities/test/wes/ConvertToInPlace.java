@@ -65,7 +65,7 @@ import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
 /**
- * Demonstrate conversion of a travelling animation into an in-place animation.
+ * Demonstrate conversion of a traveling animation into an in-place animation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -105,27 +105,21 @@ public class ConvertToInPlace extends AbstractDemo {
     /**
      * Main entry point for the ConvertToInPlace application.
      *
-     * @param ignored array of command-line arguments (not null)
+     * @param arguments array of command-line arguments (not null)
      */
-    public static void main(String[] ignored) {
-        // Mute the chatty loggers in certain packages.
+    public static void main(String[] arguments) {
+        ConvertToInPlace application = new ConvertToInPlace();
         Heart.setLoggingLevels(Level.WARNING);
 
-        ConvertToInPlace application = new ConvertToInPlace();
-
-        // Customize the window's title bar.
-        AppSettings settings = new AppSettings(true);
-        settings.setTitle(applicationName);
-
+        boolean loadDefaults = true;
+        AppSettings settings = new AppSettings(loadDefaults);
         settings.setAudioRenderer(null);
         settings.setGammaCorrection(true);
         settings.setSamples(4); // anti-aliasing
+        settings.setTitle(applicationName); // Customize the window's title bar.
         settings.setVSync(true);
         application.setSettings(settings);
-        /*
-         * Invoke the JME startup code,
-         * which in turn invokes actionInitializeApplication().
-         */
+
         application.start();
     }
     // *************************************************************************
@@ -185,6 +179,7 @@ public class ConvertToInPlace extends AbstractDemo {
     @Override
     public void moreDefaultBindings() {
         InputMode dim = getDefaultInputMode();
+
         dim.bind("dump scenes", KeyInput.KEY_P);
         dim.bindSignal(CameraInput.FLYCAM_LOWER, KeyInput.KEY_DOWN);
         dim.bindSignal(CameraInput.FLYCAM_RISE, KeyInput.KEY_UP);
