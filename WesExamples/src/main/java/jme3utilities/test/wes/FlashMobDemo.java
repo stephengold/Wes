@@ -145,7 +145,7 @@ public class FlashMobDemo extends AbstractDemo {
      */
     public static void main(String[] arguments) {
         FlashMobDemo application = new FlashMobDemo();
-        Heart.setLoggingLevels(Level.WARNING);
+        Heart.parseAppArgs(application, arguments);
 
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);

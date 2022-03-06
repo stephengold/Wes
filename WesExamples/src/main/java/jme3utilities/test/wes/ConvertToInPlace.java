@@ -109,7 +109,7 @@ public class ConvertToInPlace extends AbstractDemo {
      */
     public static void main(String[] arguments) {
         ConvertToInPlace application = new ConvertToInPlace();
-        Heart.setLoggingLevels(Level.WARNING);
+        Heart.parseAppArgs(application, arguments);
 
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);

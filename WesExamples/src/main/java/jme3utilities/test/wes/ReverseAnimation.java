@@ -102,7 +102,7 @@ public class ReverseAnimation extends AbstractDemo {
      */
     public static void main(String[] arguments) {
         ReverseAnimation application = new ReverseAnimation();
-        Heart.setLoggingLevels(Level.WARNING);
+        Heart.parseAppArgs(application, arguments);
 
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);

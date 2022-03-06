@@ -103,7 +103,7 @@ public class TrimAnimation extends AbstractDemo {
      */
     public static void main(String[] arguments) {
         TrimAnimation application = new TrimAnimation();
-        Heart.setLoggingLevels(Level.WARNING);
+        Heart.parseAppArgs(application, arguments);
 
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);
