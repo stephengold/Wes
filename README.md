@@ -132,7 +132,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 
 ## How to build Wes from source
 
-1. Install a [Java Development Kit (JDK)][openJDK],
+1. Install a [Java Development Kit (JDK)][adoptium],
    if you don't already have one.
 2. Point the `JAVA_HOME` environment variable to your JDK installation:
   + using Bash or Zsh: `export JAVA_HOME="` *path to installation* `"`
@@ -310,6 +310,7 @@ correct the situation: sgold@sonic.net
 [Jump to table of contents](#toc)
 
 
+[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
@@ -337,7 +338,6 @@ correct the situation: sgold@sonic.net
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [ogre]: http://www.ogre3d.org "Ogre Project"
-[openJDK]: https://openjdk.java.net "OpenJDK Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: http://www.cessen.com "Nathan Vegdahl"
