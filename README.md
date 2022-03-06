@@ -93,7 +93,7 @@ Add to the project’s "pom.xml" file:
 
 ### Ant-built projects
 
-For project built using [Ant], download the Wes and [Heart]
+For projects built using [Ant], download the Wes and [Heart]
 libraries from GitHub:
 
 + https://github.com/stephengold/Wes/releases/tag/latest
