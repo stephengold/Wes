@@ -5,8 +5,8 @@
 
 It contains 2 sub-projects:
 
- 1. WesLibrary: the Wes runtime library
- 2. WesExamples: demos, examples, and non-automated test software
+1. WesLibrary: the Wes runtime library
+2. WesExamples: demos, examples, and non-automated test software
 
 Complete source code (in Java) is provided under
 [a 3-clause BSD license][license].
@@ -135,7 +135,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 1. Install a [Java Development Kit (JDK)][openJDK],
    if you don't already have one.
 2. Point the `JAVA_HOME` environment variable to your JDK installation:
-  + using Bash: `export JAVA_HOME="` *path to installation* `"`
+  + using Bash or Zsh: `export JAVA_HOME="` *path to installation* `"`
   + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
 3. Download and extract the Wes source code from GitHub:
@@ -150,18 +150,18 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
 4. Run the [Gradle] wrapper:
-  + using Bash or PowerShell: `./gradlew build`
+  + using Bash or PowerShell or Zsh: `./gradlew build`
   + using Windows Command Prompt: `.\gradlew build`
 
 After a successful build,
-Maven artifacts will be found in `WesLibrary/build/libs`.
+Maven artifacts will be found in "WesLibrary/build/libs".
 
 You can install the artifacts to your local Maven repository:
-+ using Bash or PowerShell: `./gradlew install`
++ using Bash or PowerShell or Zsh: `./gradlew install`
 + using Windows Command Prompt: `.\gradlew install`
 
 You can restore the project to a pristine state:
-+ using Bash or PowerShell: `./gradlew clean`
++ using Bash or PowerShell or Zsh: `./gradlew clean`
 + using Windows Command Prompt: `.\gradlew clean`
 
 [Jump to table of contents](#toc)
