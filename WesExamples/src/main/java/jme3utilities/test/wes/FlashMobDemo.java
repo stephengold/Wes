@@ -150,11 +150,9 @@ public class FlashMobDemo extends AbstractDemo {
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);
         settings.setAudioRenderer(null);
-        settings.setGammaCorrection(true);
         settings.setRenderer(AppSettings.LWJGL_OPENGL32);
         settings.setSamples(4); // anti-aliasing
         settings.setTitle(applicationName); // Customize the window's title bar.
-        settings.setVSync(true);
         application.setSettings(settings);
 
         application.start();
