@@ -3,7 +3,7 @@
 apply plugin: 'java'
 
 ext {
-    jmeTarget = ''
+    jmeTarget = '' // distinguish libraries built for different JME releases
 
     // module coordinates of dependencies:
     heartCoordinates = 'com.github.stephengold:Heart:7.4.1' + jmeTarget
