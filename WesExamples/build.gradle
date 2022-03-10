@@ -55,7 +55,7 @@ task cleanWrittenAssets(type: Delete) { // Acorus output directory
     delete 'Written Assets'
 }
 
-// tasks to run the example apps
+// tasks to run the example apps:
 
 task ConvertToInPlace(type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.ConvertToInPlace'

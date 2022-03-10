@@ -193,7 +193,7 @@ public class ConvertToInPlace extends AbstractDemo {
     }
 
     /**
-     * Process an action that wasn't handled by the active input mode.
+     * Process an action that wasn't handled by the active InputMode.
      *
      * @param actionString textual description of the action (not null)
      * @param ongoing true if the action is ongoing, otherwise false
@@ -232,7 +232,7 @@ public class ConvertToInPlace extends AbstractDemo {
     // private methods
 
     /**
-     * Add a large static box to serve as a platform.
+     * Attach a large static Box to the scene, to serve as a platform.
      */
     private void addBox() {
         float halfExtent = 50f; // mesh units
