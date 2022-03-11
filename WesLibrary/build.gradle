@@ -22,24 +22,24 @@ dependencies {
 
 // publishing tasks
 
-task install {
+task('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description 'Installs Maven artifacts to the local repository.'
 }
-task release {
+task('release') {
     dependsOn 'publishMavenPublicationToOSSRHRepository'
     description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
 
 jar { archiveBaseName = project.ext.baseName }
-task javadocJar(type: Jar) {
+task('javadocJar', type: Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
 }
-task sourcesJar(type: Jar) {
+task('sourcesJar', type: Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
     description 'Creates a JAR of sourcecode.'

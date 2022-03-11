@@ -39,33 +39,33 @@ dependencies {
 
 clean.dependsOn('cleanDLLs', 'cleanDyLibs', 'cleanLogs', 'cleanSOs', 'cleanWrittenAssets')
 
-task cleanDLLs(type: Delete) { // extracted Windows native libraries
+task('cleanDLLs', type: Delete) { // extracted Windows native libraries
     delete fileTree(dir: '.', include: '*.dll')
 }
-task cleanDyLibs(type: Delete) { // extracted macOSX native libraries
+task('cleanDyLibs', type: Delete) { // extracted macOSX native libraries
     delete fileTree(dir: '.', include: '*.dylib')
 }
-task cleanLogs(type: Delete) { // JVM crash logs
+task('cleanLogs', type: Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
-task cleanSOs(type: Delete) { // extracted Linux and Android native libraries
+task('cleanSOs', type: Delete) { // extracted Linux and Android native libraries
     delete fileTree(dir: '.', include: '*.so')
 }
-task cleanWrittenAssets(type: Delete) { // Acorus output directory
+task('cleanWrittenAssets', type: Delete) { // Acorus output directory
     delete 'Written Assets'
 }
 
 // tasks to run the example apps:
 
-task ConvertToInPlace(type: JavaExec) {
+task('ConvertToInPlace', type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.ConvertToInPlace'
 }
-task FlashMobDemo(type: JavaExec) {
+task('FlashMobDemo', type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.FlashMobDemo'
 }
-task ReverseAnimation(type: JavaExec) {
+task('ReverseAnimation', type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.ReverseAnimation'
 }
-task TrimAnimation(type: JavaExec) {
+task('TrimAnimation', type: JavaExec) {
     mainClass = 'jme3utilities.test.wes.TrimAnimation'
 }
