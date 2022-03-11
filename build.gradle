@@ -10,11 +10,11 @@ subprojects {
 
 // publishing tasks
 
-task('install') {
+tasks.register('install') {
     dependsOn ':WesLibrary:install'
     description 'Installs Maven artifacts to the local repository.'
 }
-task('release') {
+tasks.register('release') {
     dependsOn ':WesLibrary:release'
     description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
