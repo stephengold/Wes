@@ -39,6 +39,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - run: ./gradlew build --console=plain --no-daemon --stacktrace
+        shell: bash
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
