@@ -31,7 +31,9 @@ tasks.register('release') {
     description 'Stages Maven artifacts to Sonatype OSSRH.'
 }
 
-jar { archiveBaseName = project.ext.baseName }
+jar {
+    archiveBaseName = project.ext.baseName
+}
 tasks.register('javadocJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'javadoc'
