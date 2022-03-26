@@ -49,14 +49,13 @@ Most of the features work with both the old and new animation systems.
 
 ## How to add Wes to an existing project
 
-Adding the Wes Library to an existing [jMonkeyEngine][jme] project should be
-a simple matter of adding it to the classpath.
-
-The Wes Library depends on [the Heart Library][heart],
-which in turn depends on
+Wes comes pre-built as a single library depends on
+[the Heart Library][heart], which in turn depends on
 the standard "jme3-core" library from jMonkeyEngine.
+Adding Wes to an existing [jMonkeyEngine][jme] project should be
+a simple matter of adding these libraries to the classpath.
 
-For projects built using Maven or [Gradle], it is sufficient to specify the
+For projects built using [Maven] or [Gradle], it is sufficient to add a
 dependency on the Wes Library.  The build tools should automatically
 resolve the remaining dependencies.
 
@@ -206,9 +205,9 @@ The pre-built libraries are compatible with JDK 8.
 
 ## An overview of the demo applications
 
-Demo applications have been created to showcase certain features of Wes.
-The following demos are found in the `jme3utilities.wes.test` package of
-the WesExamples sub-project:
+Applications have been created to showcase
+certain features of Wes.
+The following demos are found in the WesExamples sub-project:
 
 ### ConvertToInPlace
 
@@ -252,10 +251,9 @@ the Sinbad model to generate a "warn" clip.
 The evolution of this project is chronicled in
 [its release log][log].
 
-Much of the code was originally developed for the [Maud editor][maud].
+Much of the Wes code was originally developed for the [Maud editor][maud].
 
-The retargeting code was originally developed by Rémy Bouquet (aka "nehon")
-for his [Bvhretarget Project][bvhretarget].
+The retargeting code is based on [the Bvhretarget Project][bvhretarget].
 
 From September 2017 to January 2019, Wes was a sub-project of
 [the Jme3-utilities Project][utilities].
@@ -278,12 +276,12 @@ artists and software developers:
   the [Bvhretarget Project][bvhretarget]
   (on which `BoneMapping` and `SkeletonMapping` are based)
   and also for many helpful insights
-+ Adi Barda, for creating the ninja-fighter model.
++ Adi Barda, for creating the ninja-fighter model
 + Zi Ye, for creating the Sinbad model
 + [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
 + Ali (aka "Ali_RS) for sharing a code snippet that inspired
-  the `convertToInPlace()` methods.
+  the `convertToInPlace()` methods
 + plus the creators of (and contributors to) the following software:
     + the [FindBugs] source-code analyzer
     + the [Firefox] and [Chrome] web browsers
@@ -337,6 +335,7 @@ correct the situation: sgold@sonic.net
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
+[maven]: https://maven.apache.org "Maven Project"
 [meld]: https://meldmerge.org "Meld Tool"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
