@@ -39,6 +39,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -59,6 +60,7 @@ import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.ui.AbstractDemo;
 import jme3utilities.ui.CameraOrbitAppState;
+import jme3utilities.ui.HelpVersion;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.TweenTransforms;
@@ -158,6 +160,44 @@ public class TrimAnimation extends AbstractDemo {
     }
 
     /**
+     * Calculate screen bounds for a detailed help node. Meant to be overridden.
+     *
+     * @param viewPortWidth (in pixels, &gt;0)
+     * @param viewPortHeight (in pixels, &gt;0)
+     * @return a new instance
+     */
+    public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
+        /*
+         * Position help nodes along the top of the viewport.
+         */
+        float margin = 10f; // in pixels
+        float height = viewPortHeight - (2f * margin);
+        float width = viewPortWidth - (2f * margin);
+        float leftX = margin;
+        float topY = margin + height;
+        Rectangle result = new Rectangle(leftX, topY, width, height);
+
+        return result;
+    }
+
+    /**
+     * Callback invoked when the active InputMode changes.
+     *
+     * @param oldMode the old mode, or null if none
+     * @param newMode the new mode, or null if none
+     */
+    @Override
+    public void inputModeChange(InputMode oldMode, InputMode newMode) {
+        if (newMode != null) {
+            Camera guiCamera = guiViewPort.getCamera();
+            int viewPortWidth = guiCamera.getWidth();
+            int viewPortHeight = guiCamera.getHeight();
+            updateHelpNodes(newMode, viewPortWidth, viewPortHeight,
+                    HelpVersion.Detailed);
+        }
+    }
+
+    /**
      * Add application-specific hotkey bindings and override existing ones.
      */
     @Override
@@ -172,10 +212,6 @@ public class TrimAnimation extends AbstractDemo {
         dim.bind(asToggleHelp, KeyInput.KEY_H);
         dim.bind(asTogglePause, KeyInput.KEY_PAUSE, KeyInput.KEY_PERIOD);
         dim.bind("toggle skeleton", KeyInput.KEY_V);
-        /*
-         * The help node can't be created until all hotkeys are bound.
-         */
-        addHelp();
     }
 
     /**
@@ -216,19 +252,6 @@ public class TrimAnimation extends AbstractDemo {
         Material material = MyAsset.createShadedMaterial(assetManager, color);
         geometry.setMaterial(material);
         geometry.setShadowMode(RenderQueue.ShadowMode.Receive);
-    }
-
-    /**
-     * Attach a Node to display hotkey help.
-     */
-    private void addHelp() {
-        float x = 10f;
-        float y = cam.getHeight() - 40f;
-        float width = cam.getWidth() - 20f;
-        float height = cam.getHeight() - 20f;
-        Rectangle rectangle = new Rectangle(x, y, width, height);
-
-        attachHelpNode(rectangle);
     }
 
     /**
