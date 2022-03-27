@@ -267,11 +267,11 @@ public class FlashMobDemo extends AbstractDemo {
     }
 
     /**
-     * Process an action that wasn't handled by the active input mode.
+     * Process an action that wasn't handled by the active InputMode.
      *
      * @param actionString textual description of the action (not null)
      * @param ongoing true if the action is ongoing, otherwise false
-     * @param tpf time interval between frames (in seconds, &ge;0)
+     * @param tpf the time interval between frames (in seconds, &ge;0)
      */
     @Override
     public void onAction(String actionString, boolean ongoing, float tpf) {
@@ -285,6 +285,9 @@ public class FlashMobDemo extends AbstractDemo {
                     return;
             }
         }
+        /*
+         * The action is not handled: forward it to the superclass.
+         */
         super.onAction(actionString, ongoing, tpf);
     }
 
@@ -370,10 +373,12 @@ public class FlashMobDemo extends AbstractDemo {
         ColorRGBA ambientColor = new ColorRGBA(0.2f, 0.2f, 0.2f, 1f);
         AmbientLight ambient = new AmbientLight(ambientColor);
         rootNode.addLight(ambient);
+        ambient.setName("ambient");
 
         Vector3f direction = new Vector3f(1f, -2f, -2f).normalizeLocal();
         DirectionalLight sun = new DirectionalLight(direction);
         rootNode.addLight(sun);
+        sun.setName("sun");
 
         DirectionalLightShadowRenderer dlsr
                 = new DirectionalLightShadowRenderer(assetManager, 4_096, 3);
@@ -499,12 +504,13 @@ public class FlashMobDemo extends AbstractDemo {
     }
 
     /**
-     * Configure the Camera during startup.
+     * Configure the main camera during startup.
      */
     private void configureCamera() {
         flyCam.setDragToRotate(true);
         flyCam.setMoveSpeed(4f);
 
+        cam.setName("cam");
         cam.setLocation(new Vector3f(2.85f, 3.46f, 5.29f));
         cam.setRotation(new Quaternion(-0.054f, 0.946336f, -0.2308f, -0.2197f));
 
