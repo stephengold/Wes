@@ -40,7 +40,6 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -62,7 +61,6 @@ import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.ui.AbstractDemo;
 import jme3utilities.ui.CameraOrbitAppState;
-import jme3utilities.ui.HelpVersion;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 
@@ -194,23 +192,6 @@ public class ConvertToInPlace extends AbstractDemo {
         Rectangle result = new Rectangle(leftX, topY, width, height);
 
         return result;
-    }
-
-    /**
-     * Callback invoked when the active InputMode changes.
-     *
-     * @param oldMode the old mode, or null if none
-     * @param newMode the new mode, or null if none
-     */
-    @Override
-    public void inputModeChange(InputMode oldMode, InputMode newMode) {
-        if (newMode != null) {
-            Camera guiCamera = guiViewPort.getCamera();
-            int viewPortWidth = guiCamera.getWidth();
-            int viewPortHeight = guiCamera.getHeight();
-            updateHelpNodes(newMode, viewPortWidth, viewPortHeight,
-                    HelpVersion.Detailed);
-        }
     }
 
     /**
