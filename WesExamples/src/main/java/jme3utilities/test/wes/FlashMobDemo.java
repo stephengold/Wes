@@ -66,6 +66,7 @@ import jme3utilities.Heart;
 import jme3utilities.InfluenceUtil;
 import jme3utilities.MyAsset;
 import jme3utilities.MySpatial;
+import jme3utilities.MyString;
 import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
 import jme3utilities.ui.AbstractDemo;
@@ -144,6 +145,7 @@ public class FlashMobDemo extends AbstractDemo {
      * @param arguments array of command-line arguments (not null)
      */
     public static void main(String[] arguments) {
+        String title = applicationName + " " + MyString.join(arguments);
         FlashMobDemo application = new FlashMobDemo();
         Heart.parseAppArgs(application, arguments);
 
@@ -152,7 +154,7 @@ public class FlashMobDemo extends AbstractDemo {
         settings.setAudioRenderer(null);
         settings.setRenderer(AppSettings.LWJGL_OPENGL32);
         settings.setSamples(4); // anti-aliasing
-        settings.setTitle(applicationName); // Customize the window's title bar.
+        settings.setTitle(title); // Customize the window's title bar.
         application.setSettings(settings);
 
         application.start();
