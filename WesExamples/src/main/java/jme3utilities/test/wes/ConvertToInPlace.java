@@ -149,6 +149,8 @@ public class ConvertToInPlace extends AbstractDemo {
         statusText = new BitmapText(guiFont);
         statusText.setLocalTranslation(10f, cam.getHeight(), 0f);
         guiNode.attachChild(statusText);
+
+        super.actionInitializeApplication();
         /*
          * Create an in-place cyclic animation
          * based on the "hurricane_kick" clip

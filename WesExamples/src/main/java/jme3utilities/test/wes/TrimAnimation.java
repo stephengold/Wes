@@ -125,6 +125,8 @@ public class TrimAnimation extends AbstractDemo {
      */
     @Override
     public void actionInitializeApplication() {
+        super.actionInitializeApplication();
+
         Logger.getLogger(MaterialLoader.class.getName()).setLevel(Level.SEVERE);
         Logger.getLogger(MeshLoader.class.getName()).setLevel(Level.SEVERE);
 
