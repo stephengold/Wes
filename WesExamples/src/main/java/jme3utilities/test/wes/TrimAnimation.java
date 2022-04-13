@@ -111,6 +111,7 @@ public class TrimAnimation extends AbstractDemo {
         AppSettings settings = new AppSettings(loadDefaults);
         settings.setAudioRenderer(null);
         settings.setRenderer(AppSettings.LWJGL_OPENGL32);
+        settings.setResizable(true);
         settings.setSamples(4); // anti-aliasing
         settings.setTitle(title); // Customize the window's title bar.
         application.setSettings(settings);
@@ -134,9 +135,12 @@ public class TrimAnimation extends AbstractDemo {
 
         ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
         viewPort.setBackgroundColor(bgColor);
+        /*
+         * Hide the render-statistics overlay.
+         */
+        stateManager.getState(StatsAppState.class).toggleStats();
 
         addLighting();
-        stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
         addSinbad();
         /*
