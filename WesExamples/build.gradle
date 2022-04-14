@@ -56,6 +56,10 @@ tasks.register('ConvertToInPlace', JavaExec) {
 tasks.register('FlashMobDemo', JavaExec) {
     mainClass = 'jme3utilities.test.wes.FlashMobDemo'
 }
+tasks.register('FlashMobDemo-deleteSettings', JavaExec) {
+    args '--deleteOnly'
+    mainClass = 'jme3utilities.test.wes.FlashMobDemo'
+}
 tasks.register('ReverseAnimation', JavaExec) {
     mainClass = 'jme3utilities.test.wes.ReverseAnimation'
 }
