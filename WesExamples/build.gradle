@@ -14,7 +14,7 @@ jar.manifest.attributes('Main-Class': mainClassName)
 
 dependencies {
     implementation heartCoordinates
-    implementation 'com.github.stephengold:Acorus:0.9.13'
+    implementation 'com.github.stephengold:Acorus:0.9.14'
     runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
     runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
     implementation 'org.jmonkeyengine:jme3-plugins:' + jme3Version

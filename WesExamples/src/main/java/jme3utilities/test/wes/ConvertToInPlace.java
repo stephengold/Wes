@@ -60,7 +60,7 @@ import jme3utilities.MySpatial;
 import jme3utilities.MyString;
 import jme3utilities.debug.Dumper;
 import jme3utilities.debug.SkeletonVisualizer;
-import jme3utilities.ui.AbstractDemo;
+import jme3utilities.ui.AcorusDemo;
 import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
@@ -70,7 +70,7 @@ import jme3utilities.wes.AnimationEdit;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ConvertToInPlace extends AbstractDemo {
+public class ConvertToInPlace extends AcorusDemo {
     // *************************************************************************
     // constants and loggers
 
@@ -125,13 +125,13 @@ public class ConvertToInPlace extends AbstractDemo {
         application.start();
     }
     // *************************************************************************
-    // AbstractDemo methods
+    // AcorusDemo methods
 
     /**
      * Initialize this application.
      */
     @Override
-    public void actionInitializeApplication() {
+    public void acorusInit() {
         configureCamera();
 
         // Set the background to light blue.
@@ -150,7 +150,7 @@ public class ConvertToInPlace extends AbstractDemo {
         statusText = new BitmapText(guiFont);
         guiNode.attachChild(statusText);
 
-        super.actionInitializeApplication();
+        super.acorusInit();
         /*
          * Create an in-place cyclic animation
          * based on the "hurricane_kick" clip
@@ -244,9 +244,9 @@ public class ConvertToInPlace extends AbstractDemo {
      * @param newHeight the new height of the framebuffer (in pixels, &gt;0)
      */
     @Override
-    public void resize(int newWidth, int newHeight) {
+    public void onViewPortResize(int newWidth, int newHeight) {
         statusText.setLocalTranslation(10f, newHeight, 0f);
-        super.resize(newWidth, newHeight);
+        super.onViewPortResize(newWidth, newHeight);
     }
 
     /**
