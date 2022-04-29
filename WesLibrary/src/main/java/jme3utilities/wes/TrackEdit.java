@@ -1196,7 +1196,7 @@ final public class TrackEdit {
     public static boolean removeRepeats(MorphTrack track) {
         float[] oldTimes = track.getTimes();
         int oldCount = oldTimes.length;
-        int newCount = countDistinctKeyframes(oldTimes);
+        int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
             return false; // nothing to remove
         }
@@ -1241,7 +1241,7 @@ final public class TrackEdit {
 
         float[] oldTimes = track.getKeyFrameTimes();
         int oldCount = oldTimes.length;
-        int newCount = countDistinctKeyframes(oldTimes);
+        int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
             return false; // nothing to remove
         }
@@ -1301,7 +1301,7 @@ final public class TrackEdit {
     public static boolean removeRepeats(TransformTrack track) {
         float[] oldTimes = track.getTimes();
         int oldCount = oldTimes.length;
-        int newCount = countDistinctKeyframes(oldTimes);
+        int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
             return false; // nothing to remove
         }
@@ -2946,22 +2946,5 @@ final public class TrackEdit {
         }
 
         return result;
-    }
-
-    /**
-     * Count distinct keyframes. TODO use MyArray.countNeSorted()
-     */
-    private static int countDistinctKeyframes(float[] timeArray) {
-        float previousTime = Float.NEGATIVE_INFINITY;
-        int newCount = 0;
-        for (float time : timeArray) {
-            assert time >= previousTime : time;
-            if (time != previousTime) {
-                ++newCount;
-            }
-            previousTime = time;
-        }
-
-        return newCount;
     }
 }
