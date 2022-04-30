@@ -6,17 +6,13 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'jme3utilities.test.wes.FlashMobDemo'
-if (!hasProperty('mainClass')) {
-    ext.mainClass = mainClassName
-}
-jar.manifest.attributes('Main-Class': mainClassName)
-
 dependencies {
+    implementation 'org.apache.commons:commons-exec:1.3'
+
     implementation heartCoordinates
     implementation 'com.github.stephengold:Acorus:0.9.15'
     runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
-    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
+    implementation 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
     implementation 'org.jmonkeyengine:jme3-plugins:' + jme3Version
     runtimeOnly 'org.jmonkeyengine:jme3-testdata:' + jme3Version
 
@@ -24,8 +20,8 @@ dependencies {
     //  -- it is included solely to avoid warnings from AssetConfig.
     runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jme3Version
 
-    //implementation 'com.github.stephengold:Wes' + wesVersion
-    implementation project(':WesLibrary')
+    //implementation 'com.github.stephengold:Wes' + wesVersion // for published library
+    implementation project(':WesLibrary') // for latest sourcecode
 }
 
 // cleanup tasks:
@@ -49,6 +45,10 @@ tasks.register('cleanSOs', Delete) { // extracted Linux and Android native libra
 }
 
 // tasks to run the example apps:
+
+tasks.register('AppChooser', JavaExec) {
+    mainClass = 'jme3utilities.test.wes.AppChooser'
+}
 
 tasks.register('ConvertToInPlace', JavaExec) {
     mainClass = 'jme3utilities.test.wes.ConvertToInPlace'
