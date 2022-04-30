@@ -172,6 +172,7 @@ public class ReverseAnimation extends AcorusDemo {
      * @param viewPortHeight (in pixels, &gt;0)
      * @return a new instance
      */
+    @Override
     public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
         /*
          * Position help nodes along the top of the viewport.
