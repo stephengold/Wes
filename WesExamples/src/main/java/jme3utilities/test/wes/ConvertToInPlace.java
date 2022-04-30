@@ -48,6 +48,8 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.shadow.DirectionalLightShadowRenderer;
 import com.jme3.system.AppSettings;
+import com.jme3.system.JmeSystem;
+import com.jme3.system.Platform;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,6 +66,7 @@ import jme3utilities.ui.AcorusDemo;
 import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
+import org.lwjgl.system.Configuration;
 
 /**
  * Demonstrate conversion of a traveling animation into an in-place animation.
@@ -109,6 +112,11 @@ public class ConvertToInPlace extends AcorusDemo {
      * @param arguments array of command-line arguments (not null)
      */
     public static void main(String[] arguments) {
+        Platform platform = JmeSystem.getPlatform();
+        if (platform.getOs() == Platform.Os.MacOS) {
+            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
+        }
+
         String title = applicationName + " " + MyString.join(arguments);
         ConvertToInPlace application = new ConvertToInPlace();
         Heart.parseAppArgs(application, arguments);

@@ -49,6 +49,8 @@ import com.jme3.scene.plugins.ogre.MeshLoader;
 import com.jme3.scene.shape.Box;
 import com.jme3.shadow.DirectionalLightShadowRenderer;
 import com.jme3.system.AppSettings;
+import com.jme3.system.JmeSystem;
+import com.jme3.system.Platform;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +65,7 @@ import jme3utilities.ui.CameraOrbitAppState;
 import jme3utilities.ui.InputMode;
 import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.TweenTransforms;
+import org.lwjgl.system.Configuration;
 
 /**
  * Demonstrate trimming and stretching an AnimClip.
@@ -103,6 +106,11 @@ public class TrimAnimation extends AcorusDemo {
      * @param arguments array of command-line arguments (not null)
      */
     public static void main(String[] arguments) {
+        Platform platform = JmeSystem.getPlatform();
+        if (platform.getOs() == Platform.Os.MacOS) {
+            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
+        }
+
         String title = applicationName + " " + MyString.join(arguments);
         TrimAnimation application = new TrimAnimation();
         Heart.parseAppArgs(application, arguments);
