@@ -108,9 +108,9 @@ public class FlashMobDemo extends AcorusDemo {
      */
     private Armature sinbadArmature;
     /**
-     * true once {@link #startup1()} has completed, until then false
+     * number of frames before invoking {@link #startup2()}, or -1 if done
      */
-    private boolean didStartup1 = false;
+    private int untilStartup2 = 2;
     /**
      * list of animation channels
      */
@@ -344,9 +344,11 @@ public class FlashMobDemo extends AcorusDemo {
     public void simpleUpdate(float tpf) {
         super.simpleUpdate(tpf);
 
-        if (!didStartup1) {
-            startup1();
-            didStartup1 = true;
+        if (untilStartup2 == 0) {
+            startup2();
+        }
+        if (untilStartup2 >= 0) {
+            --untilStartup2;
         }
     }
     // *************************************************************************
@@ -566,10 +568,10 @@ public class FlashMobDemo extends AcorusDemo {
     }
 
     /**
-     * Initialization performed during the first invocation of
+     * Additional initialization performed on the 2nd invocation of
      * {@link #simpleUpdate(float)}.
      */
-    private void startup1() {
+    private void startup2() {
         /*
          * Play the "Dance" animation on all channels.
          */
