@@ -1,5 +1,13 @@
 # release log for the Wes library and related examples
 
+## Version 0.7.2: released on TBD
+
++ Added the `AppChooser` application.
++ Targeted JME version 3.5.2-stable.
++ Based on v8.0.0 of the Heart Library and v0.9.16 of Acorus.
++ Added the "checkstyle" plugin to the build.
++ Upgraded to Gradle v7.4.2 .
+
 ## Version 0.7.1: released on 24 February 2022
 
  + Bugfix:  `TweenTransforms` uses the wrong cycle time to interpolate
