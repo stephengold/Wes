@@ -159,6 +159,7 @@ public class FlashMobDemo extends AcorusDemo {
                     Heart.deleteStoredSettings(applicationName);
                     System.exit(0);
                     return;
+                default:
             }
         }
         String title = applicationName + " " + MyString.join(arguments);
@@ -326,6 +327,7 @@ public class FlashMobDemo extends AcorusDemo {
                 case "toggle skeleton":
                     toggleSkeleton();
                     return;
+                default:
             }
         }
         /*

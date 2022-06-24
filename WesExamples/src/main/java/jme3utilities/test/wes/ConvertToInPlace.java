@@ -244,6 +244,7 @@ public class ConvertToInPlace extends AcorusDemo {
                 case "toggle skeleton":
                     toggleSkeleton();
                     return;
+                default:
             }
         }
         super.onAction(actionString, ongoing, tpf);

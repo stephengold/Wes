@@ -220,6 +220,7 @@ public class ReverseAnimation extends AcorusDemo {
                 case "toggle skeleton":
                     toggleSkeleton();
                     return;
+                default:
             }
         }
         super.onAction(actionString, ongoing, tpf);

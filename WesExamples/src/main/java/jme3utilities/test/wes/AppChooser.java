@@ -220,6 +220,8 @@ public class AppChooser extends AcorusDemo {
                         updateMenuOverlay();
                     }
                     return;
+
+                default:
             }
         }
         /*
