@@ -479,7 +479,8 @@ public class FlashMobDemo extends AcorusDemo {
      * Attach a Puppet model to the root node.
      */
     private void addPuppet() {
-        Node loadedNode = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
+        Node loadedNode
+                = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
         puppet = (Node) loadedNode.getChild(0);
         rootNode.attachChild(puppet);
 

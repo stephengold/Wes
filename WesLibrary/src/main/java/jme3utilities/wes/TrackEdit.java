@@ -357,7 +357,8 @@ final public class TrackEdit {
             Vector3f scale2;
             if (frameIndex < numCopy1) { // Copy from track1[frameIndex].
                 newTimes[frameIndex] = times1[frameIndex];
-                tra1 = (translations1 == null) ? null : translations1[frameIndex];
+                tra1 = (translations1 == null)
+                        ? null : translations1[frameIndex];
                 rot1 = (rots1 == null) ? null : rots1[frameIndex];
                 scale1 = (scales1 == null) ? null : scales1[frameIndex];
                 tra2 = null;
@@ -379,7 +380,8 @@ final public class TrackEdit {
                 assert frameIndex == last1;
                 assert lastTime1 == startTime2;
                 newTimes[frameIndex] = startTime2;
-                tra1 = (translations1 == null) ? null : translations1[frameIndex];
+                tra1 = (translations1 == null)
+                        ? null : translations1[frameIndex];
                 rot1 = (rots1 == null) ? null : rots1[frameIndex];
                 scale1 = (scales1 == null) ? null : scales1[frameIndex];
                 tra2 = (translations2 == null) ? null : translations2[0];
