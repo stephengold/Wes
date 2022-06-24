@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.7.2: released on TBD
+## Version 0.7.2: released on 23 June 2022
 
 + Added the `AppChooser` application.
 + Targeted JME version 3.5.2-stable.
