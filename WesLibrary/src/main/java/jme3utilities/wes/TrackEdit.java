@@ -314,7 +314,9 @@ final public class TrackEdit {
          * Calculate the number of keyframes in the result.
          */
         float lastTime1 = times1[last1];
-        int numCopy1, numBlend, numCopy2;
+        int numCopy1;
+        int numBlend;
+        int numCopy2;
         if (lastTime1 < startTime2) {
             numCopy1 = last1 + 1;
             numBlend = 0;
@@ -347,8 +349,12 @@ final public class TrackEdit {
          * Fill the new arrays.
          */
         for (int frameIndex = 0; frameIndex < newCount; ++frameIndex) {
-            Quaternion rot1, rot2;
-            Vector3f tra1, tra2, scale1, scale2;
+            Quaternion rot1;
+            Quaternion rot2;
+            Vector3f tra1;
+            Vector3f tra2;
+            Vector3f scale1;
+            Vector3f scale2;
             if (frameIndex < numCopy1) { // Copy from track1[frameIndex].
                 newTimes[frameIndex] = times1[frameIndex];
                 tra1 = (translations1 == null) ? null : translations1[frameIndex];

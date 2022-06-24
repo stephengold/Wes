@@ -370,8 +370,10 @@ public enum TweenVectors {
 
         Vector3f v1 = samples[index1];
         Vector3f v2 = samples[index2];
-        Vector3f v0, v3;
-        int index0, index3;
+        Vector3f v0;
+        Vector3f v3;
+        int index0;
+        int index3;
         float t = (time - times[index1]) / inter12;
 
         Vector3f result;
@@ -688,9 +690,10 @@ public enum TweenVectors {
             Vector3f v2 = samples[index2];
             curve.setParameters(index1, v2, inter12);
 
-            Vector3f v0, v3;
-            int index0, index3;
-
+            Vector3f v0;
+            Vector3f v3;
+            int index0;
+            int index3;
             switch (this) {
                 case LoopCatmullRomSpline:
                 case LoopFdcSpline:

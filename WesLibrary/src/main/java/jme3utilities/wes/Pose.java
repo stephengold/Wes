@@ -916,7 +916,8 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
         Validate.nonZero(modelOrientation, "model orientation");
 
-        Quaternion bind, local;
+        Quaternion bind;
+        Quaternion local;
         if (skeleton == null) {
             bind = bindTransforms.get(boneIndex).getRotation();
             Joint joint = armature.getJoint(boneIndex);
