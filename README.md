@@ -283,9 +283,11 @@ artists and software developers:
 + Ali (aka "Ali_RS) for sharing a code snippet that inspired
   the `convertToInPlace()` methods
 + plus the creators of (and contributors to) the following software:
+    + the [Checkstyle] tool
     + the [FindBugs] source-code analyzer
     + the [Firefox] and [Chrome] web browsers
     + the [Git] revision-control system and GitK commit viewer
+    + the [GitKraken] client
     + the [Gradle] build tool
     + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
     + the [Java] compiler, standard doclet, and runtime environment
@@ -315,12 +317,14 @@ correct the situation: sgold@sonic.net
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
+[checkstyle]: https://checkstyle.org "Checkstyle"
 [chrome]: https://www.google.com/chrome "Chrome"
 [elements]: https://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
+[gitkraken]: https://www.gitkraken.com "GitKraken client"
 [gltf]: https://www.khronos.org/gltf "glTF Project"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
