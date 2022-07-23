@@ -6,6 +6,12 @@ plugins {
     id 'application'
 }
 
+mainClassName = 'jme3utilities.test.wes.AppChooser'
+if (!hasProperty('mainClass')) {
+    ext.mainClass = mainClassName
+}
+jar.manifest.attributes('Main-Class': mainClassName)
+
 dependencies {
     implementation 'org.apache.commons:commons-exec:1.3'
 
