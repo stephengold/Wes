@@ -238,8 +238,10 @@ the Sinbad model to generate a "warn" clip.
 
 ## External links
 
++ [the Wes Animation Toolkit page](https://library.jmonkeyengine.org/#!entry=11511%2F15054f52-c439-4bfb-9a73-80260b486333)
+  in [the JmonkeyEngine Library][library]
 + [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
-  at [JmonkeyStore][store]
+  at [the JmonkeyStore][store]
 
 [Jump to table of contents](#toc)
 
@@ -334,6 +336,7 @@ correct the situation: sgold@sonic.net
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
+[library]: https://library.jmonkeyengine.org "jMonkeyEngine Library"
 [license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
 [log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
