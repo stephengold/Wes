@@ -67,6 +67,15 @@ public class TweenTransforms implements Cloneable {
      */
     private TweenVectors tweenTranslations = TweenVectors.Lerp;
     // *************************************************************************
+    // constructors
+
+    /**
+     * A no-arg constructor to avoid javadoc warnings from JDK 18.
+     */
+    public TweenTransforms() {
+        // do nothing
+    }
+    // *************************************************************************
     // new methods exposed
 
     /**

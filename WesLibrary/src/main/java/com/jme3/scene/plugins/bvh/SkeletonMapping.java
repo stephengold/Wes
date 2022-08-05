@@ -38,6 +38,15 @@ public class SkeletonMapping implements Cloneable, Savable {
      */
     private Map<String, BoneMapping> mappings = new HashMap<>(50);
     // *************************************************************************
+    // constructors
+
+    /**
+     * A no-arg constructor to avoid javadoc warnings from JDK 18.
+     */
+    public SkeletonMapping() {
+        // do nothing
+    }
+    // *************************************************************************
     // new methods exposed
 
     /**
