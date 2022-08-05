@@ -287,7 +287,7 @@ artists and software developers:
 + plus the creators of (and contributors to) the following software:
     + the [Checkstyle] tool
     + the [FindBugs] source-code analyzer
-    + the [Firefox] and [Chrome] web browsers
+    + the [Firefox] and [Google Chrome][chrome] web browsers
     + the [Git] revision-control system and GitK commit viewer
     + the [GitKraken] client
     + the [Gradle] build tool
@@ -343,7 +343,7 @@ correct the situation: sgold@sonic.net
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
 [maven]: https://maven.apache.org "Maven Project"
-[meld]: https://meldmerge.org "Meld Tool"
+[meld]: https://meldmerge.org "Meld merge tool"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [ogre]: http://www.ogre3d.org "Ogre Project"
