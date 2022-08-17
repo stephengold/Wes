@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -131,7 +131,9 @@ public class RotationCurve {
     }
 
     /**
-     * Read the end time for looping.
+     * Return the end time for looping.
+     *
+     * @return the time (in seconds)
      */
     float getCycleTime() {
         return cycleTime;
@@ -140,6 +142,7 @@ public class RotationCurve {
     /**
      * Access the ending function value of the indexed interval.
      *
+     * @param index which interval (&ge;0, &le;lastIndex)
      * @return the pre-existing instance (not null)
      */
     Quaternion getEndValue(int index) {
@@ -162,6 +165,8 @@ public class RotationCurve {
 
     /**
      * Read the index of the last point to use.
+     *
+     * @return the index (&ge;0)
      */
     int getLastIndex() {
         int lastIndex = controlPoint1s.length - 1;
@@ -182,6 +187,7 @@ public class RotationCurve {
     /**
      * Access the starting function value of the indexed interval.
      *
+     * @param index which interval (&ge;0, &le;lastIndex)
      * @return the pre-existing instance (not null)
      */
     Quaternion getStartValue(int index) {

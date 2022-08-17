@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -154,7 +154,9 @@ public class VectorCurve {
     }
 
     /**
-     * Read the end time for looping.
+     * Return the end time for looping.
+     *
+     * @return the time (in seconds)
      */
     float getCycleTime() {
         return cycleTime;
@@ -244,6 +246,7 @@ public class VectorCurve {
     /**
      * Access the starting function value of the indexed interval.
      *
+     * @param index which interval (&ge;0)
      * @return the pre-existing instance (not null)
      */
     Vector3f getStartValue(int index) {

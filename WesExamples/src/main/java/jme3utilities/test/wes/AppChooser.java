@@ -98,7 +98,7 @@ public class AppChooser extends AcorusDemo {
      */
     private File script;
     /**
-     * index of the selected app in the {@code appNames} array
+     * index of the selected app in the {@code mainClasses} array
      */
     private int selectedAppIndex = 0;
     /**
@@ -225,7 +225,7 @@ public class AppChooser extends AcorusDemo {
             }
         }
         /*
-         * The action is not handled: forward it to the superclass.
+         * The action has not been handled: forward it to the superclass.
          */
         super.onAction(actionString, ongoing, tpf);
     }
@@ -280,8 +280,10 @@ public class AppChooser extends AcorusDemo {
     }
 
     /**
-     * Look for the shell script (or batchfile) to execute in
-     * "./build/install/AcorusExamples/bin".
+     * Look for the shell script (or batch file) to execute in
+     * "./build/install/WesExamples/bin".
+     *
+     * @return a new instance
      */
     private File findScriptToExecute() {
         File buildDir = new File("build");

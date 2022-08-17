@@ -302,6 +302,7 @@ public class ConvertToInPlace extends AcorusDemo {
      * @param x the desired initial X coordinate
      * @param z the desired initial Z coordinate
      * @param svColor the desired color for the SkeletonVisualizer (not null)
+     * @return a new control
      */
     private AnimComposer addFighter(float x, float z, ColorRGBA svColor) {
         /*
