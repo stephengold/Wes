@@ -170,6 +170,7 @@ public class AppChooser extends AcorusDemo {
         dim.bindSignal("ctrl", KeyInput.KEY_LCONTROL, KeyInput.KEY_RCONTROL);
         Combo ctrlX = new Combo(KeyInput.KEY_X, "ctrl", true);
         dim.bind(asDeleteSettings, ctrlX);
+        dim.bind(asDeleteSettings, KeyInput.KEY_DELETE);
 
         dim.bind(asExecute, KeyInput.KEY_RETURN);
         dim.bind(asNext,
