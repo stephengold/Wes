@@ -51,7 +51,7 @@ import org.lwjgl.system.Configuration;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class AppChooser extends AcorusDemo {
+final public class AppChooser extends AcorusDemo {
     // *************************************************************************
     // constants and loggers
 
