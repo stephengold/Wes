@@ -15,7 +15,7 @@ dependencies {
     implementation 'org.apache.commons:commons-exec:1.3'
 
     implementation heartCoordinates
-    implementation 'com.github.stephengold:Acorus:0.9.16'
+    implementation 'com.github.stephengold:Acorus:0.9.17'
     runtimeOnly 'org.jmonkeyengine:jme3-desktop:' + jme3Version
     implementation 'org.jmonkeyengine:jme3-lwjgl3:' + jme3Version
     implementation 'org.jmonkeyengine:jme3-plugins:' + jme3Version
