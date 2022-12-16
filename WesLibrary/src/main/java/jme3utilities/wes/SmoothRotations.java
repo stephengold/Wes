@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -156,8 +156,8 @@ public enum SmoothRotations {
                 dt = FastMath.abs(dt);
                 if (dt < halfWidth) {
                     float weight = 1f - dt / halfWidth;
-                    MyQuaternion.accumulateScaled(sumQuaternion, samples[j],
-                            weight);
+                    MyQuaternion.accumulateScaled(
+                            sumQuaternion, samples[j], weight);
                     sumWeight += weight;
                 }
             }
@@ -220,8 +220,8 @@ public enum SmoothRotations {
                 dt = FastMath.abs(dt);
                 if (dt < halfWidth) {
                     float weight = 1f - dt / halfWidth;
-                    MyQuaternion.accumulateScaled(sumQuaternion, samples[j],
-                            weight);
+                    MyQuaternion.accumulateScaled(
+                            sumQuaternion, samples[j], weight);
                     sumWeight += weight;
                 }
             }

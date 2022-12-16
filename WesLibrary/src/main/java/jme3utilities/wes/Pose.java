@@ -269,8 +269,8 @@ public class Pose implements JmeCloneable {
                 Vector3f translation = transform.getTranslation();
                 Quaternion rotation = transform.getRotation();
                 Vector3f scale = transform.getScale();
-                BoneTrack track = MyAnimation.newBoneTrack(boneIndex,
-                        translation, rotation, scale);
+                BoneTrack track = MyAnimation
+                        .newBoneTrack(boneIndex, translation, rotation, scale);
                 result.addTrack(track);
             }
         }
@@ -304,8 +304,8 @@ public class Pose implements JmeCloneable {
                 Vector3f[] translations = {transform.getTranslation()};
                 Quaternion[] rotations = {transform.getRotation()};
                 Vector3f[] scales = {transform.getScale()};
-                TransformTrack track = new TransformTrack(target, times,
-                        translations, rotations, scales);
+                TransformTrack track = new TransformTrack(
+                        target, times, translations, rotations, scales);
                 trackList.add(track);
             }
         }
@@ -703,8 +703,8 @@ public class Pose implements JmeCloneable {
      * @param time the animation time (in seconds)
      * @param techniques the tweening techniques to use (not null, unaffected)
      */
-    public void setToAnimation(Animation animation, float time,
-            TweenTransforms techniques) {
+    public void setToAnimation(
+            Animation animation, float time, TweenTransforms techniques) {
         Validate.nonNull(animation, "animation");
         Validate.nonNull(techniques, "techniques");
 
@@ -870,8 +870,8 @@ public class Pose implements JmeCloneable {
      * @return the required user Transform (either storeResult or a new
      * instance)
      */
-    public Transform userForLocal(int boneIndex, Transform localTransform,
-            Transform storeResult) {
+    public Transform userForLocal(
+            int boneIndex, Transform localTransform, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
         Validate.nonNull(localTransform, "local transform");
         Transform result = (storeResult == null) ? new Transform()
@@ -1046,8 +1046,8 @@ public class Pose implements JmeCloneable {
      * @param storeResult storage for the result (modified if not null)
      * @return rotation (either storeResult or a new instance)
      */
-    private Quaternion localForModel(Bone bone, Quaternion modelOrientation,
-            Quaternion storeResult) {
+    private Quaternion localForModel(
+            Bone bone, Quaternion modelOrientation, Quaternion storeResult) {
         assert bone != null;
         assert modelOrientation != null;
         Quaternion result
@@ -1075,8 +1075,8 @@ public class Pose implements JmeCloneable {
      * @param storeResult storage for the result (modified if not null)
      * @return rotation (either storeResult or a new instance)
      */
-    private Quaternion localForModel(Joint joint, Quaternion modelOrientation,
-            Quaternion storeResult) {
+    private Quaternion localForModel(
+            Joint joint, Quaternion modelOrientation, Quaternion storeResult) {
         assert joint != null;
         assert modelOrientation != null;
         Quaternion result
@@ -1103,8 +1103,8 @@ public class Pose implements JmeCloneable {
      * @param sourcePose which source pose to re-target (not null, unaffected)
      * @param map the skeleton map to use (not null, unaffected)
      */
-    private void retargetBones(Bone bone, Pose sourcePose,
-            SkeletonMapping map) {
+    private void retargetBones(
+            Bone bone, Pose sourcePose, SkeletonMapping map) {
         assert bone != null;
         assert sourcePose != null;
         assert map != null;
@@ -1141,8 +1141,8 @@ public class Pose implements JmeCloneable {
      * @param sourcePose which source pose to re-target (not null, unaffected)
      * @param map the skeleton map to use (not null, unaffected)
      */
-    private void retargetJoints(Joint joint, Pose sourcePose,
-            SkeletonMapping map) {
+    private void retargetJoints(
+            Joint joint, Pose sourcePose, SkeletonMapping map) {
         assert joint != null;
         assert sourcePose != null;
         assert map != null;

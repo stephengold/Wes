@@ -87,8 +87,8 @@ public class RotationCurve {
      * @param quaternions function values at sample times (not null, alias
      * created, same length as times)
      */
-    public RotationCurve(float[] times, float cycleTime,
-            Quaternion[] quaternions) {
+    public RotationCurve(
+            float[] times, float cycleTime, Quaternion[] quaternions) {
         Validate.nonNull(times, "times");
         Validate.nonNull(quaternions, "quaternions");
         assert times.length == quaternions.length;
@@ -215,8 +215,8 @@ public class RotationCurve {
      * @param controlPoint2 the 2nd control point for interval (not null, alias
      * created)
      */
-    void setControlPoints(int index, Quaternion controlPoint1,
-            Quaternion controlPoint2) {
+    void setControlPoints(
+            int index, Quaternion controlPoint1, Quaternion controlPoint2) {
         Validate.nonNull(controlPoint1, "control point 1");
         Validate.nonNull(controlPoint2, "control point 2");
 

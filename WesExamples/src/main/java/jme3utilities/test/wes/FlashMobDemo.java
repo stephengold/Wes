@@ -221,8 +221,8 @@ public class FlashMobDemo extends AcorusDemo {
         // Retarget the "Dance" animation from Sinbad to Jaime.
         AnimControl animControl = jaime.getControl(AnimControl.class);
         Skeleton skeleton = animControl.getSkeleton();
-        Animation dance = AnimationEdit.retargetAnimation(sinbadClip,
-                sinbadArmature, skeleton, s2j, "Dance");
+        Animation dance = AnimationEdit.retargetAnimation(
+                sinbadClip, sinbadArmature, skeleton, s2j, "Dance");
         animControl.addAnim(dance);
 
         // Load the Sinbad-to-MhGame skeleton map.
@@ -234,8 +234,8 @@ public class FlashMobDemo extends AcorusDemo {
         SkinningControl skinningControl
                 = mhGame.getControl(SkinningControl.class);
         Armature armature = skinningControl.getArmature();
-        AnimClip danceClip = AnimationEdit.retargetAnimation(sinbadClip,
-                sinbadArmature, armature, s2m, "Dance");
+        AnimClip danceClip = AnimationEdit.retargetAnimation(
+                sinbadClip, sinbadArmature, armature, s2m, "Dance");
         AnimComposer composer = mhGame.getControl(AnimComposer.class);
         composer.addAnimClip(danceClip);
 
@@ -247,8 +247,8 @@ public class FlashMobDemo extends AcorusDemo {
         // Retarget the "Dance" animation from Sinbad to Oto.
         skinningControl = oto.getControl(SkinningControl.class);
         armature = skinningControl.getArmature();
-        danceClip = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
-                armature, s2o, "Dance");
+        danceClip = AnimationEdit.retargetAnimation(
+                sinbadClip, sinbadArmature, armature, s2o, "Dance");
         composer = oto.getControl(AnimComposer.class);
         composer.addAnimClip(danceClip);
 
@@ -263,8 +263,8 @@ public class FlashMobDemo extends AcorusDemo {
         // Retarget the "Dance" animation from Sinbad to Puppet.
         animControl = puppet.getControl(AnimControl.class);
         skeleton = animControl.getSkeleton();
-        dance = AnimationEdit.retargetAnimation(sinbadClip, sinbadArmature,
-                skeleton, s2p, "Dance");
+        dance = AnimationEdit.retargetAnimation(
+                sinbadClip, sinbadArmature, skeleton, s2p, "Dance");
         animControl.addAnim(dance);
 
         // Start with skeleton and the render-statistics overlay hidden.

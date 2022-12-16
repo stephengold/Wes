@@ -177,8 +177,8 @@ public class SkeletonMapping implements Cloneable, Savable {
      * @param twist twist rotation to apply to the animation data
      * @return a new instance
      */
-    public BoneMapping map(String targetName, String sourceName,
-            Quaternion twist) {
+    public BoneMapping map(
+            String targetName, String sourceName, Quaternion twist) {
         BoneMapping boneMapping = mappings.get(targetName);
         if (boneMapping == null) {
             boneMapping = new BoneMapping(targetName, sourceName, twist);

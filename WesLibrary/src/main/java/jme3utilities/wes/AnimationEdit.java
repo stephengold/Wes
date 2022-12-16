@@ -108,8 +108,8 @@ final public class AnimationEdit {
      * @param resultName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
-    public static AnimClip convertToInPlace(AnimClip sourceClip,
-            String resultName) {
+    public static AnimClip convertToInPlace(
+            AnimClip sourceClip, String resultName) {
         Validate.nonNull(resultName, "result name");
 
         // Start with an empty AnimClip.
@@ -175,10 +175,10 @@ final public class AnimationEdit {
                     || sourceTrack instanceof SpatialTrack) {
                 newTrack = TrackEdit.truncate(sourceTrack, endTime);
                 if (startTime > 0f) {
-                    Transform startTransform = techniques.interpolate(startTime,
-                            sourceTrack, sourceDuration, null, null);
-                    newTrack = TrackEdit.behead(newTrack, startTime,
-                            startTransform, endTime);
+                    Transform startTransform = techniques.interpolate(
+                            startTime, sourceTrack, sourceDuration, null, null);
+                    newTrack = TrackEdit.behead(
+                            newTrack, startTime, startTransform, endTime);
                 }
             } else {
                 newTrack = sourceTrack.clone(); // TODO other track types
@@ -217,15 +217,15 @@ final public class AnimationEdit {
                 throw new UnsupportedOperationException(); // TODO
             } else {
                 TransformTrack oldTrack = (TransformTrack) sourceTrack;
-                Transform endTransform = techniques.interpolate(endTime,
-                        oldTrack, duration, null);
+                Transform endTransform = techniques
+                        .interpolate(endTime, oldTrack, duration, null);
                 TransformTrack newTrack
                         = TrackEdit.truncate(oldTrack, endTime, endTransform);
                 if (startTime > 0f) {
-                    Transform startTransform = techniques.interpolate(startTime,
-                            oldTrack, duration, null);
-                    newTrack = TrackEdit.behead(newTrack, startTime,
-                            startTransform);
+                    Transform startTransform = techniques.interpolate(
+                            startTime, oldTrack, duration, null);
+                    newTrack = TrackEdit
+                            .behead(newTrack, startTime, startTransform);
                 }
                 addTrack(result, newTrack);
             }
@@ -241,8 +241,8 @@ final public class AnimationEdit {
      * @param tolerance for norms (&ge;0)
      * @return the number of tracks edited (&ge;0)
      */
-    public static int normalizeQuaternions(Animation animation,
-            float tolerance) {
+    public static int normalizeQuaternions(
+            Animation animation, float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
 
         Track[] tracks = animation.getTracks();
@@ -376,9 +376,9 @@ final public class AnimationEdit {
                 int iSource = sourceSkeleton.getBoneIndex(sourceName);
                 BoneTrack sourceTrack
                         = MyAnimation.findBoneTrack(sourceAnimation, iSource);
-                BoneTrack track = TrackEdit.retargetTrack(sourceAnimation,
-                        sourceTrack, sourceSkeleton, targetSkeleton, iTarget,
-                        map, techniques, cache);
+                BoneTrack track = TrackEdit.retargetTrack(
+                        sourceAnimation, sourceTrack, sourceSkeleton,
+                        targetSkeleton, iTarget, map, techniques, cache);
                 result.addTrack(track);
             }
         }
@@ -430,9 +430,9 @@ final public class AnimationEdit {
                 int iSource = sourceArmature.getJointIndex(sourceName);
                 TransformTrack sourceTrack
                         = MyAnimation.findJointTrack(sourceClip, iSource);
-                BoneTrack track = TrackEdit.retargetTrack(sourceClip,
-                        sourceTrack, sourceArmature, targetSkeleton, iTarget,
-                        map, cache);
+                BoneTrack track = TrackEdit.retargetTrack(
+                        sourceClip, sourceTrack, sourceArmature, targetSkeleton,
+                        iTarget, map, cache);
                 result.addTrack(track);
             }
         }
@@ -482,8 +482,8 @@ final public class AnimationEdit {
                 int iSource = sourceArmature.getJointIndex(sourceName);
                 TransformTrack sourceTrack
                         = MyAnimation.findJointTrack(sourceClip, iSource);
-                TransformTrack newTrack = TrackEdit.retargetTrack(sourceClip,
-                        sourceTrack, sourceArmature, targetArmature,
+                TransformTrack newTrack = TrackEdit.retargetTrack(
+                        sourceClip, sourceTrack, sourceArmature, targetArmature,
                         targetJoint, map, cache);
 
                 int numSamples = newTrack.getTimes().length;
@@ -517,8 +517,8 @@ final public class AnimationEdit {
      * @param animationName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
-    public static AnimClip reverseAnimation(AnimClip sourceClip,
-            String animationName) {
+    public static AnimClip reverseAnimation(
+            AnimClip sourceClip, String animationName) {
         Validate.nonNull(animationName, "animation name");
 
         AnimClip result = new AnimClip(animationName);
@@ -541,8 +541,8 @@ final public class AnimationEdit {
      * @param animationName name for the resulting Animation (not null)
      * @return a new Animation
      */
-    public static Animation reverseAnimation(Animation sourceAnimation,
-            String animationName) {
+    public static Animation reverseAnimation(
+            Animation sourceAnimation, String animationName) {
         Validate.nonNull(animationName, "animation name");
 
         float duration = sourceAnimation.getLength();
@@ -565,8 +565,8 @@ final public class AnimationEdit {
      * @param animationName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
-    public static AnimClip setDuration(AnimClip sourceClip, float newDuration,
-            String animationName) {
+    public static AnimClip setDuration(
+            AnimClip sourceClip, float newDuration, String animationName) {
         Validate.nonNull(animationName, "animation name");
 
         AnimClip result = new AnimClip(animationName);

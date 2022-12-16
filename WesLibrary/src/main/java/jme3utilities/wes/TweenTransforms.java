@@ -259,8 +259,8 @@ public class TweenTransforms implements Cloneable {
             }
         }
 
-        Track result = TrackEdit.newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = TrackEdit.newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -274,8 +274,8 @@ public class TweenTransforms implements Cloneable {
      * @param duration animation duration (in seconds, &ge;0)
      * @return a new instance
      */
-    public Track resampleAtRate(Track oldTrack, float sampleRate,
-            float duration) {
+    public Track resampleAtRate(
+            Track oldTrack, float sampleRate, float duration) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
         Validate.positive(sampleRate, "sample rate");
@@ -304,8 +304,8 @@ public class TweenTransforms implements Cloneable {
      * @param duration animation duration (in seconds, &gt;0)
      * @return a new instance
      */
-    public Track resampleToNumber(Track oldTrack, int numSamples,
-            float duration) {
+    public Track resampleToNumber(
+            Track oldTrack, int numSamples, float duration) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
         Validate.inRange(numSamples, "number of samples", 2, Integer.MAX_VALUE);

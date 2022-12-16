@@ -92,8 +92,8 @@ final public class TrackEdit {
      * @param neckWeights the weights at the neck time (not null, unaffected)
      * @return a new MorphTrack with the same target and t[0]=0
      */
-    public static MorphTrack behead(MorphTrack oldTrack, float neckTime,
-            float[] neckWeights) {
+    public static MorphTrack behead(
+            MorphTrack oldTrack, float neckTime, float[] neckWeights) {
         Validate.positive(neckTime, "neck time");
         Validate.nonNull(neckWeights, "neck weights");
 
@@ -199,8 +199,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -215,8 +215,8 @@ final public class TrackEdit {
      * unaffected)
      * @return a new TransformTrack with the same target and t[0]=0
      */
-    public static TransformTrack behead(TransformTrack oldTrack, float neckTime,
-            Transform neckTransform) {
+    public static TransformTrack behead(
+            TransformTrack oldTrack, float neckTime, Transform neckTransform) {
         Validate.positive(neckTime, "neck time");
 
         float[] oldTimes = oldTrack.getTimes();
@@ -267,8 +267,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -283,8 +283,8 @@ final public class TrackEdit {
      * @param newDuration duration of the result (in seconds, &ge;start2)
      * @return a new track of the same type
      */
-    public static Track chain(Track track1, Track track2, float startTime2,
-            float newDuration) {
+    public static Track chain(
+            Track track1, Track track2, float startTime2, float newDuration) {
         assert (track1 instanceof BoneTrack && track2 instanceof BoneTrack)
                 || (track1 instanceof SpatialTrack
                 && track2 instanceof SpatialTrack);
@@ -504,8 +504,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -518,8 +518,8 @@ final public class TrackEdit {
      * @param newDuration duration of the result (in seconds, &ge;delayAmount)
      * @return a new track of the same type as oldTrack
      */
-    public static Track delayAll(Track oldTrack, float delayAmount,
-            float newDuration) {
+    public static Track delayAll(
+            Track oldTrack, float delayAmount, float newDuration) {
         Validate.inRange(delayAmount, "delay amount", 0f, newDuration);
 
         float[] oldTimes = oldTrack.getKeyFrameTimes();
@@ -530,8 +530,8 @@ final public class TrackEdit {
         // Calculate the old index of the last keyframe to include.
         float oldDuration = newDuration - delayAmount;
         assert oldDuration < newDuration;
-        int lastIndex = MyAnimation.findPreviousKeyframeIndex(oldTrack,
-                oldDuration);
+        int lastIndex = MyAnimation
+                .findPreviousKeyframeIndex(oldTrack, oldDuration);
         int addFrames;
         if (delayAmount > 0f) {
             addFrames = 1;
@@ -575,8 +575,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -591,8 +591,8 @@ final public class TrackEdit {
      * @param deleteCount number of keyframes to delete (&gt;0, &lt;lastIndex)
      * @return a new track of the same type as oldTrack
      */
-    public static Track deleteRange(Track oldTrack, int startIndex,
-            int deleteCount) {
+    public static Track deleteRange(
+            Track oldTrack, int startIndex, int deleteCount) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
         float[] oldTimes = oldTrack.getKeyFrameTimes();
@@ -645,8 +645,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -661,8 +661,8 @@ final public class TrackEdit {
      * @param deleteCount number of keyframes to delete (&gt;0, &lt;lastIndex)
      * @return a new TransformTrack
      */
-    public static TransformTrack deleteRange(TransformTrack oldTrack,
-            int startIndex, int deleteCount) {
+    public static TransformTrack deleteRange(
+            TransformTrack oldTrack, int startIndex, int deleteCount) {
         float[] oldTimes = oldTrack.getTimes();
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
@@ -714,8 +714,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -729,8 +729,8 @@ final public class TrackEdit {
      * @param transform transform to insert (not null, unaffected)
      * @return a new track of the same type
      */
-    public static Track insertKeyframe(Track oldTrack, float frameTime,
-            Transform transform) {
+    public static Track insertKeyframe(
+            Track oldTrack, float frameTime, Transform transform) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
         Validate.positive(frameTime, "keyframe time");
@@ -791,8 +791,8 @@ final public class TrackEdit {
             newScales[oldCount] = transform.getScale().clone();
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -806,8 +806,8 @@ final public class TrackEdit {
      * @param transform transform to insert (not null, unaffected)
      * @return a new TransformTrack
      */
-    public static TransformTrack insertKeyframe(TransformTrack oldTrack,
-            float frameTime, Transform transform) {
+    public static TransformTrack insertKeyframe(
+            TransformTrack oldTrack, float frameTime, Transform transform) {
         Validate.positive(frameTime, "keyframe time");
         assert MyAnimation.findKeyframeIndex(oldTrack, frameTime) == -1;
 
@@ -867,8 +867,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -898,8 +898,8 @@ final public class TrackEdit {
         if (oldTrack instanceof BoneTrack) {
             BoneTrack boneTrack = (BoneTrack) oldTrack;
             int boneIndex = boneTrack.getTargetBoneIndex();
-            result = MyAnimation.newBoneTrack(boneIndex, times, translations,
-                    rotations, scales);
+            result = MyAnimation.newBoneTrack(
+                    boneIndex, times, translations, rotations, scales);
 
         } else if (oldTrack instanceof SpatialTrack) {
             SpatialTrack spatialTrack = (SpatialTrack) oldTrack;
@@ -924,8 +924,8 @@ final public class TrackEdit {
      * @param tolerance the tolerance for norms (&ge;0)
      * @return a new track if changes were made, or else inputTrack
      */
-    public static AnimTrack<?> normalizeQuaternions(AnimTrack<?> inputTrack,
-            float tolerance) {
+    public static AnimTrack<?> normalizeQuaternions(
+            AnimTrack<?> inputTrack, float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
 
         AnimTrack<?> result = inputTrack;
@@ -985,8 +985,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        result = new TransformTrack(target, times, translations, rotations,
-                scales);
+        result = new TransformTrack(
+                target, times, translations, rotations, scales);
 
         return result;
     }
@@ -999,8 +999,8 @@ final public class TrackEdit {
      * @param tolerance the tolerance for norms (&ge;0)
      * @return a new track if changes are made, or else oldTrack
      */
-    public static Track normalizeQuaternions(Track inputTrack,
-            float tolerance) {
+    public static Track normalizeQuaternions(
+            Track inputTrack, float tolerance) {
         assert inputTrack instanceof BoneTrack
                 || inputTrack instanceof SpatialTrack;
         Validate.nonNegative(tolerance, "tolerance");
@@ -1114,8 +1114,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1171,8 +1171,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1346,8 +1346,8 @@ final public class TrackEdit {
      * @param transform transform to apply (not null, unaffected)
      * @return a new track of the same type as oldTrack
      */
-    public static Track replaceKeyframe(Track oldTrack, int frameIndex,
-            Transform transform) {
+    public static Track replaceKeyframe(
+            Track oldTrack, int frameIndex, Transform transform) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
         float[] oldTimes = oldTrack.getKeyFrameTimes();
@@ -1390,8 +1390,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1405,8 +1405,8 @@ final public class TrackEdit {
      * @param transform transform to apply (not null, unaffected)
      * @return a new TransformTrack
      */
-    public static TransformTrack replaceKeyframe(TransformTrack oldTrack,
-            int frameIndex, Transform transform) {
+    public static TransformTrack replaceKeyframe(
+            TransformTrack oldTrack, int frameIndex, Transform transform) {
         float[] oldTimes = oldTrack.getTimes();
         int frameCount = oldTimes.length;
         Validate.inRange(frameIndex, "keyframe index", 0, frameCount - 1);
@@ -1448,8 +1448,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1461,8 +1461,8 @@ final public class TrackEdit {
      * @param newTimes sample times (not null, alias created)
      * @return a new instance
      */
-    public static TransformTrack resample(TransformTrack oldTrack,
-            float[] newTimes) {
+    public static TransformTrack resample(
+            TransformTrack oldTrack, float[] newTimes) {
         int numSamples = newTimes.length;
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
@@ -1499,8 +1499,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1513,8 +1513,8 @@ final public class TrackEdit {
      * @param duration the duration of the AnimClip (in seconds, &ge;0)
      * @return a new instance
      */
-    public static TransformTrack resampleAtRate(TransformTrack oldTrack,
-            float sampleRate, float duration) {
+    public static TransformTrack resampleAtRate(
+            TransformTrack oldTrack, float sampleRate, float duration) {
         Validate.positive(sampleRate, "sample rate");
         Validate.nonNegative(duration, "duration");
 
@@ -1540,8 +1540,8 @@ final public class TrackEdit {
      * @param duration the duration of the AnimClip (in seconds, &ge;0)
      * @return a new instance
      */
-    public static TransformTrack resampleToNumber(TransformTrack oldTrack,
-            int numSamples, float duration) {
+    public static TransformTrack resampleToNumber(
+            TransformTrack oldTrack, int numSamples, float duration) {
         Validate.inRange(numSamples, "number of samples", 2, Integer.MAX_VALUE);
         Validate.positive(duration, "duration");
 
@@ -1607,8 +1607,8 @@ final public class TrackEdit {
             scales[frameIndex] = localTransform.getScale();
         }
 
-        TransformTrack result = new TransformTrack(targetJoint, times,
-                translations, rotations, scales);
+        TransformTrack result = new TransformTrack(
+                targetJoint, times, translations, rotations, scales);
 
         return result;
     }
@@ -1629,8 +1629,7 @@ final public class TrackEdit {
     public static BoneTrack retargetTrack(AnimClip sourceClip,
             TransformTrack sourceTrack, Armature sourceArmature,
             Skeleton targetSkeleton, int targetBoneIndex,
-            SkeletonMapping map,
-            Map<Float, Pose> cache) {
+            SkeletonMapping map, Map<Float, Pose> cache) {
         Validate.nonNull(sourceArmature, "source armature");
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
@@ -1660,8 +1659,8 @@ final public class TrackEdit {
             scales[frameIndex] = userTransform.getScale();
         }
 
-        BoneTrack result = new BoneTrack(targetBoneIndex, times, translations,
-                rotations, scales);
+        BoneTrack result = new BoneTrack(
+                targetBoneIndex, times, translations, rotations, scales);
 
         return result;
     }
@@ -1711,8 +1710,8 @@ final public class TrackEdit {
             Pose targetPose = cache.get(trackTime);
             if (targetPose == null) {
                 targetPose = new Pose(targetSkeleton);
-                sourcePose.setToAnimation(sourceAnimation, trackTime,
-                        techniques);
+                sourcePose.setToAnimation(
+                        sourceAnimation, trackTime, techniques);
                 targetPose.setToRetarget(sourcePose, map);
                 cache.put(trackTime, targetPose);
             }
@@ -1723,8 +1722,8 @@ final public class TrackEdit {
             scales[frameIndex] = userTransform.getScale();
         }
 
-        BoneTrack result = new BoneTrack(targetBoneIndex, times, translations,
-                rotations, scales);
+        BoneTrack result = new BoneTrack(
+                targetBoneIndex, times, translations, rotations, scales);
 
         return result;
     }
@@ -1807,8 +1806,8 @@ final public class TrackEdit {
             }
 
             HasLocalTransform target = oldTransformTrack.getTarget();
-            result = new TransformTrack(target, newTimes, newTranslations,
-                    newRotations, newScales);
+            result = new TransformTrack(
+                    target, newTimes, newTranslations, newRotations, newScales);
         }
 
         return result;
@@ -1863,8 +1862,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(inputTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                inputTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -1877,8 +1876,8 @@ final public class TrackEdit {
      * @param newDuration the desired duration (in seconds, &ge;0)
      * @return a new MorphTrack with the same target and t[0]=0
      */
-    public static MorphTrack setDuration(MorphTrack oldTrack,
-            float newDuration) {
+    public static MorphTrack setDuration(
+            MorphTrack oldTrack, float newDuration) {
         Validate.nonNegative(newDuration, "new duration");
 
         float[] oldTimes = oldTrack.getTimes();
@@ -1984,8 +1983,8 @@ final public class TrackEdit {
      * @param newDuration the desired duration (in seconds, &ge;0)
      * @return a new TransformTrack with the same target and t[0]=0
      */
-    public static TransformTrack setDuration(TransformTrack oldTrack,
-            float newDuration) {
+    public static TransformTrack setDuration(
+            TransformTrack oldTrack, float newDuration) {
         Validate.nonNegative(newDuration, "new duration");
 
         float[] oldTimes = oldTrack.getTimes();
@@ -2058,8 +2057,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2073,8 +2072,8 @@ final public class TrackEdit {
      * @param newTime new time for the frame (in seconds, &gt;0)
      * @return a new track of the same type as oldTrack, or null if unsuccessful
      */
-    public static Track setFrameTime(Track oldTrack, int frameIndex,
-            float newTime) {
+    public static Track setFrameTime(
+            Track oldTrack, int frameIndex, float newTime) {
         float[] oldTimes = oldTrack.getKeyFrameTimes();
         int numFrames = oldTimes.length;
         Validate.inRange(frameIndex, "frame index", 1, numFrames - 1);
@@ -2105,9 +2104,9 @@ final public class TrackEdit {
      * @param rotations (either null or same length as times)
      * @param scales (either null or same length as times)
      */
-    public static void setKeyframes(Track track, float[] times,
-            Vector3f[] translations, Quaternion[] rotations,
-            Vector3f[] scales) {
+    public static void setKeyframes(
+            Track track, float[] times, Vector3f[] translations,
+            Quaternion[] rotations, Vector3f[] scales) {
         Validate.nonNull(times, "times");
         int numKeyframes = times.length;
         assert numKeyframes > 0 : numKeyframes;
@@ -2279,8 +2278,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2294,8 +2293,8 @@ final public class TrackEdit {
      * @param tolerance the tolerance to use when testing for identity (&ge;0)
      * @return a new TransformTrack with the same target
      */
-    public static TransformTrack simplify(TransformTrack oldTrack,
-            float tolerance) {
+    public static TransformTrack simplify(
+            TransformTrack oldTrack, float tolerance) {
         Validate.nonNegative(tolerance, "tolerance");
         boolean keepScales = false;
 
@@ -2341,8 +2340,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2379,20 +2378,20 @@ final public class TrackEdit {
 
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
-            newTranslations = smoothTranslations.smooth(oldTimes, duration,
-                    oldTranslations, width, null);
+            newTranslations = smoothTranslations.smooth(
+                    oldTimes, duration, oldTranslations, width, null);
         }
 
         Quaternion[] newRotations = null;
         if (oldRotations != null) {
-            newRotations = smoothRotations.smooth(oldTimes, duration,
-                    oldRotations, width, null);
+            newRotations = smoothRotations.smooth(
+                    oldTimes, duration, oldRotations, width, null);
         }
 
         Vector3f[] newScales = null;
         if (oldScales != null) {
-            newScales = smoothScales.smooth(oldTimes, duration, oldScales,
-                    width, null);
+            newScales = smoothScales.smooth(
+                    oldTimes, duration, oldScales, width, null);
         }
 
         Track result = newTrack(oldTrack, newTimes, newTranslations,
@@ -2431,23 +2430,23 @@ final public class TrackEdit {
 
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
-            newTranslations = smoothTranslations.smooth(oldTimes,
-                    duration, oldTranslations, width, null);
+            newTranslations = smoothTranslations.smooth(
+                    oldTimes, duration, oldTranslations, width, null);
         }
         Quaternion[] newRotations = null;
         if (oldRotations != null) {
-            newRotations = smoothRotations.smooth(oldTimes, duration,
-                    oldRotations, width, null);
+            newRotations = smoothRotations.smooth(
+                    oldTimes, duration, oldRotations, width, null);
         }
         Vector3f[] newScales = null;
         if (oldScales != null) {
-            newScales = smoothScales.smooth(oldTimes, duration, oldScales,
-                    width, null);
+            newScales = smoothScales.smooth(
+                    oldTimes, duration, oldScales, width, null);
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2460,8 +2459,8 @@ final public class TrackEdit {
      * @param endWeights weights at the end time (not null, unaffected)
      * @return a new MorphTrack with the same target and t[0]=0
      */
-    public static MorphTrack truncate(MorphTrack oldTrack,
-            float endTime, float[] endWeights) {
+    public static MorphTrack truncate(
+            MorphTrack oldTrack, float endTime, float[] endWeights) {
         Validate.nonNegative(endTime, "end time");
         Validate.nonNull(endWeights, "end weights");
 
@@ -2552,8 +2551,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2566,8 +2565,8 @@ final public class TrackEdit {
      * @param endTransform transform of target at the end time (unaffected)
      * @return a new TransformTrack with the same target and t[0]=0
      */
-    public static TransformTrack truncate(TransformTrack oldTrack,
-            float endTime, Transform endTransform) {
+    public static TransformTrack truncate(
+            TransformTrack oldTrack, float endTime, Transform endTransform) {
         Validate.nonNegative(endTime, "end time");
 
         // Access the old arrays.
@@ -2614,8 +2613,8 @@ final public class TrackEdit {
         newScales[lastFrame] = endTransform.getScale().clone();
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         assert (float) result.getLength() == endTime;
         return result;
@@ -2716,8 +2715,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2733,8 +2732,8 @@ final public class TrackEdit {
      * keyframe, if one exists (&ge;0, &le;1)
      * @return a new TransformTrack
      */
-    public static TransformTrack wrap(TransformTrack oldTrack, float duration,
-            float endWeight) {
+    public static TransformTrack wrap(
+            TransformTrack oldTrack, float duration, float endWeight) {
         Validate.positive(duration, "duration");
         Validate.fraction(endWeight, "end weight");
 
@@ -2825,8 +2824,8 @@ final public class TrackEdit {
         }
 
         HasLocalTransform target = oldTrack.getTarget();
-        TransformTrack result = new TransformTrack(target, newTimes,
-                newTranslations, newRotations, newScales);
+        TransformTrack result = new TransformTrack(
+                target, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -2842,8 +2841,8 @@ final public class TrackEdit {
      * @param rot2 the 2nd input rotation (may be null, unaffected)
      * @return a new quaternion
      */
-    private static Quaternion blendRotations(float weight2, Quaternion rot1,
-            Quaternion rot2) {
+    private static Quaternion blendRotations(
+            float weight2, Quaternion rot1, Quaternion rot2) {
         Quaternion result;
         if (rot1 == null) {
             if (rot2 == null) {
@@ -2869,8 +2868,8 @@ final public class TrackEdit {
      * @param scale2 the 2nd input vector (may be null, unaffected)
      * @return a new vector
      */
-    private static Vector3f blendScales(float weight2, Vector3f scale1,
-            Vector3f scale2) {
+    private static Vector3f blendScales(
+            float weight2, Vector3f scale1, Vector3f scale2) {
         Vector3f result;
         if (scale1 == null) {
             if (scale2 == null) {
@@ -2896,8 +2895,8 @@ final public class TrackEdit {
      * @param tra2 the 2nd input vector (may be null, unaffected)
      * @return a new vector
      */
-    private static Vector3f blendTranslations(float weight2, Vector3f tra1,
-            Vector3f tra2) {
+    private static Vector3f blendTranslations(
+            float weight2, Vector3f tra1, Vector3f tra2) {
         Vector3f result;
         if (tra1 == null) {
             if (tra2 == null) {

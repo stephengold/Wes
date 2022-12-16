@@ -225,8 +225,8 @@ public enum TweenVectors {
                         cubicSpline(time, times, samples, result);
                     }
                 } else {
-                    loopCubicSpline(time, last, times, cycleTime, samples,
-                            result);
+                    loopCubicSpline(
+                            time, last, times, cycleTime, samples, result);
                 }
                 break;
 
@@ -259,8 +259,8 @@ public enum TweenVectors {
      * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
-    public Vector3f interpolate(float time, VectorCurve curve,
-            Vector3f storeResult) {
+    public Vector3f interpolate(
+            float time, VectorCurve curve, Vector3f storeResult) {
         Validate.nonNull(curve, "curve");
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
@@ -488,8 +488,8 @@ public enum TweenVectors {
      * times, each norm==1)
      * @return a new instance
      */
-    public VectorCurve precompute(float[] times, float cycleTime,
-            Vector3f[] samples) {
+    public VectorCurve precompute(
+            float[] times, float cycleTime, Vector3f[] samples) {
         Validate.nonNull(times, "times");
         assert times.length > 0;
         assert times.length == samples.length;
@@ -944,8 +944,8 @@ public enum TweenVectors {
      * @param storeResult storage for the result (modified if not null)
      * @return an interpolated vector (either storeResult or a new instance)
      */
-    private Vector3f spline(float time, VectorCurve curve,
-            Vector3f storeResult) {
+    private Vector3f spline(
+            float time, VectorCurve curve, Vector3f storeResult) {
         assert time >= 0f : time;
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         float cycleTime = curve.getCycleTime();

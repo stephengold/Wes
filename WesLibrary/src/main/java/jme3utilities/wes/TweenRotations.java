@@ -165,8 +165,8 @@ public enum TweenRotations {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    public Quaternion interpolate(float time, RotationCurve curve,
-            Quaternion storeResult) {
+    public Quaternion interpolate(
+            float time, RotationCurve curve, Quaternion storeResult) {
         Validate.nonNull(curve, "curve");
         Quaternion result;
 
@@ -180,8 +180,8 @@ public enum TweenRotations {
                 float[] times = curve.getTimes();
                 float cycleTime = curve.getCycleTime();
                 Quaternion[] samples = curve.getSamples();
-                result = interpolate(time, times, cycleTime, samples,
-                        storeResult);
+                result = interpolate(
+                        time, times, cycleTime, samples, storeResult);
                 break;
 
             case LoopSpline:
@@ -342,8 +342,8 @@ public enum TweenRotations {
      * times, each norm==1)
      * @return a new instance
      */
-    public RotationCurve precompute(float[] times, float cycleTime,
-            Quaternion[] samples) {
+    public RotationCurve precompute(
+            float[] times, float cycleTime, Quaternion[] samples) {
         Validate.nonNull(times, "times");
         assert times.length > 0;
         assert times.length == samples.length;
@@ -495,8 +495,8 @@ public enum TweenRotations {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    private Quaternion lerp(float t, Quaternion q0, Quaternion q1,
-            Quaternion storeResult) {
+    private Quaternion lerp(
+            float t, Quaternion q0, Quaternion q1, Quaternion storeResult) {
         Validate.inRange(t, "t", 0f, 1f);
         MyQuaternion.validateUnit(q0, "q0", 0.0005f);
         MyQuaternion.validateUnit(q1, "q1", 0.0005f);
@@ -548,8 +548,8 @@ public enum TweenRotations {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    private static Quaternion loopSpline(float time, RotationCurve curve,
-            Quaternion storeResult) {
+    private static Quaternion loopSpline(
+            float time, RotationCurve curve, Quaternion storeResult) {
         assert time >= 0f : time;
         float cycleTime = curve.getCycleTime();
         Validate.inRange(time, "time", 0f, cycleTime);
@@ -609,8 +609,8 @@ public enum TweenRotations {
      * @param curve (not null, modified)
      * @param lastIndex index of the last point to use (&ge;0)
      */
-    private static void precomputeLoopSpline(RotationCurve curve,
-            int lastIndex) {
+    private static void precomputeLoopSpline(
+            RotationCurve curve, int lastIndex) {
         curve.setLastIndex(lastIndex);
 
         float[] times = curve.getTimes();
@@ -687,8 +687,8 @@ public enum TweenRotations {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    private static Quaternion spline(float time, RotationCurve curve,
-            Quaternion storeResult) {
+    private static Quaternion spline(
+            float time, RotationCurve curve, Quaternion storeResult) {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
