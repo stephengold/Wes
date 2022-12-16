@@ -196,9 +196,7 @@ public class ConvertToInPlace extends AcorusDemo {
      */
     @Override
     public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
-        /*
-         * Position help nodes along the top of the viewport.
-         */
+        // Position help nodes along the top of the viewport.
         float margin = 10f; // in pixels
         float height = viewPortHeight - (2f * margin)
                 - 20f; // 20px so as not to cover the status line

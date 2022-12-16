@@ -193,9 +193,8 @@ public class Pose implements JmeCloneable {
         Validate.nonNull(targetArmature, "target armature");
         int numJoints = countBones();
         assert targetArmature.getJointCount() == numJoints : numJoints;
-        /*
-         * Copy local transforms from Pose to Armature.
-         */
+
+        // Copy local transforms from Pose to Armature.
         Transform tempTransform = new Transform();
         for (int jointIndex = 0; jointIndex < numJoints; ++jointIndex) {
             localTransform(jointIndex, tempTransform);
@@ -213,9 +212,8 @@ public class Pose implements JmeCloneable {
         Validate.nonNull(targetSkeleton, "target skeleton");
         int numBones = countBones();
         assert targetSkeleton.getBoneCount() == numBones : numBones;
-        /*
-         * Copy local transforms from Pose to Skeleton.
-         */
+
+        // Copy local transforms from Pose to Skeleton.
         Transform tempTransform = new Transform();
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             localTransform(boneIndex, tempTransform);
@@ -257,14 +255,12 @@ public class Pose implements JmeCloneable {
      */
     public Animation capture(String animationName) {
         Validate.nonNull(animationName, "animation name");
-        /*
-         * Start with an empty animation.
-         */
+
+        // Start with an empty animation.
         float duration = 0f;
         Animation result = new Animation(animationName, duration);
-        /*
-         * Add a BoneTrack for each bone that's not in bind pose.
-         */
+
+        // Add a BoneTrack for each bone that's not in bind pose.
         int numBones = countBones();
         Transform transform = new Transform();
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
@@ -291,9 +287,8 @@ public class Pose implements JmeCloneable {
      */
     public AnimClip captureToClip(String clipName) {
         Validate.nonNull(clipName, "clip name");
-        /*
-         * Start with an empty clip.
-         */
+
+        // Start with an empty clip.
         AnimClip result = new AnimClip(clipName);
         /*
          * Add a TransformTrack for each Joint
@@ -373,9 +368,8 @@ public class Pose implements JmeCloneable {
      */
     public Quaternion localRotation(int boneIndex, Quaternion storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        /*
-         * Start with the local bind rotation.
-         */
+
+        // Start with the local bind rotation.
         Quaternion bindRotation;
         if (skeleton == null) {
             Transform bindTransform = bindTransforms.get(boneIndex);
@@ -384,9 +378,8 @@ public class Pose implements JmeCloneable {
             Bone bone = skeleton.getBone(boneIndex);
             bindRotation = bone.getBindRotation(); // alias
         }
-        /*
-         * Apply its user/animation rotation.
-         */
+
+        // Apply its user/animation rotation.
         Transform userTransform = transforms.get(boneIndex);
         Quaternion userRotation = userTransform.getRotation();
         Quaternion result = bindRotation.mult(userRotation, storeResult);
@@ -404,9 +397,8 @@ public class Pose implements JmeCloneable {
      */
     public Transform localTransform(int boneIndex, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        /*
-         * Start with the local bind transform.
-         */
+
+        // Start with the local bind transform.
         Transform result = bindTransform(boneIndex, storeResult);
         /*
          * Apply the user/animation transform in a simple (yet peculiar) way
@@ -465,10 +457,7 @@ public class Pose implements JmeCloneable {
 
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
-        if (isRoot) {
-            /*
-             * For a root joint/bone, use the local rotation.
-             */
+        if (isRoot) { // For a root joint/bone, use the local rotation.
             localRotation(boneIndex, result);
         } else {
             /*
@@ -495,9 +484,8 @@ public class Pose implements JmeCloneable {
      */
     public Transform modelTransform(int boneIndex, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
-        /*
-         * Start with the joint/bone local transform.
-         */
+
+        // Start with the joint/bone local transform.
         Transform result = localTransform(boneIndex, storeResult);
 
         Transform parent = null;
@@ -818,9 +806,8 @@ public class Pose implements JmeCloneable {
             result = storeResult;
             assert result.length >= numBones : numBones;
         }
-        /*
-         * Allocate temporary storage.
-         */
+
+        // Allocate temporary storage.
         Vector3f skTranslation = new Vector3f();
         Quaternion skRotation = new Quaternion();
         Matrix3f skRotMatrix = new Matrix3f();
@@ -1069,10 +1056,7 @@ public class Pose implements JmeCloneable {
         Bone parent = bone.getParent();
         if (parent == null) {
             result.set(modelOrientation);
-        } else {
-            /*
-             * Factor in the orientation of the parent bone.
-             */
+        } else { // Factor in the orientation of the parent bone.
             int parentIndex = skeleton.getBoneIndex(parent);
             Quaternion parentMo = modelOrientation(parentIndex, null);
             Quaternion parentImo = parentMo.inverse();
@@ -1101,10 +1085,7 @@ public class Pose implements JmeCloneable {
         Joint parent = joint.getParent();
         if (parent == null) {
             result.set(modelOrientation);
-        } else {
-            /*
-             * Factor in the orientation of the parent joint.
-             */
+        } else { // Factor in the orientation of the parent joint.
             int parentIndex = parent.getId();
             Quaternion parentMo = modelOrientation(parentIndex, null);
             Quaternion parentImo = parentMo.inverse();
@@ -1135,9 +1116,7 @@ public class Pose implements JmeCloneable {
         String targetName = bone.getName();
         BoneMapping boneMapping = map.get(targetName);
         if (boneMapping != null) {
-            /*
-             * Calculate the orientation of the source bone in model space.
-             */
+            // Calculate the orientation of the source bone in model space.
             String sourceName = boneMapping.getSourceName();
             int sourceIndex = sourcePose.findBone(sourceName);
             Quaternion mo = sourcePose.modelOrientation(sourceIndex, null);
@@ -1175,9 +1154,7 @@ public class Pose implements JmeCloneable {
         String targetName = joint.getName();
         BoneMapping boneMapping = map.get(targetName);
         if (boneMapping != null) {
-            /*
-             * Calculate the orientation of the source joint in model space.
-             */
+            // Calculate the orientation of the source joint in model space.
             String sourceName = boneMapping.getSourceName();
             int sourceIndex = sourcePose.findBone(sourceName);
             Quaternion mo = sourcePose.modelOrientation(sourceIndex, null);

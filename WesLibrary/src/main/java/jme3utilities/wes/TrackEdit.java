@@ -105,9 +105,8 @@ final public class TrackEdit {
         int neckIndex = MyArray.findPreviousIndex(neckTime, oldTimes);
         int newCount = oldCount - neckIndex;
         assert newCount > 0 : newCount;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         int numTargets = oldTrack.getNbMorphTargets();
         float[] newWeights = new float[newCount * numTargets];
@@ -165,9 +164,8 @@ final public class TrackEdit {
                 = MyAnimation.findPreviousKeyframeIndex(oldTrack, neckTime);
         int newCount = oldCount - neckIndex;
         assert newCount > 0 : newCount;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
         Vector3f[] newTranslations = null;
@@ -233,9 +231,8 @@ final public class TrackEdit {
                 = MyAnimation.findPreviousKeyframeIndex(oldTrack, neckTime);
         int newCount = oldCount - neckIndex;
         assert newCount > 0 : newCount;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
         Vector3f[] newTranslations = null;
@@ -302,17 +299,15 @@ final public class TrackEdit {
         Vector3f[] translations2 = MyAnimation.getTranslations(track2);
         Quaternion[] rots2 = MyAnimation.getRotations(track2);
         Vector3f[] scales2 = MyAnimation.getScales(track2);
-        /*
-         * Calculate the index of the last keyframe to include from each track.
-         */
+
+        // Calculate the index of the last keyframe to include from each track.
         int last1 = MyAnimation.findPreviousKeyframeIndex(track1, newDuration);
         assert last1 >= 0 : last1;
         float newDuration2 = newDuration - startTime2;
         int last2 = MyAnimation.findPreviousKeyframeIndex(track2, newDuration2);
         assert last2 >= 0 : last2;
-        /*
-         * Calculate the number of keyframes in the result.
-         */
+
+        // Calculate the number of keyframes in the result.
         float lastTime1 = times1[last1];
         int numCopy1;
         int numBlend;
@@ -329,9 +324,8 @@ final public class TrackEdit {
             throw new IllegalArgumentException("overlapping tracks");
         }
         int newCount = numCopy1 + numBlend + numCopy2;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (translations1 != null || translations2 != null) {
@@ -345,9 +339,8 @@ final public class TrackEdit {
         if (scales1 != null || scales2 != null) {
             newScales = new Vector3f[newCount];
         }
-        /*
-         * Fill the new arrays.
-         */
+
+        // Fill the new arrays.
         for (int frameIndex = 0; frameIndex < newCount; ++frameIndex) {
             Quaternion rot1;
             Quaternion rot2;
@@ -533,9 +526,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
-        /*
-         * Calculate the old index of the last keyframe to include.
-         */
+
+        // Calculate the old index of the last keyframe to include.
         float oldDuration = newDuration - delayAmount;
         assert oldDuration < newDuration;
         int lastIndex = MyAnimation.findPreviousKeyframeIndex(oldTrack,
@@ -547,9 +539,8 @@ final public class TrackEdit {
             addFrames = 0;
         }
         int newCount = addFrames + lastIndex + 1;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
         Vector3f[] newTranslations = null;
@@ -567,9 +558,8 @@ final public class TrackEdit {
             newScales = new Vector3f[newCount];
             newScales[0] = new Vector3f(1f, 1f, 1f);
         }
-        /*
-         * Fill the new arrays.
-         */
+
+        // Fill the new arrays.
         for (int oldIndex = 0; oldIndex <= lastIndex; ++oldIndex) {
             int frameIndex = oldIndex + addFrames;
             newTimes[frameIndex] = oldTimes[oldIndex] + delayAmount;
@@ -619,9 +609,8 @@ final public class TrackEdit {
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
 
         int newCount = oldCount - deleteCount;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -688,9 +677,8 @@ final public class TrackEdit {
         Vector3f[] oldScales = oldTrack.getScales();
 
         int newCount = oldCount - deleteCount;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -756,9 +744,8 @@ final public class TrackEdit {
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int newCount = oldCount + 1;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = new Vector3f[newCount];
         Quaternion[] newRotations = new Quaternion[newCount];
@@ -832,9 +819,8 @@ final public class TrackEdit {
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int newCount = oldCount + 1;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = new Vector3f[newCount];
         Quaternion[] newRotations = new Quaternion[newCount];
@@ -972,9 +958,8 @@ final public class TrackEdit {
         assert oldTimes.length == numFrames;
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] times = new float[numFrames];
         Vector3f[] translations = null;
         if (oldTranslations != null) {
@@ -1045,9 +1030,8 @@ final public class TrackEdit {
         assert oldTimes.length == numFrames;
         Vector3f[] oldTranslations = MyAnimation.getTranslations(inputTrack);
         Vector3f[] oldScales = MyAnimation.getScales(inputTrack);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] times = new float[numFrames];
         Vector3f[] translations = null;
         if (oldTranslations != null) {
@@ -1099,9 +1083,8 @@ final public class TrackEdit {
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int newCount = 1 + (oldCount - 1) / factor;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -1156,9 +1139,8 @@ final public class TrackEdit {
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int newCount = 1 + (oldCount - 1) / factor;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -1213,9 +1195,8 @@ final public class TrackEdit {
         float[] newTimes = new float[newCount];
         int numTargets = track.getNbMorphTargets();
         float[] newWeights = new float[newCount * numTargets];
-        /*
-         * Copy all non-repeated keyframes.
-         */
+
+        // Copy all non-repeated keyframes.
         float prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
@@ -1257,9 +1238,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(track);
         Quaternion[] oldRotations = MyAnimation.getRotations(track);
         Vector3f[] oldScales = MyAnimation.getScales(track);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -1273,9 +1253,8 @@ final public class TrackEdit {
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
         }
-        /*
-         * Copy all non-repeated keyframes.
-         */
+
+        // Copy all non-repeated keyframes.
         float prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
@@ -1317,9 +1296,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = track.getTranslations();
         Quaternion[] oldRotations = track.getRotations();
         Vector3f[] oldScales = track.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -1333,9 +1311,8 @@ final public class TrackEdit {
         if (oldScales != null) {
             newScales = new Vector3f[newCount];
         }
-        /*
-         * Copy all non-repeated keyframes.
-         */
+
+        // Copy all non-repeated keyframes.
         float prevTime = Float.NEGATIVE_INFINITY;
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldCount; ++oldIndex) {
@@ -1381,9 +1358,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[frameCount];
         Vector3f[] newTranslations = new Vector3f[frameCount];
         Quaternion[] newRotations = new Quaternion[frameCount];
@@ -1439,9 +1415,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[frameCount];
         Vector3f[] newTranslations = new Vector3f[frameCount];
         Quaternion[] newRotations = new Quaternion[frameCount];
@@ -1492,9 +1467,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
             newTranslations = new Vector3f[numSamples];
@@ -1775,9 +1749,8 @@ final public class TrackEdit {
         if (inputTrack instanceof MorphTrack) {
             MorphTrack oldMorphTrack = (MorphTrack) inputTrack;
             float[] oldWeights = oldMorphTrack.getWeights();
-            /*
-             * Allocate new arrays.
-             */
+
+            // Allocate new arrays.
             newTimes = new float[numFrames];
             int numTargets = oldMorphTrack.getNbMorphTargets();
             float[] weights = new float[numFrames * numTargets];
@@ -1803,9 +1776,8 @@ final public class TrackEdit {
             Vector3f[] oldTranslations = oldTransformTrack.getTranslations();
             Quaternion[] oldRotations = oldTransformTrack.getRotations();
             Vector3f[] oldScales = oldTransformTrack.getScales();
-            /*
-             * Allocate new arrays.
-             */
+
+            // Allocate new arrays.
             newTimes = new float[numFrames];
             Vector3f[] newTranslations = null;
             if (oldTranslations != null) {
@@ -1860,9 +1832,8 @@ final public class TrackEdit {
 
         int numFrames = oldTimes.length;
         float lastFrameTime = oldTimes[numFrames - 1];
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[numFrames];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -1917,9 +1888,8 @@ final public class TrackEdit {
         assert oldDuration >= 0f : oldCount;
 
         float[] oldWeights = oldTrack.getWeights();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         int newCount;
         if (oldDuration == 0f && newDuration > 0f) {
             newCount = oldCount + 1;
@@ -2027,9 +1997,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         int newCount;
         if (oldDuration == 0f && newDuration > 0f) {
             newCount = oldCount + 1;
@@ -2210,9 +2179,7 @@ final public class TrackEdit {
         Track result = null;
         if (keepTranslations || keepRotations || keepScales) {
             if (oldTrack instanceof BoneTrack) {
-                /*
-                 * A bone track requires both translations and rotations.
-                 */
+                // A bone track requires both translations and rotations.
                 keepTranslations = true;
                 keepRotations = true;
             }
@@ -2403,9 +2370,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         float[] newTimes = new float[numFrames];
@@ -2456,9 +2422,8 @@ final public class TrackEdit {
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         float[] newTimes = new float[numFrames];
@@ -2499,14 +2464,12 @@ final public class TrackEdit {
             float endTime, float[] endWeights) {
         Validate.nonNegative(endTime, "end time");
         Validate.nonNull(endWeights, "end weights");
-        /*
-         * Access the old arrays.
-         */
+
+        // Access the old arrays.
         float[] oldTimes = oldTrack.getTimes();
         float[] oldWeights = oldTrack.getWeights();
-        /*
-         * Allocate new arrays. Avoid creating a repetitious keyframe.
-         */
+
+        // Allocate new arrays. Avoid creating a repetitious keyframe.
         int lastFrame = MyArray.findPreviousIndex(endTime, oldTimes);
         int newCount = lastFrame + 1;
         if (oldTimes[lastFrame] != endTime) {
@@ -2559,9 +2522,8 @@ final public class TrackEdit {
 
         int newCount
                 = 1 + MyAnimation.findPreviousKeyframeIndex(oldTrack, endTime);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
@@ -2607,16 +2569,14 @@ final public class TrackEdit {
     public static TransformTrack truncate(TransformTrack oldTrack,
             float endTime, Transform endTransform) {
         Validate.nonNegative(endTime, "end time");
-        /*
-         * Access the old arrays.
-         */
+
+        // Access the old arrays.
         float[] oldTimes = oldTrack.getTimes();
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
-        /*
-         * Allocate new arrays. Avoid creating a repetitious keyframe.
-         */
+
+        // Allocate new arrays. Avoid creating a repetitious keyframe.
         int lastFrame
                 = MyAnimation.findPreviousKeyframeIndex(oldTrack, endTime);
         int newCount = lastFrame + 1;
@@ -2718,9 +2678,8 @@ final public class TrackEdit {
             }
         }
         assert endIndex == newCount - 1;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
         newTimes[endIndex] = duration;
@@ -2824,9 +2783,8 @@ final public class TrackEdit {
             }
         }
         assert endIndex == newCount - 1;
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         float[] newTimes = new float[newCount];
         newTimes[0] = 0f;
         newTimes[endIndex] = duration;

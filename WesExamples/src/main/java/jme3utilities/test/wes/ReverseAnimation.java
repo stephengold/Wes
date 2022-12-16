@@ -150,17 +150,15 @@ public class ReverseAnimation extends AcorusDemo {
         stateManager.getState(StatsAppState.class).toggleStats();
         addBox();
         addSinbad();
-        /*
-         * Create a reversed version of the "StandUpBack" clip.
-         */
+
+        // Create a reversed version of the "StandUpBack" clip.
         AnimComposer composer = sinbadModelRoot.getControl(AnimComposer.class);
         AnimClip forward = composer.getAnimClip("StandUpBack");
         String reverseName = "LieDown";
         AnimClip reverse = AnimationEdit.reverseAnimation(forward, reverseName);
         composer.addAnimClip(reverse);
-        /*
-         * Play the reversed "StandUpBack" clip repeatedly.
-         */
+
+        // Play the reversed "StandUpBack" clip repeatedly.
         composer.setCurrentAction(reverseName);
     }
 
@@ -173,9 +171,7 @@ public class ReverseAnimation extends AcorusDemo {
      */
     @Override
     public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
-        /*
-         * Position help nodes along the top of the viewport.
-         */
+        // Position help nodes along the top of the viewport.
         float margin = 10f; // in pixels
         float height = viewPortHeight - (2f * margin);
         float width = viewPortWidth - (2f * margin);
@@ -277,9 +273,8 @@ public class ReverseAnimation extends AcorusDemo {
         }
         setCgmHeight(sinbadModelRoot, 2f);
         centerCgm(sinbadModelRoot);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkinningControl sc = sinbadModelRoot.getControl(SkinningControl.class);
         this.sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);

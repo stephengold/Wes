@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -475,9 +475,8 @@ public enum TweenRotations {
         Quaternion qq0 = align(q0, q1);
         Quaternion qq2 = align(q2, q1);
         Quaternion qq3 = align(q3, qq2);
-        /*
-         * Calculate Squad parameter "a" at either end of the central interval.
-         */
+
+        // Calculate Squad parameter "a" at either end of the central interval.
         Quaternion a1 = MyQuaternion.squadA(qq0, q1, qq2, null);
         Quaternion a2 = MyQuaternion.squadA(q1, qq2, qq3, null);
         Quaternion result = MyQuaternion.squad(t, q1, a1, a2, qq2, storeResult);
@@ -561,9 +560,8 @@ public enum TweenRotations {
         if (index1 > lastIndex) {
             index1 = lastIndex;
         }
-        /*
-         * Interpolate using the Squad function.
-         */
+
+        // Interpolate using the Squad function.
         float intervalDuration = curve.getIntervalDuration(index1);
         float t = (time - times[index1]) / intervalDuration;
         Quaternion a1 = curve.getControlPoint1(index1);
@@ -701,10 +699,7 @@ public enum TweenRotations {
         int lastIndex = curve.getLastIndex();
         if (index1 == lastIndex) {
             result.set(q1);
-        } else {
-            /*
-             * Interpolate using the Squad function.
-             */
+        } else { // Interpolate using the Squad function.
             float intervalDuration = curve.getIntervalDuration(index1);
             float t = (time - times[index1]) / intervalDuration;
             Quaternion a1 = curve.getControlPoint1(index1);

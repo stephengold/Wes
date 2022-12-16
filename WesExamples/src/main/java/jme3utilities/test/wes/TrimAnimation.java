@@ -146,33 +146,29 @@ public class TrimAnimation extends AcorusDemo {
 
         ColorRGBA bgColor = new ColorRGBA(0.2f, 0.2f, 1f, 1f);
         viewPort.setBackgroundColor(bgColor);
-        /*
-         * Hide the render-statistics overlay.
-         */
+
+        // Hide the render-statistics overlay.
         stateManager.getState(StatsAppState.class).toggleStats();
 
         addLighting();
         addBox();
         addSinbad();
-        /*
-         * Create a trimmed version of the "SliceHorizontal" clip.
-         */
+
+        // Create a trimmed version of the "SliceHorizontal" clip.
         AnimComposer composer = sinbadModelRoot.getControl(AnimComposer.class);
         AnimClip slice = composer.getAnimClip("SliceHorizontal");
         float startTime = 0.308f;
         float endTime = 0.344f;
         TweenTransforms techniques = new TweenTransforms();
-        AnimClip trimmed = AnimationEdit.extractAnimation(slice, startTime,
-                endTime, techniques, "");
-        /*
-         * Create a version of the trimmed clip that runs 15x slower/longer.
-         */
+        AnimClip trimmed = AnimationEdit.extractAnimation(
+                slice, startTime, endTime, techniques, "");
+
+        // Create a version of the trimmed clip that runs 15x slower/longer.
         float newDuration = 15f * (endTime - startTime);
         AnimClip warn = AnimationEdit.setDuration(trimmed, newDuration, "warn");
         composer.addAnimClip(warn);
-        /*
-         * Play the resulting clip repeatedly.
-         */
+
+        // Play the resulting clip repeatedly.
         composer.setCurrentAction("warn");
     }
 
@@ -185,9 +181,7 @@ public class TrimAnimation extends AcorusDemo {
      */
     @Override
     public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
-        /*
-         * Position help nodes along the top of the viewport.
-         */
+        // Position help nodes along the top of the viewport.
         float margin = 10f; // in pixels
         float height = viewPortHeight - (2f * margin);
         float width = viewPortWidth - (2f * margin);
@@ -289,9 +283,8 @@ public class TrimAnimation extends AcorusDemo {
         }
         setCgmHeight(sinbadModelRoot, 2f);
         centerCgm(sinbadModelRoot);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkinningControl sc = sinbadModelRoot.getControl(SkinningControl.class);
         this.sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);

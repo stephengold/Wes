@@ -228,9 +228,8 @@ public class TweenTransforms implements Cloneable {
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
-        /*
-         * Allocate new arrays.
-         */
+
+        // Allocate new arrays.
         Vector3f[] newTranslations = null;
         if (oldTranslations != null) {
             newTranslations = new Vector3f[numSamples];
@@ -384,9 +383,7 @@ public class TweenTransforms implements Cloneable {
         Vector3f[] scales = MyAnimation.getScales(track);
 
         if (time <= 0f || lastFrame == 0) {
-            /*
-             * Copy the transform of the first frame.
-             */
+            // Copy the transform of the first frame.
             result.loadIdentity();
             if (translations != null) {
                 result.setTranslation(translations[0]);
@@ -398,10 +395,7 @@ public class TweenTransforms implements Cloneable {
                 result.setScale(scales[0]);
             }
 
-        } else {
-            /*
-             * Interpolate between frames.
-             */
+        } else { // Interpolate between frames.
             interpolate(time, times, duration, translations, rotations, scales,
                     fallback, result);
         }

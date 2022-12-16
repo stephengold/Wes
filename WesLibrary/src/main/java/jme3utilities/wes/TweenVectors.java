@@ -115,9 +115,7 @@ public enum TweenVectors {
             case FdcSpline:
             case LoopCatmullRomSpline:
             case LoopFdcSpline:
-                /*
-                 * Estimate slopes at either end of the central interval.
-                 */
+                // Estimate slopes at either end of the central interval.
                 Vector3f m1;
                 if (index1 == 0) {
                     m1 = MyVector3f.velocity(inter12, v1, v2, null);
@@ -352,9 +350,8 @@ public enum TweenVectors {
         assert times.length > last : times.length;
         assert samples.length > last : samples.length;
         assert cycleTime > times[last] : cycleTime;
-        /*
-         * Find 4 nearby points and calculate the 3 intervals.
-         */
+
+        // Find 4 nearby points and calculate the 3 intervals.
         int index1 = MyArray.findPreviousIndex(time, times);
 
         float inter12;
@@ -380,9 +377,7 @@ public enum TweenVectors {
         switch (this) {
             case LoopCatmullRomSpline:
             case LoopFdcSpline:
-                /*
-                 * Estimate slopes at either end of the central interval.
-                 */
+                // Estimate slopes at either end of the central interval.
                 float inter01;
                 if (index1 > 0) {
                     index0 = index1 - 1;
@@ -642,9 +637,8 @@ public enum TweenVectors {
         assert m1 != null;
         assert m2 != null;
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
-        /*
-         * Evaluate the 4 Hermite basis functions, which are all cubic.
-         */
+
+        // Evaluate the 4 Hermite basis functions, which are all cubic.
         float u = 1f - t;
         float u2 = u * u;
         float h00 = (1f + 2f * t) * u2;
@@ -697,9 +691,7 @@ public enum TweenVectors {
             switch (this) {
                 case LoopCatmullRomSpline:
                 case LoopFdcSpline:
-                    /*
-                     * Estimate slopes at either end of the central interval.
-                     */
+                    // Estimate slopes at either end of the central interval.
                     float inter01;
                     if (index1 > 0) {
                         index0 = index1 - 1;
@@ -799,9 +791,7 @@ public enum TweenVectors {
                 case FdcSpline:
                 case LoopCatmullRomSpline:
                 case LoopFdcSpline:
-                    /*
-                     * Estimate slopes at either end of the central interval.
-                     */
+                    // Estimate slopes at either end of the central interval.
                     Vector3f m1;
                     if (index1 == 0) {
                         m1 = MyVector3f.velocity(inter12, v1, v2, null);

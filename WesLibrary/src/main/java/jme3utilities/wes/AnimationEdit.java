@@ -162,9 +162,8 @@ final public class AnimationEdit {
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
         Validate.nonNull(newAnimationName, "new animation name");
-        /*
-         * Start with an empty Animation.
-         */
+
+        // Start with an empty Animation.
         float newDuration = endTime - startTime;
         Animation result = new Animation(newAnimationName, newDuration);
 
@@ -207,9 +206,8 @@ final public class AnimationEdit {
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
         Validate.nonNull(newClipName, "new clip name");
-        /*
-         * Start with an empty AnimClip.
-         */
+
+        // Start with an empty AnimClip.
         AnimClip result = new AnimClip(newClipName);
 
         float duration = (float) sourceClip.getLength();
@@ -361,14 +359,12 @@ final public class AnimationEdit {
         Validate.nonNull(map, "map");
         Validate.nonNull(techniques, "techniques");
         Validate.nonNull(animationName, "animation name");
-        /*
-         * Start with an empty Animation.
-         */
+
+        // Start with an empty Animation.
         float duration = sourceAnimation.getLength();
         Animation result = new Animation(animationName, duration);
-        /*
-         * Add a BoneTrack for each target bone that's mapped.
-         */
+
+        // Add a BoneTrack for each target bone that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
         for (int iTarget = 0; iTarget < numTargetBones; ++iTarget) {
@@ -386,9 +382,8 @@ final public class AnimationEdit {
                 result.addTrack(track);
             }
         }
-        /*
-         * Copy any non-bone tracks.
-         */
+
+        // Copy any non-bone tracks.
         Track[] tracks = sourceAnimation.getTracks();
         for (Track track : tracks) {
             if (!(track instanceof BoneTrack)) {
@@ -418,14 +413,12 @@ final public class AnimationEdit {
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
         Validate.nonNull(animationName, "animation name");
-        /*
-         * Start with an empty Animation.
-         */
+
+        // Start with an empty Animation.
         float duration = (float) sourceClip.getLength();
         Animation result = new Animation(animationName, duration);
-        /*
-         * Add a BoneTrack for each target bone that's mapped.
-         */
+
+        // Add a BoneTrack for each target bone that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetBones = targetSkeleton.getBoneCount();
         for (int iTarget = 0; iTarget < numTargetBones; ++iTarget) {
@@ -443,9 +436,8 @@ final public class AnimationEdit {
                 result.addTrack(track);
             }
         }
-        /*
-         * Convert any non-joint tracks.
-         */
+
+        // Convert any non-joint tracks.
         AnimTrack<?>[] tracks = sourceClip.getTracks();
         for (AnimTrack<?> track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {
@@ -474,13 +466,11 @@ final public class AnimationEdit {
         Validate.nonNull(targetArmature, "target armature");
         Validate.nonNull(map, "map");
         Validate.nonNull(clipName, "clip name");
-        /*
-         * Start with an empty AnimClip.
-         */
+
+        // Start with an empty AnimClip.
         AnimClip result = new AnimClip(clipName);
-        /*
-         * Add a TransformTrack for each target joint that's mapped.
-         */
+
+        // Add a TransformTrack for each target joint that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
         int numTargetJoints = targetArmature.getJointCount();
         for (int iTarget = 0; iTarget < numTargetJoints; ++iTarget) {
@@ -506,9 +496,8 @@ final public class AnimationEdit {
                 addTrack(result, newTrack);
             }
         }
-        /*
-         * Copy any non-joint tracks.
-         */
+
+        // Copy any non-joint tracks.
         AnimTrack<?>[] tracks = sourceClip.getTracks();
         for (AnimTrack<?> track : tracks) {
             if (!MyAnimation.isJointTrack(track)) {

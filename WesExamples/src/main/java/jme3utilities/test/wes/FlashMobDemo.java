@@ -280,9 +280,7 @@ public class FlashMobDemo extends AcorusDemo {
      */
     @Override
     public Rectangle detailedHelpBounds(int viewPortWidth, int viewPortHeight) {
-        /*
-         * Position help nodes along the top of the viewport.
-         */
+        // Position help nodes along the top of the viewport.
         float margin = 10f; // in pixels
         float height = viewPortHeight - (2f * margin);
         float width = viewPortWidth - (2f * margin);
@@ -330,9 +328,8 @@ public class FlashMobDemo extends AcorusDemo {
                 default:
             }
         }
-        /*
-         * The action is not handled: forward it to the superclass.
-         */
+
+        // The action is not handled: forward it to the superclass.
         super.onAction(actionString, ongoing, tpf);
     }
 
@@ -386,9 +383,8 @@ public class FlashMobDemo extends AcorusDemo {
         setCgmHeight(jaime, 2f);
         centerCgm(jaime);
         jaime.move(-2f, 0f, 0f); // behind Sinbad and to his right
-        /*
-         * Add an animation channel.
-         */
+
+        // Add an animation channel.
         AnimControl animControl = jaime.getControl(AnimControl.class);
         AnimChannel animChannel = animControl.createChannel();
         allChannels.add(animChannel);
@@ -436,14 +432,12 @@ public class FlashMobDemo extends AcorusDemo {
         setCgmHeight(mhGame, 2f);
         centerCgm(mhGame);
         mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
-        /*
-         * Add composer to the master list.
-         */
+
+        // Add composer to the master list.
         AnimComposer composer = mhGame.getControl(AnimComposer.class);
         composers.add(composer);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkinningControl sc = mhGame.getControl(SkinningControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
@@ -463,14 +457,12 @@ public class FlashMobDemo extends AcorusDemo {
         setCgmHeight(oto, 2f);
         centerCgm(oto);
         oto.move(0f, 0f, -1f); // directly behind Sinbad
-        /*
-         * Add composer to the master list.
-         */
+
+        // Add composer to the master list.
         AnimComposer composer = oto.getControl(AnimComposer.class);
         composers.add(composer);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkinningControl sc = oto.getControl(SkinningControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
@@ -492,15 +484,13 @@ public class FlashMobDemo extends AcorusDemo {
         setCgmHeight(puppet, 2f);
         centerCgm(puppet);
         puppet.move(2f, 0f, 1f);
-        /*
-         * Add an animation channel.
-         */
+
+        // Add an animation channel.
         AnimControl animControl = puppet.getControl(AnimControl.class);
         AnimChannel animChannel = animControl.createChannel();
         allChannels.add(animChannel);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkeletonControl sc = puppet.getControl(SkeletonControl.class);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         InfluenceUtil.hideNonInfluencers(sv, sc);
@@ -528,13 +518,11 @@ public class FlashMobDemo extends AcorusDemo {
 
         SkinningControl sc = cgModel.getControl(SkinningControl.class);
         this.sinbadArmature = sc.getArmature();
-        /*
-         * Add composer to the master list.
-         */
+
+        // Add composer to the master list.
         composers.add(composer);
-        /*
-         * Add a skeleton visualizer.
-         */
+
+        // Add a skeleton visualizer.
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
@@ -575,16 +563,13 @@ public class FlashMobDemo extends AcorusDemo {
      * {@link #simpleUpdate(float)}.
      */
     private void startup2() {
-        /*
-         * Play the "Dance" animation on all channels.
-         */
+        // Play the "Dance" animation on all channels.
         for (AnimChannel animChannel : allChannels) {
             animChannel.setAnim("Dance");
             animChannel.setTime(0f);
         }
-        /*
-         * Play the "Dance" clip on all composers.
-         */
+
+        // Play the "Dance" clip on all composers.
         for (AnimComposer poser : composers) {
             poser.setCurrentAction("Dance");
             poser.setTime(AnimComposer.DEFAULT_LAYER, 0f);
