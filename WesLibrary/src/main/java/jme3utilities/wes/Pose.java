@@ -119,8 +119,8 @@ public class Pose implements JmeCloneable {
             jointCount = armature.getJointCount();
         }
 
-        bindTransforms = new ArrayList<>(jointCount);
-        transforms = new ArrayList<>(jointCount);
+        this.bindTransforms = new ArrayList<>(jointCount);
+        this.transforms = new ArrayList<>(jointCount);
 
         if (armature != null) {
             Cloner cloner = new Cloner();
@@ -171,8 +171,8 @@ public class Pose implements JmeCloneable {
             boneCount = skeleton.getBoneCount();
         }
 
-        bindTransforms = null;
-        transforms = new ArrayList<>(boneCount);
+        this.bindTransforms = null;
+        this.transforms = new ArrayList<>(boneCount);
 
         for (int boneIndex = 0; boneIndex < boneCount; ++boneIndex) {
             Transform transform = new Transform();
@@ -1012,12 +1012,12 @@ public class Pose implements JmeCloneable {
      */
     @Override
     public void cloneFields(Cloner cloner, Object original) {
-        armature = cloner.clone(armature);
-        skeleton = cloner.clone(skeleton);
+        this.armature = cloner.clone(armature);
+        this.skeleton = cloner.clone(skeleton);
 
         int numTransforms = transforms.size();
         List<Transform> originalTransforms = transforms;
-        transforms = new ArrayList<>(numTransforms);
+        this.transforms = new ArrayList<>(numTransforms);
         for (Transform t : originalTransforms) {
             Transform tClone = t.clone();
             transforms.add(tClone);
@@ -1025,7 +1025,7 @@ public class Pose implements JmeCloneable {
 
         if (bindTransforms != null) {
             originalTransforms = bindTransforms;
-            bindTransforms = new ArrayList<>(numTransforms);
+            this.bindTransforms = new ArrayList<>(numTransforms);
             for (Transform t : originalTransforms) {
                 Transform tClone = t.clone();
                 bindTransforms.add(tClone);

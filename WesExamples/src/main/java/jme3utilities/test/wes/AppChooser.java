@@ -252,7 +252,7 @@ final public class AppChooser extends AcorusDemo {
     private void addMenuOverlay() {
         float width = 40f; // in pixels
         int numLines = 25;
-        menuOverlay = new Overlay("menu", width, numLines);
+        this.menuOverlay = new Overlay("menu", width, numLines);
         menuOverlay.setLocationPolicy(LocationPolicy.CenterLeft);
 
         boolean success = stateManager.attach(menuOverlay);

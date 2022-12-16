@@ -58,9 +58,9 @@ public class BoneMapping implements Savable {
      * @param sourceBone the name of the bone in the source skeleton.
      */
     public BoneMapping(String targetBone, String sourceBone) {
-        targetName = targetBone;
-        sourceName = sourceBone;
-        twist = new Quaternion();
+        this.targetName = targetBone;
+        this.sourceName = sourceBone;
+        this.twist = new Quaternion();
     }
 
     /**
@@ -73,8 +73,8 @@ public class BoneMapping implements Savable {
      * @param twist the twist rotation to apply to the animation data
      */
     public BoneMapping(String targetBone, String sourceBone, Quaternion twist) {
-        targetName = targetBone;
-        sourceName = sourceBone;
+        this.targetName = targetBone;
+        this.sourceName = sourceBone;
         this.twist = twist;
     }
 
@@ -90,9 +90,9 @@ public class BoneMapping implements Savable {
      */
     public BoneMapping(String targetBone, String sourceBone, float twistAngle,
             Vector3f twistAxis) {
-        targetName = targetBone;
-        sourceName = sourceBone;
-        twist = new Quaternion().fromAngleAxis(twistAngle, twistAxis);
+        this.targetName = targetBone;
+        this.sourceName = sourceBone;
+        this.twist = new Quaternion().fromAngleAxis(twistAngle, twistAxis);
     }
     // *************************************************************************
     // new methods exposed
@@ -163,9 +163,9 @@ public class BoneMapping implements Savable {
     public void read(JmeImporter im) throws IOException {
         InputCapsule ic = im.getCapsule(this);
 
-        targetName = ic.readString("targetName", "");
-        sourceName = ic.readString("sourceName", "");
-        twist = (Quaternion) ic.readSavable("twist", null);
+        this.targetName = ic.readString("targetName", "");
+        this.sourceName = ic.readString("sourceName", "");
+        this.twist = (Quaternion) ic.readSavable("twist", null);
     }
 
     /**

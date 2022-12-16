@@ -287,7 +287,7 @@ public class SkeletonMapping implements Cloneable, Savable {
     @SuppressWarnings("unchecked")
     public void read(JmeImporter im) throws IOException {
         InputCapsule ic = im.getCapsule(this);
-        mappings = (Map<String, BoneMapping>) ic.readStringSavableMap(
+        this.mappings = (Map<String, BoneMapping>) ic.readStringSavableMap(
                 "mappings", new HashMap<String, BoneMapping>(50));
     }
 

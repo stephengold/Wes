@@ -279,7 +279,7 @@ public class TrimAnimation extends AcorusDemo {
      * Attach a Sinbad model to the root node.
      */
     private void addSinbad() {
-        sinbadModelRoot = (Node) assetManager.loadModel(
+        this.sinbadModelRoot = (Node) assetManager.loadModel(
                 "Models/Sinbad/Sinbad.mesh.xml");
         rootNode.attachChild(sinbadModelRoot);
 
@@ -293,7 +293,7 @@ public class TrimAnimation extends AcorusDemo {
          * Add a skeleton visualizer.
          */
         SkinningControl sc = sinbadModelRoot.getControl(SkinningControl.class);
-        sv = new SkeletonVisualizer(assetManager, sc);
+        this.sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);
         sv.setLineColor(ColorRGBA.Yellow);
     }

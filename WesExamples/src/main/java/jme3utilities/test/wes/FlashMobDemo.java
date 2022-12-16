@@ -375,7 +375,7 @@ public class FlashMobDemo extends AcorusDemo {
      * Attach a Jaime model (with visualizer) to the root node.
      */
     private void addJaime() {
-        jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
+        this.jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
         rootNode.attachChild(jaime);
 
         List<Spatial> list = MySpatial.listSpatials(jaime);
@@ -425,7 +425,8 @@ public class FlashMobDemo extends AcorusDemo {
      * Attach an MhGame model to the root node.
      */
     private void addMhGame() {
-        mhGame = (Node) assetManager.loadModel("Models/MhGame/MhGame.mesh.xml");
+        this.mhGame = (Node) assetManager
+                .loadModel("Models/MhGame/MhGame.mesh.xml");
         rootNode.attachChild(mhGame);
 
         List<Spatial> list = MySpatial.listSpatials(mhGame);
@@ -452,7 +453,7 @@ public class FlashMobDemo extends AcorusDemo {
      * Attach an Oto model to the root node.
      */
     private void addOto() {
-        oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
+        this.oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
         rootNode.attachChild(oto);
 
         List<Spatial> list = MySpatial.listSpatials(oto);
@@ -481,7 +482,7 @@ public class FlashMobDemo extends AcorusDemo {
     private void addPuppet() {
         Node loadedNode
                 = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
-        puppet = (Node) loadedNode.getChild(0);
+        this.puppet = (Node) loadedNode.getChild(0);
         rootNode.attachChild(puppet);
 
         List<Spatial> list = MySpatial.listSpatials(puppet);
@@ -523,10 +524,10 @@ public class FlashMobDemo extends AcorusDemo {
         cgModel.move(0f, 0f, 1f); // in front of the origin
 
         AnimComposer composer = cgModel.getControl(AnimComposer.class);
-        sinbadClip = composer.getAnimClip("Dance");
+        this.sinbadClip = composer.getAnimClip("Dance");
 
         SkinningControl sc = cgModel.getControl(SkinningControl.class);
-        sinbadArmature = sc.getArmature();
+        this.sinbadArmature = sc.getArmature();
         /*
          * Add composer to the master list.
          */
