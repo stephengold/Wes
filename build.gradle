@@ -8,11 +8,12 @@ subprojects {
     apply from: rootProject.file('common.gradle')
 }
 
-task run(dependsOn: ':WesExamples:AppChooser') {
+tasks.register('run') {
+    dependsOn ':WesExamples:AppChooser'
     description = 'Runs the examples.'
 }
 
-// publishing tasks
+// publishing tasks:
 
 tasks.register('install') {
     dependsOn ':WesLibrary:install'
