@@ -1,5 +1,11 @@
 # release log for the Wes library and related examples
 
+## Version 0.7.3+for36: released on TBD
+
++ Targeted JME version 3.6.0-beta3.
++ Based on v8.2.1+for36 of the Heart Library and v0.9.28+for36 of Acorus.
++ Upgraded to Gradle v8.0.1 .
+
 ## Version 0.7.2: released on 23 June 2022
 
 + Added the `AppChooser` application.
