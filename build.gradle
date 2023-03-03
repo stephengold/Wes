@@ -8,6 +8,10 @@ subprojects {
     apply from: rootProject.file('common.gradle')
 }
 
+tasks.register('checkstyle') {
+    dependsOn ':WesExamples:checkstyleMain', ':WesLibrary:checkstyleMain'
+}
+
 tasks.register('run') {
     dependsOn ':WesExamples:AppChooser'
     description = 'Runs the examples.'
