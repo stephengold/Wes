@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -146,7 +146,8 @@ public class Pose implements JmeCloneable {
                 transforms.add(transform);
 
                 Joint cloneJoint = clonedArmature.getJoint(jointIndex);
-                Transform bindTransform = cloneJoint.getLocalTransform();
+                Transform bindTransform
+                        = cloneJoint.getLocalTransform(); // alias
                 bindTransforms.add(bindTransform);
             }
         }
@@ -234,10 +235,10 @@ public class Pose implements JmeCloneable {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
 
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             Transform transform = bindTransforms.get(boneIndex);
             result.set(transform);
-        } else {
+        } else { // old animation system
             Bone bone = skeleton.getBone(boneIndex);
             MySkeleton.copyBindTransform(bone, result);
         }
@@ -266,9 +267,9 @@ public class Pose implements JmeCloneable {
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             userTransform(boneIndex, transform);
             if (!MyMath.isIdentity(transform)) {
-                Vector3f translation = transform.getTranslation();
-                Quaternion rotation = transform.getRotation();
-                Vector3f scale = transform.getScale();
+                Vector3f translation = transform.getTranslation(); // alias
+                Quaternion rotation = transform.getRotation(); // alias
+                Vector3f scale = transform.getScale(); // alias
                 BoneTrack track = MyAnimation
                         .newBoneTrack(boneIndex, translation, rotation, scale);
                 result.addTrack(track);
@@ -337,9 +338,9 @@ public class Pose implements JmeCloneable {
     public int findBone(String boneName) {
         int result;
 
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             result = armature.getJointIndex(boneName);
-        } else {
+        } else { // old animation system
             result = skeleton.getBoneIndex(boneName);
         }
         return result;
@@ -351,9 +352,9 @@ public class Pose implements JmeCloneable {
      * @return the pre-existing instance, or null
      */
     public Object findSkeleton() {
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             return armature;
-        } else {
+        } else { // old animation system
             return skeleton;
         }
     }
@@ -371,17 +372,17 @@ public class Pose implements JmeCloneable {
 
         // Start with the local bind rotation.
         Quaternion bindRotation;
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             Transform bindTransform = bindTransforms.get(boneIndex);
-            bindRotation = bindTransform.getRotation();
-        } else {
+            bindRotation = bindTransform.getRotation(); // alias
+        } else { // old animation system
             Bone bone = skeleton.getBone(boneIndex);
             bindRotation = bone.getBindRotation(); // alias
         }
 
         // Apply its user/animation rotation.
         Transform userTransform = transforms.get(boneIndex);
-        Quaternion userRotation = userTransform.getRotation();
+        Quaternion userRotation = userTransform.getRotation(); // alias
         Quaternion result = bindRotation.mult(userRotation, storeResult);
 
         return result;
@@ -443,12 +444,12 @@ public class Pose implements JmeCloneable {
 
         boolean isRoot;
         int parentIndex;
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             Joint joint = armature.getJoint(boneIndex);
             Joint parentJoint = joint.getParent();
             isRoot = (parentJoint == null);
             parentIndex = armature.getJointIndex(parentJoint);
-        } else {
+        } else { // old animation system
             Bone bone = skeleton.getBone(boneIndex);
             Bone parentBone = bone.getParent();
             isRoot = (parentBone == null);
@@ -512,9 +513,9 @@ public class Pose implements JmeCloneable {
              * Apply the parent's model transform in a very peculiar way
              * to obtain the bone's model transform.
              */
-            Vector3f mTranslation = result.getTranslation();
-            Quaternion mRotation = result.getRotation();
-            Vector3f mScale = result.getScale();
+            Vector3f mTranslation = result.getTranslation(); // alias
+            Quaternion mRotation = result.getRotation(); // alias
+            Vector3f mScale = result.getScale(); // alias
             parent.getRotation().mult(local.getRotation(), mRotation);
             parent.getScale().mult(local.getScale(), mScale);
             parent.getRotation().mult(local.getTranslation(), mTranslation);
@@ -557,7 +558,7 @@ public class Pose implements JmeCloneable {
         int boneCount = transforms.size();
         int[] result = new int[boneCount];
 
-        if (armature != null) {
+        if (armature != null) { // new animation system
             List<Joint> list = MySkeleton.preOrderJoints(armature);
             assert list.size() == boneCount : boneCount;
             for (int index = 0; index < boneCount; ++index) {
@@ -565,7 +566,7 @@ public class Pose implements JmeCloneable {
                 result[index] = joint.getId();
             }
 
-        } else if (skeleton != null) {
+        } else if (skeleton != null) { // old animation system
             List<Bone> list = MySkeleton.preOrderBones(skeleton);
             assert list.size() == boneCount : boneCount;
             for (int index = 0; index < boneCount; ++index) {
@@ -586,7 +587,7 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
 
         Transform transform = transforms.get(boneIndex);
-        Quaternion rotation = transform.getRotation();
+        Quaternion rotation = transform.getRotation(); // alias
         rotation.loadIdentity();
     }
 
@@ -599,7 +600,7 @@ public class Pose implements JmeCloneable {
         Validate.nonNegative(boneIndex, "bone index");
 
         Transform transform = transforms.get(boneIndex);
-        Vector3f scale = transform.getScale();
+        Vector3f scale = transform.getScale(); // alias
         scale.set(1f, 1f, 1f);
     }
 
@@ -623,21 +624,21 @@ public class Pose implements JmeCloneable {
      */
     public int[] rootBoneIndices() {
         int numRootBones = 0;
-        if (armature != null) {
+        if (armature != null) { // new animation system
             numRootBones = MySkeleton.countRootJoints(armature);
-        } else if (skeleton != null) {
+        } else if (skeleton != null) { // old animation system
             numRootBones = MySkeleton.countRootBones(skeleton);
         }
         int[] result = new int[numRootBones];
 
-        if (armature != null) {
+        if (armature != null) { // new animation system
             Joint[] roots = armature.getRoots();
             for (int rootIndex = 0; rootIndex < numRootBones; ++rootIndex) {
                 Joint root = roots[rootIndex];
                 result[rootIndex] = root.getId();
             }
 
-        } else if (skeleton != null) {
+        } else if (skeleton != null) { // old animation system
             Bone[] roots = skeleton.getRoots();
             for (int rootIndex = 0; rootIndex < numRootBones; ++rootIndex) {
                 Bone root = roots[rootIndex];
@@ -763,13 +764,13 @@ public class Pose implements JmeCloneable {
         Validate.nonNull(sourcePose, "source pose");
         Validate.nonNull(map, "map");
 
-        if (skeleton == null) {
+        if (skeleton == null) { // new animation system
             Joint[] rootJoints = armature.getRoots();
             for (Joint rootJoint : rootJoints) {
                 retargetJoints(rootJoint, sourcePose, map);
             }
 
-        } else {
+        } else { // old animation system
             Bone[] rootBones = skeleton.getRoots();
             for (Bone rootBone : rootBones) {
                 retargetBones(rootBone, sourcePose, map);
@@ -814,9 +815,9 @@ public class Pose implements JmeCloneable {
         Vector3f skScale = new Vector3f();
         Transform msTransform = new Transform();
 
-        Vector3f msTranslation = msTransform.getTranslation();
-        Quaternion msRotation = msTransform.getRotation();
-        Vector3f msScale = msTransform.getScale();
+        Vector3f msTranslation = msTransform.getTranslation(); // alias
+        Quaternion msRotation = msTransform.getRotation(); // alias
+        Vector3f msScale = msTransform.getScale(); // alias
 
         for (int boneIndex = 0; boneIndex < numBones; ++boneIndex) {
             modelTransform(boneIndex, msTransform);
@@ -832,13 +833,13 @@ public class Pose implements JmeCloneable {
              *
              * TODO handle MatrixJointModelTransform differently?
              */
-            if (skeleton == null) {
+            if (skeleton == null) { // new animation system
                 msTransform.toTransformMatrix(matrix4f);
                 Joint joint = armature.getJoint(boneIndex);
                 Matrix4f mbi = joint.getInverseModelBindMatrix();
                 matrix4f.mult(mbi, matrix4f);
 
-            } else {
+            } else { // old animation system
                 Bone bone = skeleton.getBone(boneIndex);
                 Vector3f mbiTranslation = bone.getModelBindInversePosition();
                 Quaternion mbiRotation = bone.getModelBindInverseRotation();
@@ -880,7 +881,7 @@ public class Pose implements JmeCloneable {
         result.set(localTransform);
         Transform bind = bindTransform(boneIndex, null); // TODO garbage
         result.getTranslation().subtractLocal(bind.getTranslation());
-        Quaternion userRotation = result.getRotation();
+        Quaternion userRotation = result.getRotation(); // alias
         bind.getRotation().inverseLocal().mult(userRotation, userRotation);
         result.getScale().divideLocal(bind.getScale());
 
