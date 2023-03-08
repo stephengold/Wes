@@ -249,13 +249,14 @@ public class TweenTransforms implements Cloneable {
                     = transform(oldTrack, time, duration, null, null);
 
             if (newTranslations != null) {
-                newTranslations[frameIndex] = transform.getTranslation();
+                newTranslations[frameIndex]
+                        = transform.getTranslation(); // alias
             }
             if (newRotations != null) {
-                newRotations[frameIndex] = transform.getRotation();
+                newRotations[frameIndex] = transform.getRotation(); // alias
             }
             if (newScales != null) {
-                newScales[frameIndex] = transform.getScale();
+                newScales[frameIndex] = transform.getScale(); // alias
             }
         }
 
