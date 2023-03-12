@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -119,8 +119,8 @@ public enum TweenRotations {
                         lerp(time, times, samples, result);
                     }
                 } else {
-                    loopLerp(time, lastIndex, times, cycleTime, samples,
-                            result);
+                    loopLerp(
+                            time, lastIndex, times, cycleTime, samples, result);
                 }
                 break;
 
@@ -133,8 +133,8 @@ public enum TweenRotations {
                         spline(time, times, samples, result);
                     }
                 } else {
-                    loopSpline(time, lastIndex, times, cycleTime, samples,
-                            result);
+                    loopSpline(
+                            time, lastIndex, times, cycleTime, samples, result);
                 }
                 break;
 
@@ -298,9 +298,9 @@ public enum TweenRotations {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    public static Quaternion loopSpline(float time, int lastIndex,
-            float[] times, float cycleTime, Quaternion[] samples,
-            Quaternion storeResult) {
+    public static Quaternion loopSpline(
+            float time, int lastIndex, float[] times, float cycleTime,
+            Quaternion[] samples, Quaternion storeResult) {
         Validate.inRange(time, "time", 0f, cycleTime);
         Validate.positive(lastIndex, "last index");
         Validate.nonNull(times, "times");
@@ -586,9 +586,9 @@ public enum TweenRotations {
      * norm=1)
      * @param q3 function value following q2 (not null, unaffected, norm=1)
      */
-    private static void precomputeFlipSpline(RotationCurve curve, int index1,
-            float inter12, Quaternion q0, Quaternion q1, Quaternion q2,
-            Quaternion q3) {
+    private static void precomputeFlipSpline(
+            RotationCurve curve, int index1, float inter12,
+            Quaternion q0, Quaternion q1, Quaternion q2, Quaternion q3) {
         /*
          * Flip signs as necessary to make dot products of successive
          * sampled values non-negative.

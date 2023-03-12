@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -183,9 +183,9 @@ public enum SmoothRotations {
      * @return array of smoothed quaternions (either storeResult or a new
      * instance)
      */
-    public static Quaternion[] loopLerp(int last, float[] times,
-            float cycleTime, Quaternion[] samples, float width,
-            Quaternion[] storeResult) {
+    public static Quaternion[] loopLerp(
+            int last, float[] times, float cycleTime, Quaternion[] samples,
+            float width, Quaternion[] storeResult) {
         Validate.positive(last, "last");
         Validate.nonNull(samples, "samples");
         assert times.length > last : times.length;

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -155,9 +155,9 @@ final public class AnimationEdit {
      * @param newAnimationName a name for the resulting Animation (not null)
      * @return a new Animation
      */
-    public static Animation extractAnimation(Animation sourceAnimation,
-            float startTime, float endTime, TweenTransforms techniques,
-            String newAnimationName) {
+    public static Animation extractAnimation(
+            Animation sourceAnimation, float startTime, float endTime,
+            TweenTransforms techniques, String newAnimationName) {
         Validate.nonNull(sourceAnimation, "source animation");
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
@@ -199,9 +199,9 @@ final public class AnimationEdit {
      * @param newClipName a name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
-    public static AnimClip extractAnimation(AnimClip sourceClip,
-            float startTime, float endTime, TweenTransforms techniques,
-            String newClipName) {
+    public static AnimClip extractAnimation(
+            AnimClip sourceClip, float startTime, float endTime,
+            TweenTransforms techniques, String newClipName) {
         Validate.nonNull(sourceClip, "source clip");
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
@@ -350,10 +350,10 @@ final public class AnimationEdit {
      * @param animationName name for the resulting Animation (not null)
      * @return a new Animation
      */
-    public static Animation retargetAnimation(Animation sourceAnimation,
-            Skeleton sourceSkeleton, Skeleton targetSkeleton,
-            SkeletonMapping map, TweenTransforms techniques,
-            String animationName) {
+    public static Animation retargetAnimation(
+            Animation sourceAnimation, Skeleton sourceSkeleton,
+            Skeleton targetSkeleton, SkeletonMapping map,
+            TweenTransforms techniques, String animationName) {
         Validate.nonNull(sourceSkeleton, "source skeleton");
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
@@ -459,9 +459,9 @@ final public class AnimationEdit {
      * @param clipName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
-    public static AnimClip retargetAnimation(AnimClip sourceClip,
-            Armature sourceArmature, Armature targetArmature,
-            SkeletonMapping map, String clipName) {
+    public static AnimClip retargetAnimation(
+            AnimClip sourceClip, Armature sourceArmature,
+            Armature targetArmature, SkeletonMapping map, String clipName) {
         Validate.nonNull(sourceArmature, "source armature");
         Validate.nonNull(targetArmature, "target armature");
         Validate.nonNull(map, "map");

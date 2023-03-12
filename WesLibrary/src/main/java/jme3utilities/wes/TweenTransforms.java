@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -199,12 +199,12 @@ public class TweenTransforms implements Cloneable {
                     result.getTranslation());
         }
         if (rotations != null) {
-            tweenRotations.interpolate(time, times, duration, rotations,
-                    result.getRotation());
+            tweenRotations.interpolate(
+                    time, times, duration, rotations, result.getRotation());
         }
         if (scales != null) {
-            tweenScales.interpolate(time, times, duration, scales,
-                    result.getScale());
+            tweenScales.interpolate(
+                    time, times, duration, scales, result.getScale());
         }
 
         return result;

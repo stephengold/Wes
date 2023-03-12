@@ -877,8 +877,8 @@ public class Pose implements JmeCloneable {
             int boneIndex, Transform localTransform, Transform storeResult) {
         Validate.nonNegative(boneIndex, "bone index");
         Validate.nonNull(localTransform, "local transform");
-        Transform result = (storeResult == null) ? new Transform()
-                : storeResult;
+        Transform result
+                = (storeResult == null) ? new Transform() : storeResult;
 
         result.set(localTransform);
         Transform bind = bindTransform(boneIndex, null); // TODO garbage

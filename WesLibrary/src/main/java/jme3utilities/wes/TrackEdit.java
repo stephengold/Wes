@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -394,8 +394,8 @@ final public class TrackEdit {
             }
         }
 
-        Track result = newTrack(track1, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                track1, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
@@ -884,9 +884,9 @@ final public class TrackEdit {
      * @param scales (either null or same length as times)
      * @return a new track of the same type as oldTrack
      */
-    public static Track newTrack(Track oldTrack, float[] times,
-            Vector3f[] translations, Quaternion[] rotations,
-            Vector3f[] scales) {
+    public static Track newTrack(
+            Track oldTrack, float[] times, Vector3f[] translations,
+            Quaternion[] rotations, Vector3f[] scales) {
         Validate.nonNull(times, "times");
         int numKeyframes = times.length;
         assert numKeyframes > 0 : numKeyframes;
@@ -1626,10 +1626,10 @@ final public class TrackEdit {
      * @param cache previously calculated poses (not null, added to)
      * @return a new BoneTrack
      */
-    public static BoneTrack retargetTrack(AnimClip sourceClip,
-            TransformTrack sourceTrack, Armature sourceArmature,
-            Skeleton targetSkeleton, int targetBoneIndex,
-            SkeletonMapping map, Map<Float, Pose> cache) {
+    public static BoneTrack retargetTrack(
+            AnimClip sourceClip, TransformTrack sourceTrack,
+            Armature sourceArmature, Skeleton targetSkeleton,
+            int targetBoneIndex, SkeletonMapping map, Map<Float, Pose> cache) {
         Validate.nonNull(sourceArmature, "source armature");
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
@@ -2394,8 +2394,8 @@ final public class TrackEdit {
                     oldTimes, duration, oldScales, width, null);
         }
 
-        Track result = newTrack(oldTrack, newTimes, newTranslations,
-                newRotations, newScales);
+        Track result = newTrack(
+                oldTrack, newTimes, newTranslations, newRotations, newScales);
 
         return result;
     }
