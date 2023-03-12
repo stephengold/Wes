@@ -1,9 +1,9 @@
 # release log for the Wes library and related examples
 
-## Version 0.7.4+for36: released on TBD
+## Version 0.7.4+for36: released on 12 March 2023
 
 + Bugfix:  `Pose.setToClip()` yields incorrect poses for certain tracks
-+ Upgraded to Gradle v8.0.1 .
++ Upgraded to Gradle v8.0.2 .
 
 ## Version 0.7.3+for36: released on 3 March 2023
 
