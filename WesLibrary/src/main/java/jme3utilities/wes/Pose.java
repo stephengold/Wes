@@ -748,6 +748,8 @@ public class Pose implements JmeCloneable {
             if (track == null) {
                 transform.loadIdentity();
             } else {
+                Transform bt = bindTransforms.get(jointIndex); // alias
+                transform.set(bt);
                 track.getDataAtTime(time, transform);
                 userForLocal(jointIndex, transform, transform);
             }
