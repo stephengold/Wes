@@ -11,7 +11,7 @@ ext {
 
     // current versions of libraries:
     jme3Version = '3.6.0-beta3'
-    wesVersion = '0.7.4' + jmeTarget + '-SNAPSHOT'
+    wesVersion = '0.7.4' + jmeTarget
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_7
