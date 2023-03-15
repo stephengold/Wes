@@ -82,6 +82,9 @@ final public class TrackEdit {
     }
     // *************************************************************************
     // new methods exposed
+    // TODO deleteRange(MorphTrack), reduce(MorphTrack)
+    // TODO resampleAtRate(MorphTrack), resampleToNumber(MorphTrack)
+    // TODO wrap(MorphTrack)
 
     /**
      * Copy a MorphTrack, deleting everything before the specified time and
