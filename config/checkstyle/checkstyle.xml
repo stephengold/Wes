@@ -8,13 +8,13 @@
     <property name="severity" value="error"/>
     <property name="fileExtensions" value="java, properties, xml"/>
 
-    <!-- Checks for whitespace                            -->
-    <!-- See http://checkstyle.org/config_whitespace.html -->
+    <!-- Checks for whitespace                             -->
+    <!-- See https://checkstyle.org/config_whitespace.html -->
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
     </module>
 
-    <!-- Checks that a package-info.java file exists for each package. -->
+    <!-- Checks that a package-info.java file exists for each package  -->
     <!-- See https://checkstyle.org/config_javadoc.html#JavadocPackage -->
     <module name="JavadocPackage"/>
 
@@ -25,7 +25,7 @@
         <property name="message" value="Line has trailing whitespace."/>
     </module>
 
-    <!-- Checks for size violations.                  -->
+    <!-- Checks for size violations                   -->
     <!-- See https://checkstyle.org/config_sizes.html -->
     <module name="FileLength">
         <property name="max" value="3000"/>
@@ -53,6 +53,9 @@
             <property name="allowByTailComment" value="true"/>
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
+
+        <!-- Checks for imports                             -->
+        <!-- See https://checkstyle.org/config_imports.html -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
@@ -64,6 +67,9 @@
         <module name="NoLineWrap">
             <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
         </module>
+
+        <!-- Checks for blocks. You know, those {}'s       -->
+        <!-- See https://checkstyle.org/config_blocks.html -->
         <module name="EmptyBlock">
             <property name="option" value="TEXT"/>
             <property name="tokens"
@@ -170,6 +176,9 @@
             <property name="tokens" value="METHOD_REF"/>
             <property name="option" value="nl"/>
         </module>
+
+        <!-- Checks for naming conventions                 -->
+        <!-- See https://checkstyle.org/config_naming.html -->
         <module name="PackageName">
             <property name="format" value="^[a-z][a-z3.]*[a-z]$"/>
             <message key="name.invalidPattern"
@@ -310,6 +319,9 @@
             <property name="allowSamelineMultipleAnnotations" value="true"/>
         </module>
         <module name="NonEmptyAtclauseDescription"/>
+
+        <!-- Checks for Javadoc comments                    -->
+        <!-- See https://checkstyle.org/config_javadoc.html -->
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocTagContinuationIndentation">
             <property name="offset" value="0"/>
@@ -364,7 +376,7 @@
             <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
         </module>
 
-        <!-- Checks for size violations.                  -->
+        <!-- Checks for size violations                   -->
         <!-- See https://checkstyle.org/config_sizes.html -->
         <module name="MethodLength"/>
         <module name="ParameterNumber">
