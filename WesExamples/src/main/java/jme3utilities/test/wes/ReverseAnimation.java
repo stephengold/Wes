@@ -91,11 +91,11 @@ class ReverseAnimation extends AcorusDemo {
     /**
      * root node of the loaded Sinbad model
      */
-    private Node sinbadModelRoot;
+    private static Node sinbadModelRoot;
     /**
      * debug visualizer for Sinbad's skeleton
      */
-    private SkeletonVisualizer sv;
+    private static SkeletonVisualizer sv;
     // *************************************************************************
     // new methods exposed
 
@@ -263,7 +263,7 @@ class ReverseAnimation extends AcorusDemo {
      * Attach a Sinbad model to the root node.
      */
     private void addSinbad() {
-        this.sinbadModelRoot = (Node) assetManager.loadModel(
+        sinbadModelRoot = (Node) assetManager.loadModel(
                 "Models/Sinbad/Sinbad.mesh.xml");
         rootNode.attachChild(sinbadModelRoot);
 
@@ -276,7 +276,7 @@ class ReverseAnimation extends AcorusDemo {
 
         // Add a skeleton visualizer.
         SkinningControl sc = sinbadModelRoot.getControl(SkinningControl.class);
-        this.sv = new SkeletonVisualizer(assetManager, sc);
+        sv = new SkeletonVisualizer(assetManager, sc);
         rootNode.addControl(sv);
         sv.setLineColor(ColorRGBA.Yellow);
     }

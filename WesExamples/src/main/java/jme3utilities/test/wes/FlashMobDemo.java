@@ -101,43 +101,44 @@ class FlashMobDemo extends AcorusDemo {
     /**
      * Sinbad's "Dance" animation
      */
-    private AnimClip sinbadClip;
+    private static AnimClip sinbadClip;
     /**
      * Sinbad's Armature
      */
-    private Armature sinbadArmature;
+    private static Armature sinbadArmature;
     /**
      * number of frames before invoking {@link #startup2()}, or -1 if done
      */
-    private int untilStartup2 = 2;
+    private static int untilStartup2 = 2;
     /**
      * list of animation channels
      */
-    final private List<AnimChannel> allChannels = new ArrayList<>(2);
+    final private static List<AnimChannel> allChannels = new ArrayList<>(2);
     /**
      * list of composers
      */
-    final private List<AnimComposer> composers = new ArrayList<>(3);
+    final private static List<AnimComposer> composers = new ArrayList<>(3);
     /**
      * list of skeleton visualizers
      */
-    final private List<SkeletonVisualizer> visualizers = new ArrayList<>(5);
+    final private static List<SkeletonVisualizer> visualizers
+            = new ArrayList<>(5);
     /**
      * root node of the loaded Jaime model
      */
-    private Node jaime;
+    private static Node jaime;
     /**
      * root node of the loaded MhGame model
      */
-    private Node mhGame;
+    private static Node mhGame;
     /**
      * root node of the loaded Oto model
      */
-    private Node oto;
+    private static Node oto;
     /**
      * root node of the loaded Puppet model
      */
-    private Node puppet;
+    private static Node puppet;
     // *************************************************************************
     // new methods exposed
 
@@ -371,7 +372,7 @@ class FlashMobDemo extends AcorusDemo {
      * Attach a Jaime model (with visualizer) to the root node.
      */
     private void addJaime() {
-        this.jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
+        jaime = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
         rootNode.attachChild(jaime);
 
         List<Spatial> list = MySpatial.listSpatials(jaime);
@@ -420,8 +421,7 @@ class FlashMobDemo extends AcorusDemo {
      * Attach an MhGame model to the root node.
      */
     private void addMhGame() {
-        this.mhGame = (Node) assetManager
-                .loadModel("Models/MhGame/MhGame.mesh.xml");
+        mhGame = (Node) assetManager.loadModel("Models/MhGame/MhGame.mesh.xml");
         rootNode.attachChild(mhGame);
 
         List<Spatial> list = MySpatial.listSpatials(mhGame);
@@ -446,7 +446,7 @@ class FlashMobDemo extends AcorusDemo {
      * Attach an Oto model to the root node.
      */
     private void addOto() {
-        this.oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
+        oto = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
         rootNode.attachChild(oto);
 
         List<Spatial> list = MySpatial.listSpatials(oto);
@@ -473,7 +473,7 @@ class FlashMobDemo extends AcorusDemo {
     private void addPuppet() {
         Node loadedNode
                 = (Node) assetManager.loadModel("Models/Puppet/Puppet.j3o");
-        this.puppet = (Node) loadedNode.getChild(0);
+        puppet = (Node) loadedNode.getChild(0);
         rootNode.attachChild(puppet);
 
         List<Spatial> list = MySpatial.listSpatials(puppet);
@@ -513,10 +513,10 @@ class FlashMobDemo extends AcorusDemo {
         cgModel.move(0f, 0f, 1f); // in front of the origin
 
         AnimComposer composer = cgModel.getControl(AnimComposer.class);
-        this.sinbadClip = composer.getAnimClip("Dance");
+        sinbadClip = composer.getAnimClip("Dance");
 
         SkinningControl sc = cgModel.getControl(SkinningControl.class);
-        this.sinbadArmature = sc.getArmature();
+        sinbadArmature = sc.getArmature();
 
         // Add composer to the master list.
         composers.add(composer);

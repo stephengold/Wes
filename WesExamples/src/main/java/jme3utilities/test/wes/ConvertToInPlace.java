@@ -154,11 +154,11 @@ class ConvertToInPlace extends AcorusDemo {
         attachWorldAxes(1f);
 
         // the unmodified animation in white, the modified one in yellow
-        this.composer = addFighter(0.7f, -0.7f, ColorRGBA.Yellow);
+        composer = addFighter(0.7f, -0.7f, ColorRGBA.Yellow);
         AnimComposer control = addFighter(-0.7f, 0.7f, ColorRGBA.White);
 
         // Attach status text to the GUI.
-        this.statusText = new BitmapText(guiFont);
+        statusText = new BitmapText(guiFont);
         guiNode.attachChild(statusText);
 
         super.acorusInit();
