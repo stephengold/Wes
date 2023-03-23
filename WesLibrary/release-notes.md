@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.7.5:  released on TBD
+## Version 0.7.5: released on 22 March 2023
 
 + Targeted JME version 3.6.0-stable.
 + Based on v8.3.2 of the Heart Library and v1.0.0 of Acorus.

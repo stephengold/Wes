@@ -67,7 +67,7 @@ Add to the project’s "build.gradle" file:
         mavenCentral()
     }
     dependencies {
-        implementation 'com.github.stephengold:Wes:0.7.2'
+        implementation 'com.github.stephengold:Wes:0.7.5'
     }
 
 For some older versions of Gradle,
@@ -87,7 +87,7 @@ Add to the project’s "pom.xml" file:
     <dependency>
       <groupId>com.github.stephengold</groupId>
       <artifactId>Wes</artifactId>
-      <version>0.7.2</version>
+      <version>0.7.5</version>
     </dependency>
 
 ### Ant-built projects
@@ -96,12 +96,12 @@ For projects built using [Ant], download the Wes and [Heart]
 libraries from GitHub:
 
 + https://github.com/stephengold/Wes/releases/tag/latest
-+ https://github.com/stephengold/Heart/releases/tag/8.0.0
++ https://github.com/stephengold/Heart/releases/tag/8.3.2
 
-You'll want both class jars
-and probably the `-sources` and `-javadoc` jars as well.
+You'll definitely want both class jars
+and probably the "-sources" and "-javadoc" jars as well.
 
-Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
+Open the project's properties in the IDE (JME SDK or NetBeans):
 
 1. Right-click on the project (not its assets) in the "Projects" window.
 2. Select "Properties" to open the "Project Properties" dialog.
@@ -110,15 +110,15 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
 5. Add the [Heart] class jar:
   + Click on the "Add JAR/Folder" button.
   + Navigate to the download folder.
-  + Select the "Heart-8.0.0.jar" file.
+  + Select the "Heart-8.3.2.jar" file.
   + Click on the "Open" button.
 6. (optional) Add jars for javadoc and sources:
   + Click on the "Edit" button.
   + Click on the "Browse..." button to the right of "Javadoc:"
-  + Select the "Heart-8.0.0-javadoc.jar" file.
+  + Select the "Heart-8.3.2-javadoc.jar" file.
   + Click on the "Open" button.
   + Click on the "Browse..." button to the right of "Sources:"
-  + Select the "Heart-8.0.0-sources.jar" file.
+  + Select the "Heart-8.3.2-sources.jar" file.
   + Click on the "Open" button again.
   + Click on the "OK" button to close the "Edit Jar Reference" dialog.
 7. Similarly, add the Wes jar(s).
@@ -144,7 +144,7 @@ Open the project's properties in the IDE (JME 3.2 SDK or NetBeans 8.2):
   + using Git:
     + `git clone https://github.com/stephengold/Wes.git`
     + `cd Wes`
-    + `git checkout -b latest 0.7.2`
+    + `git checkout -b latest 0.7.5`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link
