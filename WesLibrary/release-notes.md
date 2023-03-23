@@ -31,8 +31,8 @@
 
  + Made `TrackEdit.cloneTrack()` into a generic method. (API change)
  + Finalized the `AnimationEdit` and `TrackEdit` classes. (API change)
- + Bugfix:  `TrackEdit.reverse()` assumes a `MorphTrack`.
-   has a exactly one target
+ + Bugfix:  `TrackEdit.reverse()` assumes a `MorphTrack`
+   has exactly one target
  + Added 7 public methods:
    + `AnimationEdit.convertToInPlace()`
    + `Pose.findSkeleton()`

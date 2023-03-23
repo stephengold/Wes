@@ -282,7 +282,7 @@ artists and software developers:
 + Zi Ye, for creating the Sinbad model
 + [Nathan Vegdahl][vegdahl], for creating the Puppet model
 + Paul Speed, for helpful insights
-+ Ali (aka "Ali_RS) for sharing a code snippet that inspired
++ Ali (aka "Ali_RS") for sharing a code snippet that inspired
   the `convertToInPlace()` methods
 + plus the creators of (and contributors to) the following software:
     + the [Checkstyle] tool
