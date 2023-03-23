@@ -1,5 +1,10 @@
 # release log for the Wes library and related examples
 
+## Version 0.7.5:  released on TBD
+
++ Targeted JME version 3.6.0-stable.
++ Based on v8.3.2 of the Heart Library and v1.0.0 of Acorus.
+
 ## Version 0.7.4+for36: released on 12 March 2023
 
 + Bugfix:  `Pose.setToClip()` yields incorrect poses for certain tracks
@@ -8,7 +13,7 @@
 ## Version 0.7.3+for36: released on 3 March 2023
 
 + Targeted JME version 3.6.0-beta3.
-+ Based on v8.2.1+for36 of the Heart Library and v0.9.28+for36 of Acorus.
++ Based on v8.3.1+for36 of the Heart Library and v0.9.18+for36 of Acorus.
 + Upgraded to Gradle v8.0.1 .
 
 ## Version 0.7.2: released on 23 June 2022
