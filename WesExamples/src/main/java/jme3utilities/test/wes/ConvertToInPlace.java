@@ -80,7 +80,7 @@ class ConvertToInPlace extends AcorusDemo {
     /**
      * message logger for this class
      */
-    final public static Logger logger
+    final static Logger logger
             = Logger.getLogger(ConvertToInPlace.class.getName());
     /**
      * application name (for the title bar of the app's window)
