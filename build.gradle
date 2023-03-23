@@ -10,6 +10,7 @@ subprojects {
 
 tasks.register('checkstyle') {
     dependsOn ':WesExamples:checkstyleMain', ':WesLibrary:checkstyleMain'
+    description 'Checks the style of all Java sourcecode.'
 }
 
 tasks.register('run') {
