@@ -2,10 +2,54 @@
 
 plugins {
     id 'base' // to add a "clean" task to the root project
+    id 'checkstyle'
 }
 
 subprojects {
     apply from: rootProject.file('common.gradle')
+}
+
+ext {
+    jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
+
+    // module coordinates of external dependencies:
+    heartCoordinates = 'com.github.stephengold:Heart:8.3.2' + jmeTarget
+
+    // current versions of libraries:
+    jme3Version = '3.6.0-stable'
+    wesVersion = '0.7.6' + jmeTarget + '-SNAPSHOT'
+}
+
+checkstyle {
+    toolVersion '9.3'
+}
+
+tasks.withType(JavaCompile) { // Java compile-time options:
+    options.compilerArgs << '-Xdiags:verbose'
+    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
+        // Suppress warnings that source value 7 is obsolete.
+        options.compilerArgs << '-Xlint:-options'
+    }
+    options.compilerArgs << '-Xlint:unchecked'
+    //options.deprecation = true // to provide detailed deprecation warnings
+    options.encoding = 'UTF-8'
+    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_10)) {
+        options.release = 8
+    }
+}
+
+tasks.withType(JavaExec) { // Java runtime options:
+    //args '--verbose' // to enable additional log output
+    classpath sourceSets.main.runtimeClasspath
+    dependsOn 'installDist'
+    enableAssertions true
+    //jvmArgs '-verbose:gc'
+    //jvmArgs '-Xms512m', '-Xmx512m' // to enlarge the Java heap
+    //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // to disable caching of SNAPSHOTs
 }
 
 tasks.register('checkstyle') {
