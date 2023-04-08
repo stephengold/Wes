@@ -59,7 +59,7 @@ tasks.register('checkstyle') {
 
 tasks.register('run') {
     dependsOn ':WesExamples:AppChooser'
-    description = 'Runs the examples.'
+    description 'Runs the examples.'
 }
 
 // publishing tasks:
