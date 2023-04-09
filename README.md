@@ -180,7 +180,7 @@ Old releases (v0.2.1 through v0.3.8) can be downloaded from
 [the Jme3-utilities Project](https://github.com/stephengold/jme3-utilities/releases).
 
 Newer Maven artifacts (since v0.6.2) are available from
-[MavenCentral](https://search.maven.org/artifact/com.github.stephengold/Wes).
+[MavenCentral](https://central.sonatype.com/artifact/com.github.stephengold/Wes/0.7.5/versions).
 
 Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
 
