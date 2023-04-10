@@ -1,6 +1,22 @@
 // Gradle settings and tasks common to all Wes subprojects
 
+apply plugin: 'checkstyle'
 apply plugin: 'java'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_8
+
+checkstyle {
+    toolVersion '9.3'
+}
+
+tasks.withType(JavaExec) { // Java runtime options:
+    //args '--verbose' // to enable additional log output
+    classpath sourceSets.main.runtimeClasspath
+    dependsOn 'installDist'
+    enableAssertions true
+    //jvmArgs '-verbose:gc'
+    //jvmArgs '-Xms512m', '-Xmx512m' // to enlarge the Java heap
+    //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
+}
+
