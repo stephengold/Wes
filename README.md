@@ -240,8 +240,6 @@ the Sinbad model to generate a "warn" clip.
 
 + [the Wes Animation Toolkit page](https://library.jmonkeyengine.org/#!entry=11511%2F15054f52-c439-4bfb-9a73-80260b486333)
   in [the JmonkeyEngine Library][library]
-+ [the Wes Animation Toolkit page](https://store.jmonkeyengine.org/15054f52-c439-4bfb-9a73-80260b486333)
-  at [the JmonkeyStore][store]
 
 [Jump to table of contents](#toc)
 
