@@ -346,7 +346,6 @@ correct the situation: sgold@sonic.net
 [netbeans]: https://netbeans.org "NetBeans Project"
 [ogre]: http://www.ogre3d.org "Ogre Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
-[store]: https://store.jmonkeyengine.org "JmonkeyStore"
 [utilities]: https://github.com/stephengold/jme3-utilities "Jme3-utilities Project"
 [vegdahl]: https://www.cessen.com "Nathan Vegdahl"
 [wes]: https://github.com/stephengold/Wes "Wes Project"
