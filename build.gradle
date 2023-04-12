@@ -19,20 +19,6 @@ ext {
     wesVersion = '0.7.6' + jmeTarget + '-SNAPSHOT'
 }
 
-tasks.withType(JavaCompile) { // Java compile-time options:
-    options.compilerArgs << '-Xdiags:verbose'
-    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
-        // Suppress warnings that source value 7 is obsolete.
-        options.compilerArgs << '-Xlint:-options'
-    }
-    options.compilerArgs << '-Xlint:unchecked'
-    //options.deprecation = true // to provide detailed deprecation warnings
-    options.encoding = 'UTF-8'
-    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_1_10)) {
-        options.release = 8
-    }
-}
-
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // to disable caching of SNAPSHOTs
 }
