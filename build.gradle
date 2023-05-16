@@ -4,10 +4,6 @@ plugins {
     id 'base' // to add a "clean" task to the root project
 }
 
-subprojects {
-    apply from: rootProject.file('common.gradle')
-}
-
 ext {
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
 
@@ -17,6 +13,10 @@ ext {
     // current versions of libraries:
     jme3Version = '3.6.0-stable'
     wesVersion = '0.7.6' + jmeTarget + '-SNAPSHOT'
+}
+
+subprojects {
+    apply from: rootProject.file('common.gradle')
 }
 
 configurations.all {
