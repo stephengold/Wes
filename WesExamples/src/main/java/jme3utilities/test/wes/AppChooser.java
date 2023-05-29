@@ -195,6 +195,7 @@ final class AppChooser extends AcorusDemo {
                     Class<?> mainClass = mainClasses[selectedAppIndex];
                     String appName = mainClass.getSimpleName();
                     Heart.deleteStoredSettings(appName);
+                    updateMenuOverlay();
                     return;
 
                 case asExecute:
@@ -318,16 +319,19 @@ final class AppChooser extends AcorusDemo {
 
         for (int lineIndex = 0; lineIndex < numLines; ++lineIndex) {
             int appIndex = topLineAppIndex + lineIndex;
-            String appName = "";
+            String text = "";
             if (appIndex >= 0 && appIndex < mainClasses.length) {
                 Class<?> mainClass = mainClasses[appIndex];
-                appName = mainClass.getSimpleName();
+                text = mainClass.getSimpleName();
+                if (Heart.hasStoredSettings(text)) {
+                    text = text + " +";
+                }
             }
             if (lineIndex == selectedLineIndex) {
-                String text = "--> " + appName;
+                text = "--> " + text;
                 menuOverlay.setText(lineIndex, text, ColorRGBA.Yellow);
             } else {
-                menuOverlay.setText(lineIndex, appName, ColorRGBA.White);
+                menuOverlay.setText(lineIndex, text, ColorRGBA.White);
             }
         }
     }
