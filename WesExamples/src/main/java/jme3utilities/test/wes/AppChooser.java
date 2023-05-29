@@ -67,7 +67,8 @@ final class AppChooser extends AcorusDemo {
     /**
      * message logger for this class
      */
-    final static Logger logger = Logger.getLogger(AppChooser.class.getName());
+    final private static Logger logger
+            = Logger.getLogger(AppChooser.class.getName());
     /**
      * application name (for the title bar of the app's window)
      */
