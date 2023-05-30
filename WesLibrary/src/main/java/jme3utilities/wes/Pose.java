@@ -57,6 +57,7 @@ import jme3utilities.MyAnimation;
 import jme3utilities.MySkeleton;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
+import jme3utilities.math.MyQuaternion;
 
 /**
  * Encapsulate a pose for a specific Armature or Skeleton.
@@ -518,7 +519,8 @@ public class Pose implements JmeCloneable {
             Vector3f mScale = result.getScale(); // alias
             parent.getRotation().mult(local.getRotation(), mRotation);
             parent.getScale().mult(local.getScale(), mScale);
-            parent.getRotation().mult(local.getTranslation(), mTranslation);
+            MyQuaternion.rotate(
+                    parent.getRotation(), local.getTranslation(), mTranslation);
             mTranslation.multLocal(parent.getScale());
             mTranslation.addLocal(parent.getTranslation());
         }
@@ -852,7 +854,7 @@ public class Pose implements JmeCloneable {
                 skRotation.toRotationMatrix(skRotMatrix);
 
                 skScale.mult(mbiTranslation, skTranslation);
-                skRotation.mult(skTranslation, skTranslation);
+                MyQuaternion.rotate(skRotation, skTranslation, skTranslation);
                 skTranslation.addLocal(msTranslation);
 
                 matrix4f.setTransform(skTranslation, skScale, skRotMatrix);
