@@ -1128,8 +1128,9 @@ public class Pose implements JmeCloneable {
 
             Quaternion userRotation = userForModel(targetIndex, mo, null);
             Quaternion twist = boneMapping.getTwist();
-            userRotation.mult(twist, userTransform.getRotation());
-            userTransform.getRotation().normalizeLocal();
+            Quaternion rot = userTransform.getRotation(); // alias
+            userRotation.mult(twist, rot);
+            MyQuaternion.normalizeLocal(rot);
         }
 
         List<Bone> children = bone.getChildren();
@@ -1166,8 +1167,9 @@ public class Pose implements JmeCloneable {
 
             Quaternion userRotation = userForModel(targetIndex, mo, null);
             Quaternion twist = boneMapping.getTwist();
-            userRotation.mult(twist, userTransform.getRotation());
-            userTransform.getRotation().normalizeLocal();
+            Quaternion rot = userTransform.getRotation();
+            userRotation.mult(twist, rot);
+            MyQuaternion.normalizeLocal(rot);
         }
 
         List<Joint> children = joint.getChildren();

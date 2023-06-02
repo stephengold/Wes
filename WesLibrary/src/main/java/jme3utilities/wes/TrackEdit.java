@@ -981,7 +981,8 @@ final public class TrackEdit {
             if (translations != null) {
                 translations[frameI] = oldTranslations[frameI].clone();
             }
-            rotations[frameI] = oldRotations[frameI].clone().normalizeLocal();
+            rotations[frameI] = oldRotations[frameI].clone();
+            MyQuaternion.normalizeLocal(rotations[frameI]);
             if (scales != null) {
                 scales[frameI] = oldScales[frameI].clone();
             }
@@ -1053,8 +1054,8 @@ final public class TrackEdit {
             if (translations != null) {
                 translations[frameIndex] = oldTranslations[frameIndex].clone();
             }
-            rotations[frameIndex]
-                    = oldRotations[frameIndex].clone().normalizeLocal();
+            rotations[frameIndex] = oldRotations[frameIndex].clone();
+            MyQuaternion.normalizeLocal(rotations[frameIndex]);
             if (scales != null) {
                 scales[frameIndex] = oldScales[frameIndex].clone();
             }

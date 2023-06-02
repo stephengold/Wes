@@ -162,7 +162,7 @@ public enum SmoothRotations {
                 }
             }
             assert sumWeight > 0f : sumWeight;
-            sumQuaternion.normalizeLocal();
+            MyQuaternion.normalizeLocal(sumQuaternion);
         }
 
         return result;
@@ -226,7 +226,7 @@ public enum SmoothRotations {
                 }
             }
             assert sumWeight > 0f : sumWeight;
-            sumQuaternion.normalizeLocal();
+            MyQuaternion.normalizeLocal(sumQuaternion);
         }
 
         return result;
