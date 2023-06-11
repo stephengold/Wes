@@ -203,7 +203,6 @@ final class AppChooser extends AcorusDemo {
                     Class<?> mainClass = mainClasses[selectedAppIndex];
                     String appName = mainClass.getSimpleName();
                     Heart.deleteStoredSettings(appName);
-                    updateMenuOverlay();
                     return;
 
                 case asExecute:
@@ -220,7 +219,6 @@ final class AppChooser extends AcorusDemo {
                     // Select the next app.
                     if (selectedAppIndex < mainClasses.length - 1) {
                         ++selectedAppIndex;
-                        updateMenuOverlay();
                     }
                     return;
 
@@ -228,7 +226,6 @@ final class AppChooser extends AcorusDemo {
                     // Select the previous app.
                     if (selectedAppIndex > 0) {
                         --selectedAppIndex;
-                        updateMenuOverlay();
                     }
                     return;
 
@@ -251,6 +248,17 @@ final class AppChooser extends AcorusDemo {
         super.onViewPortResize(newWidth, newHeight);
         menuOverlay.onViewPortResize(newWidth, newHeight);
     }
+
+    /**
+     * Callback invoked once per frame.
+     *
+     * @param tpf the time interval between frames (in seconds, &ge;0)
+     */
+    @Override
+    public void simpleUpdate(float tpf) {
+        super.simpleUpdate(tpf);
+        updateMenuOverlay();
+    }
     // *************************************************************************
     // private methods
 
@@ -267,7 +275,6 @@ final class AppChooser extends AcorusDemo {
         assert success;
 
         menuOverlay.setEnabled(true);
-        updateMenuOverlay();
     }
 
     /**
