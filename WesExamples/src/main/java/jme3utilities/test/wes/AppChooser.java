@@ -48,7 +48,7 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 
 /**
- * Choose an application from a list, then execute it.
+ * Choose a Wes example application from a list, then execute it.
  *
  * @author Stephen Gold sgold@sonic.net
  */
