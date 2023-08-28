@@ -8,7 +8,7 @@ ext {
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
 
     // module coordinates of external dependencies:
-    heartCoordinates = 'com.github.stephengold:Heart:8.6.0' + jmeTarget
+    heartCoordinates = 'com.github.stephengold:Heart:8.7.0' + jmeTarget
 
     // current versions of libraries:
     jme3Version = '3.6.1-stable'
