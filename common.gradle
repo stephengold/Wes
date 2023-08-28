@@ -41,4 +41,3 @@ tasks.withType(JavaExec) { // Java runtime options:
     //jvmArgs '-Xms512m', '-Xmx512m' // to enlarge the Java heap
     //jvmArgs '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=10'
 }
-
