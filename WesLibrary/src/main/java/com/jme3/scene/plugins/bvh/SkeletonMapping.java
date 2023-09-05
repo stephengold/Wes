@@ -1,5 +1,9 @@
 package com.jme3.scene.plugins.bvh;
 
+import com.jme3.anim.Armature;
+import com.jme3.anim.Joint;
+import com.jme3.animation.Bone;
+import com.jme3.animation.Skeleton;
 import com.jme3.export.InputCapsule;
 import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
@@ -45,6 +49,37 @@ public class SkeletonMapping implements Cloneable, Savable {
      */
     public SkeletonMapping() {
         // do nothing
+    }
+
+    /**
+     * Construct a one-to-one mapping for the specified Armature.
+     *
+     * @param armature the Armature to provide the joint names (not null,
+     * unaffected)
+     */
+    public SkeletonMapping(Armature armature) {
+        List<Joint> jointList = armature.getJointList();
+        for (Joint joint : jointList) {
+            String name = joint.getName();
+            BoneMapping boneMapping = new BoneMapping(name, name);
+            addMapping(boneMapping);
+        }
+    }
+
+    /**
+     * Construct a one-to-one mapping for the specified Skeleton.
+     *
+     * @param skeleton the Skeleton to provide the bone names (not null,
+     * unaffected)
+     */
+    public SkeletonMapping(Skeleton skeleton) {
+        int boneCount = skeleton.getBoneCount();
+        for (int boneIndex = 0; boneIndex < boneCount; ++boneIndex) {
+            Bone bone = skeleton.getBone(boneIndex);
+            String name = bone.getName();
+            BoneMapping boneMapping = new BoneMapping(name, name);
+            addMapping(boneMapping);
+        }
     }
     // *************************************************************************
     // new methods exposed
