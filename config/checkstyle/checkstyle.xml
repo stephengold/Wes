@@ -370,8 +370,8 @@
         <module name="JavadocVariable">
             <property name="scope" value="package"/>
         </module>
-
         <module name="SingleLineJavadoc"/>
+
         <module name="EmptyCatchBlock">
             <property name="exceptionVariableName" value="expected"/>
         </module>
