@@ -1,9 +1,9 @@
 *.dll
 *.dylib
 *.so
+/WesExamples/Written Assets/
 /.gradle/
+/WesExamples/build/
+/WesLibrary/build/
 /.idea/
 /.nb-gradle/
-/WesExamples/build/
-/WesExamples/Written Assets/
-/WesLibrary/build/
