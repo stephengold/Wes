@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -220,8 +220,8 @@ public class RotationCurve {
         Validate.nonNull(controlPoint1, "control point 1");
         Validate.nonNull(controlPoint2, "control point 2");
 
-        controlPoint1s[index] = controlPoint1;
-        controlPoint2s[index] = controlPoint2;
+        this.controlPoint1s[index] = controlPoint1;
+        this.controlPoint2s[index] = controlPoint2;
     }
 
     /**
@@ -232,10 +232,10 @@ public class RotationCurve {
     void setLastIndex(int newLastIndex) {
         Validate.nonNegative(newLastIndex, "new last index");
 
-        controlPoint1s = new Quaternion[newLastIndex + 1];
-        controlPoint2s = new Quaternion[newLastIndex + 1];
-        endValues = new Quaternion[newLastIndex + 1];
-        intervalDurations = new float[newLastIndex + 1];
+        this.controlPoint1s = new Quaternion[newLastIndex + 1];
+        this.controlPoint2s = new Quaternion[newLastIndex + 1];
+        this.endValues = new Quaternion[newLastIndex + 1];
+        this.intervalDurations = new float[newLastIndex + 1];
     }
 
     /**
@@ -249,7 +249,7 @@ public class RotationCurve {
         Validate.nonNull(endValue, "end value");
         Validate.positive(intervalDuration, "interval duration");
 
-        endValues[index] = endValue;
-        intervalDurations[index] = intervalDuration;
+        this.endValues[index] = endValue;
+        this.intervalDurations[index] = intervalDuration;
     }
 }

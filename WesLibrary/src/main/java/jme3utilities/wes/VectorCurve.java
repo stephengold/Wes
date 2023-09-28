@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -279,8 +279,8 @@ public class VectorCurve {
         Validate.nonNull(auxPoint1, "aux point 1");
         Validate.nonNull(auxPoint2, "aux point 2");
 
-        aux1s[index] = auxPoint1;
-        aux2s[index] = auxPoint2;
+        this.aux1s[index] = auxPoint1;
+        this.aux2s[index] = auxPoint2;
     }
 
     /**
@@ -293,9 +293,9 @@ public class VectorCurve {
      * @param dt23 square root of following interval's distance (&ge;0)
      */
     void setDts(int index, float dt01, float dt12, float dt23) {
-        dt01s[index] = dt01;
-        dt12s[index] = dt12;
-        dt23s[index] = dt23;
+        this.dt01s[index] = dt01;
+        this.dt12s[index] = dt12;
+        this.dt23s[index] = dt23;
     }
 
     /**
@@ -308,14 +308,14 @@ public class VectorCurve {
         Validate.nonNegative(newLastIndex, "new last index");
 
         int numSamples = newLastIndex + 1;
-        aux1s = new Vector3f[numSamples];
-        aux2s = new Vector3f[numSamples];
-        endValues = new Vector3f[numSamples];
-        intervalDurations = new float[numSamples];
+        this.aux1s = new Vector3f[numSamples];
+        this.aux2s = new Vector3f[numSamples];
+        this.endValues = new Vector3f[numSamples];
+        this.intervalDurations = new float[numSamples];
         if (allocateDts) {
-            dt01s = new float[numSamples];
-            dt12s = new float[numSamples];
-            dt23s = new float[numSamples];
+            this.dt01s = new float[numSamples];
+            this.dt12s = new float[numSamples];
+            this.dt23s = new float[numSamples];
         }
     }
 
@@ -330,7 +330,7 @@ public class VectorCurve {
         Validate.nonNull(endValue, "end value");
         Validate.positive(intervalDuration, "interval duration");
 
-        endValues[index] = endValue;
-        intervalDurations[index] = intervalDuration;
+        this.endValues[index] = endValue;
+        this.intervalDurations[index] = intervalDuration;
     }
 }
