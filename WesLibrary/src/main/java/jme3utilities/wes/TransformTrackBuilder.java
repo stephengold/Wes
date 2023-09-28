@@ -36,7 +36,6 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyArray;
-import jme3utilities.math.MyQuaternion;
 
 /**
  * Gather the data needed to construct a JMonkeyEngine TransformTrack.
@@ -64,7 +63,7 @@ public class TransformTrackBuilder {
      */
     final private HasLocalTransform target;
     /**
-     * maps animation times to rotation vectors
+     * maps animation times to (normalized) rotation vectors
      */
     final private Map<Float, Quaternion> rotationMap = new TreeMap<>();
     /**
@@ -120,9 +119,8 @@ public class TransformTrackBuilder {
      */
     public void addRotation(float time, Quaternion rotation) {
         Validate.inRange(time, "time", 0f, duration);
-        MyQuaternion.validateUnit(rotation, "rotation", 0.0005f);
 
-        Quaternion cloneRotation = rotation.clone();
+        Quaternion cloneRotation = rotation.clone().normalizeLocal();
         rotationMap.put(time, cloneRotation);
         timeSet.add(time);
     }
