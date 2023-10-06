@@ -38,7 +38,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyArray;
 
 /**
- * Gather the data needed to construct a JMonkeyEngine TransformTrack.
+ * Gather the data needed to construct a TransformTrack.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -120,7 +120,9 @@ public class TransformTrackBuilder {
     public void addRotation(float time, Quaternion rotation) {
         Validate.inRange(time, "time", 0f, duration);
 
+        // Normalize the quaternion to ensure Wes interpolation will work:
         Quaternion cloneRotation = rotation.clone().normalizeLocal();
+
         rotationMap.put(time, cloneRotation);
         timeSet.add(time);
     }
@@ -208,7 +210,7 @@ public class TransformTrackBuilder {
     }
 
     /**
-     * Alter the technique for rotations.
+     * Alter the interpolation technique for rotations.
      *
      * @param newTechnique (not null, default=LoopSpline)
      */
@@ -218,7 +220,7 @@ public class TransformTrackBuilder {
     }
 
     /**
-     * Alter the technique for scales.
+     * Alter the interpolation technique for scales.
      *
      * @param newTechnique (not null, default=LoopFdcSpline)
      */
@@ -228,7 +230,7 @@ public class TransformTrackBuilder {
     }
 
     /**
-     * Alter the technique for translations.
+     * Alter the interpolation technique for translations.
      *
      * @param newTechnique (not null, default=LoopFdcSpline)
      */
@@ -270,7 +272,6 @@ public class TransformTrackBuilder {
     private RotationCurve toRotationCurve(
             Map<Float, Quaternion> map, TweenRotations tween) {
         float[] times = toFloatArray(map.keySet());
-
         int numFrames = times.length;
         Quaternion[] array = new Quaternion[numFrames];
 
@@ -294,7 +295,6 @@ public class TransformTrackBuilder {
     private VectorCurve toVectorCurve(
             Map<Float, Vector3f> map, TweenVectors tween) {
         float[] times = toFloatArray(map.keySet());
-
         int numFrames = times.length;
         Vector3f[] array = new Vector3f[numFrames];
 
