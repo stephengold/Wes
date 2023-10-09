@@ -2596,20 +2596,23 @@ final public class TrackEdit {
         Quaternion[] newRotations = new Quaternion[newCount];
         Vector3f[] newScales = new Vector3f[newCount];
 
+        HasLocalTransform target = oldTrack.getTarget();
+        Transform fillData = target.getLocalTransform();
+
         for (int frameI = 0; frameI < lastFrame; ++frameI) {
             newTimes[frameI] = oldTimes[frameI] - oldTimes[0];
             if (oldTranslations == null) {
-                newTranslations[frameI] = new Vector3f();
+                newTranslations[frameI] = fillData.getTranslation().clone();
             } else {
                 newTranslations[frameI] = oldTranslations[frameI].clone();
             }
             if (oldRotations == null) {
-                newRotations[frameI] = new Quaternion();
+                newRotations[frameI] = fillData.getRotation().clone();
             } else {
                 newRotations[frameI] = oldRotations[frameI].clone();
             }
             if (oldScales == null) {
-                newScales[frameI] = new Vector3f(1f, 1f, 1f);
+                newScales[frameI] = fillData.getScale().clone();
             } else {
                 newScales[frameI] = oldScales[frameI].clone();
             }
@@ -2620,7 +2623,6 @@ final public class TrackEdit {
         newRotations[lastFrame] = endTransform.getRotation().clone();
         newScales[lastFrame] = endTransform.getScale().clone();
 
-        HasLocalTransform target = oldTrack.getTarget();
         TransformTrack result = new TransformTrack(
                 target, newTimes, newTranslations, newRotations, newScales);
 
@@ -2753,9 +2755,12 @@ final public class TrackEdit {
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int newCount;
-        Vector3f wrapTranslation = new Vector3f();
-        Quaternion wrapRotation = new Quaternion();
-        Vector3f wrapScale = new Vector3f(1f, 1f, 1f);
+
+        HasLocalTransform target = oldTrack.getTarget();
+        Transform fillData = target.getLocalTransform();
+        Vector3f wrapTranslation = fillData.getTranslation().clone();
+        Quaternion wrapRotation = fillData.getRotation().clone();
+        Vector3f wrapScale = fillData.getScale().clone();
 
         int endIndex = MyArray.findPreviousIndex(duration, oldTimes);
         if (endIndex >= 0 && oldTimes[endIndex] != duration) {
@@ -2831,7 +2836,6 @@ final public class TrackEdit {
             }
         }
 
-        HasLocalTransform target = oldTrack.getTarget();
         TransformTrack result = new TransformTrack(
                 target, newTimes, newTranslations, newRotations, newScales);
 
