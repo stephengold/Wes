@@ -1428,6 +1428,9 @@ final public class TrackEdit {
         Quaternion[] newRotations = new Quaternion[frameCount];
         Vector3f[] newScales = new Vector3f[frameCount];
 
+        HasLocalTransform target = oldTrack.getTarget();
+        Transform fillData = target.getLocalTransform();
+
         for (int frameI = 0; frameI < frameCount; ++frameI) {
             newTimes[frameI] = oldTimes[frameI];
             if (frameI == frameIndex) {
@@ -1436,24 +1439,23 @@ final public class TrackEdit {
                 newScales[frameI] = transform.getScale().clone();
             } else {
                 if (oldTranslations == null) {
-                    newTranslations[frameI] = new Vector3f();
+                    newTranslations[frameI] = fillData.getTranslation().clone();
                 } else {
                     newTranslations[frameI] = oldTranslations[frameI].clone();
                 }
                 if (oldRotations == null) {
-                    newRotations[frameI] = new Quaternion();
+                    newRotations[frameI] = fillData.getRotation().clone();
                 } else {
                     newRotations[frameI] = oldRotations[frameI].clone();
                 }
                 if (oldScales == null) {
-                    newScales[frameI] = new Vector3f(1f, 1f, 1f);
+                    newScales[frameI] = fillData.getScale().clone();
                 } else {
                     newScales[frameI] = oldScales[frameI].clone();
                 }
             }
         }
 
-        HasLocalTransform target = oldTrack.getTarget();
         TransformTrack result = new TransformTrack(
                 target, newTimes, newTranslations, newRotations, newScales);
 
