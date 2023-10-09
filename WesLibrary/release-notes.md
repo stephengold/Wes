@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.8.0: released on TBD
+## Version 0.8.0: released on 9 October 2023
 
 + Bugfix:  4 methods use wrong fill transform for the new animation system:
   + `TweenTransforms.interpolate()`
