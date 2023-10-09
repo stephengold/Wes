@@ -27,6 +27,7 @@
 package jme3utilities.wes;
 
 import com.jme3.anim.TransformTrack;
+import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.BoneTrack;
 import com.jme3.animation.SpatialTrack;
 import com.jme3.animation.Track;
@@ -159,8 +160,10 @@ public class TweenTransforms implements Cloneable {
             Vector3f[] translations = track.getTranslations();
             Quaternion[] rotations = track.getRotations();
             Vector3f[] scales = track.getScales();
+            HasLocalTransform target = track.getTarget();
+            Transform fallback = target.getLocalTransform();
             interpolate(time, times, duration, translations, rotations,
-                    scales, null, result);
+                    scales, fallback, result);
         }
 
         return result;
