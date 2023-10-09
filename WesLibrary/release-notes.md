@@ -1,5 +1,22 @@
 # release log for the Wes library and related examples
 
+## Version 0.8.0: released on TBD
+
++ Bugfix:  4 methods use wrong fill transform for the new animation system:
+  + `TweenTransforms.interpolate()`
+  + `TrackEdit.insertKeyframe()`
+  + `TrackEdit.replaceKeyframe()`
+  + `TrackEdit.truncate()`
++ Added a new `TransformTrackBuilder` class.
++ Added 2 more constructors for `SkeletonMapping`, to construct one-to-one
+  mappings for an `Armature` or `Skeleton`.
++ In AppChooser:
+  + Added "+" to indicate apps with saved settings.
+  + Changed macOS startup from glfw_async to -XstartOnFirstThread.
++ Targeted JME version 3.6.1-stable.
++ Based on v8.7.0 of the Heart library and v1.1.0 of Acorus.
++ Upgraded to Gradle v8.4 .
+
 ## Version 0.7.5: released on 22 March 2023
 
 + Targeted JME version 3.6.0-stable.

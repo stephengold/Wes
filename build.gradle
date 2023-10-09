@@ -12,7 +12,7 @@ ext {
 
     // current versions of libraries:
     jme3Version = '3.6.1-stable'
-    wesVersion = '0.7.6' + jmeTarget + '-SNAPSHOT'
+    wesVersion = '0.8.0' + jmeTarget
 }
 
 subprojects {
