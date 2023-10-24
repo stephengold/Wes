@@ -5,10 +5,10 @@
 
 It contains 2 sub-projects:
 
-1. WesLibrary: the Wes runtime library
+1. WesLibrary: the Wes [JVM] runtime library
 2. WesExamples: demos, examples, and non-automated test software
 
-Complete source code (in Java) is provided under
+Complete source code (in [Java]) is provided under
 [a 3-clause BSD license][license].
 
 
@@ -56,8 +56,8 @@ Adding Wes to an existing [jMonkeyEngine][jme] project should be
 a simple matter of adding these libraries to the classpath.
 
 For projects built using [Maven] or [Gradle], it is sufficient to add a
-dependency on the Wes Library.  The build tools should automatically
-resolve the remaining dependencies.
+dependency on the Wes Library.
+The build tool should automatically resolve the remaining dependencies.
 
 ### Gradle-built projects
 
@@ -166,7 +166,7 @@ You can restore the project to a pristine state:
 + using Bash or PowerShell or Zsh: `./gradlew clean`
 + using Windows Command Prompt: `.\gradlew clean`
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="downloads"></a>
@@ -184,7 +184,7 @@ Newer Maven artifacts (since v0.6.2) are available from
 
 Old Maven artifacts (v0.4.8 thru v0.6.1) are available from JCenter.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="conventions"></a>
@@ -198,7 +198,7 @@ Package names begin with
 The source code is compatible with JDK 7.
 The pre-built libraries are compatible with JDK 8.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="demos"></a>
@@ -231,7 +231,7 @@ generate a "LieDown" clip.
 Demonstrates trimming and stretching the "SliceHorizontal" animation clip of
 the Sinbad model to generate a "warn" clip.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="links"></a>
@@ -241,7 +241,7 @@ the Sinbad model to generate a "warn" clip.
 + [the Wes Animation Toolkit page](https://library.jmonkeyengine.org/#!entry=11511%2F15054f52-c439-4bfb-9a73-80260b486333)
   in [the JmonkeyEngine Library][library]
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="history"></a>
@@ -261,7 +261,7 @@ From September 2017 to January 2019, Wes was a sub-project of
 Since January 2019, Wes has been a separate project, hosted at
 [GitHub][wes].
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="acks"></a>
@@ -293,7 +293,7 @@ artists and software developers:
     + the [Java] compiler, standard doclet, and runtime environment
     + [jMonkeyEngine][jme] and the jME3 Software Development Kit
     + the [Linux Mint][mint] operating system
-    + LWJGL, the Lightweight Java Game Library
+    + [LWJGL], the Lightweight Java Game Library
     + the [MakeHuman] 3-D character creation tool
     + the [Markdown] document-conversion tool
     + the [Meld] visual merge tool
@@ -310,7 +310,7 @@ I'm also grateful to my dear Holly, for keeping me sane.
 If I've misattributed anything or left anyone out, please let me know, so I can
 correct the situation: sgold@sonic.net
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 [adoptium]: https://adoptium.net/releases.html "Adoptium Project"
@@ -330,13 +330,15 @@ correct the situation: sgold@sonic.net
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [imgur]: https://imgur.com/ "Imgur"
-[java]: https://java.com "Java"
+[java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jfrog]: https://www.jfrog.com "JFrog"
-[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
+[jme]: https://jmonkeyengine.org "jMonkeyEngine Project"
+[jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java virtual machine"
 [latest]: https://github.com/stephengold/Wes/releases/latest "latest release"
 [library]: https://library.jmonkeyengine.org "jMonkeyEngine Library"
 [license]: https://github.com/stephengold/Wes/blob/master/LICENSE "Wes license"
 [log]: https://github.com/stephengold/Wes/blob/master/WesLibrary/release-notes.md "release log"
+[lwjgl]: https://www.lwjgl.org "Lightweight Java Game Library"
 [makehuman]: http://www.makehumancommunity.org/ "MakeHuman Community"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [maud]: https://github.com/stephengold/Maud "Maud editor"
