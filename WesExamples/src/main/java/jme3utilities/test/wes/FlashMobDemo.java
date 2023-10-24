@@ -231,12 +231,11 @@ class FlashMobDemo extends AcorusDemo {
         SkeletonMapping s2m = assetManager.loadAsset(s2mKey);
 
         // Retarget the "Dance" animation from Sinbad to MhGame.
-        SkinningControl skinningControl
-                = mhGame.getControl(SkinningControl.class);
+        SkinningControl skinningControl = findSkinner(mhGame);
         Armature armature = skinningControl.getArmature();
         AnimClip danceClip = AnimationEdit.retargetAnimation(
                 sinbadClip, sinbadArmature, armature, s2m, "Dance");
-        AnimComposer composer = mhGame.getControl(AnimComposer.class);
+        AnimComposer composer = findComposer(mhGame);
         composer.addAnimClip(danceClip);
 
         // Load the Sinbad-to-Oto skeleton map.
@@ -245,11 +244,11 @@ class FlashMobDemo extends AcorusDemo {
         SkeletonMapping s2o = assetManager.loadAsset(s2oKey);
 
         // Retarget the "Dance" animation from Sinbad to Oto.
-        skinningControl = oto.getControl(SkinningControl.class);
+        skinningControl = findSkinner(oto);
         armature = skinningControl.getArmature();
         danceClip = AnimationEdit.retargetAnimation(
                 sinbadClip, sinbadArmature, armature, s2o, "Dance");
-        composer = oto.getControl(AnimComposer.class);
+        composer = findComposer(oto);
         composer.addAnimClip(danceClip);
 
         // Load the Puppet-to-Sinbad skeleton map.
@@ -433,11 +432,11 @@ class FlashMobDemo extends AcorusDemo {
         mhGame.move(2f, 0f, -1f); // behind Sinbad and to his left
 
         // Add composer to the master list.
-        AnimComposer composer = mhGame.getControl(AnimComposer.class);
+        AnimComposer composer = findComposer(mhGame);
         composers.add(composer);
 
         // Add a skeleton visualizer.
-        SkinningControl sc = mhGame.getControl(SkinningControl.class);
+        SkinningControl sc = findSkinner(mhGame);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
@@ -458,11 +457,11 @@ class FlashMobDemo extends AcorusDemo {
         oto.move(0f, 0f, -1f); // directly behind Sinbad
 
         // Add composer to the master list.
-        AnimComposer composer = oto.getControl(AnimComposer.class);
+        AnimComposer composer = findComposer(oto);
         composers.add(composer);
 
         // Add a skeleton visualizer.
-        SkinningControl sc = oto.getControl(SkinningControl.class);
+        SkinningControl sc = findSkinner(oto);
         SkeletonVisualizer sv = new SkeletonVisualizer(assetManager, sc);
         visualizers.add(sv);
     }
@@ -512,10 +511,10 @@ class FlashMobDemo extends AcorusDemo {
         centerCgm(cgModel);
         cgModel.move(0f, 0f, 1f); // in front of the origin
 
-        AnimComposer composer = cgModel.getControl(AnimComposer.class);
+        AnimComposer composer = findComposer(cgModel);
         sinbadClip = composer.getAnimClip("Dance");
 
-        SkinningControl sc = cgModel.getControl(SkinningControl.class);
+        SkinningControl sc = findSkinner(cgModel);
         sinbadArmature = sc.getArmature();
 
         // Add composer to the master list.
@@ -555,6 +554,68 @@ class FlashMobDemo extends AcorusDemo {
         dumper.setDumpTransform(true);
         //dumper.setDumpUser(true);
         dumper.dump(renderManager);
+    }
+
+    /**
+     * Access the first AnimComposer (if any) in the specified scene-graph
+     * subtree.
+     *
+     * @param subtree the subtree to analyze (not null)
+     * @return the pre-existing control, or null if none
+     */
+    private static AnimComposer findComposer(Spatial subtree) {
+        List<AnimComposer> list
+                = MySpatial.listControls(subtree, AnimComposer.class, null);
+        int numComposers = list.size();
+
+        AnimComposer result;
+        switch (numComposers) {
+            case 0:
+                result = null;
+                break;
+
+            case 1:
+                result = list.get(0);
+                break;
+
+            default:
+                result = list.get(0);
+                logger.warning("Multiple anim composers in subtree.");
+                break;
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the first SkinningControl (if any) in the specified scene-graph
+     * subtree.
+     *
+     * @param subtree the subtree to analyze (not null)
+     * @return the pre-existing control, or null if none
+     */
+    private static SkinningControl findSkinner(Spatial subtree) {
+        List<SkinningControl> list
+                = MySpatial.listControls(subtree, SkinningControl.class, null);
+        int numSkinners = list.size();
+
+        SkinningControl result;
+        switch (numSkinners) {
+            case 0:
+                result = null;
+                break;
+
+            case 1:
+                result = list.get(0);
+                break;
+
+            default:
+                result = list.get(0);
+                logger.warning("Multiple anim composers in subtree.");
+                break;
+        }
+
+        return result;
     }
 
     /**
