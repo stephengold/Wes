@@ -42,7 +42,7 @@ Complete source code (in [Java]) is provided under
 
 Most of the features work with both the old and new animation systems.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="add"></a>
@@ -298,6 +298,7 @@ artists and software developers:
     + the [Markdown] document-conversion tool
     + the [Meld] visual merge tool
     + Microsoft Windows
+    + the [NetBeans] integrated development environment
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
