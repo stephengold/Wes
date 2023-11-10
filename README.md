@@ -124,7 +124,7 @@ Open the project's properties in the IDE (JME SDK or NetBeans):
 7. Similarly, add the Wes jar(s).
 8. Click on the "OK" button to exit the "Project Properties" dialog.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="build"></a>
@@ -141,7 +141,7 @@ Open the project's properties in the IDE (JME SDK or NetBeans):
   + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
 3. Download and extract the Wes source code from GitHub:
-  + using Git:
+  + using [Git]:
     + `git clone https://github.com/stephengold/Wes.git`
     + `cd Wes`
     + `git checkout -b latest 0.8.0`
