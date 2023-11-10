@@ -298,7 +298,6 @@ artists and software developers:
     + the [Markdown] document-conversion tool
     + the [Meld] visual merge tool
     + Microsoft Windows
-    + the [NetBeans] integrated development environment
     + the PMD source-code analyzer
     + the [WinMerge] differencing and merging tool
 
