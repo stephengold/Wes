@@ -123,7 +123,7 @@ public class TweenTransforms implements Cloneable {
         Validate.inRange(time, "time", 0f, duration);
         assert track instanceof BoneTrack || track instanceof SpatialTrack;
 
-        float[] times = track.getKeyFrameTimes();
+        float[] times = track.getKeyFrameTimes(); // alias
         Vector3f[] translations = MyAnimation.getTranslations(track);
         Quaternion[] rotations = MyAnimation.getRotations(track);
         Vector3f[] scales = MyAnimation.getScales(track);
@@ -148,7 +148,7 @@ public class TweenTransforms implements Cloneable {
             float duration, Transform storeResult) {
         Transform result = (storeResult == null)
                 ? new Transform() : storeResult;
-        float[] times = track.getTimes();
+        float[] times = track.getTimes(); // alias
         int lastFrame = times.length - 1;
 
         if (lastFrame == 0) { // single-frame track
@@ -378,7 +378,7 @@ public class TweenTransforms implements Cloneable {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
 
-        float[] times = track.getKeyFrameTimes();
+        float[] times = track.getKeyFrameTimes(); // alias
         int lastFrame = times.length - 1;
         assert lastFrame >= 0 : lastFrame;
 

@@ -100,10 +100,10 @@ final public class TrackEdit {
         Validate.positive(neckTime, "neck time");
         Validate.nonNull(neckWeights, "neck weights");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         assert neckTime >= oldTimes[0] : neckTime;
         int oldCount = oldTimes.length;
-        float[] oldWeights = oldTrack.getWeights();
+        float[] oldWeights = oldTrack.getWeights(); // alias
 
         int neckIndex = MyArray.findPreviousIndex(neckTime, oldTimes);
         int newCount = oldCount - neckIndex;
@@ -156,7 +156,7 @@ final public class TrackEdit {
                 || oldTrack instanceof SpatialTrack;
         Validate.positive(neckTime, "neck time");
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -222,7 +222,7 @@ final public class TrackEdit {
             TransformTrack oldTrack, float neckTime, Transform neckTransform) {
         Validate.positive(neckTime, "neck time");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         assert neckTime >= oldTimes[0];
         int oldCount = oldTimes.length;
 
@@ -293,12 +293,12 @@ final public class TrackEdit {
                 && track2 instanceof SpatialTrack);
         Validate.inRange(startTime2, "start time for track2", 0f, newDuration);
 
-        float[] times1 = track1.getKeyFrameTimes();
+        float[] times1 = track1.getKeyFrameTimes(); // alias
         Vector3f[] translations1 = MyAnimation.getTranslations(track1);
         Quaternion[] rots1 = MyAnimation.getRotations(track1);
         Vector3f[] scales1 = MyAnimation.getScales(track1);
 
-        float[] times2 = track2.getKeyFrameTimes();
+        float[] times2 = track2.getKeyFrameTimes(); // alias
         Vector3f[] translations2 = MyAnimation.getTranslations(track2);
         Quaternion[] rots2 = MyAnimation.getRotations(track2);
         Vector3f[] scales2 = MyAnimation.getScales(track2);
@@ -458,7 +458,7 @@ final public class TrackEdit {
         Validate.inRange(numTranslations, "number of translations",
                 2, Integer.MAX_VALUE);
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int frameCount = oldTimes.length;
         int lastFrame = frameCount - 1;
         float elapsed = oldTimes[lastFrame] - oldTimes[0];
@@ -525,7 +525,7 @@ final public class TrackEdit {
             Track oldTrack, float delayAmount, float newDuration) {
         Validate.inRange(delayAmount, "delay amount", 0f, newDuration);
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -598,7 +598,7 @@ final public class TrackEdit {
             Track oldTrack, int startIndex, int deleteCount) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int lastIndex = oldCount - 1;
@@ -666,7 +666,7 @@ final public class TrackEdit {
      */
     public static TransformTrack deleteRange(
             TransformTrack oldTrack, int startIndex, int deleteCount) {
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         int lastIndex = oldCount - 1;
@@ -739,7 +739,7 @@ final public class TrackEdit {
         Validate.positive(frameTime, "keyframe time");
         assert MyAnimation.findKeyframeIndex(oldTrack, frameTime) == -1;
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -814,7 +814,7 @@ final public class TrackEdit {
         Validate.positive(frameTime, "keyframe time");
         assert MyAnimation.findKeyframeIndex(oldTrack, frameTime) == -1;
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
@@ -959,7 +959,7 @@ final public class TrackEdit {
             return result;
         }
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         assert oldTimes.length == numFrames;
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Vector3f[] oldScales = oldTrack.getScales();
@@ -1032,7 +1032,7 @@ final public class TrackEdit {
             return result;
         }
 
-        float[] oldTimes = inputTrack.getKeyFrameTimes();
+        float[] oldTimes = inputTrack.getKeyFrameTimes(); // alias
         assert oldTimes.length == numFrames;
         Vector3f[] oldTranslations = MyAnimation.getTranslations(inputTrack);
         Vector3f[] oldScales = MyAnimation.getScales(inputTrack);
@@ -1081,7 +1081,7 @@ final public class TrackEdit {
                 || oldTrack instanceof SpatialTrack;
         Validate.inRange(factor, "factor", 2, Integer.MAX_VALUE);
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -1137,7 +1137,7 @@ final public class TrackEdit {
     public static TransformTrack reduce(TransformTrack oldTrack, int factor) {
         Validate.inRange(factor, "factor", 2, Integer.MAX_VALUE);
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
@@ -1190,14 +1190,14 @@ final public class TrackEdit {
      * @return true if 1 or more keyframes were removed, otherwise false
      */
     public static boolean removeRepeats(MorphTrack track) {
-        float[] oldTimes = track.getTimes();
+        float[] oldTimes = track.getTimes(); // alias
         int oldCount = oldTimes.length;
         int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
             return false; // nothing to remove
         }
 
-        float[] oldWeights = track.getWeights();
+        float[] oldWeights = track.getWeights(); // alias
         float[] newTimes = new float[newCount];
         int numTargets = track.getNbMorphTargets();
         float[] newWeights = new float[newCount * numTargets];
@@ -1234,7 +1234,7 @@ final public class TrackEdit {
     public static boolean removeRepeats(Track track) {
         assert track instanceof BoneTrack || track instanceof SpatialTrack;
 
-        float[] oldTimes = track.getKeyFrameTimes();
+        float[] oldTimes = track.getKeyFrameTimes(); // alias
         int oldCount = oldTimes.length;
         int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
@@ -1292,7 +1292,7 @@ final public class TrackEdit {
      * @return true if 1 or more keyframes were removed, otherwise false
      */
     public static boolean removeRepeats(TransformTrack track) {
-        float[] oldTimes = track.getTimes();
+        float[] oldTimes = track.getTimes(); // alias
         int oldCount = oldTimes.length;
         int newCount = MyArray.countNeSorted(oldTimes);
         if (newCount == oldCount) {
@@ -1356,7 +1356,7 @@ final public class TrackEdit {
             Track oldTrack, int frameIndex, Transform transform) {
         assert oldTrack instanceof BoneTrack
                 || oldTrack instanceof SpatialTrack;
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         int frameCount = oldTimes.length;
         Validate.inRange(frameIndex, "keyframe index", 0, frameCount - 1);
         Validate.nonNull(transform, "transform");
@@ -1413,7 +1413,7 @@ final public class TrackEdit {
      */
     public static TransformTrack replaceKeyframe(
             TransformTrack oldTrack, int frameIndex, Transform transform) {
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int frameCount = oldTimes.length;
         Validate.inRange(frameIndex, "keyframe index", 0, frameCount - 1);
         Validate.nonNull(transform, "transform");
@@ -1590,7 +1590,7 @@ final public class TrackEdit {
         Validate.nonNull(map, "map");
         Validate.nonNull(targetJoint, "target joint");
 
-        float[] times = sourceTrack.getTimes();
+        float[] times = sourceTrack.getTimes(); // alias
         int numKeyframes = times.length;
         assert numKeyframes > 0 : numKeyframes;
         Vector3f[] translations = new Vector3f[numKeyframes];
@@ -1643,7 +1643,7 @@ final public class TrackEdit {
         Validate.nonNull(map, "map");
         Validate.nonNegative(targetBoneIndex, "target bone index");
 
-        float[] times = sourceTrack.getTimes();
+        float[] times = sourceTrack.getTimes(); // alias
         int numKeyframes = times.length;
         assert numKeyframes > 0 : numKeyframes;
         Vector3f[] translations = new Vector3f[numKeyframes];
@@ -1704,7 +1704,7 @@ final public class TrackEdit {
             times = new float[numKeyframes];
             times[0] = 0f;
         } else {
-            times = sourceTrack.getKeyFrameTimes();
+            times = sourceTrack.getKeyFrameTimes(); // alias
             numKeyframes = times.length;
             assert numKeyframes > 0 : numKeyframes;
         }
@@ -1749,13 +1749,13 @@ final public class TrackEdit {
 
         AnimTrack<?> result;
         float[] newTimes;
-        float[] oldTimes = MyAnimation.getKeyFrameTimes(inputTrack);
+        float[] oldTimes = MyAnimation.getKeyFrameTimes(inputTrack); // alias
         int numFrames = oldTimes.length;
         float lastFrameTime = oldTimes[numFrames - 1];
 
         if (inputTrack instanceof MorphTrack) {
             MorphTrack oldMorphTrack = (MorphTrack) inputTrack;
-            float[] oldWeights = oldMorphTrack.getWeights();
+            float[] oldWeights = oldMorphTrack.getWeights(); // alias
 
             // Allocate new arrays.
             newTimes = new float[numFrames];
@@ -1832,7 +1832,7 @@ final public class TrackEdit {
         assert inputTrack instanceof BoneTrack
                 || inputTrack instanceof SpatialTrack;
 
-        float[] oldTimes = inputTrack.getKeyFrameTimes();
+        float[] oldTimes = inputTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(inputTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(inputTrack);
         Vector3f[] oldScales = MyAnimation.getScales(inputTrack);
@@ -1888,13 +1888,13 @@ final public class TrackEdit {
             MorphTrack oldTrack, float newDuration) {
         Validate.nonNegative(newDuration, "new duration");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         float oldDuration = oldTimes[oldCount - 1] - oldTimes[0];
         assert oldDuration >= 0f : oldCount;
 
-        float[] oldWeights = oldTrack.getWeights();
+        float[] oldWeights = oldTrack.getWeights(); // alias
 
         // Allocate new arrays.
         int newCount;
@@ -1957,13 +1957,13 @@ final public class TrackEdit {
         Validate.nonNegative(newDuration, "new duration");
 
         float oldDuration = oldTrack.getLength();
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         assert numFrames == 1 || oldDuration > 0f : numFrames;
 
         Track result = oldTrack.clone();
-        float[] newTimes = result.getKeyFrameTimes(); // an alias
+        float[] newTimes = result.getKeyFrameTimes(); // alias
 
         for (int frameIndex = 0; frameIndex < numFrames; ++frameIndex) {
             float oldTime = oldTimes[frameIndex];
@@ -1995,7 +1995,7 @@ final public class TrackEdit {
             TransformTrack oldTrack, float newDuration) {
         Validate.nonNegative(newDuration, "new duration");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int oldCount = oldTimes.length;
         assert oldCount > 0 : oldCount;
         float oldDuration = oldTimes[oldCount - 1] - oldTimes[0];
@@ -2082,7 +2082,7 @@ final public class TrackEdit {
      */
     public static Track setFrameTime(
             Track oldTrack, int frameIndex, float newTime) {
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         int numFrames = oldTimes.length;
         Validate.inRange(frameIndex, "frame index", 1, numFrames - 1);
         Validate.positive(newTime, "new time");
@@ -2097,7 +2097,7 @@ final public class TrackEdit {
         }
 
         Track result = oldTrack.clone();
-        float[] newTimes = result.getKeyFrameTimes(); // an alias
+        float[] newTimes = result.getKeyFrameTimes(); // alias
         newTimes[frameIndex] = newTime;
 
         return result;
@@ -2159,7 +2159,7 @@ final public class TrackEdit {
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         for (int index = 0; index < numFrames; ++index) {
@@ -2226,7 +2226,7 @@ final public class TrackEdit {
     public static TransformTrack simplify(TransformTrack oldTrack) {
         boolean keepScales = false;
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
 
@@ -2306,7 +2306,7 @@ final public class TrackEdit {
         Validate.nonNegative(tolerance, "tolerance");
         boolean keepScales = false;
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         int numFrames = oldTimes.length;
         assert numFrames > 0 : numFrames;
         Vector3f[] oldScales = oldTrack.getScales();
@@ -2373,7 +2373,7 @@ final public class TrackEdit {
         Validate.inRange(width, "width", 0f, duration);
         Validate.nonNegative(duration, "duration");
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -2425,7 +2425,7 @@ final public class TrackEdit {
         Validate.inRange(width, "width", 0f, duration);
         Validate.nonNegative(duration, "duration");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
@@ -2473,8 +2473,8 @@ final public class TrackEdit {
         Validate.nonNull(endWeights, "end weights");
 
         // Access the old arrays.
-        float[] oldTimes = oldTrack.getTimes();
-        float[] oldWeights = oldTrack.getWeights();
+        float[] oldTimes = oldTrack.getTimes(); // alias
+        float[] oldWeights = oldTrack.getWeights(); // alias
 
         // Allocate new arrays. Avoid creating a repetitious keyframe.
         int lastFrame = MyArray.findPreviousIndex(endTime, oldTimes);
@@ -2522,7 +2522,7 @@ final public class TrackEdit {
                 || oldTrack instanceof SpatialTrack;
         Validate.nonNegative(endTime, "end time");
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -2578,7 +2578,7 @@ final public class TrackEdit {
         Validate.nonNegative(endTime, "end time");
 
         // Access the old arrays.
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();
@@ -2647,7 +2647,7 @@ final public class TrackEdit {
         Validate.positive(duration, "duration");
         Validate.fraction(endWeight, "end weight");
 
-        float[] oldTimes = oldTrack.getKeyFrameTimes();
+        float[] oldTimes = oldTrack.getKeyFrameTimes(); // alias
         Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
         Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
         Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
@@ -2747,7 +2747,7 @@ final public class TrackEdit {
         Validate.positive(duration, "duration");
         Validate.fraction(endWeight, "end weight");
 
-        float[] oldTimes = oldTrack.getTimes();
+        float[] oldTimes = oldTrack.getTimes(); // alias
         Vector3f[] oldTranslations = oldTrack.getTranslations();
         Quaternion[] oldRotations = oldTrack.getRotations();
         Vector3f[] oldScales = oldTrack.getScales();

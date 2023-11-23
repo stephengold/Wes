@@ -598,7 +598,7 @@ final public class AnimationEdit {
         int numTracksEdited = 0;
         Track[] tracks = animation.getTracks();
         for (Track track : tracks) {
-            float[] times = track.getKeyFrameTimes(); // an alias
+            float[] times = track.getKeyFrameTimes(); // alias
             if (times[0] != 0f) {
                 times[0] = 0f;
                 ++numTracksEdited;
@@ -620,9 +620,9 @@ final public class AnimationEdit {
         for (AnimTrack<?> track : tracks) {
             float[] times;
             if (track instanceof MorphTrack) {
-                times = ((MorphTrack) track).getTimes();
+                times = ((MorphTrack) track).getTimes(); // alias
             } else {
-                times = ((TransformTrack) track).getTimes();
+                times = ((TransformTrack) track).getTimes(); // alias
             }
             if (times[0] != 0f) {
                 times[0] = 0f;
