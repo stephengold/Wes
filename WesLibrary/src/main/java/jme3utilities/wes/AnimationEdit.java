@@ -616,16 +616,28 @@ final public class AnimationEdit {
      */
     public static int zeroFirst(AnimClip clip) {
         int numTracksEdited = 0;
+
         AnimTrack<?>[] tracks = clip.getTracks();
-        for (AnimTrack<?> track : tracks) {
+        int numTracks = tracks.length;
+        for (int i = 0; i < numTracks; ++i) {
+            AnimTrack<?> track = tracks[i];
             float[] times;
             if (track instanceof MorphTrack) {
                 times = ((MorphTrack) track).getTimes(); // alias
             } else {
                 times = ((TransformTrack) track).getTimes(); // alias
             }
+
             if (times[0] != 0f) {
+                track = TrackEdit.cloneTrack(track);
+                if (track instanceof MorphTrack) {
+                    times = ((MorphTrack) track).getTimes(); // alias
+                } else {
+                    times = ((TransformTrack) track).getTimes(); // alias
+                }
                 times[0] = 0f;
+                tracks[i] = track;
+
                 ++numTracksEdited;
             }
         }
