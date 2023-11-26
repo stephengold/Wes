@@ -45,7 +45,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
-import com.jme3.util.clone.Cloner;
 import java.util.Map;
 import java.util.logging.Logger;
 import jme3utilities.MyAnimation;
@@ -404,7 +403,7 @@ final public class TrackEdit {
     }
 
     /**
-     * Clone the specified track without cloning its target.
+     * Deeply clone the specified track without cloning its target.
      *
      * @param <T> the type of track to be cloned
      * @param track an AnimTrack or Track (not null)
@@ -415,23 +414,54 @@ final public class TrackEdit {
         T result;
 
         if (track instanceof MorphTrack) {
-            Cloner cloner = new Cloner();
-            Geometry target = ((MorphTrack) track).getTarget();
-            if (target != null) {
-                cloner.setClonedValue(target, target);
-            }
-            result = cloner.clone(track);
+            /*
+             * Can't use a Cloner here because MorphTrack.cloneFields()
+             * doesn't clone times or weights.
+             */
+            MorphTrack oldTrack = (MorphTrack) track;
+            Geometry target = oldTrack.getTarget();
+
+            float[] oldTimes = oldTrack.getTimes(); // alias
+            int numKeyFrames = oldTimes.length;
+            float[] newTimes = new float[numKeyFrames];
+            System.arraycopy(oldTimes, 0, newTimes, 0, numKeyFrames);
+
+            float[] oldWeights = oldTrack.getWeights(); // alias
+            int numWeights = oldWeights.length;
+            float[] newWeights = new float[numWeights];
+            System.arraycopy(oldWeights, 0, newWeights, 0, numWeights);
+
+            int numTargets = oldTrack.getNbMorphTargets();
+            // TODO clone the interpolator if it's not null
+
+            MorphTrack clone
+                    = new MorphTrack(target, newTimes, newWeights, numTargets);
+            result = (T) clone;
 
         } else if (track instanceof Track) {
             result = (T) ((Track) track).clone();
 
         } else if (track instanceof TransformTrack) {
-            Cloner cloner = new Cloner();
-            HasLocalTransform target = ((TransformTrack) track).getTarget();
-            if (target != null) {
-                cloner.setClonedValue(target, target);
-            }
-            result = cloner.clone(track);
+            /*
+             * Can't use a Cloner here because TransformTrack.cloneFields()
+             * doesn't clone times, translations, rotations, or scales.
+             */
+            TransformTrack oldTrack = (TransformTrack) track;
+
+            float[] oldTimes = oldTrack.getTimes(); // alias
+            int numKeyFrames = oldTimes.length;
+            float[] newTimes = new float[numKeyFrames];
+            System.arraycopy(oldTimes, 0, newTimes, 0, numKeyFrames);
+
+            Vector3f[] translations = oldTrack.getTranslations();
+            Quaternion[] rotations = oldTrack.getRotations();
+            Vector3f[] scales = oldTrack.getScales();
+            HasLocalTransform target = oldTrack.getTarget();
+            // TODO clone the interpolator if it's not null
+
+            TransformTrack clone = new TransformTrack(
+                    target, newTimes, translations, rotations, scales);
+            result = (T) clone;
 
         } else {
             String className = track.getClass().getSimpleName();
