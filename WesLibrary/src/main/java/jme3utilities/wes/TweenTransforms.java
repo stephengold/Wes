@@ -124,9 +124,9 @@ public class TweenTransforms implements Cloneable {
         assert track instanceof BoneTrack || track instanceof SpatialTrack;
 
         float[] times = track.getKeyFrameTimes(); // alias
-        Vector3f[] translations = MyAnimation.getTranslations(track);
-        Quaternion[] rotations = MyAnimation.getRotations(track);
-        Vector3f[] scales = MyAnimation.getScales(track);
+        Vector3f[] translations = MyAnimation.copyTranslations(track);
+        Quaternion[] rotations = MyAnimation.copyRotations(track);
+        Vector3f[] scales = MyAnimation.copyScales(track);
 
         Transform result = interpolate(time, times, duration, translations,
                 rotations, scales, fallback, storeResult);
@@ -228,9 +228,9 @@ public class TweenTransforms implements Cloneable {
         Validate.nonNegative(duration, "duration");
 
         int numSamples = newTimes.length;
-        Vector3f[] oldTranslations = MyAnimation.getTranslations(oldTrack);
-        Quaternion[] oldRotations = MyAnimation.getRotations(oldTrack);
-        Vector3f[] oldScales = MyAnimation.getScales(oldTrack);
+        Vector3f[] oldTranslations = MyAnimation.copyTranslations(oldTrack);
+        Quaternion[] oldRotations = MyAnimation.copyRotations(oldTrack);
+        Vector3f[] oldScales = MyAnimation.copyScales(oldTrack);
 
         // Allocate new arrays.
         Vector3f[] newTranslations = null;
@@ -382,9 +382,9 @@ public class TweenTransforms implements Cloneable {
         int lastFrame = times.length - 1;
         assert lastFrame >= 0 : lastFrame;
 
-        Vector3f[] translations = MyAnimation.getTranslations(track);
-        Quaternion[] rotations = MyAnimation.getRotations(track);
-        Vector3f[] scales = MyAnimation.getScales(track);
+        Vector3f[] translations = MyAnimation.copyTranslations(track);
+        Quaternion[] rotations = MyAnimation.copyRotations(track);
+        Vector3f[] scales = MyAnimation.copyScales(track);
 
         if (time <= 0f || lastFrame == 0) {
             // Copy the transform of the first frame.
