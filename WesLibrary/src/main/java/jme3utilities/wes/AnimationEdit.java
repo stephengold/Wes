@@ -78,8 +78,8 @@ final public class AnimationEdit {
     /**
      * Add the specified AnimTrack to the specified AnimClip.
      *
-     * @param clip (not null, alias created)
-     * @param track (not null, modified)
+     * @param clip the clip to augment (not null, modified)
+     * @param track the track to add (not null, alias created)
      */
     public static void addTrack(AnimClip clip, AnimTrack<?> track) {
         Validate.nonNull(track, "track");
@@ -100,13 +100,13 @@ final public class AnimationEdit {
     }
 
     /**
-     * Copy the specified AnimClip, converting it from a travelling animation to
+     * Copy the specified AnimClip, converting it from a traveling animation to
      * an in-place animation. Rotations and scales aren't considered. Works best
      * on cyclic animations.
      *
-     * @param sourceClip the AnimClip to convert (not null, unaffected)
+     * @param sourceClip the AnimClip to copy (not null, unaffected)
      * @param resultName name for the resulting AnimClip (not null)
-     * @return a new AnimClip
+     * @return a new AnimClip with the specified name
      */
     public static AnimClip convertToInPlace(
             AnimClip sourceClip, String resultName) {
@@ -515,7 +515,7 @@ final public class AnimationEdit {
      *
      * @param sourceClip the AnimClip to reverse (not null, unaffected)
      * @param animationName name for the resulting AnimClip (not null)
-     * @return a new AnimClip
+     * @return a new AnimClip with the specified name
      */
     public static AnimClip reverseAnimation(
             AnimClip sourceClip, String animationName) {
@@ -539,7 +539,7 @@ final public class AnimationEdit {
      *
      * @param sourceAnimation which Animation to reverse (not null, unaffected)
      * @param animationName name for the resulting Animation (not null)
-     * @return a new Animation
+     * @return a new Animation with the specified name
      */
     public static Animation reverseAnimation(
             Animation sourceAnimation, String animationName) {
