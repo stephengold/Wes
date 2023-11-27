@@ -152,20 +152,20 @@ final public class AnimationEdit {
      * @param startTime the start of the range (in seconds, &gt;0, &le;endTime)
      * @param endTime the end of the range (in seconds, &ge;startTime)
      * @param techniques tweening techniques to use (unaffected)
-     * @param newAnimationName a name for the resulting Animation (not null)
+     * @param resultName a name for the resulting Animation (not null)
      * @return a new Animation
      */
     public static Animation extractAnimation(
             Animation sourceAnimation, float startTime, float endTime,
-            TweenTransforms techniques, String newAnimationName) {
+            TweenTransforms techniques, String resultName) {
         Validate.nonNull(sourceAnimation, "source animation");
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
-        Validate.nonNull(newAnimationName, "new animation name");
+        Validate.nonNull(resultName, "result name");
 
         // Start with an empty Animation.
         float newDuration = endTime - startTime;
-        Animation result = new Animation(newAnimationName, newDuration);
+        Animation result = new Animation(resultName, newDuration);
 
         float sourceDuration = sourceAnimation.getLength();
         Track[] sourceTracks = sourceAnimation.getTracks();
@@ -196,19 +196,19 @@ final public class AnimationEdit {
      * @param startTime the start of the range (in seconds, &gt;0, &le;endTime)
      * @param endTime the end of the range (in seconds, &ge;startTime)
      * @param techniques tweening techniques to use (unaffected)
-     * @param newClipName a name for the resulting AnimClip (not null)
+     * @param resultName a name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
     public static AnimClip extractAnimation(
             AnimClip sourceClip, float startTime, float endTime,
-            TweenTransforms techniques, String newClipName) {
+            TweenTransforms techniques, String resultName) {
         Validate.nonNull(sourceClip, "source clip");
         Validate.inRange(startTime, "start time", 0f, endTime);
         Validate.inRange(endTime, "end time", startTime, Float.MAX_VALUE);
-        Validate.nonNull(newClipName, "new clip name");
+        Validate.nonNull(resultName, "result name");
 
         // Start with an empty AnimClip.
-        AnimClip result = new AnimClip(newClipName);
+        AnimClip result = new AnimClip(resultName);
 
         float duration = (float) sourceClip.getLength();
         AnimTrack<?>[] sourceTracks = sourceClip.getTracks();
@@ -347,22 +347,22 @@ final public class AnimationEdit {
      * @param targetSkeleton (not null, unaffected)
      * @param map the skeleton map to use (not null, unaffected)
      * @param techniques the tweening techniques to use (not null, unaffected)
-     * @param animationName name for the resulting Animation (not null)
+     * @param resultName name for the resulting Animation (not null)
      * @return a new Animation
      */
     public static Animation retargetAnimation(
             Animation sourceAnimation, Skeleton sourceSkeleton,
             Skeleton targetSkeleton, SkeletonMapping map,
-            TweenTransforms techniques, String animationName) {
+            TweenTransforms techniques, String resultName) {
         Validate.nonNull(sourceSkeleton, "source skeleton");
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
         Validate.nonNull(techniques, "techniques");
-        Validate.nonNull(animationName, "animation name");
+        Validate.nonNull(resultName, "result name");
 
         // Start with an empty Animation.
         float duration = sourceAnimation.getLength();
-        Animation result = new Animation(animationName, duration);
+        Animation result = new Animation(resultName, duration);
 
         // Add a BoneTrack for each target bone that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
@@ -403,20 +403,20 @@ final public class AnimationEdit {
      * @param sourceArmature (not null, unaffected)
      * @param targetSkeleton (not null, unaffected)
      * @param map the skeleton map to use (not null, unaffected)
-     * @param animationName name for the resulting Animation (not null)
+     * @param resultName name for the resulting Animation (not null)
      * @return a new Animation
      */
     public static Animation retargetAnimation(AnimClip sourceClip,
             Armature sourceArmature, Skeleton targetSkeleton,
-            SkeletonMapping map, String animationName) {
+            SkeletonMapping map, String resultName) {
         Validate.nonNull(sourceArmature, "source armature");
         Validate.nonNull(targetSkeleton, "target skeleton");
         Validate.nonNull(map, "map");
-        Validate.nonNull(animationName, "animation name");
+        Validate.nonNull(resultName, "result name");
 
         // Start with an empty Animation.
         float duration = (float) sourceClip.getLength();
-        Animation result = new Animation(animationName, duration);
+        Animation result = new Animation(resultName, duration);
 
         // Add a BoneTrack for each target bone that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
@@ -456,19 +456,19 @@ final public class AnimationEdit {
      * @param sourceArmature (not null, unaffected)
      * @param targetArmature (not null, unaffected)
      * @param map the skeleton map to use (not null, unaffected)
-     * @param clipName name for the resulting AnimClip (not null)
+     * @param resultName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
     public static AnimClip retargetAnimation(
             AnimClip sourceClip, Armature sourceArmature,
-            Armature targetArmature, SkeletonMapping map, String clipName) {
+            Armature targetArmature, SkeletonMapping map, String resultName) {
         Validate.nonNull(sourceArmature, "source armature");
         Validate.nonNull(targetArmature, "target armature");
         Validate.nonNull(map, "map");
-        Validate.nonNull(clipName, "clip name");
+        Validate.nonNull(resultName, "result name");
 
         // Start with an empty AnimClip.
-        AnimClip result = new AnimClip(clipName);
+        AnimClip result = new AnimClip(resultName);
 
         // Add a TransformTrack for each target joint that's mapped.
         Map<Float, Pose> cache = new TreeMap<>();
@@ -514,14 +514,14 @@ final public class AnimationEdit {
      * Reverse the specified AnimClip.
      *
      * @param sourceClip the AnimClip to reverse (not null, unaffected)
-     * @param animationName name for the resulting AnimClip (not null)
+     * @param resultName name for the resulting AnimClip (not null)
      * @return a new AnimClip with the specified name
      */
     public static AnimClip reverseAnimation(
-            AnimClip sourceClip, String animationName) {
-        Validate.nonNull(animationName, "animation name");
+            AnimClip sourceClip, String resultName) {
+        Validate.nonNull(resultName, "result name");
 
-        AnimClip result = new AnimClip(animationName);
+        AnimClip result = new AnimClip(resultName);
 
         AnimTrack<?>[] forwardTracks = sourceClip.getTracks();
         for (AnimTrack<?> forwardTrack : forwardTracks) {
@@ -538,15 +538,15 @@ final public class AnimationEdit {
      * bone/spatial tracks.
      *
      * @param sourceAnimation which Animation to reverse (not null, unaffected)
-     * @param animationName name for the resulting Animation (not null)
+     * @param resultName name for the resulting Animation (not null)
      * @return a new Animation with the specified name
      */
     public static Animation reverseAnimation(
-            Animation sourceAnimation, String animationName) {
-        Validate.nonNull(animationName, "animation name");
+            Animation sourceAnimation, String resultName) {
+        Validate.nonNull(resultName, "result name");
 
         float duration = sourceAnimation.getLength();
-        Animation result = new Animation(animationName, duration);
+        Animation result = new Animation(resultName, duration);
 
         Track[] forwardTracks = sourceAnimation.getTracks();
         for (Track forwardTrack : forwardTracks) {
@@ -562,14 +562,14 @@ final public class AnimationEdit {
      *
      * @param sourceClip the AnimClip to alter (not null, unaffected)
      * @param newDuration the desired duration (in seconds, &ge;0)
-     * @param animationName name for the resulting AnimClip (not null)
+     * @param resultName name for the resulting AnimClip (not null)
      * @return a new AnimClip
      */
     public static AnimClip setDuration(
-            AnimClip sourceClip, float newDuration, String animationName) {
-        Validate.nonNull(animationName, "animation name");
+            AnimClip sourceClip, float newDuration, String resultName) {
+        Validate.nonNull(resultName, "result name");
 
-        AnimClip result = new AnimClip(animationName);
+        AnimClip result = new AnimClip(resultName);
 
         AnimTrack<?>[] oldTracks = sourceClip.getTracks();
         for (AnimTrack<?> sourceTrack : oldTracks) {
