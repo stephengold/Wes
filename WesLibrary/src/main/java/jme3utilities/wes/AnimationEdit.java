@@ -32,16 +32,20 @@ import com.jme3.anim.Armature;
 import com.jme3.anim.Joint;
 import com.jme3.anim.MorphTrack;
 import com.jme3.anim.TransformTrack;
+import com.jme3.anim.util.HasLocalTransform;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
 import com.jme3.animation.BoneTrack;
 import com.jme3.animation.Skeleton;
 import com.jme3.animation.SpatialTrack;
 import com.jme3.animation.Track;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -335,6 +339,58 @@ final public class AnimationEdit {
         }
 
         return numTracksEdited;
+    }
+
+    /**
+     * Copy the specified AnimClip, replacing all translations in the specified
+     * track.
+     *
+     * @param sourceClip the AnimClip to copy (not null, unaffected)
+     * @param sourceTrack the track in {@code sourceClip} that's to be modified
+     * (not null, unaffected)
+     * @param translations the desired translations for the modified track (not
+     * null, alias created)
+     * @param resultName name for the resulting AnimClip (not null)
+     * @return a new AnimClip with the specified name
+     */
+    public static AnimClip replaceTranslations(
+            AnimClip sourceClip, TransformTrack sourceTrack,
+            Vector3f[] translations, String resultName) {
+        Validate.nonNull(resultName, "result name");
+
+        // Construct a new track using the modified translations:
+        float[] oldTimes = sourceTrack.getTimes(); // alias
+        int numKeyFrames = oldTimes.length;
+        float[] newTimes = new float[numKeyFrames];
+        System.arraycopy(oldTimes, 0, newTimes, 0, numKeyFrames);
+
+        Quaternion[] rotations = sourceTrack.getRotations();
+        Vector3f[] scales = sourceTrack.getScales();
+        HasLocalTransform target = sourceTrack.getTarget();
+        // TODO clone the interpolator if it's not null
+        TransformTrack newTrack = new TransformTrack(
+                target, newTimes, translations, rotations, scales);
+
+        // Construct a new clip using the modified track:
+        AnimClip result = new AnimClip(resultName);
+
+        AnimTrack[] oldTracks = sourceClip.getTracks();
+        int oldNumTracks = oldTracks.length;
+        List<AnimTrack> trackList = new ArrayList<>(oldNumTracks);
+        for (AnimTrack track : oldTracks) {
+            if (track == sourceTrack) {
+                trackList.add(newTrack);
+            } else {
+                AnimTrack cloneTrack = TrackEdit.cloneTrack(track);
+                trackList.add(cloneTrack);
+            }
+        }
+        int newNumTracks = trackList.size();
+        AnimTrack[] newTracks = new AnimTrack[newNumTracks];
+        trackList.toArray(newTracks);
+        result.setTracks(newTracks);
+
+        return result;
     }
 
     /**
