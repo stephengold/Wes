@@ -5,6 +5,9 @@ plugins {
 }
 
 ext {
+    //wesSnapshot = '-SNAPSHOT' // for development builds
+    wesSnapshot = '' // for release builds
+
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
 
     // module coordinates of external dependencies:
@@ -12,7 +15,7 @@ ext {
 
     // current versions of libraries:
     jme3Version = '3.6.1-stable'
-    wesVersion = '0.8.1' + jmeTarget + '-SNAPSHOT'
+    wesVersion = '0.8.1' + jmeTarget + wesSnapshot
 }
 
 subprojects {

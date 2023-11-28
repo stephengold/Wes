@@ -1,5 +1,21 @@
 # release log for the Wes library and related examples
 
+## Version 0.8.1: released on TBD
+
++ Bugfix:  `TrackEdit.cloneTrack()` doesn't clone deeply enough
++ Bugfix:  `AnimationEdit.zeroFirst()` has unexpected side effects
++ Renamed 3 methods and deprecated the original names:
+  + `MyAnimation.getScales()`
+  + `MyAnimation.getRotations()`
+  + `MyAnimation.getTranslations()`
++ Added the `SupportUtils` class (derived from Maud).
++ Added 4 new methods:
+  + `AnimationEdit.replaceTranslations()`
+  + `AnimationEdit.translateForInitialSupport()`
+  + `AnimationEdit.translateForSupport()`
+  + `AnimationEdit.translateForTraction()`
++ Based on v8.8.0 of the Heart library.
+
 ## Version 0.8.0: released on 9 October 2023
 
 + Bugfix:  4 methods use wrong fill transform for the new animation system:
