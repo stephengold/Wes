@@ -1,8 +1,9 @@
 # release log for the Wes library and related examples
 
-## Version 0.8.1: released on TBD
+## Version 0.8.1: released on 27 November 2023
 
-+ Bugfix:  `TrackEdit.cloneTrack()` doesn't clone deeply enough
++ Bugfix:  `TrackEdit.cloneTrack()` doesn't clone deeply enough; see
+  jmonkeyengine issue 1350
 + Bugfix:  `AnimationEdit.zeroFirst()` has unexpected side effects
 + Renamed 3 methods and deprecated the original names:
   + `MyAnimation.getScales()`
