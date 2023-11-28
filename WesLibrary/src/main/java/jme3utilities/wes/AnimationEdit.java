@@ -42,6 +42,7 @@ import com.jme3.animation.Track;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.bvh.BoneMapping;
 import com.jme3.scene.plugins.bvh.SkeletonMapping;
 import java.util.ArrayList;
@@ -608,6 +609,123 @@ final public class AnimationEdit {
         for (Track forwardTrack : forwardTracks) {
             Track newTrack = TrackEdit.reverse(forwardTrack);
             result.addTrack(newTrack);
+        }
+
+        return result;
+    }
+
+    /**
+     * Translate the targeted track of the specified clip to put the initial
+     * point of support at the specified Y-coordinate.
+     *
+     * @param sourceClip the clip to be translated (not null, unaffected)
+     * @param jointIndex the index of the targeted Joint (&ge;0)
+     * @param armature the Armature of the model (not null, unaffected)
+     * @param subtree the scene-graph subtree containing all vertices to
+     * consider (not null, unaffected)
+     * @param supportY world Y-coordinate for initial support
+     * @param resultName name for the resulting AnimClip (not null)
+     * @return a new AnimClip with the specified name or {@code null} if
+     * unsuccessful
+     */
+    public static AnimClip translateForInitialSupport(
+            AnimClip sourceClip, int jointIndex, Armature armature,
+            Spatial subtree, float supportY, String resultName) {
+        Validate.nonNull(sourceClip, "source clip");
+        Validate.nonNegative(jointIndex, "joint index");
+        Validate.nonNull(armature, "armature");
+        Validate.nonNull(subtree, "subtree");
+        Validate.nonNull(resultName, "result name");
+
+        Vector3f[] translations = SupportUtils.translateForInitialSupport(
+                sourceClip, jointIndex, armature, subtree, supportY);
+
+        AnimClip result;
+        if (translations == null) {
+            result = null;
+        } else {
+            TransformTrack oldTrack
+                    = MyAnimation.findJointTrack(sourceClip, jointIndex);
+            assert oldTrack != null;
+            result = replaceTranslations(
+                    sourceClip, oldTrack, translations, resultName);
+        }
+
+        return result;
+    }
+
+    /**
+     * Translate the targeted track of the specified clip to put the point of
+     * support continuously at the specified Y-coordinate.
+     *
+     * @param sourceClip the clip to be translated (not null, unaffected)
+     * @param jointIndex the index of the targeted Joint (&ge;0)
+     * @param armature the Armature of the model (not null, unaffected)
+     * @param subtree the scene-graph subtree containing all vertices to
+     * consider (not null, unaffected)
+     * @param supportY world Y-coordinate for support
+     * @param resultName name for the resulting AnimClip (not null)
+     * @return a new AnimClip with the specified name or {@code null} if
+     * unsuccessful
+     */
+    public static AnimClip translateForSupport(
+            AnimClip sourceClip, int jointIndex, Armature armature,
+            Spatial subtree, float supportY, String resultName) {
+        Validate.nonNull(sourceClip, "source clip");
+        Validate.nonNegative(jointIndex, "joint index");
+        Validate.nonNull(armature, "armature");
+        Validate.nonNull(subtree, "subtree");
+        Validate.nonNull(resultName, "result name");
+
+        Vector3f[] translations = SupportUtils.translateForSupport(
+                sourceClip, jointIndex, armature, subtree, supportY);
+
+        AnimClip result;
+        if (translations == null) {
+            result = null;
+        } else {
+            TransformTrack oldTrack
+                    = MyAnimation.findJointTrack(sourceClip, jointIndex);
+            result = replaceTranslations(
+                    sourceClip, oldTrack, translations, resultName);
+        }
+
+        return result;
+    }
+
+    /**
+     * Translate the targeted track of the specified clip to simulate traction
+     * at the point of support.
+     *
+     * @param sourceClip the clip to be translated (not null, unaffected)
+     * @param jointIndex the index of the targeted Joint (&ge;0)
+     * @param armature the Armature of the model (not null, unaffected)
+     * @param subtree the scene-graph subtree containing all vertices to
+     * consider (not null, unaffected)
+     * @param resultName name for the resulting AnimClip (not null)
+     * @return a new AnimClip with the specified name or {@code null} if
+     * unsuccessful
+     */
+    public static AnimClip translateForTraction(
+            AnimClip sourceClip, int jointIndex, Armature armature,
+            Spatial subtree, String resultName) {
+        Validate.nonNull(sourceClip, "source clip");
+        Validate.nonNegative(jointIndex, "joint index");
+        Validate.nonNull(armature, "armature");
+        Validate.nonNull(subtree, "subtree");
+        Validate.nonNull(resultName, "result name");
+
+        Vector3f[] translations = SupportUtils.translateForTraction(
+                sourceClip, jointIndex, armature, subtree);
+
+        AnimClip result;
+        if (translations == null) {
+            result = null;
+        } else {
+            TransformTrack oldTrack
+                    = MyAnimation.findJointTrack(sourceClip, jointIndex);
+            result = replaceTranslations(
+                    sourceClip, oldTrack, translations, resultName);
         }
 
         return result;
