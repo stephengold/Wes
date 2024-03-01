@@ -323,6 +323,7 @@ correct the situation: sgold@sonic.net
 [elements]: https://www.adobe.com/products/photoshop-elements.html "Photoshop Elements"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
+[fish]: https://fishshell.com/ "Fish command-line shell"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gitkraken]: https://www.gitkraken.com "GitKraken client"
