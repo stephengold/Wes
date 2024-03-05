@@ -26,14 +26,14 @@ configurations.configureEach {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // to disable caching of snapshots
 }
 
-tasks.register('checkstyle') {
-    dependsOn ':WesExamples:checkstyleMain', ':WesLibrary:checkstyleMain'
-    description 'Checks the style of all Java sourcecode.'
-}
-
 tasks.register('AppChooser') {
     dependsOn ':WesExamples:AppChooser'
     description 'Runs the example apps.'
+}
+
+tasks.register('checkstyle') {
+    dependsOn ':WesExamples:checkstyleMain', ':WesLibrary:checkstyleMain'
+    description 'Checks the style of all Java sourcecode.'
 }
 
 // Register publishing tasks:
