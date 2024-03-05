@@ -44,7 +44,7 @@
     </module>
     <module name="SuppressionSingleFilter">
         <property name="checks" value="Header"/>
-        <property name="files" value="com[/]jme3"/>
+        <property name="files" value="com([/\\])jme3"/>
         <property name="lines" value="1"/>
     </module>
 
