@@ -215,7 +215,7 @@
                      value="Parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LambdaParameterName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,19}$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Lambda parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -231,12 +231,12 @@
         </module>
         <module name="LocalFinalVariableName"/>
         <module name="MethodName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,29}$"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]{0,25}$"/>
             <message key="name.invalidPattern"
                      value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PatternVariableName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,19}$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Pattern variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -247,7 +247,7 @@
                      value="Class type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="RecordComponentName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]{0,19}$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Record component name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -395,7 +395,9 @@
 
         <!-- Checks for size violations              -->
         <!-- See https://checkstyle.org/checks/sizes -->
-        <module name="MethodLength"/>
+        <module name="MethodLength">
+            <property name="max" value="120"/>
+        </module>
         <module name="ParameterNumber">
             <property name="max" value="9"/>
         </module>
