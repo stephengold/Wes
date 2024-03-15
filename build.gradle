@@ -14,7 +14,7 @@ ext {
     heartCoordinates = 'com.github.stephengold:Heart:9.0.0' + jmeTarget
 
     // current versions of libraries:
-    jme3Version = '3.6.1-stable'
+    jme3Version = '3.7.0-alpha3.1'
     wesVersion = '0.8.1' + jmeTarget + wesSnapshot
 }
 
