@@ -5,7 +5,7 @@
 //   of the root project.
 
 plugins {
-    id 'application' // to build Java applications
+    id 'application' // to build JVM applications
 }
 
 dependencies {
@@ -46,7 +46,7 @@ tasks.register('cleanSOs', Delete) { // extracted Linux and Android native libra
     delete fileTree(dir: '.', include: '*.so')
 }
 
-// Register tasks to run specific apps:
+// Register tasks to run the example apps:
 
 tasks.register('AppChooser', JavaExec) {
     mainClass = 'jme3utilities.test.wes.AppChooser'

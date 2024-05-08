@@ -1,6 +1,6 @@
 // Gradle settings and tasks common to all Wes subprojects
 
-apply plugin: 'checkstyle'
+apply plugin: 'checkstyle' // to analyze Java sourcecode for style violations
 apply plugin: 'java'
 
 java {
