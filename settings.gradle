@@ -1,6 +1,4 @@
-/*
- * settings.gradle: global settings shared by all Wes subprojects
- */
+// global settings shared by all Wes subprojects
 
 dependencyResolutionManagement {
     repositories {
