@@ -1,4 +1,4 @@
-// Gradle script to build the Wes/WesLibrary sub-project
+// Gradle script to build the WesLibrary subproject of Wes
 
 // Note: "common.gradle" in the root project contains additional initialization
 //   for this project. This initialization is applied in the "build.gradle"
