@@ -3,7 +3,7 @@
 [The Wes Project][wes] is about editing animations used in
 [the jMonkeyEngine (JME) game engine][jme].
 
-It contains 2 sub-projects:
+It contains 2 subprojects:
 
 1. WesLibrary: the Wes [JVM] runtime library
 2. WesExamples: demos, examples, and non-automated test software
@@ -211,7 +211,7 @@ The pre-built libraries are compatible with JDK 8.
 
 Applications have been created to showcase
 certain features of Wes.
-The following demos are found in the WesExamples sub-project:
+The following demos are found in the WesExamples subproject:
 
 ### ConvertToInPlace
 
@@ -259,7 +259,7 @@ Much of the Wes code was originally developed for the [Maud editor][maud].
 
 The retargeting code is derived from [the Bvhretarget Project][bvhretarget].
 
-From September 2017 to January 2019, Wes was a sub-project of
+From September 2017 to January 2019, Wes was a subproject of
 [the Jme3-utilities Project][utilities].
 
 Since January 2019, Wes has been a separate project, hosted at
