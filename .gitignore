@@ -3,13 +3,13 @@
 *.so
 /WesExamples/Written Assets/
 
-# Ignore Gradle's project-specific cache directory
+# Ignore Gradle's project-specific cache directory:
 /.gradle/
 
-# Ignore Gradle's build output directories
+# Ignore Gradle's build output directories:
 /WesExamples/build/
 /WesLibrary/build/
 
-# Ignore IDE-specific directories
+# Ignore IDE-specific directories:
 /.idea/
 /.nb-gradle/
