@@ -1,7 +1,6 @@
 *.dll
 *.dylib
 *.so
-/WesExamples/Written Assets/
 
 # Ignore Gradle's project-specific cache directory:
 /.gradle/
@@ -9,6 +8,9 @@
 # Ignore Gradle's build output directories:
 /WesExamples/build/
 /WesLibrary/build/
+
+# Ignore the Acorus sandbox:
+/WesExamples/Written Assets/
 
 # Ignore IDE-specific directories:
 /.idea/
