@@ -1,9 +1,5 @@
 // Gradle script to build the Wes project
 
-plugins {
-    id 'base' // to add a "clean" task to the root project
-}
-
 ext {
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
 
