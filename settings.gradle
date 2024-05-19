@@ -1,4 +1,4 @@
-// global settings shared by all Wes subprojects
+// global build settings shared by all Wes subprojects
 
 rootProject.name = 'Wes'
 
