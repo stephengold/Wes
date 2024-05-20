@@ -19,7 +19,7 @@ ext {
 }
 
 dependencies {
-    api heartCoordinates
+    api(libs.heart)
 }
 
 // Register publishing tasks:

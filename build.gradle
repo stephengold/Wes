@@ -2,13 +2,6 @@
 
 ext {
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-
-    // current version of the JMonkeyEngine libraries:
-    jme3Version = '3.7.0-beta1'
-
-    // module coordinates of external dependencies:
-    heartCoordinates = 'com.github.stephengold:Heart:9.0.0' + jmeTarget
-
     wesSnapshot = '-SNAPSHOT' // for development builds
     //wesSnapshot = '' // for release builds
     wesVersion = '0.8.1' + jmeTarget + wesSnapshot
