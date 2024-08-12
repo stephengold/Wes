@@ -49,7 +49,7 @@ Most of the features work with both the old and new animation systems.
 
 ## How to add Wes to an existing project
 
-Wes comes pre-built as a single library depends on
+Wes comes pre-built as a single library dependent on
 [the Heart Library][heart], which in turn depends on
 the standard "jme3-core" library from jMonkeyEngine.
 Adding Wes to an existing [jMonkeyEngine][jme] project should be
