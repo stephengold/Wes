@@ -8,6 +8,7 @@
 # Ignore Gradle's build output directories:
 /WesExamples/build/
 /WesLibrary/build/
+/build/
 
 # Ignore the Acorus sandbox:
 /WesExamples/Written Assets/
