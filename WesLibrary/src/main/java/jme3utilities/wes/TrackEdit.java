@@ -2489,6 +2489,25 @@ final public class TrackEdit {
     }
 
     /**
+     * Copy the translations of the specified TransformTrack, adding the
+     * specified offset to each translation.
+     *
+     * @param track input TransformTrack (not null, unaffected)
+     * @param offset the desired offset (not null, unaffected)
+     * @return a new array of new vectors
+     */
+    public static Vector3f[] translate(TransformTrack track, Vector3f offset) {
+        Vector3f[] oldTranslations = track.getTranslations();
+        int count = oldTranslations.length;
+        Vector3f[] result = new Vector3f[count];
+        for (int index = 0; index < count; ++index) {
+            result[index] = oldTranslations[index].add(offset);
+        }
+
+        return result;
+    }
+
+    /**
      * Copy a MorphTrack, truncating it at the specified time.
      *
      * @param oldTrack input MorphTrack (not null, unaffected)
