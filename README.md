@@ -151,7 +151,7 @@ Open the project's properties in the IDE (JME SDK or NetBeans):
     + `git checkout -b latest 0.8.1`
   + using a web browser:
     + browse to [the latest release][latest]
-    + follow the "Source code (zip)" link
+    + follow the "Source code (zip)" link at the bottom of the page
     + save the ZIP file
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
@@ -160,7 +160,7 @@ Open the project's properties in the IDE (JME SDK or NetBeans):
   + using Windows Command Prompt: `.\gradlew build`
 
 After a successful build,
-Maven artifacts will be found in "WesLibrary/build/libs".
+artifacts will be found in "WesLibrary/build/libs".
 
 You can install the artifacts to your local Maven repository:
 + using Bash or Fish or PowerShell or Zsh: `./gradlew install`
