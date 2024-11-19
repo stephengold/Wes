@@ -149,7 +149,7 @@ public class SkeletonMapping implements Cloneable, Savable {
     public SkeletonMapping inverse() {
         SkeletonMapping result = new SkeletonMapping();
         for (BoneMapping boneMapping : mappings.values()) {
-            Quaternion twist = boneMapping.getTwist();
+            Quaternion twist = boneMapping.getTwist(); // alias
             Quaternion inverseTwist = twist.inverse();
             String targetName = boneMapping.getTargetName();
             String sourceName = boneMapping.getSourceName();
@@ -300,7 +300,7 @@ public class SkeletonMapping implements Cloneable, Savable {
         super.clone();
         SkeletonMapping result = new SkeletonMapping();
         for (BoneMapping boneMapping : mappings.values()) {
-            Quaternion twist = boneMapping.getTwist();
+            Quaternion twist = boneMapping.getTwist(); // alias
             twist = twist.clone();
             String targetName = boneMapping.getTargetName();
             String sourceName = boneMapping.getSourceName();

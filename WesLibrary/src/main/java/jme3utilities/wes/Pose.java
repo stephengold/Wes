@@ -1114,19 +1114,20 @@ public class Pose implements JmeCloneable {
         assert map != null;
 
         int targetIndex = skeleton.getBoneIndex(bone);
-        Transform userTransform = transforms.get(targetIndex);
+        Transform userTransform = transforms.get(targetIndex); // alias
         userTransform.loadIdentity();
 
         String targetName = bone.getName();
-        BoneMapping boneMapping = map.get(targetName);
+        BoneMapping boneMapping = map.get(targetName); // alias
         if (boneMapping != null) {
             // Calculate the orientation of the source bone in model space.
             String sourceName = boneMapping.getSourceName();
             int sourceIndex = sourcePose.findBone(sourceName);
             Quaternion mo = sourcePose.modelOrientation(sourceIndex, null);
 
+            // Set the orientation of the target bone in user space:
             Quaternion userRotation = userForModel(targetIndex, mo, null);
-            Quaternion twist = boneMapping.getTwist();
+            Quaternion twist = boneMapping.getTwist(); // alias
             Quaternion rot = userTransform.getRotation(); // alias
             userRotation.mult(twist, rot);
             MyQuaternion.normalizeLocal(rot);
@@ -1153,20 +1154,21 @@ public class Pose implements JmeCloneable {
         assert map != null;
 
         int targetIndex = joint.getId();
-        Transform userTransform = transforms.get(targetIndex);
+        Transform userTransform = transforms.get(targetIndex); // alias
         userTransform.loadIdentity();
 
         String targetName = joint.getName();
-        BoneMapping boneMapping = map.get(targetName);
+        BoneMapping boneMapping = map.get(targetName); // alias
         if (boneMapping != null) {
             // Calculate the orientation of the source joint in model space.
             String sourceName = boneMapping.getSourceName();
             int sourceIndex = sourcePose.findBone(sourceName);
             Quaternion mo = sourcePose.modelOrientation(sourceIndex, null);
 
+            // Set the orientation of the target joint in user space:
             Quaternion userRotation = userForModel(targetIndex, mo, null);
-            Quaternion twist = boneMapping.getTwist();
-            Quaternion rot = userTransform.getRotation();
+            Quaternion twist = boneMapping.getTwist(); // alias
+            Quaternion rot = userTransform.getRotation(); // alias
             userRotation.mult(twist, rot);
             MyQuaternion.normalizeLocal(rot);
         }
