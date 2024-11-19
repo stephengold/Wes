@@ -1100,7 +1100,7 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Configure the specified Bone and its descendents by re-targeting the
+     * Configure the specified Bone and its descendants by re-targeting the
      * specified source pose. Note: recursive!
      *
      * @param bone the Bone to start with (not null, unaffected)
@@ -1140,7 +1140,7 @@ public class Pose implements JmeCloneable {
     }
 
     /**
-     * Configure the specified Armature and its descendents by re-targeting the
+     * Configure the specified Armature and its descendants by re-targeting the
      * specified source pose. Note: recursive!
      *
      * @param joint the Joint to start with (not null, unaffected)
