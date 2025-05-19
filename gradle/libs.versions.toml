@@ -1,4 +1,4 @@
-## catalog of libraries and plugins used to build the Wes project
+## catalog of libraries and plugins used to build and run the Wes project
 
 [versions]
 
@@ -10,6 +10,7 @@ jme = "3.8.1-stable"
 acorus = "com.github.stephengold:Acorus:2.0.2"
 commons-exec = "org.apache.commons:commons-exec:1.4.0"
 heart = "com.github.stephengold:Heart:9.2.0"
+
 jme3-desktop = { module = "org.jmonkeyengine:jme3-desktop", version.ref = "jme" }
 jme3-jogg = { module = "org.jmonkeyengine:jme3-jogg", version.ref = "jme" }
 jme3-lwjgl3 = { module = "org.jmonkeyengine:jme3-lwjgl3", version.ref = "jme" }
