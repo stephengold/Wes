@@ -6,9 +6,9 @@ plugins {
 
 ext {
     jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-    wesSnapshot = '-SNAPSHOT' // for development builds
-    //wesSnapshot = '' // for release builds
-    wesVersion = '0.8.1' + jmeTarget + wesSnapshot
+    //wesSnapshot = '-SNAPSHOT' // for development builds
+    wesSnapshot = '' // for release builds
+    wesVersion = '0.8.2' + jmeTarget + wesSnapshot
 }
 
 subprojects {

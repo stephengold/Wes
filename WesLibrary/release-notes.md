@@ -1,14 +1,16 @@
 # release log for the Wes library and related examples
 
+## Version 0.8.2: released on TBD
+
++ Added the `TrackEdit.translate()` method.
++ Reconfigured to publish to Central Publisher Portal instead of OSSRH.
++ Targeted v9.2.0 of the Heart library and v3.8.1-stable of JMonkeyEngine.
+
 ## Version 0.8.1: released on 27 November 2023
 
 + Bugfix:  `TrackEdit.cloneTrack()` doesn't clone deeply enough; see
   jmonkeyengine issue 1350
 + Bugfix:  `AnimationEdit.zeroFirst()` has unexpected side effects
-+ Renamed 3 methods and deprecated the original names:
-  + `MyAnimation.getScales()`
-  + `MyAnimation.getRotations()`
-  + `MyAnimation.getTranslations()`
 + Added the `SupportUtils` class (derived from Maud).
 + Added 4 new methods:
   + `AnimationEdit.replaceTranslations()`
