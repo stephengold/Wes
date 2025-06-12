@@ -1,9 +1,9 @@
 # release log for the Wes library and related examples
 
-## Version 0.8.2: released on TBD
+## Version 0.8.2: released on 11 June 2025
 
 + Added the `TrackEdit.translate()` method.
-+ Reconfigured to publish to Central Publisher Portal instead of OSSRH.
++ Reconfigured to publish via Central Publisher Portal instead of OSSRH.
 + Targeted v9.2.0 of the Heart library and v3.8.1-stable of JMonkeyEngine.
 
 ## Version 0.8.1: released on 27 November 2023
