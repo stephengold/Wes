@@ -1,4 +1,4 @@
-// Gradle script to build the WesExamples subproject of Wes
+// Gradle script to build and run the WesExamples subproject of Wes
 
 // Note: "common.gradle" in the root project contains additional initialization
 //   for this project. This initialization is applied in the "build.gradle"
@@ -19,11 +19,11 @@ dependencies {
     runtimeOnly(libs.jme3.testdata)
 
     // WesExamples doesn't use jme3-jogg
-    //  -- it is included solely to avoid warnings from AssetConfig.
+    //  -- it is included solely to avoid runtime warnings from AssetConfig:
     runtimeOnly(libs.jme3.jogg)
 
     //implementation 'com.github.stephengold:Wes' + wesVersion // for published library
-    implementation project(':WesLibrary') // for latest sourcecode
+    implementation project(':WesLibrary') // for local library build
 }
 
 // Register cleanup tasks:

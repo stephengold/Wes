@@ -1,4 +1,4 @@
-// Gradle script to build the Wes project
+// Gradle script to build and run the Wes project
 
 plugins {
     id 'base' // to add a "clean" task to the root project
