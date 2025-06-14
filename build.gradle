@@ -33,9 +33,9 @@ tasks.register('checkstyle') {
 
 tasks.register('install') {
     dependsOn ':WesLibrary:install'
-    description = 'Installs Maven artifacts to the local repository.'
+    description = 'Installs the Maven artifacts to the local repository.'
 }
 tasks.register('release') {
     dependsOn ':WesLibrary:release'
-    description = 'Stages Maven artifacts to the Central Publisher Portal.'
+    description = 'Stages the Maven artifacts to the Central Publisher Portal.'
 }
