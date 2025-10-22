@@ -37,9 +37,7 @@
     <module name="FileLength">
         <property name="max" value="3000"/>
     </module>
-    <module name="LineLength">
-        <property name="fileExtensions" value="java"/>
-    </module>
+    <module name="LineLength"/>
 
     <!-- Checks for whitespace:                       -->
     <!-- See https://checkstyle.org/checks/whitespace -->
@@ -84,7 +82,7 @@
         <module name="RightCurly">
             <property name="id" value="RightCurlyAlone"/>
             <property name="option" value="alone"/>
-            <property name="tokens" value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF, COMPACT_CTOR_DEF, LITERAL_SWITCH, LITERAL_CASE"/>
+            <property name="tokens" value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF, COMPACT_CTOR_DEF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_FINALLY, LITERAL_CATCH"/>
         </module>
         <module name="SuppressionXpathSingleFilter">
             <!-- suppression is required till https://github.com/checkstyle/checkstyle/issues/7541 -->
@@ -174,9 +172,10 @@
         <module name="JavadocVariable"/>
         <module name="MissingJavadocMethod">
             <property name="allowedAnnotations" value=""/>
+            <property name="scope" value="private"/>
         </module>
         <module name="MissingJavadocType">
-            <property name="scope" value="protected"/>
+            <property name="scope" value="private"/>
         </module>
         <module name="NonEmptyAtclauseDescription"/>
         <module name="RequireEmptyLineBeforeBlockTagGroup"/>
@@ -240,11 +239,11 @@
         </module>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,19}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,18}$"/>
             <message key="name.invalidPattern" value="Local variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MemberName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,19}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,16}$"/>
             <message key="name.invalidPattern" value="Member name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MethodName">
@@ -260,7 +259,7 @@
             <message key="name.invalidPattern" value="Package name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ParameterName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,19}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,17}$"/>
             <message key="name.invalidPattern" value="Parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PatternVariableName">
