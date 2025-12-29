@@ -567,6 +567,37 @@ final public class AnimationEdit {
     }
 
     /**
+     * Retarget an AnimClip to the specified Armature without using a
+     * {@code SkeletonMap}. This technique preserves any translation and/or
+     * scaling in the joint tracks.
+     *
+     * @param clip the clip to retarget (not null)
+     * @param armature the target armature (not null, unaffected)
+     * @param clipName desired name for the new clip
+     * @return a new clip containing modified pre-existing tracks
+     */
+    public static AnimClip retargetClip(
+            AnimClip clip, Armature armature, String clipName) {
+        AnimTrack[] animTracks = clip.getTracks(); // alias
+        AnimClip result = new AnimClip(clipName);
+        for (AnimTrack animTrack : animTracks) {
+            if (MyAnimation.isJointTrack(animTrack)) {
+                TransformTrack transformTrack = (TransformTrack) animTrack;
+                HasLocalTransform animTarget = transformTrack.getTarget();
+                Joint animJoint = (Joint) animTarget;
+                String jointName = animJoint.getName();
+                Joint charaJoint = armature.getJoint(jointName);
+                if (charaJoint != null) {
+                    transformTrack.setTarget(charaJoint);
+                    addTrack(result, transformTrack);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Reverse the specified Animation. All tracks in the Animation must be
      * bone/spatial tracks.
      *
