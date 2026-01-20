@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2023, Stephen Gold
+ Copyright (c) 2017-2026 Stephen Gold
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -442,7 +442,7 @@ public enum TweenRotations {
 
         if (qa.dot(qb) < 0f) {
             result = qa.clone();
-            result.negate(); // modifies result!
+            result.negateLocal();
         } else {
             result = qa;
         }
