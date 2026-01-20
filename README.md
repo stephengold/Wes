@@ -1,6 +1,6 @@
 <img height="150" src="https://i.imgur.com/1iPoJpl.png" alt="Wes Project logo">
 
-[The Wes Project][wes] is about editing animations used in
+[The Wes Project][wes] is a software library for editing animations used in
 [the jMonkeyEngine (JME) game engine][jme].
 
 It contains 2 subprojects:
