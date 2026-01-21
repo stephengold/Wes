@@ -1,5 +1,13 @@
 # release log for the Wes library and related examples
 
+## Version 0.8.3: released on TBD
+
++ Added the `AnimationEdit.retargetClip()` method.
++ Targeted v9.3.0 of the Heart library and v3.9.0-stable of JMonkeyEngine.
++ Added developer ID and inception year to the POM.
++ Updated the Gradle build tool to v9.3.0. When building this project,
+  JDK 17+ is now assumed, though this can be worked around.
+
 ## Version 0.8.2: released on 11 June 2025
 
 + Added the `TrackEdit.translate()` method.
