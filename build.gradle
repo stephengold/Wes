@@ -4,13 +4,6 @@ plugins {
     id 'base' // to add a "clean" task to the root project
 }
 
-ext {
-    jmeTarget = '' // distinguish non-JME libraries built for specific JME releases
-    wesSnapshot = '-SNAPSHOT' // for development builds
-    //wesSnapshot = '' // for release builds
-    wesVersion = '0.8.4' + jmeTarget + wesSnapshot
-}
-
 subprojects {
     apply from: rootProject.file('common.gradle')
 }

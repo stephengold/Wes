@@ -13,7 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'Wes'
-    version = wesVersion
+    version = providers.gradleProperty('wesVersion').get()
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/Wes'
 }

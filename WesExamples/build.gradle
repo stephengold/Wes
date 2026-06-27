@@ -22,7 +22,7 @@ dependencies {
     //  -- it is included solely to avoid runtime warnings from AssetConfig:
     runtimeOnly(libs.jme3.jogg)
 
-    //implementation 'com.github.stephengold:Wes' + wesVersion // for published library
+    //implementation 'com.github.stephengold:Wes:' + providers.gradleProperty('wesVersion').get() // for published library
     implementation project(':WesLibrary') // for local library build
 }
 
