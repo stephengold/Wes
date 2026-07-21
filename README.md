@@ -318,7 +318,7 @@ correct the situation: sgold@sonic.net
 [Jump to the table of contents](#toc)
 
 
-[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[adoptium]: https://adoptium.net/temurin/releases/ "Adoptium Project"
 [ant]: https://ant.apache.org "Apache Ant Project"
 [blender]: https://docs.blender.org "Blender Project"
 [bvhretarget]: https://github.com/Nehon/bvhretarget "Bvhretarget Project"
