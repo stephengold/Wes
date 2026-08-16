@@ -1,6 +1,6 @@
 # release log for the Wes library and related examples
 
-## Version 0.8.4: released on TBD
+## Version 0.8.4: released on 15 August 2026
 
 Targeted v9.4.0-test1 of the Heart library and v3.10.0-beta2 of JMonkeyEngine.
 
