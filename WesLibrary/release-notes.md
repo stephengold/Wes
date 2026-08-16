@@ -1,5 +1,9 @@
 # release log for the Wes library and related examples
 
+## Version 0.8.4: released on TBD
+
+Targeted v9.4.0-test1 of the Heart library and v3.10.0-beta2 of JMonkeyEngine.
+
 ## Version 0.8.3: released on 21 January 2026
 
 + Added the `AnimationEdit.retargetClip()` method.
