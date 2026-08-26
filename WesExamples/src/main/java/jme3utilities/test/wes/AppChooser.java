@@ -310,7 +310,8 @@ final class AppChooser extends AcorusDemo {
      * Look for the shell script (or batch file) to execute in
      * "./build/install/WesExamples/bin".
      *
-     * @return a new instance
+     * @return a new file instance that refers to a pre-existing script file
+     * (not null)
      */
     private static File findScriptToExecute() {
         File buildDir = new File("build");
