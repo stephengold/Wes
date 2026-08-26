@@ -108,7 +108,7 @@ final class AppChooser extends AcorusDemo {
     /**
      * environment variables passed to the executor
      */
-    private static Map<String, String> env = new TreeMap<>();
+    final private static Map<String, String> env = new TreeMap<>();
     /**
      * menu overlay, displayed in the upper-left corner of the GUI node
      */
@@ -346,9 +346,11 @@ final class AppChooser extends AcorusDemo {
             String text = "";
             if (appIndex >= 0 && appIndex < mainClasses.length) {
                 Class<?> mainClass = mainClasses[appIndex];
-                text = mainClass.getSimpleName();
-                if (Heart.hasStoredSettings(text)) {
-                    text = text + " +";
+                String appName = mainClass.getSimpleName();
+                if (Heart.hasStoredSettings(appName)) {
+                    text = appName + " +";
+                } else {
+                    text = appName;
                 }
             }
             if (lineIndex == selectedLineIndex) {
