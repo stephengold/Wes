@@ -45,6 +45,7 @@
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
     </module>
+
     <module name="SuppressionSingleFilter">
         <property name="checks" value="Header"/>
         <property name="files" value="com([/\\])jme3"/>
