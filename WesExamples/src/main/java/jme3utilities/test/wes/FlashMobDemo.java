@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2023, Stephen Gold
+ Copyright (c) 2019-2026 Stephen Gold
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -168,6 +168,7 @@ class FlashMobDemo extends AcorusDemo {
         boolean loadDefaults = true;
         AppSettings settings = new AppSettings(loadDefaults);
         settings.setAudioRenderer(null);
+        settings.setRenderer(AppSettings.LWJGL_OPENGL32); // default=ANGLE_GLES3
         settings.setResizable(true);
         settings.setSamples(4); // anti-aliasing
         settings.setTitle(title); // Customize the window's title bar.
